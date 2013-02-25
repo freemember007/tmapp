@@ -1,8 +1,10 @@
-".container": {
-	backgroundColor:"white"
-},
-"Label": {
+'TabGroup':{
+	backgroundColor: '#fff',
+	barColor:'darkgray'
+}
+
+'Label': {
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,
-	color: "#000"
-} 
+	color: '#000'
+},

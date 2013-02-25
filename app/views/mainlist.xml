@@ -1,0 +1,13 @@
+<Alloy>
+	<Collection src="feed"/>
+	<Window onClick="a" title='今天'>
+		<TableView dataCollection="feed">
+			<TableViewSection headerTitle="{date}">
+				<TableViewRow>
+					<ImageView image="{image}"/ >
+					<Label text="{content}"/>
+				</TableViewRow>
+			</TableViewSection>
+		</TableView>
+	</Window>
+</Alloy>
