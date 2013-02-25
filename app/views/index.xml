@@ -1,5 +1,15 @@
 <Alloy>
-	<Window class="container">
-		<Label id="label" onClick="doClick">Hello, World</Label>
-	</Window>
+	<TabGroup>
+		<Tab id='tab1' title='最新'>
+			<Require src="mainlist"/>
+		</Tab>
+		<Tab id='tab2' title='拍照'>
+			<Require src="pub"/>
+		</Tab>
+		<Tab id='tab3' title='设置'>
+			<Window title='设置'>
+			</Window>
+		</Tab>
+	</TabGroup>
+
 </Alloy>
