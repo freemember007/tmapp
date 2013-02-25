@@ -1,4 +1,3 @@
-var util = require("util");
 var user = Alloy.createModel("user",{email: 'freemem@163.com', password: '666666'});
 var feeds = Alloy.Collections.feed;
 

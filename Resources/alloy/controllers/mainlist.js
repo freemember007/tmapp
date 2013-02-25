@@ -55,7 +55,7 @@ function Controller() {
         Alloy.Collections.feed.off("fetch destroy change add remove reset", __alloyId19);
     };
     _.extend($, $.__views);
-    var util = require("util"), user = Alloy.createModel("user", {
+    var user = Alloy.createModel("user", {
         email: "freemem@163.com",
         password: "666666"
     }), feeds = Alloy.Collections.feed;

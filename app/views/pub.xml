@@ -1,5 +1,6 @@
 <Alloy>
-	<Window title='记录这一刻'>
-
+	<Window onOpen="uploadCameraPhoto" title='记录这一刻'>
+		<ImageView id="image"/>
+		<TextField/>
 	</Window>
 </Alloy>
