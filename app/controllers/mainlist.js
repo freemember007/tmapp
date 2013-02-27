@@ -19,9 +19,3 @@ util.send('api/login', {email: user.get("email"), password: user.get("password")
 });
 
 user.save();
-
-function a(){
-	var feed = Alloy.createModel("feed",{content:"测试", date:"2013/02/25", image:"http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif"});
-			//feed.save();
-	feeds.add(feed,{at: 0})
-}

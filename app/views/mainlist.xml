@@ -1,6 +1,6 @@
 <Alloy>
 	<Collection src="feed"/>
-	<Window onClick="a" title='今天'>
+	<Window title='今天'>
 		<TableView dataCollection="feed">
 			<TableViewSection headerTitle="{date}">
 				<TableViewRow>

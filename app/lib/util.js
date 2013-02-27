@@ -1,5 +1,69 @@
 var sitePath = 'http://184.82.117.60/';
 
+if(OS_IOS){
+	var jpgcompressor = require('com.sideshowcoder.jpgcompressor');
+		jpgcompressor.setCompressSize(102400);
+		jpgcompressor.setWorstCompressQuality(0.65);
+		
+	exports.computeImageSize = function(img){
+		//貌似新版中这个swap已经不需要了。e.midea能直接返回图片的实际宽和高。
+		var imageAsTaken = Ti.UI.createImageView({
+			image: img,
+			width: 'auto',
+			height: 'auto'
+		});
+		imageAsTaken = imageAsTaken.toImage() //估计是接口变了，必须加这么一句，否则，后面w,h的值都为auto，以致发布时收到的img为非图片从而出错。
+		//alert(imageAsTaken.width + " " + imageAsTaken.height);
+		
+		var w = imageAsTaken.width;
+		var h = imageAsTaken.height;
+		
+		var width = 500;
+		var cImage = jpgcompressor.scale(img, width, h*(width/w));
+		var img = jpgcompressor.compress(cImage);
+		
+		var cImage = jpgcompressor.scale(img, 120, h*(120/w));
+		var thumb = jpgcompressor.compress(cImage);
+		
+		return {
+			img: {
+				src: img,
+				width: width,
+				height: h*(width/w)
+			},
+			thumb: {
+				src: thumb,
+				width: 120,
+				height: h*(120/w)
+			}
+		}
+	};	
+}
+
+if(OS_ANDROID){
+	var imagefactory = require('ti.imagefactory');
+	exports.computeImageSize = function(img){
+		var w = img.width;
+		var h = img.height;
+		var width = 600;
+		var img = imagefactory.imageAsResized(img, {width:width, height:h*(width/w), quality:0.7});
+		var thumb = imagefactory.imageAsResized(img, {width:120, height:h*(120/w), quality:0.7});
+		return {
+			img: {
+				src: img,
+				width: width,
+				height: h*(width/w)
+			},
+			thumb: {
+				src: thumb,
+				width: 120,
+				height: h*(120/w)
+			}
+		}
+	};			
+		
+}
+
 exports.send = function(url, data, onload){
 	var networkType = Ti.Network.getNetworkType();
 	if(networkType == Ti.Network.NETWORK_NONE){
@@ -20,37 +84,4 @@ exports.send = function(url, data, onload){
     };
     xhr.open('POST',sitePath + url);
     xhr.send(data);
-}
-
-exports.publishText = function(content){
-	send('api/publish_blog', {content: content, id:Titanium.App.Properties.getString("userid")}, function(res){
-		var data = JSON.parse(res);
-		mvc.view.partial.blogList.addBlog(data.item);
-		mvc.view.mainList.reload();
-	})
-}
-
-
-exports.uploadPhoto = function(){
-	Ti.Media.openPhotoGallery({
-		success: function(e){
-			mvc.view.publishPhoto.show(computeImageSize(e.media), false);
-		},
-		error: function(){
-			alert("error");
-		}
-	});
-}
-
-exports.uploadCameraPhoto = function(){
-	Ti.Media.showCamera({
-		success: function(e){
-	        Ti.Media.hideCamera();
-	        mvc.view.publishPhoto.show(computeImageSize(e.media), true);
-		},
-		error: function(){
-			alert("error");
-		},
-		autohide:false
-	});
 }

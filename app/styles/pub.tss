@@ -1,8 +1,25 @@
-ImageView:{
-	top:0,
-	height:"100",
+"#dialog":{
+	cancel:2,
 }
-TextField:{
-	width:"280",
-	hight:"50",
+
+"ImageView":{
+	top:0,
+	width:120,
+}
+
+"TextField":{
+	top:120,
+	left:10,
+	width:180,
+	hight:30,
+	borderColor:"#ccc",
+	visible:false,
+}
+
+"Button":{
+	top:120,
+	left:200,
+	width:60,
+	hight:20,
+	visible:false,
 }

@@ -4,7 +4,7 @@
     <name>tmapp</name>
     <version>1.0</version>
     <publisher>xjp</publisher>
-    <url>timenote.me</url>
+    <url>http://timenote.me</url>
     <description>not specified</description>
     <copyright>not specified</copyright>
     <icon>appicon.png</icon>
@@ -38,8 +38,9 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="android" version="1.0">ti.physicalSizeCategory</module>
         <module platform="iphone" version="0.5.1">com.sideshowcoder.jpgcompressor</module>
+        <module platform="android">ti.physicalsizecategory</module>
+        <module platform="android" version="2.2">ti.imagefactory</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

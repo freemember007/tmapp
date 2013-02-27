@@ -1,6 +1,14 @@
 <Alloy>
-	<Window onOpen="uploadCameraPhoto" title='记录这一刻'>
+	<Window id="pubWindow" onOpen="showOptions" title='记录这一刻'>
 		<ImageView id="image"/>
-		<TextField/>
+		<TextField id="TextField"/>
+		<Button id="pubButton" title="发布"/>
+		<OptionDialog id="dialog" onClick="choose" title="添加照片">
+			<Options>
+                <Option >照相</Option>
+                <Option >从相册选取</Option>
+                <Option>取消</Option>
+            </Options>
+		</OptionDialog>
 	</Window>
 </Alloy>

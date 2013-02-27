@@ -3,7 +3,8 @@ exports.definition = {
 	config: {
 		"columns": {
 			"email":"text",
-			"password":"text"
+			"password":"text",
+			"userid":"integer"
 		},
 		"adapter": {
 			"type": "properties",
