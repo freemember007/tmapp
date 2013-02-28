@@ -3,7 +3,7 @@ exports.definition = {
         columns: {
             email: "text",
             password: "text",
-            userid: "integer"
+            id: "integer"
         },
         adapter: {
             type: "properties",

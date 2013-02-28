@@ -1,0 +1,60 @@
+"Window": {
+	backgroundColor: "#f4f4f4",
+	barColor:'darkgray',
+	tabBarHidden:true,
+}
+
+".container":{
+	top:20,bottom:10,left:10,right:10,
+	layout:"vertical",
+}
+
+"#loginTitle":{
+	left:0,
+}
+
+".inputContainer":{
+	top:10, 
+	height:40,
+	backgroundColor:"white",
+	borderColor:"#ccc",
+	borderRadius:2,
+	layout:"horizontal",
+}
+
+".inputLabel":{
+	left: 10,
+	height: 40,	
+}
+
+".input":{	
+	left: 10, right:10,
+	height: 40,
+	color: '#666',
+}
+
+"#passwordInput":{
+	passwordMask:true,
+}
+
+"#registerContainer":{
+	top:10, 
+	layout:"horizontal",
+}
+
+"#registerLabel":{
+	left:0,
+	height: 30,
+}
+
+"#registerButton":{
+	left:10,
+	height: 30, width:140,
+	font:{size:14},
+	textAlign:"center",
+	backgroundColor:"white",
+	borderColor:"#ccc",
+	borderRadius: 5,
+	shadowColor:"#ccc"
+}
+

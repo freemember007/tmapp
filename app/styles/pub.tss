@@ -2,24 +2,22 @@
 	cancel:2,
 }
 
-"ImageView":{
+"#image":{
 	top:0,
 	width:120,
 }
 
-"TextField":{
-	top:120,
+"#textField":{
+	top:170,
 	left:10,
 	width:180,
-	hight:30,
+	height: 40,
 	borderColor:"#ccc",
 	visible:false,
 }
 
-"Button":{
-	top:120,
+"#pubButton":{
+	top:170,
 	left:200,
-	width:60,
-	hight:20,
 	visible:false,
 }

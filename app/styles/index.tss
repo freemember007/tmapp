@@ -1,6 +1,6 @@
 'TabGroup':{
 	backgroundColor: '#fff',
-	barColor:'darkgray'
+	barColor:'darkgray',
 }
 
 'Label': {

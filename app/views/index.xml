@@ -1,9 +1,9 @@
 <Alloy>
-	<TabGroup id="tabGroup">
-		<Tab id='tab1' title='最新'>
+	<TabGroup>
+		<Tab id='tab1' title='最新' >
 			<Require src="mainlist"/>
 		</Tab>
-		<Tab id='tab2' title='发布'>
+		<Tab id='tab2' title='发布' >
 			<Require src="pub"/>
 		</Tab>
 		<Tab id='tab3' title='设置'>

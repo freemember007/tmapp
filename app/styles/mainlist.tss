@@ -1,0 +1,33 @@
+"Window":{
+}
+
+"#table":{
+	style:Titanium.UI.iPhone.TableViewStyle.GROUPED,
+	backgroundColor:"#ddd",
+}
+
+"#date":{
+
+}
+
+"#row":{
+	backgroundColor:"#fff",
+	selectedBackgroundColor:"#fff",
+	bottom:5,
+}
+
+"#rowContainer":{
+	layout:"vertical",
+	width:"95%",
+}
+
+"#image":{
+	top:8,
+	preventDefaultImage:true,
+}
+
+"#content":{
+	font:{fontSize:16},
+	top:5,
+	left:0,
+}

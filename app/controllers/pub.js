@@ -39,14 +39,16 @@ function takePhoto(){
 
 function showPhoto(imgs){
 	$.image.image = imgs.thumb.src;
-	$.TextField.visible = true;
+	$.textField.visible = true;
 	$.pubButton.visible = true;
 	$.pubButton.addEventListener("click",function(){
-		util.send('api/uploadPhoto', {photo:imgs.img.src, content:$.pubButton.value, id:"1"}, function(res){
+		util.send('api/uploadPhoto', {photo:imgs.img.src, content:$.textField.value, id:"1"}, function(res){
 		var data = JSON.parse(res);
 		item = data.item;
-		Alloy.Globals.tabGroup.setActiveTab("tab1");
-		//Alloy.Globals.tab2.close($.pubWindow);
+		$.image.visible = false;
+		$.textField.visible = false;
+		$.pubButton.visible = false;
+		Alloy.Globals.index.setActiveTab("tab1");
 		var feeds = Alloy.Collections.feed;
 		var feed = Alloy.createModel("feed",{content:item.content, date:"2013/"+item.month+"/"+item.day, image:item.image});
 		feeds.add(feed,{at: 0})

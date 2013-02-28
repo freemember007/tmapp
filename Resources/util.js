@@ -1,15 +1,17 @@
-var sitePath = "http://184.82.117.60/", imagefactory = require("ti.imagefactory");
+var sitePath = "http://184.82.117.60/", jpgcompressor = require("com.sideshowcoder.jpgcompressor");
+
+jpgcompressor.setCompressSize(102400);
+
+jpgcompressor.setWorstCompressQuality(0.65);
 
 exports.computeImageSize = function(img) {
-    var w = img.width, h = img.height, width = 600, img = imagefactory.imageAsResized(img, {
-        width: width,
-        height: h * (width / w),
-        quality: 0.7
-    }), thumb = imagefactory.imageAsResized(img, {
-        width: 120,
-        height: h * (120 / w),
-        quality: 0.7
+    var imageAsTaken = Ti.UI.createImageView({
+        image: img,
+        width: "auto",
+        height: "auto"
     });
+    imageAsTaken = imageAsTaken.toImage();
+    var w = imageAsTaken.width, h = imageAsTaken.height, width = 500, cImage = jpgcompressor.scale(img, width, h * (width / w)), img = jpgcompressor.compress(cImage), cImage = jpgcompressor.scale(img, 120, h * (120 / w)), thumb = jpgcompressor.compress(cImage);
     return {
         img: {
             src: img,

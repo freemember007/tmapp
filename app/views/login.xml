@@ -1,0 +1,27 @@
+<Alloy>
+	<TabGroup>
+		<Tab>
+			<Window title='时光笔记'>
+				<RightNavButton>
+					<Button title="登录" onClick="login"/>
+				</RightNavButton>
+				<View class="container">
+					<Label id="loginTitle" text="请登录您的时光帐户："/>
+					<View class="inputContainer">
+						<Label class="inputLabel" text="邮箱"/>
+						<TextField id="usernameInput" class="input"/>
+					</View>
+					<View class="inputContainer">
+						<Label class="inputLabel" text="密码"/>
+						<TextField id="passwordInput" class="input"/>
+					</View>
+					<View id="registerContainer">
+						<Label id="registerLabel" text="还没有注册？"/>
+						<Label id="registerButton" text="创建一个时光帐户" onClick="login" />
+					</View>
+				</View>
+			</Window>
+		</Tab>
+	</TabGroup>
+
+</Alloy>
