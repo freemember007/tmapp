@@ -1,20 +1,17 @@
 function Controller() {
-    function showOptions() {
-        alert("aaa");
-    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.index = Ti.UI.createTabGroup({
         backgroundColor: "#fff",
-        barColor: "darkgray",
+        barColor: "silver",
         id: "index"
     });
-    $.__views.__alloyId1 = Alloy.createController("mainlist", {
-        id: "__alloyId1"
+    $.__views.__alloyId2 = Alloy.createController("mainlist", {
+        id: "__alloyId2"
     });
     $.__views.tab1 = Ti.UI.createTab({
-        window: $.__views.__alloyId1.getViewEx({
+        window: $.__views.__alloyId2.getViewEx({
             recurse: !0
         }),
         id: "tab1",

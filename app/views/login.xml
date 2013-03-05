@@ -2,26 +2,47 @@
 	<TabGroup>
 		<Tab>
 			<Window title='时光笔记'>
+				<!--左导航button的class不起作用，待查...
+				<LeftNavButton>
+					<Button id="backButton" class="invisible" title="返回" onClick="back"/>
+				</LeftNavButton>
+				-->
 				<RightNavButton>
-					<Button title="登录" onClick="login"/>
+					<Button id="submitButton" title="登录" onClick="login"/>
 				</RightNavButton>
-				<View class="container">
+
+				<View id="container">
+
 					<Label id="loginTitle" text="请登录您的时光帐户："/>
+
 					<View class="inputContainer">
 						<Label class="inputLabel" text="邮箱"/>
 						<TextField id="usernameInput" class="input"/>
 					</View>
+
 					<View class="inputContainer">
 						<Label class="inputLabel" text="密码"/>
 						<TextField id="passwordInput" class="input"/>
-					</View>
-					<View id="registerContainer">
+					</View>	
+
+					<View id="registerTips">
 						<Label id="registerLabel" text="还没有注册？"/>
-						<Label id="registerButton" text="创建一个时光帐户" onClick="login" />
+						<Label id="registerButton" text="创建一个时光帐户" onClick="showRegister" />
+					</View>				
+                    
+                    <!--给注册控制器的表单-->
+					<View id="registerInputOne" class="inputContainer invisible">
+						<Label class="inputLabel" text="昵称"/>
+						<TextField id="nicknameInput" class="input"/>
 					</View>
+					<View id="registerInputTwo" class="inputContainer invisible">
+						<Label class="inputLabel" text="头像"/>
+						<TextField id="avatarInput" class="input"/>
+					</View>
+
 				</View>
+
 			</Window>
 		</Tab>
 	</TabGroup>
-
 </Alloy>

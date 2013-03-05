@@ -1,4 +1,4 @@
-var sitePath = 'http://184.82.117.60/';
+var sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
 
 if(OS_IOS){
 	var jpgcompressor = require('com.sideshowcoder.jpgcompressor');
@@ -18,7 +18,7 @@ if(OS_IOS){
 		var w = imageAsTaken.width;
 		var h = imageAsTaken.height;
 		
-		var width = 500;
+		var width = 600;
 		var cImage = jpgcompressor.scale(img, width, h*(width/w));
 		var img = jpgcompressor.compress(cImage);
 		

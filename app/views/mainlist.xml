@@ -1,15 +1,17 @@
 <Alloy>
-	<Collection src="feed"/>
-	<Window onOpen="fetchFeed" title='今天'>
-		<TableView id="table" dataCollection="feed">
-			<TableViewSection id="date" headerTitle="{date}">
+	<Window onOpen="fetchFeed" title='今年'>
+		<TableView id="table"><!--数据绑定暂不支持绑定至section-->
+			<!--
+			<TableViewSection id="section" >
+				<HeaderView>
+					<Label id="{the}" class="date" text="{date}" />
+				</HeaderView>
 				<TableViewRow id="row">
-					<View id="rowContainer">
-						<ImageView id="image" image="{image}"/ >
-						<Label id="content" text="{content}"/>
-					</View>
+						<ImageView class="image" image="{image}"/ >
+						<Label class="content" text="{content}"/>
 				</TableViewRow>
 			</TableViewSection>
+			-->
 		</TableView>
 	</Window>
 </Alloy>

@@ -6,9 +6,9 @@ function isTabletFallback() {
     return !(Math.min(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) < 700);
 }
 
-var _ = require("alloy/underscore")._, Backbone = require("alloy/backbone");
+var _ = require("alloy/underscore")._, Backbone = require("alloy/backbone"), DEFAULT_WIDGET = "widget";
 
-exports.version = "1.0.0";
+exports.version = "1.1.0";
 
 exports._ = _;
 
@@ -49,7 +49,11 @@ exports.C = function(name, modelDesc, model) {
 };
 
 exports.createWidget = function(id, name, args) {
-    return new (require("alloy/widgets/" + id + "/controllers/" + (name || "widget")))(args);
+    if (typeof name != "undefined" && name !== null && _.isObject(name)) {
+        args = name;
+        name = DEFAULT_WIDGET;
+    }
+    return new (require("alloy/widgets/" + id + "/controllers/" + (name || DEFAULT_WIDGET)))(args);
 };
 
 exports.createController = function(name, args) {

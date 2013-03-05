@@ -1,4 +1,4 @@
-var sitePath = "http://184.82.117.60/", jpgcompressor = require("com.sideshowcoder.jpgcompressor");
+var sitePath = "http://localhost:3000/", jpgcompressor = require("com.sideshowcoder.jpgcompressor");
 
 jpgcompressor.setCompressSize(102400);
 

@@ -4,7 +4,12 @@
 	tabBarHidden:true,
 }
 
-".container":{
+"#backButton":{
+	visible: false,
+	height: 0,
+}
+
+"#container":{
 	top:20,bottom:10,left:10,right:10,
 	layout:"vertical",
 }
@@ -37,7 +42,7 @@
 	passwordMask:true,
 }
 
-"#registerContainer":{
+"#registerTips":{
 	top:10, 
 	layout:"horizontal",
 }
@@ -57,4 +62,3 @@
 	borderRadius: 5,
 	shadowColor:"#ccc"
 }
-

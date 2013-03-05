@@ -3,7 +3,8 @@ exports.definition = {
 		columns: {
 		    "content": "text",
 		    "date": "text",
-		    "image": "text"
+		    "image": "text",
+		    "the": "integer"
 		},
 		adapter: {
 			type: "sql",

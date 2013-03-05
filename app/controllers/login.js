@@ -17,3 +17,8 @@ function login(){
 		}
 	});	
 }
+
+function showRegister(){
+	var register = Alloy.createController('register').getView();
+		register.open();
+}

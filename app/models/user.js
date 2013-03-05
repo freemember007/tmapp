@@ -15,7 +15,21 @@ exports.definition = {
 	extendModel: function(Model) {		
 		_.extend(Model.prototype, {
 						
-			// extended functions go here
+			validate: function (attrs) {
+    	        for (var key in attrs) {
+                    var value = attrs[key];
+                    if (key === "email") {
+                        if (value.length <= 0) {
+                            return "Error: No email!";
+                        }
+                    }
+                    if (key === "password") {
+                        if (value.length <= 0) {
+                            return "Error: No password!";
+                        }	
+                    }	
+                }
+            },
 
 		}); // end extend
 		

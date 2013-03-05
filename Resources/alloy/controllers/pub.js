@@ -34,6 +34,7 @@ function Controller() {
         });
     }
     function showPhoto(imgs) {
+        $.dialog.hide();
         $.image.image = imgs.thumb.src;
         $.textField.visible = !0;
         $.pubButton.visible = !0;
@@ -93,13 +94,13 @@ function Controller() {
         title: "发布"
     });
     $.__views.pub.add($.__views.pubButton);
-    var __alloyId26 = [];
-    __alloyId26.push("照相");
-    __alloyId26.push("从相册选取");
-    __alloyId26.push("取消");
+    var __alloyId17 = [];
+    __alloyId17.push("照相");
+    __alloyId17.push("从相册选取");
+    __alloyId17.push("取消");
     $.__views.dialog = Ti.UI.createOptionDialog({
         cancel: 2,
-        options: __alloyId26,
+        options: __alloyId17,
         id: "dialog",
         title: "添加照片"
     });

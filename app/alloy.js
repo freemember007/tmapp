@@ -10,3 +10,7 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 var util = require("util");
+
+
+//定义GUI规格
+Alloy.Globals.GUI_bkC = "#f4f4f4"

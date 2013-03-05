@@ -11,7 +11,15 @@ exports.definition = {
         }
     },
     extendModel: function(Model) {
-        _.extend(Model.prototype, {});
+        _.extend(Model.prototype, {
+            validate: function(attrs) {
+                for (var key in attrs) {
+                    var value = attrs[key];
+                    if (key === "email" && value.length <= 0) return "Error: No email!";
+                    if (key === "password" && value.length <= 0) return "Error: No password!";
+                }
+            }
+        });
         return Model;
     },
     extendCollection: function(Collection) {

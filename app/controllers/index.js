@@ -6,7 +6,3 @@ if(Ti.App.Properties.hasProperty("id")){
 	login.open();
 }
 Alloy.Globals.index = $.index
-
-function showOptions(){
-	alert("aaa")
-}

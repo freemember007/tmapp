@@ -38,6 +38,7 @@ function takePhoto(){
 }
 
 function showPhoto(imgs){
+	$.dialog.hide(); //暂时的丑办法
 	$.image.image = imgs.thumb.src;
 	$.textField.visible = true;
 	$.pubButton.visible = true;
