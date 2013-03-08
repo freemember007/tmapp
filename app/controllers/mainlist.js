@@ -14,10 +14,10 @@ function hideNavBar(e){
 		offset = e.contentOffset.y
 	}
 	//以下处理超出上下边界的极端情况：
-	if(e.contentOffset.y < 0){
+	if(e.contentOffset.y <= 0){
 		offset = 0;
 	}
-	if(e.contentOffset.y > e.contentSize.height - e.size.height){
+	if(e.contentOffset.y >= e.contentSize.height - e.size.height){
 		offset = e.contentSize.height - e.size.height;
 	}
 }
