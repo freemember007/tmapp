@@ -1,0 +1,7 @@
+<Alloy>
+	<TableViewSection>
+		<HeaderView>
+			<Label id="headerLabel" />
+		</HeaderView>
+	</TableViewSection>
+</Alloy>

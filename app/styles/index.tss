@@ -1,10 +1,5 @@
 'TabGroup':{
 	backgroundColor: '#fff',
-	barColor:'silver',
+	barColor:'gray',
+	tabsBackgroundColor:"darkgray",
 }
-
-'Label': {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: '#000'
-},

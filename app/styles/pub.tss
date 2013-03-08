@@ -1,23 +1,32 @@
-"#dialog":{
-	cancel:2,
+"Window":{
+	backgroundColor: Alloy.Globals.GUI_bkC,
+}
+
+"#imageContainer":{
+	top:20,
+	width:120,height:120,
+	borderColor: "#ccc",
 }
 
 "#image":{
 	top:0,
 	width:120,
+	preventDefaultImage:true,
 }
 
-"#textField":{
-	top:170,
-	left:10,
-	width:180,
-	height: 40,
-	borderColor:"#ccc",
-	visible:false,
+"#toolbar":{
+	bottom:0,
+    barColor:"#999",
+    visible: false,
+    zIndex: 1,
+}
+
+"#commentInput":{
+	width:240,height: 32,
+	font: {fontSize: 14},
+	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 }
 
 "#pubButton":{
-	top:170,
-	left:200,
-	visible:false,
+	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
 }

@@ -1,0 +1,6 @@
+<Alloy>
+	<TableViewRow id="row">
+		<ImageView onClick="openZoomImage" id="image" />
+		<Label id="label" />
+	</TableViewRow>
+</Alloy>

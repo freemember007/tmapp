@@ -1,20 +1,40 @@
-var sitePath = "http://localhost:3000/", jpgcompressor = require("com.sideshowcoder.jpgcompressor");
+var sitePath = "http://localhost:3000/";
 
-jpgcompressor.setCompressSize(102400);
-
-jpgcompressor.setWorstCompressQuality(0.65);
-
-exports.computeImageSize = function(img) {
-    var imageAsTaken = Ti.UI.createImageView({
-        image: img,
-        width: "auto",
-        height: "auto"
+exports.fetchFeed = function() {
+    util.send("api/login", {
+        email: "freemem@163.com",
+        password: "666666"
+    }, function(res) {
+        var data = JSON.parse(res);
+        if (data.type == "success") {
+            items = data.items;
+            var tabledata = [];
+            for (key in items) {
+                var arg = {
+                    day: key,
+                    feeds: items[key]
+                }, section = Alloy.createController("section", arg).getView();
+                tabledata.push(section);
+            }
+            Alloy.Globals.table.setData(tabledata);
+        } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
     });
-    imageAsTaken = imageAsTaken.toImage();
-    var w = imageAsTaken.width, h = imageAsTaken.height, width = 500, cImage = jpgcompressor.scale(img, width, h * (width / w)), img = jpgcompressor.compress(cImage), cImage = jpgcompressor.scale(img, 120, h * (120 / w)), thumb = jpgcompressor.compress(cImage);
+};
+
+exports.computeImageSize = function(originImg) {
+    var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 600, middleImg = imagefactory.imageAsResized(originImg, {
+        width: width,
+        height: h * (width / w)
+    });
+    middleImg = imagefactory.compress(middleImg, 0.7);
+    var thumb = imagefactory.imageAsResized(originImg, {
+        width: 120,
+        height: h * (120 / w)
+    });
+    thumb = imagefactory.compress(thumb, 0.7);
     return {
-        img: {
-            src: img,
+        middleImg: {
+            src: middleImg,
             width: width,
             height: h * (width / w)
         },

@@ -1,6 +1,6 @@
 <Alloy>
-	<Window onOpen="fetchFeed" title='今年'>
-		<TableView id="table"><!--数据绑定暂不支持绑定至section-->
+	<Window onOpen="util.fetchFeed" title='今年'>
+		<TableView onScroll="hideNavBar" id="table" ><!--数据绑定暂不支持绑定至section-->
 			<!--
 			<TableViewSection id="section" >
 				<HeaderView>

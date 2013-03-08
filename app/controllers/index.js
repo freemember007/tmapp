@@ -6,3 +6,4 @@ if(Ti.App.Properties.hasProperty("id")){
 	login.open();
 }
 Alloy.Globals.index = $.index
+Alloy.Globals.tab1 = $.tab1

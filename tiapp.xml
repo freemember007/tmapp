@@ -38,9 +38,9 @@
         <theme>default</theme>
     </mobileweb>
     <modules>
-        <module platform="iphone" version="0.5.1">com.sideshowcoder.jpgcompressor</module>
         <module platform="android">ti.physicalsizecategory</module>
         <module platform="android" version="2.2">ti.imagefactory</module>
+        <module platform="iphone" version="1.1.1">ti.imagefactory</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

@@ -1,0 +1,8 @@
+"Window": {
+	backgroundColor: "black",
+	fullscreen: true,
+}
+
+"ImageView":{
+	width: "100%",
+}

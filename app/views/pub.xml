@@ -1,14 +1,28 @@
 <Alloy>
 	<Window onFocus="showOptions" title='记录这一刻'>
-		<ImageView id="image"/>
-		<TextField id="textField"/>
-		<Button id="pubButton" title="发布"/>
-		<OptionDialog id="dialog" onClick="choose" title="添加照片">
+		<LeftNavButton>
+		</LeftNavButton>
+
+		<View id="imageContainer"/>
+		<ImageView id="image" onClick="openZoomImage"/>
+
+		<ScrollView>
+			<Toolbar id="toolbar" platform="ios">
+	            <Items>
+	            	<TextField id="commentInput"/>
+	                <FlexSpace />
+	                <Button id="pubButton" title="发布"/>
+	            </Items>
+	        </Toolbar>
+		</ScrollView>
+
+		<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
 			<Options>
                 <Option >照相</Option>
                 <Option >从相册选取</Option>
                 <Option>取消</Option>
             </Options>
 		</OptionDialog>
+
 	</Window>
 </Alloy>

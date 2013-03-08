@@ -1,68 +1,50 @@
 var sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
 
-if(OS_IOS){
-	var jpgcompressor = require('com.sideshowcoder.jpgcompressor');
-		jpgcompressor.setCompressSize(102400);
-		jpgcompressor.setWorstCompressQuality(0.65);
-		
-	exports.computeImageSize = function(img){
-		//貌似新版中这个swap已经不需要了。e.midea能直接返回图片的实际宽和高。
-		var imageAsTaken = Ti.UI.createImageView({
-			image: img,
-			width: 'auto',
-			height: 'auto'
-		});
-		imageAsTaken = imageAsTaken.toImage() //估计是接口变了，必须加这么一句，否则，后面w,h的值都为auto，以致发布时收到的img为非图片从而出错。
-		//alert(imageAsTaken.width + " " + imageAsTaken.height);
-		
-		var w = imageAsTaken.width;
-		var h = imageAsTaken.height;
-		
-		var width = 600;
-		var cImage = jpgcompressor.scale(img, width, h*(width/w));
-		var img = jpgcompressor.compress(cImage);
-		
-		var cImage = jpgcompressor.scale(img, 120, h*(120/w));
-		var thumb = jpgcompressor.compress(cImage);
-		
-		return {
-			img: {
-				src: img,
-				width: width,
-				height: h*(width/w)
-			},
-			thumb: {
-				src: thumb,
-				width: 120,
-				height: h*(120/w)
-			}
+exports.fetchFeed = function (){
+	util.send('api/login', {email: "freemem@163.com", password: "666666"}, function(res){
+		var data = JSON.parse(res);
+		if(data.type == "success"){
+			items = data.items;
+			var tabledata = [];
+			for(key in items){
+				var arg = {
+			        day: key,
+			        feeds: items[key]
+				};
+				var section = Alloy.createController('section', arg).getView();
+				tabledata.push(section);
+			};
+			Alloy.Globals.table.setData(tabledata);
+		}else if(data.type == "fail"){
+			alert('用户名或密码错误！');
+		}else{
+			alert('unknown error');
 		}
-	};	
+	});
 }
 
-if(OS_ANDROID){
+exports.computeImageSize = function(originImg){
 	var imagefactory = require('ti.imagefactory');
-	exports.computeImageSize = function(img){
-		var w = img.width;
-		var h = img.height;
-		var width = 600;
-		var img = imagefactory.imageAsResized(img, {width:width, height:h*(width/w), quality:0.7});
-		var thumb = imagefactory.imageAsResized(img, {width:120, height:h*(120/w), quality:0.7});
-		return {
-			img: {
-				src: img,
-				width: width,
-				height: h*(width/w)
-			},
-			thumb: {
-				src: thumb,
-				width: 120,
-				height: h*(120/w)
-			}
+	var w = originImg.width;
+	var h = originImg.height;
+	var width = 600;
+	var middleImg = imagefactory.imageAsResized(originImg, {width:width, height:h*(width/w)});
+	middleImg = imagefactory.compress(middleImg, 0.7); //本来上面的函数有压缩功能，但在iPhone下貌似有bug，必须与上面分开写才行，否则格式为png.
+	var thumb = imagefactory.imageAsResized(originImg, {width:120, height:h*(120/w)});
+	thumb = imagefactory.compress(thumb, 0.7);
+	return {
+		middleImg: {
+			src: middleImg,
+			width: width,
+			height: h*(width/w)
+		},
+		thumb: {
+			src: thumb,
+			width: 120,
+			height: h*(120/w)
 		}
-	};			
-		
-}
+	}
+};
 
 exports.send = function(url, data, onload){
 	var networkType = Ti.Network.getNetworkType();
