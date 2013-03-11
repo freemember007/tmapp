@@ -1,49 +1,40 @@
 function Controller() {
-    function showOptions() {
-        if ($.image.image == null) {
-            $.dialog.show();
-            $.pub.setLeftNavButton(null);
-        }
+    function donotOpen(e) {
+        Alloy.Globals.index.setActiveTab(e.previousTab);
+        $.dialog.show();
+        previousTab = e.previousTab;
     }
     function choose(e) {
-        $.dialog.hide();
         switch (e.index) {
           case 0:
             takePhoto();
             break;
           case 1:
             openPhoto();
-            break;
-          case 2:
-            Alloy.Globals.index.setActiveTab("tab1");
         }
     }
     function openPhoto() {
-        $.image.image = "notNull";
         Ti.Media.openPhotoGallery({
             success: function(e) {
+                $.tab2.removeEventListener("focus", donotOpen);
+                Alloy.Globals.index.setActiveTab($.tab2);
                 showPhoto(util.computeImageSize(e.media));
             },
-            cancel: function() {
-                $.image.image = null;
-                $.dialog.show();
-            },
+            cancel: function() {},
             error: function() {
                 alert("error");
             }
         });
     }
     function takePhoto() {
-        $.image.image = "notNull";
         Ti.Media.showCamera({
             success: function(e) {
+                $.tab2.removeEventListener("focus", donotOpen);
+                Alloy.Globals.index.setActiveTab($.tab2);
                 Ti.Media.hideCamera();
                 showPhoto(util.computeImageSize(e.media));
             },
-            cancel: function() {
-                $.image.image = null;
-                $.dialog.show();
-            },
+            cancel: function() {},
             error: function() {
                 alert("error");
             },
@@ -51,15 +42,10 @@ function Controller() {
         });
     }
     function showPhoto(imgs) {
-        var cancelButton = Ti.UI.createButton({
-            title: "取消"
-        });
-        $.pub.setLeftNavButton(cancelButton);
-        cancelButton.addEventListener("click", clearPub);
-        $.pub.remove($.imageContainer);
+        $.window.remove($.imageContainer);
         $.image.image = imgs.middleImg.src;
-        $.toolbar.visible = !0;
         $.commentInput.focus();
+        $.cancelButton.addEventListener("click", clearPub);
         $.pubButton.addEventListener("click", pub);
     }
     function pub() {
@@ -72,55 +58,57 @@ function Controller() {
             var data = JSON.parse(res);
             item = data.item;
             clearPub();
+            Alloy.Globals.index.setActiveTab(Alloy.Globals.tab1);
             Alloy.Globals.table.scrollToTop();
             util.fetchFeed();
         });
     }
     function clearPub() {
-        $.pub.setLeftNavButton(null);
-        $.pub.add($.imageContainer);
-        $.image.image = null;
+        $.window.add($.imageContainer);
+        $.image.image = "null";
         $.commentInput.value = "";
-        $.commentInput.blur();
-        $.toolbar.visible = !1;
-        Alloy.Globals.index.setActiveTab("tab1");
+        $.cancelButton.removeEventListener("click", clearPub);
         $.pubButton.removeEventListener("click", pub);
+        Alloy.Globals.index.setActiveTab(previousTab);
+        $.tab2.addEventListener("focus", donotOpen);
     }
     function openZoomImage() {
-        var image = Alloy.createController("zoomImage", $.image.image).getView();
+        Alloy.createController("zoomImage", $.image.image).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
-    $.__views.pub = Ti.UI.createWindow({
+    $.__views.window = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        title: "记录这一刻",
-        id: "pub"
+        id: "window",
+        title: "记录这一刻"
     });
-    $.addTopLevelView($.__views.pub);
-    showOptions ? $.__views.pub.addEventListener("focus", showOptions) : __defers["$.__views.pub!focus!showOptions"] = !0;
-    $.__views.pub.leftNavButton = undefined;
+    $.__views.cancelButton = Ti.UI.createButton({
+        id: "cancelButton",
+        title: "取消"
+    });
+    $.__views.window.leftNavButton = $.__views.cancelButton;
     $.__views.imageContainer = Ti.UI.createView({
         top: 20,
         width: 120,
         height: 120,
-        borderColor: "#ccc",
+        borderColor: "#999",
         id: "imageContainer"
     });
-    $.__views.pub.add($.__views.imageContainer);
+    $.__views.window.add($.__views.imageContainer);
     $.__views.image = Ti.UI.createImageView({
         top: 0,
         width: 120,
         preventDefaultImage: !0,
         id: "image"
     });
-    $.__views.pub.add($.__views.image);
+    $.__views.window.add($.__views.image);
     openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = !0;
-    $.__views.__alloyId16 = Ti.UI.createScrollView({
-        id: "__alloyId16"
+    $.__views.__alloyId17 = Ti.UI.createScrollView({
+        id: "__alloyId17"
     });
-    $.__views.pub.add($.__views.__alloyId16);
-    var __alloyId18 = [];
+    $.__views.window.add($.__views.__alloyId17);
+    var __alloyId19 = [];
     $.__views.commentInput = Ti.UI.createTextField({
         width: 240,
         height: 32,
@@ -128,44 +116,51 @@ function Controller() {
             fontSize: 14
         },
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+        zIndex: 1,
         id: "commentInput"
     });
-    __alloyId18.push($.__views.commentInput);
-    $.__views.__alloyId19 = Ti.UI.createButton({
+    __alloyId19.push($.__views.commentInput);
+    $.__views.__alloyId20 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId18.push($.__views.__alloyId19);
+    __alloyId19.push($.__views.__alloyId20);
     $.__views.pubButton = Ti.UI.createButton({
         style: Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
         id: "pubButton",
         title: "发布"
     });
-    __alloyId18.push($.__views.pubButton);
+    __alloyId19.push($.__views.pubButton);
     $.__views.toolbar = Ti.UI.iOS.createToolbar({
         bottom: 0,
         barColor: "#999",
-        visible: !1,
-        zIndex: 1,
-        items: __alloyId18,
+        items: __alloyId19,
         id: "toolbar"
     });
-    $.__views.__alloyId16.add($.__views.toolbar);
-    var __alloyId21 = [];
-    __alloyId21.push("照相");
-    __alloyId21.push("从相册选取");
-    __alloyId21.push("取消");
+    $.__views.__alloyId17.add($.__views.toolbar);
+    var __alloyId22 = [];
+    __alloyId22.push("照相");
+    __alloyId22.push("从相册选取");
+    __alloyId22.push("取消");
     $.__views.dialog = Ti.UI.createOptionDialog({
-        options: __alloyId21,
+        options: __alloyId22,
         id: "dialog",
         cancel: "2",
         title: "添加照片"
     });
     choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
+    $.__views.tab2 = Ti.UI.createTab({
+        window: $.__views.window,
+        id: "tab2",
+        title: "记录"
+    });
+    $.addTopLevelView($.__views.tab2);
+    donotOpen ? $.__views.tab2.addEventListener("focus", donotOpen) : __defers["$.__views.tab2!focus!donotOpen"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.pub!focus!showOptions"] && $.__views.pub.addEventListener("focus", showOptions);
+    var previousTab;
     __defers["$.__views.image!click!openZoomImage"] && $.__views.image.addEventListener("click", openZoomImage);
     __defers["$.__views.dialog!click!choose"] && $.__views.dialog.addEventListener("click", choose);
+    __defers["$.__views.tab2!focus!donotOpen"] && $.__views.tab2.addEventListener("focus", donotOpen);
     _.extend($, exports);
 }
 

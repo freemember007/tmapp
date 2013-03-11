@@ -8,36 +8,32 @@ function Controller() {
         tabsBackgroundColor: "darkgray",
         id: "index"
     });
-    $.__views.__alloyId1 = Alloy.createController("mainlist", {
-        id: "__alloyId1"
+    $.__views.__alloyId2 = Alloy.createController("mainlist", {
+        id: "__alloyId2"
     });
     $.__views.tab1 = Ti.UI.createTab({
-        window: $.__views.__alloyId1.getViewEx({
+        window: $.__views.__alloyId2.getViewEx({
             recurse: !0
         }),
         id: "tab1",
-        title: "最新"
+        title: "最近"
     });
     $.__views.index.addTab($.__views.tab1);
-    $.__views.__alloyId3 = Alloy.createController("pub", {
-        id: "__alloyId3"
+    $.__views.__alloyId4 = Alloy.createController("pub", {
+        id: "__alloyId4"
     });
-    $.__views.tab2 = Ti.UI.createTab({
-        window: $.__views.__alloyId3.getViewEx({
-            recurse: !0
-        }),
-        id: "tab2",
-        title: "发布"
-    });
-    $.__views.index.addTab($.__views.tab2);
-    $.__views.__alloyId5 = Ti.UI.createWindow({
-        title: "设置",
+    $.__views.index.addTab($.__views.__alloyId4.getViewEx({
+        recurse: !0
+    }));
+    $.__views.__alloyId5 = Alloy.createController("galleryList", {
         id: "__alloyId5"
     });
     $.__views.tab3 = Ti.UI.createTab({
-        window: $.__views.__alloyId5,
+        window: $.__views.__alloyId5.getViewEx({
+            recurse: !0
+        }),
         id: "tab3",
-        title: "设置"
+        title: "总览"
     });
     $.__views.index.addTab($.__views.tab3);
     $.addTopLevelView($.__views.index);
@@ -49,6 +45,7 @@ function Controller() {
     }
     Alloy.Globals.index = $.index;
     Alloy.Globals.tab1 = $.tab1;
+    Alloy.Globals.tab3 = $.tab3;
     _.extend($, exports);
 }
 

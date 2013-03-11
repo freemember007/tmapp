@@ -1,0 +1,6 @@
+<Alloy>
+	<Window>
+		<Label id="label" />
+		<View id="imageContainer" />
+	</Window>
+</Alloy>

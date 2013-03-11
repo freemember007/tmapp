@@ -1,12 +1,12 @@
-function showOptions(){
-	if($.image.image == null){
-		$.dialog.show();
-		$.pub.setLeftNavButton(null);
-	}
+var previousTab;
+
+function donotOpen(e){
+	Alloy.Globals.index.setActiveTab(e.previousTab);
+	$.dialog.show();
+	previousTab = e.previousTab
 }
 
 function choose(e){
-	$.dialog.hide();;
 	switch( e.index ) {
 		case 0:
 			takePhoto();
@@ -14,20 +14,17 @@ function choose(e){
 		case 1:
 			openPhoto();
 			break;
-		case 2:
-			Alloy.Globals.index.setActiveTab("tab1");
     }	
 }
 
 function openPhoto(){
-	$.image.image = "notNull"; //以免图片打开后dialog再次显示
 	Ti.Media.openPhotoGallery({
 		success: function(e){
+			$.tab2.removeEventListener("focus",donotOpen);
+			Alloy.Globals.index.setActiveTab($.tab2);
 			showPhoto(util.computeImageSize(e.media));
 		},
 		cancel: function(){
-			$.image.image = null; //去掉上面的赋值，回归原始null值
-			$.dialog.show();
 		},
 		error: function(){
 			alert("error");
@@ -36,15 +33,14 @@ function openPhoto(){
 }
 
 function takePhoto(){
-	$.image.image = "notNull";
 	Ti.Media.showCamera({
 		success: function(e){
+			$.tab2.removeEventListener("focus",donotOpen);
+			Alloy.Globals.index.setActiveTab($.tab2);
 			if(OS_IOS)Ti.Media.hideCamera();
 			showPhoto(util.computeImageSize(e.media));
 		},
 		cancel: function(){
-			$.image.image = null;
-			$.dialog.show();
 		},
 		error: function(){
 			alert("error");
@@ -54,40 +50,35 @@ function takePhoto(){
 }
 
 function showPhoto(imgs){
-	var cancelButton = Ti.UI.createButton({
-		title: "取消",
-	})
-	$.pub.setLeftNavButton(cancelButton);
-	cancelButton.addEventListener("click",clearPub);
-	$.pub.remove($.imageContainer);
+	$.window.remove($.imageContainer);
 	$.image.image = imgs.middleImg.src;
-	$.toolbar.visible = true;
 	$.commentInput.focus();
+	$.cancelButton.addEventListener("click",clearPub);
 	$.pubButton.addEventListener("click",pub);
 }
 
 function pub(){
-	$.commentInput.blur(); //此处的blur跟clearPub的blur不冲突
+	$.commentInput.blur(); 
 	util.send('api/uploadPhoto', {photo:$.image.image, content:$.commentInput.value, id:"1"}, function(res){
 		var data = JSON.parse(res);
 		item = data.item;
 		clearPub();
+		Alloy.Globals.index.setActiveTab(Alloy.Globals.tab1);
 		Alloy.Globals.table.scrollToTop();
 		util.fetchFeed();
 	});
 }
 
 function clearPub(){
-	$.pub.setLeftNavButton(null);
-	$.pub.add($.imageContainer);
-	$.image.image = null;
+	$.window.add($.imageContainer);
+	$.image.image = "null";
 	$.commentInput.value = "";
-	$.commentInput.blur();
-	$.toolbar.visible = false;
-	Alloy.Globals.index.setActiveTab("tab1");
-	$.pubButton.removeEventListener("click",pub); //重要！取消show函数定义的监听事件
+	$.cancelButton.removeEventListener("click",clearPub);//重要！取消show函数定义的监听事件,否则后续事件会触发多次！
+	$.pubButton.removeEventListener("click",pub); 
+	Alloy.Globals.index.setActiveTab(previousTab);
+	$.tab2.addEventListener("focus",donotOpen);
 };
 
 function openZoomImage(){
-	var image = Alloy.createController('zoomImage', $.image.image).getView();
+	Alloy.createController('zoomImage', $.image.image).getView();
 };

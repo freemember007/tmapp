@@ -16,7 +16,7 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.mainlist = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        title: "今年",
+        title: "最近时光",
         id: "mainlist"
     });
     $.addTopLevelView($.__views.mainlist);

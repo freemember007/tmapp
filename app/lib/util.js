@@ -27,11 +27,11 @@ exports.computeImageSize = function(originImg){
 	var imagefactory = require('ti.imagefactory');
 	var w = originImg.width;
 	var h = originImg.height;
-	var width = 600;
+	var width = 500;
 	var middleImg = imagefactory.imageAsResized(originImg, {width:width, height:h*(width/w)});
-	middleImg = imagefactory.compress(middleImg, 0.7); //本来上面的函数有压缩功能，但在iPhone下貌似有bug，必须与上面分开写才行，否则格式为png.
+	middleImg = imagefactory.compress(middleImg, 0.65); //本来上面的函数有压缩功能，但在iPhone下貌似有bug，必须与上面分开写才行，否则格式为png.
 	var thumb = imagefactory.imageAsResized(originImg, {width:120, height:h*(120/w)});
-	thumb = imagefactory.compress(thumb, 0.7);
+	thumb = imagefactory.compress(thumb, 0.65);
 	return {
 		middleImg: {
 			src: middleImg,

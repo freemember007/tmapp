@@ -1,14 +1,11 @@
 <Alloy>
 	<TabGroup>
-		<Tab id='tab1' title='最新' >
+		<Tab id="tab1" title="最近" >
 			<Require src="mainlist"/>
 		</Tab>
-		<Tab id='tab2' title='发布' >
-			<Require src="pub"/>
-		</Tab>
-		<Tab id='tab3' title='设置'>
-			<Window title='设置'>
-			</Window>
+		<Require src="pub"/>
+		<Tab id="tab3" title="总览">
+			<Require src="galleryList"/>
 		</Tab>
 	</TabGroup>
 

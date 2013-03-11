@@ -1,28 +1,32 @@
 <Alloy>
-	<Window onFocus="showOptions" title='记录这一刻'>
-		<LeftNavButton>
-		</LeftNavButton>
+	<Tab id="tab2" onFocus="donotOpen" title="记录" >
+		<Window id="window" title='记录这一刻'>
 
-		<View id="imageContainer"/>
-		<ImageView id="image" onClick="openZoomImage"/>
+			<LeftNavButton>
+				<Button id="cancelButton" title="取消" />
+			</LeftNavButton>
 
-		<ScrollView>
-			<Toolbar id="toolbar" platform="ios">
-	            <Items>
-	            	<TextField id="commentInput"/>
-	                <FlexSpace />
-	                <Button id="pubButton" title="发布"/>
-	            </Items>
-	        </Toolbar>
-		</ScrollView>
+			<View id="imageContainer"/>
+			<ImageView id="image" onClick="openZoomImage"/>
 
-		<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
-			<Options>
-                <Option >照相</Option>
-                <Option >从相册选取</Option>
-                <Option>取消</Option>
-            </Options>
-		</OptionDialog>
+			<ScrollView>
+				<Toolbar id="toolbar" platform="ios">
+		            <Items>
+		            	<TextField id="commentInput"/>
+		                <FlexSpace />
+		                <Button id="pubButton" title="发布"/>
+		            </Items>
+		        </Toolbar>
+			</ScrollView>
 
-	</Window>
+			<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
+				<Options>
+	                <Option >照相</Option>
+	                <Option >从相册选取</Option>
+	                <Option>取消</Option>
+	            </Options>
+			</OptionDialog>
+
+		</Window>
+	</Tab>
 </Alloy>

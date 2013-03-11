@@ -1,0 +1,8 @@
+"Window":{
+	backgroundColor: "black",	
+}
+
+"#table":{
+	backgroundColor: "black",
+	separatorColor:"transparent",
+}

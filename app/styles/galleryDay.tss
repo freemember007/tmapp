@@ -1,0 +1,17 @@
+"Window":{
+	backgroundColor: "black",
+}
+
+"#label":{
+	height: 30,
+	backgroundColor: "black",
+	opacity: 0.8,
+	color: "white",
+	font:{fontSize:20, fontWeight:'bold', },
+	textAlign: "center",
+}
+
+"#imageContainer":{
+	layout:"horizontal",
+	left:5,top:5,
+}

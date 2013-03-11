@@ -1,0 +1,19 @@
+"#row":{
+	backgroundColor: "black",
+	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
+	layout:"vertical",
+	height: 100,
+}
+
+"#imageContainer":{
+	layout:"horizontal",
+	left:10,
+}
+
+"#label":{
+	top:5,bottom: 5,
+	height: 15,
+	color:"white",
+	font:{fontSize:12,},
+	left:10,
+}

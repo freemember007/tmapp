@@ -1,0 +1,6 @@
+<Alloy>
+	<TableViewRow id="row" onClick="showDay">
+		<Label id="label" />
+		<View id="imageContainer" />
+	</TableViewRow>
+</Alloy>

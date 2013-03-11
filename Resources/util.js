@@ -22,16 +22,16 @@ exports.fetchFeed = function() {
 };
 
 exports.computeImageSize = function(originImg) {
-    var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 600, middleImg = imagefactory.imageAsResized(originImg, {
+    var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 500, middleImg = imagefactory.imageAsResized(originImg, {
         width: width,
         height: h * (width / w)
     });
-    middleImg = imagefactory.compress(middleImg, 0.7);
+    middleImg = imagefactory.compress(middleImg, 0.65);
     var thumb = imagefactory.imageAsResized(originImg, {
         width: 120,
         height: h * (120 / w)
     });
-    thumb = imagefactory.compress(thumb, 0.7);
+    thumb = imagefactory.compress(thumb, 0.65);
     return {
         middleImg: {
             src: middleImg,
