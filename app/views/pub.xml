@@ -1,5 +1,5 @@
 <Alloy>
-	<Tab id="tab2" onFocus="donotOpen" title="记录" >
+	<Tab id="tab3" onFocus="donotOpen" title="记录" >
 		<Window id="window" title='记录这一刻'>
 
 			<LeftNavButton>

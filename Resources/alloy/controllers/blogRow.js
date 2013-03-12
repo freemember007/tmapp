@@ -5,13 +5,13 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
-    $.__views.row = Ti.UI.createTableViewRow({
+    $.__views.blogRow = Ti.UI.createTableViewRow({
         backgroundColor: Alloy.Globals.GUI_bkC,
         selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
         layout: "vertical",
-        id: "row"
+        id: "blogRow"
     });
-    $.addTopLevelView($.__views.row);
+    $.addTopLevelView($.__views.blogRow);
     $.__views.image = Ti.UI.createImageView({
         top: 5,
         width: 300,
@@ -20,7 +20,7 @@ function Controller() {
         preventDefaultImage: !0,
         id: "image"
     });
-    $.__views.row.add($.__views.image);
+    $.__views.blogRow.add($.__views.image);
     openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = !0;
     $.__views.label = Ti.UI.createLabel({
         bottom: 5,
@@ -34,12 +34,12 @@ function Controller() {
         backgroundColor: "white",
         id: "label"
     });
-    $.__views.row.add($.__views.label);
+    $.__views.blogRow.add($.__views.label);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.image.image = args.url;
-    args.content == "" ? $.row.remove($.label) : $.label.text = "  " + args.content;
+    args.content == "" ? $.blogRow.remove($.label) : $.label.text = "  " + args.content;
     __defers["$.__views.image!click!openZoomImage"] && $.__views.image.addEventListener("click", openZoomImage);
     _.extend($, exports);
 }

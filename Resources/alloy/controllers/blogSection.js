@@ -2,10 +2,10 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
-    $.__views.section = Ti.UI.createTableViewSection({
-        id: "section"
+    $.__views.blogSection = Ti.UI.createTableViewSection({
+        id: "blogSection"
     });
-    $.addTopLevelView($.__views.section);
+    $.addTopLevelView($.__views.blogSection);
     $.__views.headerLabel = Ti.UI.createLabel({
         backgroundColor: Alloy.Globals.GUI_bkC,
         height: 30,
@@ -23,15 +23,15 @@ function Controller() {
         },
         id: "headerLabel"
     });
-    $.__views.section.headerView = $.__views.headerLabel;
+    $.__views.blogSection.headerView = $.__views.headerLabel;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.headerLabel.text = " " + args.day;
     var items = args.feeds;
     for (i = 0; i < items.length; i++) {
-        var row = Alloy.createController("row", items[i]).getView();
-        $.section.add(row);
+        var row = Alloy.createController("blogRow", items[i]).getView();
+        $.blogSection.add(row);
     }
     _.extend($, exports);
 }

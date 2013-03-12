@@ -1,0 +1,5 @@
+"#row":{
+	backgroundColor: "black",
+	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
+	layout:"horizontal",
+}

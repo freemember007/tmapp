@@ -1,9 +1,6 @@
 function Controller() {
     function showDay() {
-        Alloy.createController("galleryDay", items).getView();
-    }
-    function openZoomImage() {
-        var image = Alloy.createController("zoomImage", args.url).getView();
+        Alloy.createController("monthDay", items).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;

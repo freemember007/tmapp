@@ -1,0 +1,6 @@
+<Alloy>
+	<Window onOpen="fetchMonth" title='本月'>
+		<TableView onScroll="hideNavBar" id="table" >
+		</TableView>
+	</Window>
+</Alloy>

@@ -1,12 +1,17 @@
 <Alloy>
 	<TabGroup>
 		<Tab id="tab1" title="最近" >
-			<Require src="mainlist"/>
+			<Require src="blogList"/>
+		</Tab>
+		<Tab id="tab2" title="月汇总" >
+			<Require src="monthList"/>
 		</Tab>
 		<Require src="pub"/>
-		<Tab id="tab3" title="总览">
-			<Require src="galleryList"/>
+		<Tab id="tab4" title="年汇总">
+			<Require src="yearList"/>
+		</Tab>
+		<Tab id="tab5" title="随机" >
+			<Require src="random"/>
 		</Tab>
 	</TabGroup>
-
 </Alloy>

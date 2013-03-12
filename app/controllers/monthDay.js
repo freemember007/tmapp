@@ -14,9 +14,8 @@ for(i=0; i<items.length; i++){
 	})
 	$.imageContainer.add(image);
 }
-//Alloy.Globals.tab3.window = $.galleryDay; //貌似不起作用，下面的写法才生效。
+//Alloy.Globals.tab4.window = $.yearDay; //貌似不起作用，下面的写法才生效。
 
-$.galleryDay.title = "某天"; //貌似设置Ti.UI.currentWindow或Ti.UI.getCurrentWindow()的值都不行，之前就碰到过。
-$.galleryDay.showNavBar();
-Alloy.Globals.tab3.open($.galleryDay);
-
+$.monthDay.title = "某天"; //貌似设置Ti.UI.currentWindow或Ti.UI.getCurrentWindow()的值都不行，之前就碰到过。
+$.monthDay.showNavBar();
+Alloy.Globals.tab2.open($.monthDay);

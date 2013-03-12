@@ -1,4 +1,4 @@
-var sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
+var sitePath = !ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
 
 exports.fetchFeed = function (){
 	util.send('api/login', {email: "freemem@163.com", password: "666666"}, function(res){
@@ -11,7 +11,7 @@ exports.fetchFeed = function (){
 			        day: key,
 			        feeds: items[key]
 				};
-				var section = Alloy.createController('section', arg).getView();
+				var section = Alloy.createController('blogSection', arg).getView();
 				tabledata.push(section);
 			};
 			Alloy.Globals.table.setData(tabledata);

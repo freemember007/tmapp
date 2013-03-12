@@ -32,9 +32,5 @@ for(i=0; i<items.length; i++){
 }
 
 function showDay(){
-	Alloy.createController('galleryDay', items).getView();
-}
-
-function openZoomImage(){
-	var image = Alloy.createController('zoomImage', args.url).getView();
+	Alloy.createController('monthDay', items).getView();
 }

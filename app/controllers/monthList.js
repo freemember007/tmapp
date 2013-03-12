@@ -1,13 +1,11 @@
-//Alloy.Globals.galleryTable = $.table
-
 var offset = 0;
 function hideNavBar(e){
-	if(e.contentOffset.y > offset){
-		$.galleryList.hideNavBar();
+	if(e.contentOffset.y - offset > 10){
+		$.monthList.hideNavBar();
 		offset = e.contentOffset.y
 	}
-	if(e.contentOffset.y < offset){
-		$.galleryList.showNavBar() ;
+	if(e.contentOffset.y - offset < -10){
+		$.monthList.showNavBar() ;
 		offset = e.contentOffset.y
 	}
 	if(e.contentOffset.y <= 0){
@@ -18,19 +16,19 @@ function hideNavBar(e){
 	}
 }
 
-function fetchGallery(){
-	util.send('api/fetchGallery', {email: "freemem@163.com", password: "666666"}, function(res){
+function fetchMonth(){
+	util.send('api/fetchMonth', {email: "freemem@163.com", password: "666666"}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			items = data.items;
 			var tabledata = [];
 			for(key in items){
 				var arg = {
-			        month: key,
+			        day: key,
 			        feeds: items[key]
 				};
-				var section = Alloy.createController('gallerySection', arg).getView();
-				tabledata.push(section);
+				var row = Alloy.createController('monthRow', arg).getView();
+				tabledata.push(row);
 			};
 			$.table.setData(tabledata);
 		}else if(data.type == "fail"){

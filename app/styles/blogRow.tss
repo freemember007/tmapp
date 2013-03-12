@@ -1,4 +1,4 @@
-"#row":{
+"#blogRow":{
 	backgroundColor: Alloy.Globals.GUI_bkC,
 	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
 	layout:"vertical",

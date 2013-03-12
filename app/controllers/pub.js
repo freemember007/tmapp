@@ -1,5 +1,7 @@
-var previousTab;
+$.window.hide();
+$.window.hideNavBar();
 
+var previousTab;
 function donotOpen(e){
 	Alloy.Globals.index.setActiveTab(e.previousTab);
 	$.dialog.show();
@@ -20,8 +22,10 @@ function choose(e){
 function openPhoto(){
 	Ti.Media.openPhotoGallery({
 		success: function(e){
-			$.tab2.removeEventListener("focus",donotOpen);
-			Alloy.Globals.index.setActiveTab($.tab2);
+			$.window.show();
+			$.window.showNavBar();
+			$.tab3.removeEventListener("focus",donotOpen);
+			Alloy.Globals.index.setActiveTab($.tab3);
 			showPhoto(util.computeImageSize(e.media));
 		},
 		cancel: function(){
@@ -35,8 +39,10 @@ function openPhoto(){
 function takePhoto(){
 	Ti.Media.showCamera({
 		success: function(e){
-			$.tab2.removeEventListener("focus",donotOpen);
-			Alloy.Globals.index.setActiveTab($.tab2);
+			$.window.show();
+			$.window.showNavBar();
+			$.tab3.removeEventListener("focus",donotOpen);
+			Alloy.Globals.index.setActiveTab($.tab3);
 			if(OS_IOS)Ti.Media.hideCamera();
 			showPhoto(util.computeImageSize(e.media));
 		},
@@ -76,7 +82,9 @@ function clearPub(){
 	$.cancelButton.removeEventListener("click",clearPub);//重要！取消show函数定义的监听事件,否则后续事件会触发多次！
 	$.pubButton.removeEventListener("click",pub); 
 	Alloy.Globals.index.setActiveTab(previousTab);
-	$.tab2.addEventListener("focus",donotOpen);
+	$.tab3.addEventListener("focus",donotOpen);
+	$.window.hide();
+	$.window.hideNavBar();
 };
 
 function openZoomImage(){

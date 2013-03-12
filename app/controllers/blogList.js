@@ -5,12 +5,12 @@ var offset = 0;
 function hideNavBar(e){
 	//Ti.API.log(e.contentOffset.y);
 	//Ti.API.log(e.contentSize.height - e.size.height);
-	if(e.contentOffset.y > offset){
-		$.mainlist.hideNavBar();
+	if(e.contentOffset.y - offset > 10){
+		$.blogList.hideNavBar();
 		offset = e.contentOffset.y
 	}
-	if(e.contentOffset.y < offset){
-		$.mainlist.showNavBar() ;
+	if(e.contentOffset.y - offset < -10){
+		$.blogList.showNavBar() ;
 		offset = e.contentOffset.y
 	}
 	//以下处理超出上下边界的极端情况：
@@ -30,10 +30,10 @@ function touchStart(e){
 function touchMove(e){
 	move = e.globalPoint.y;
 	if(start>move){
-		$.mainlist.hideNavBar();
+		$.blogList.hideNavBar();
 	}
 	if(start<move){
-		$.mainlist.showNavBar();
+		$.blogList.showNavBar();
 	}
 }
 */
@@ -61,7 +61,7 @@ function fetchFeed(){
 	});
 }
 //对于使用了数据绑定的controller，毁掉一些东西，防内存泄露。
-$.mainlist.addEventListener('close', function() {
+$.blogList.addEventListener('close', function() {
     $.destroy();
 });
 */

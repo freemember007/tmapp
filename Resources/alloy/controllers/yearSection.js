@@ -2,12 +2,12 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
-    $.__views.gallerySection = Ti.UI.createTableViewSection({
-        id: "gallerySection"
+    $.__views.yearSection = Ti.UI.createTableViewSection({
+        id: "yearSection"
     });
-    $.addTopLevelView($.__views.gallerySection);
+    $.addTopLevelView($.__views.yearSection);
     $.__views.headerLabel = Ti.UI.createLabel({
-        height: 30,
+        height: 50,
         backgroundColor: "black",
         opacity: 0.8,
         color: "white",
@@ -18,19 +18,13 @@ function Controller() {
         textAlign: "center",
         id: "headerLabel"
     });
-    $.__views.gallerySection.headerView = $.__views.headerLabel;
+    $.__views.yearSection.headerView = $.__views.headerLabel;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.headerLabel.text = args.month + "月";
-    var items = args.feeds;
-    for (key in items) {
-        var arg = {
-            day: key,
-            feeds: items[key]
-        }, row = Alloy.createController("galleryRow", arg).getView();
-        $.gallerySection.add(row);
-    }
+    var items = args.feeds, row = Alloy.createController("yearRow", items).getView();
+    $.yearSection.add(row);
     _.extend($, exports);
 }
 

@@ -1,5 +1,13 @@
 'TabGroup':{
-	backgroundColor: '#fff',
+	backgroundColor: '#ccc', //发布pop时闪得好一些
 	barColor:'gray',
 	tabsBackgroundColor:"darkgray",
+}
+
+"#tab1":{
+	//icon:Titanium.UI.iPhone.SystemIcon.RECENTS
+}
+
+"#tab4":{
+	//icon:Titanium.UI.iPhone.SystemIcon.MORE
 }

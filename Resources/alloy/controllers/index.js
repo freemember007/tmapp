@@ -3,12 +3,12 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.index = Ti.UI.createTabGroup({
-        backgroundColor: "#fff",
+        backgroundColor: "#ccc",
         barColor: "gray",
         tabsBackgroundColor: "darkgray",
         id: "index"
     });
-    $.__views.__alloyId2 = Alloy.createController("mainlist", {
+    $.__views.__alloyId2 = Alloy.createController("blogList", {
         id: "__alloyId2"
     });
     $.__views.tab1 = Ti.UI.createTab({
@@ -19,23 +19,45 @@ function Controller() {
         title: "最近"
     });
     $.__views.index.addTab($.__views.tab1);
-    $.__views.__alloyId4 = Alloy.createController("pub", {
+    $.__views.__alloyId4 = Alloy.createController("monthList", {
         id: "__alloyId4"
     });
-    $.__views.index.addTab($.__views.__alloyId4.getViewEx({
-        recurse: !0
-    }));
-    $.__views.__alloyId5 = Alloy.createController("galleryList", {
-        id: "__alloyId5"
-    });
-    $.__views.tab3 = Ti.UI.createTab({
-        window: $.__views.__alloyId5.getViewEx({
+    $.__views.tab2 = Ti.UI.createTab({
+        window: $.__views.__alloyId4.getViewEx({
             recurse: !0
         }),
-        id: "tab3",
-        title: "总览"
+        id: "tab2",
+        title: "月汇总"
     });
-    $.__views.index.addTab($.__views.tab3);
+    $.__views.index.addTab($.__views.tab2);
+    $.__views.__alloyId6 = Alloy.createController("pub", {
+        id: "__alloyId6"
+    });
+    $.__views.index.addTab($.__views.__alloyId6.getViewEx({
+        recurse: !0
+    }));
+    $.__views.__alloyId7 = Alloy.createController("yearList", {
+        id: "__alloyId7"
+    });
+    $.__views.tab4 = Ti.UI.createTab({
+        window: $.__views.__alloyId7.getViewEx({
+            recurse: !0
+        }),
+        id: "tab4",
+        title: "年汇总"
+    });
+    $.__views.index.addTab($.__views.tab4);
+    $.__views.__alloyId9 = Alloy.createController("random", {
+        id: "__alloyId9"
+    });
+    $.__views.tab5 = Ti.UI.createTab({
+        window: $.__views.__alloyId9.getViewEx({
+            recurse: !0
+        }),
+        id: "tab5",
+        title: "随机"
+    });
+    $.__views.index.addTab($.__views.tab5);
     $.addTopLevelView($.__views.index);
     exports.destroy = function() {};
     _.extend($, $.__views);
@@ -45,7 +67,8 @@ function Controller() {
     }
     Alloy.Globals.index = $.index;
     Alloy.Globals.tab1 = $.tab1;
-    Alloy.Globals.tab3 = $.tab3;
+    Alloy.Globals.tab2 = $.tab2;
+    Alloy.Globals.tab4 = $.tab4;
     _.extend($, exports);
 }
 

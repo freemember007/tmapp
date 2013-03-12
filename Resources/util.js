@@ -13,7 +13,7 @@ exports.fetchFeed = function() {
                 var arg = {
                     day: key,
                     feeds: items[key]
-                }, section = Alloy.createController("section", arg).getView();
+                }, section = Alloy.createController("blogSection", arg).getView();
                 tabledata.push(section);
             }
             Alloy.Globals.table.setData(tabledata);

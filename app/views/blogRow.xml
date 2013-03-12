@@ -1,5 +1,5 @@
 <Alloy>
-	<TableViewRow id="row">
+	<TableViewRow id="blogRow">
 		<ImageView onClick="openZoomImage" id="image" />
 		<Label id="label" />
 	</TableViewRow>

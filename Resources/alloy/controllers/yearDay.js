@@ -2,11 +2,11 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
-    $.__views.galleryDay = Ti.UI.createWindow({
+    $.__views.yearDay = Ti.UI.createWindow({
         backgroundColor: "black",
-        id: "galleryDay"
+        id: "yearDay"
     });
-    $.addTopLevelView($.__views.galleryDay);
+    $.addTopLevelView($.__views.yearDay);
     $.__views.label = Ti.UI.createLabel({
         height: 30,
         backgroundColor: "black",
@@ -19,14 +19,14 @@ function Controller() {
         textAlign: "center",
         id: "label"
     });
-    $.__views.galleryDay.add($.__views.label);
+    $.__views.yearDay.add($.__views.label);
     $.__views.imageContainer = Ti.UI.createView({
         layout: "horizontal",
         left: 5,
         top: 5,
         id: "imageContainer"
     });
-    $.__views.galleryDay.add($.__views.imageContainer);
+    $.__views.yearDay.add($.__views.imageContainer);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {}, items = args;
@@ -41,9 +41,9 @@ function Controller() {
         });
         $.imageContainer.add(image);
     }
-    $.galleryDay.title = "某天";
-    $.galleryDay.showNavBar();
-    Alloy.Globals.tab3.open($.galleryDay);
+    $.yearDay.title = "某天";
+    $.yearDay.showNavBar();
+    Alloy.Globals.tab4.open($.yearDay);
     _.extend($, exports);
 }
 
