@@ -1,4 +1,4 @@
-var sitePath = "http://184.82.117.60/";
+var sitePath = "http://localhost:3000/";
 
 exports.fetchFeed = function() {
     util.send("api/login", {

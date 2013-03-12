@@ -1,4 +1,4 @@
-var sitePath = !ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
+var sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
 
 exports.fetchFeed = function (){
 	util.send('api/login', {email: "freemem@163.com", password: "666666"}, function(res){
