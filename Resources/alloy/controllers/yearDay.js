@@ -33,11 +33,15 @@ function Controller() {
     for (i = 0; i < items.length; i++) {
         var url = items[i].url, image = Ti.UI.createImageView({
             image: url,
-            url: url
+            index: i
         });
         image.image = image.toBlob().imageAsThumbnail(100);
         image.addEventListener("click", function(e) {
-            Alloy.createController("zoomImage", e.source.url).getView();
+            var scrollImage = Alloy.createController("scrollImage", {
+                index: e.source.index,
+                items: items
+            }).getView();
+            Alloy.Globals.tab4.open(scrollImage);
         });
         $.imageContainer.add(image);
     }

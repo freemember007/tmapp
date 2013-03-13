@@ -27,7 +27,7 @@ function Controller() {
             recurse: !0
         }),
         id: "tab2",
-        title: "月汇总"
+        title: "本月"
     });
     $.__views.index.addTab($.__views.tab2);
     $.__views.__alloyId6 = Alloy.createController("pub", {
@@ -44,7 +44,7 @@ function Controller() {
             recurse: !0
         }),
         id: "tab4",
-        title: "年汇总"
+        title: "今年"
     });
     $.__views.index.addTab($.__views.tab4);
     $.__views.__alloyId9 = Alloy.createController("random", {

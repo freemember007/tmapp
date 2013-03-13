@@ -1,0 +1,5 @@
+"Window": {
+	backgroundColor: "black",
+	barColor: "transparent",
+	tabBarHidden: true,
+}

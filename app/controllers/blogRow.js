@@ -8,5 +8,5 @@ if(args.content == ""){
 }
 
 function openZoomImage(){
-	var image = Alloy.createController('zoomImage', $.image.image).getView();
+	Alloy.createController('zoomImage', $.image.image).getView();
 }

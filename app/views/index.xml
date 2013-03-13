@@ -3,11 +3,11 @@
 		<Tab id="tab1" title="最近" >
 			<Require src="blogList"/>
 		</Tab>
-		<Tab id="tab2" title="月汇总" >
+		<Tab id="tab2" title="本月" >
 			<Require src="monthList"/>
 		</Tab>
 		<Require src="pub"/>
-		<Tab id="tab4" title="年汇总">
+		<Tab id="tab4" title="今年">
 			<Require src="yearList"/>
 		</Tab>
 		<Tab id="tab5" title="随机" >
