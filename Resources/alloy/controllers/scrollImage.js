@@ -9,9 +9,9 @@ function Controller() {
         id: "scrollImage"
     });
     $.addTopLevelView($.__views.scrollImage);
-    var __alloyId30 = [];
+    var __alloyId31 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId30,
+        views: __alloyId31,
         id: "scrollableView",
         showPagingControl: "true"
     });

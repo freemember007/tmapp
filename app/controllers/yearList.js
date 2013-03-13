@@ -16,8 +16,8 @@ function hideNavBar(e){
 	}
 }
 
-function fetchGallery(){
-	util.send('api/fetchGallery', {email: "freemem@163.com", password: "666666"}, function(res){
+function fetchYear(){
+	util.send('api/fetchYear', {email: "freemem@163.com", password: "666666"}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			items = data.items;

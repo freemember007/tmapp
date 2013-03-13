@@ -1,6 +1,6 @@
 function Controller() {
     function openZoomImage() {
-        var image = Alloy.createController("zoomImage", $.image.image).getView();
+        Alloy.createController("zoomImage", $.image.image).getView();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;

@@ -11,8 +11,8 @@ function Controller() {
         e.contentOffset.y <= 0 && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
     }
-    function fetchGallery() {
-        util.send("api/fetchGallery", {
+    function fetchYear() {
+        util.send("api/fetchYear", {
             email: "freemem@163.com",
             password: "666666"
         }, function(res) {
@@ -40,7 +40,7 @@ function Controller() {
         id: "yearList"
     });
     $.addTopLevelView($.__views.yearList);
-    fetchGallery ? $.__views.yearList.addEventListener("open", fetchGallery) : __defers["$.__views.yearList!open!fetchGallery"] = !0;
+    fetchYear ? $.__views.yearList.addEventListener("open", fetchYear) : __defers["$.__views.yearList!open!fetchYear"] = !0;
     $.__views.table = Ti.UI.createTableView({
         backgroundColor: "black",
         separatorColor: "transparent",
@@ -51,7 +51,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var offset = 0;
-    __defers["$.__views.yearList!open!fetchGallery"] && $.__views.yearList.addEventListener("open", fetchGallery);
+    __defers["$.__views.yearList!open!fetchYear"] && $.__views.yearList.addEventListener("open", fetchYear);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }
