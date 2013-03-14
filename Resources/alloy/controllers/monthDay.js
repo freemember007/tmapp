@@ -7,19 +7,6 @@ function Controller() {
         id: "monthDay"
     });
     $.addTopLevelView($.__views.monthDay);
-    $.__views.label = Ti.UI.createLabel({
-        height: 30,
-        backgroundColor: "black",
-        opacity: 0.8,
-        color: "white",
-        font: {
-            fontSize: 20,
-            fontWeight: "bold"
-        },
-        textAlign: "center",
-        id: "label"
-    });
-    $.__views.monthDay.add($.__views.label);
     $.__views.imageContainer = Ti.UI.createView({
         layout: "horizontal",
         left: 5,
@@ -32,6 +19,8 @@ function Controller() {
     var args = arguments[0] || {}, items = args;
     for (i = 0; i < items.length; i++) {
         var url = items[i].url, image = Ti.UI.createImageView({
+            left: 0,
+            top: 0,
             image: url,
             index: i
         });

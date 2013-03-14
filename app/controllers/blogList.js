@@ -1,10 +1,8 @@
-Alloy.Globals.table = $.table
+Alloy.Globals.tableBlog = $.table
 
 // scroll事情监听实现hideNavBar
 var offset = 0;
 function hideNavBar(e){
-	//Ti.API.log(e.contentOffset.y);
-	//Ti.API.log(e.contentSize.height - e.size.height);
 	if(e.contentOffset.y - offset > 10){
 		$.blogList.hideNavBar();
 		offset = e.contentOffset.y
@@ -21,6 +19,12 @@ function hideNavBar(e){
 		offset = e.contentSize.height - e.size.height;
 	}
 }
+
+// 下拉刷新
+var pullView = Alloy.createController('pullView', {table:Alloy.Globals.tableBlog,fetch:util.fetchBlog}).getView();
+$.table.headerPullView = pullView
+
+
 
 /* touch事情监听实现hideNavBar，有诸多问题，如不包括scroll，事情不能在空的区域触发。
 var start, move;
@@ -43,7 +47,7 @@ var user = Alloy.createModel("user",{email: 'freemem@163.com', password: '666666
 var feeds = Alloy.Collections.feed;
 
 fetch feed via RestAPI.
-function fetchFeed(){
+function fetchBlog(){
 	util.send('api/login', {email: user.get("email"), password: user.get("password")}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){

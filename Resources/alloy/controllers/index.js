@@ -3,7 +3,7 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.index = Ti.UI.createTabGroup({
-        backgroundColor: "#ccc",
+        backgroundColor: "#black",
         barColor: "gray",
         tabsBackgroundColor: "darkgray",
         id: "index"
@@ -61,9 +61,13 @@ function Controller() {
     $.addTopLevelView($.__views.index);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    if (Ti.App.Properties.hasProperty("id")) $.index.open(); else {
+    if (Ti.App.Properties.hasProperty("id")) $.index.open({
+        transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT
+    }); else {
         var login = Alloy.createController("login").getView();
-        login.open();
+        login.open({
+            transition: Ti.UI.iPhone.AnimationStyle.CURL_DOWN
+        });
     }
     Alloy.Globals.index = $.index;
     Alloy.Globals.tab1 = $.tab1;

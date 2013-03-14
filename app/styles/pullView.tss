@@ -1,0 +1,59 @@
+"#pullView":{
+	backgroundColor:"#FFFFCC",
+    width:320,
+    height:60,
+}
+
+"#border1":{
+	backgroundColor:"#333",
+	height:1,
+	bottom:1
+}
+
+"#border2":{
+	backgroundColor:"#999",
+	height:1,
+	bottom:0
+}
+
+"#arrow":{
+	backgroundImage:"whiteArrow.png",
+	width:23,
+	height:60,
+	bottom:10,
+	left:20
+}
+
+"#actInd":{
+	left:20,
+	bottom:13,
+	width:30,
+	height:30,
+	style:  Titanium.UI.iPhone.ActivityIndicatorStyle.DARK
+}
+
+"#statusLabel":{
+	text:"下拉刷新",
+	left:55,
+	width:200,
+	bottom:30,
+	height:"auto",
+	color:"#333",
+	textAlign:"center",
+	font:{fontSize:13,fontWeight:"bold"},
+	shadowColor:"#999",
+	shadowOffset:{x:0,y:1}
+}
+
+"#lastUpdatedLabel":{
+	text:"上次更新: 尚未更新过",
+	left:55,
+	width:200,
+	bottom:15,
+	height:"auto",
+	color:"#333",
+	textAlign:"center",
+	font:{fontSize:12},
+	shadowColor:"#999",
+	shadowOffset:{x:0,y:1}
+}

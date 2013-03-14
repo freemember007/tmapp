@@ -12,6 +12,7 @@ function Controller() {
     });
     $.addTopLevelView($.__views.zoomImage);
     $.__views.image = Ti.UI.createImageView({
+        preventDefaultImage: !0,
         width: "100%",
         id: "image"
     });

@@ -1,3 +1,5 @@
+Alloy.Globals.tableMonth = $.table
+
 var offset = 0;
 function hideNavBar(e){
 	if(e.contentOffset.y - offset > 10){
@@ -38,3 +40,7 @@ function fetchMonth(){
 		}
 	});
 }
+
+// 下拉刷新
+var pullView = Alloy.createController('pullView', {table:Alloy.Globals.tableMonth,fetch:fetchMonth}).getView();
+$.table.headerPullView = pullView

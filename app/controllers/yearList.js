@@ -1,3 +1,5 @@
+Alloy.Globals.tableYear = $.table
+
 var offset = 0;
 function hideNavBar(e){
 	if(e.contentOffset.y - offset > 10){
@@ -38,3 +40,7 @@ function fetchYear(){
 		}
 	});
 }
+
+// 下拉刷新
+var pullView = Alloy.createController('pullView', {table:Alloy.Globals.tableYear,fetch:fetchYear}).getView();
+$.table.headerPullView = pullView

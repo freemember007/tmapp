@@ -1,6 +1,6 @@
 <Alloy>
-	<Window onOpen="fetchRandom" title='某时'>
-		<ScrollableView id="scrollableView" showPagingControl="true">
+	<Window onFocus="fetchRandom">
+		<ScrollableView id="scrollableView">
         </ScrollableView>
 	</Window>
 </Alloy>

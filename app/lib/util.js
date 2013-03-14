@@ -1,6 +1,6 @@
 var sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
 
-exports.fetchFeed = function (){
+exports.fetchBlog = function (){
 	util.send('api/login', {email: "freemem@163.com", password: "666666"}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
@@ -14,7 +14,7 @@ exports.fetchFeed = function (){
 				var section = Alloy.createController('blogSection', arg).getView();
 				tabledata.push(section);
 			};
-			Alloy.Globals.table.setData(tabledata);
+			Alloy.Globals.tableBlog.setData(tabledata);
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{

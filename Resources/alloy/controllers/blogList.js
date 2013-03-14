@@ -20,7 +20,7 @@ function Controller() {
         id: "blogList"
     });
     $.addTopLevelView($.__views.blogList);
-    util.fetchFeed ? $.__views.blogList.addEventListener("open", util.fetchFeed) : __defers["$.__views.blogList!open!util.fetchFeed"] = !0;
+    util.fetchBlog ? $.__views.blogList.addEventListener("open", util.fetchBlog) : __defers["$.__views.blogList!open!util.fetchBlog"] = !0;
     $.__views.table = Ti.UI.createTableView({
         backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
@@ -30,9 +30,13 @@ function Controller() {
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Alloy.Globals.table = $.table;
-    var offset = 0;
-    __defers["$.__views.blogList!open!util.fetchFeed"] && $.__views.blogList.addEventListener("open", util.fetchFeed);
+    Alloy.Globals.tableBlog = $.table;
+    var offset = 0, pullView = Alloy.createController("pullView", {
+        table: Alloy.Globals.tableBlog,
+        fetch: util.fetchBlog
+    }).getView();
+    $.table.headerPullView = pullView;
+    __defers["$.__views.blogList!open!util.fetchBlog"] && $.__views.blogList.addEventListener("open", util.fetchBlog);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

@@ -13,11 +13,11 @@ function Controller() {
     });
     $.addTopLevelView($.__views.blogRow);
     $.__views.image = Ti.UI.createImageView({
+        preventDefaultImage: !0,
         top: 5,
         width: 300,
         borderWidth: 5,
         borderColor: "white",
-        preventDefaultImage: !0,
         id: "image"
     });
     $.__views.blogRow.add($.__views.image);

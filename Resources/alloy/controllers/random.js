@@ -8,7 +8,7 @@ function Controller() {
             if (data.type == "success") {
                 items = data.items;
                 data = [];
-                for (i = 0; i < items.length; i++) {
+                for (i = 0; i < items.length; i++) if (items[i].url != null) {
                     var view = Ti.UI.createScrollView({
                         maxZoomScale: 1.5
                     }), image = Ti.UI.createImageView({
@@ -21,6 +21,7 @@ function Controller() {
                 $.scrollableView.setViews(data);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
         });
+        $.scrollableView.scrollToView(0);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
@@ -28,16 +29,14 @@ function Controller() {
     $.__views.random = Ti.UI.createWindow({
         backgroundColor: "black",
         barColor: "transparent",
-        title: "某时",
         id: "random"
     });
     $.addTopLevelView($.__views.random);
-    fetchRandom ? $.__views.random.addEventListener("open", fetchRandom) : __defers["$.__views.random!open!fetchRandom"] = !0;
+    fetchRandom ? $.__views.random.addEventListener("focus", fetchRandom) : __defers["$.__views.random!focus!fetchRandom"] = !0;
     var __alloyId30 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
         views: __alloyId30,
-        id: "scrollableView",
-        showPagingControl: "true"
+        id: "scrollableView"
     });
     $.__views.random.add($.__views.scrollableView);
     exports.destroy = function() {};
@@ -51,7 +50,7 @@ function Controller() {
         });
     });
     $.random.title = "某时";
-    __defers["$.__views.random!open!fetchRandom"] && $.__views.random.addEventListener("open", fetchRandom);
+    __defers["$.__views.random!focus!fetchRandom"] && $.__views.random.addEventListener("focus", fetchRandom);
     _.extend($, exports);
 }
 

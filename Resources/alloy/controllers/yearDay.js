@@ -32,6 +32,8 @@ function Controller() {
     var args = arguments[0] || {}, items = args;
     for (i = 0; i < items.length; i++) {
         var url = items[i].url, image = Ti.UI.createImageView({
+            left: 0,
+            top: 0,
             image: url,
             index: i
         });

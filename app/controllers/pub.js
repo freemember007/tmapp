@@ -70,8 +70,8 @@ function pub(){
 		item = data.item;
 		clearPub();
 		Alloy.Globals.index.setActiveTab(Alloy.Globals.tab1);
-		Alloy.Globals.table.scrollToTop();
-		util.fetchFeed();
+		Alloy.Globals.tableBlog.scrollToTop();
+		util.fetchBlog();
 	});
 }
 

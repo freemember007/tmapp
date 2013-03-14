@@ -4,6 +4,7 @@ var items = args;
 for(i=0; i<items.length; i++){
 	var url = items[i].url
 	var image = Ti.UI.createImageView({
+		left:0,top:0, //重要，否则返回时位置会变
 		image: url,
 		index: i, //自定义属性
 	})

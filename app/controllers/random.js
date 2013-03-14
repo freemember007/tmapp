@@ -5,15 +5,17 @@ function fetchRandom(){
 			items = data.items;
 			data = [];
 			for(i=0; i<items.length; i++){
-				var view = Ti.UI.createScrollView({
-					maxZoomScale:1.5, //这项必须有,先放1.5吧，否则不清晰。
-				})
-				var image = Ti.UI.createImageView({
-					width:318, //让图片之间留点间隙，暂时的解决办法
-					image: items[i].url,
-				})
-				view.add(image);
-				data.push(view);
+				if (items[i].url != null){
+					var view = Ti.UI.createScrollView({
+						maxZoomScale:1.5, //这项必须有,先放1.5吧，否则不清晰。
+					})
+					var image = Ti.UI.createImageView({
+						width:318, //让图片之间留点间隙，暂时的解决办法
+						image: items[i].url,
+					})
+					view.add(image);
+					data.push(view);
+				};
 			};
 			$.scrollableView.setViews(data);
 		}else if(data.type == "fail"){
@@ -22,9 +24,11 @@ function fetchRandom(){
 			alert('unknown error');
 		}
 	});
+	$.scrollableView.scrollToView(0);
 }
 
-//scrollableView加事件监听并定位初始位置
+//scrollableView加事件监听
+
 $.scrollableView.addEventListener('doubletap', function(e){
     var view = $.scrollableView.views[$.scrollableView.currentPage];
     (view.zoomScale <= 1.0) ? view.setZoomScale(2, {animated:true}) : view.setZoomScale(1, {animated:true});

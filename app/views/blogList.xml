@@ -1,5 +1,5 @@
 <Alloy>
-	<Window onOpen="util.fetchFeed" title='最近时光'>
+	<Window onOpen="util.fetchBlog" title='最近时光'>
 		<TableView onScroll="hideNavBar" id="table" ><!--数据绑定暂不支持绑定至section-->
 			<!--
 			<TableViewSection id="section" >

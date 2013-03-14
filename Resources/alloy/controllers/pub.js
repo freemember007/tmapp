@@ -63,8 +63,8 @@ function Controller() {
             item = data.item;
             clearPub();
             Alloy.Globals.index.setActiveTab(Alloy.Globals.tab1);
-            Alloy.Globals.table.scrollToTop();
-            util.fetchFeed();
+            Alloy.Globals.tableBlog.scrollToTop();
+            util.fetchBlog();
         });
     }
     function clearPub() {
@@ -103,9 +103,9 @@ function Controller() {
     });
     $.__views.window.add($.__views.imageContainer);
     $.__views.image = Ti.UI.createImageView({
+        preventDefaultImage: !0,
         top: 0,
         width: 120,
-        preventDefaultImage: !0,
         id: "image"
     });
     $.__views.window.add($.__views.image);

@@ -1,0 +1,10 @@
+<Alloy>
+	<View id="pullView">
+		<View id="border1" />
+		<View id="border2" />
+		<View id="arrow" />
+		<ActivityIndicator id="actInd" />
+		<Label id="statusLabel" />
+		<Label id="lastUpdatedLabel" />
+	</View>
+</Alloy>

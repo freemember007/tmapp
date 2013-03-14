@@ -50,7 +50,12 @@ function Controller() {
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var offset = 0;
+    Alloy.Globals.tableMonth = $.table;
+    var offset = 0, pullView = Alloy.createController("pullView", {
+        table: Alloy.Globals.tableMonth,
+        fetch: fetchMonth
+    }).getView();
+    $.table.headerPullView = pullView;
     __defers["$.__views.monthList!open!fetchMonth"] && $.__views.monthList.addEventListener("open", fetchMonth);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
