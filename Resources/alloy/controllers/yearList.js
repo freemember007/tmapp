@@ -29,6 +29,7 @@ function Controller() {
                 }
                 $.table.setData(tabledata);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
+            $.yearList.remove(actInd);
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -50,9 +51,10 @@ function Controller() {
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Alloy.Globals.tableYear = $.table;
+    var actInd = Alloy.createController("actInd").getView();
+    $.yearList.add(actInd);
     var offset = 0, pullView = Alloy.createController("pullView", {
-        table: Alloy.Globals.tableYear,
+        table: $.table,
         fetch: fetchYear
     }).getView();
     $.table.headerPullView = pullView;

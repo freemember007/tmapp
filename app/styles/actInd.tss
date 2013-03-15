@@ -1,0 +1,6 @@
+"ActivityIndicator":{
+	style: Titanium.UI.iPhone.ActivityIndicatorStyle.PLAIN,
+	message: "加载中...",
+	color: "white",
+	font: {fontSize:14,},
+}

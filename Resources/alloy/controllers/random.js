@@ -1,5 +1,7 @@
 function Controller() {
     function fetchRandom() {
+        var actInd = Alloy.createController("actInd").getView();
+        $.random.add(actInd);
         util.send("api/fetchRandom", {
             email: "freemem@163.com",
             password: "666666"
@@ -20,8 +22,9 @@ function Controller() {
                 }
                 $.scrollableView.setViews(data);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
+            $.random.remove(actInd);
+            $.scrollableView.scrollToView(0);
         });
-        $.scrollableView.scrollToView(0);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;

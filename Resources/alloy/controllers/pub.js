@@ -64,7 +64,7 @@ function Controller() {
             clearPub();
             Alloy.Globals.index.setActiveTab(Alloy.Globals.tab1);
             Alloy.Globals.tableBlog.scrollToTop();
-            util.fetchBlog();
+            Alloy.Globals.fetchBlog();
         });
     }
     function clearPub() {

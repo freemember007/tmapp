@@ -1,4 +1,6 @@
-Alloy.Globals.tableYear = $.table
+// 添加actInd 
+var actInd = Alloy.createController('actInd').getView();
+$.yearList.add(actInd);
 
 var offset = 0;
 function hideNavBar(e){
@@ -38,9 +40,10 @@ function fetchYear(){
 		}else{
 			alert('unknown error');
 		}
+		$.yearList.remove(actInd);
 	});
 }
 
 // 下拉刷新
-var pullView = Alloy.createController('pullView', {table:Alloy.Globals.tableYear,fetch:fetchYear}).getView();
+var pullView = Alloy.createController('pullView', {table:$.table,fetch:fetchYear}).getView();
 $.table.headerPullView = pullView

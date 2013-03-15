@@ -1,4 +1,6 @@
 function fetchRandom(){
+	var actInd = Alloy.createController('actInd').getView();
+	$.random.add(actInd);
 	util.send('api/fetchRandom', {email: "freemem@163.com", password: "666666"}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
@@ -23,12 +25,12 @@ function fetchRandom(){
 		}else{
 			alert('unknown error');
 		}
+		$.random.remove(actInd);
+		$.scrollableView.scrollToView(0);
 	});
-	$.scrollableView.scrollToView(0);
 }
 
 //scrollableView加事件监听
-
 $.scrollableView.addEventListener('doubletap', function(e){
     var view = $.scrollableView.views[$.scrollableView.currentPage];
     (view.zoomScale <= 1.0) ? view.setZoomScale(2, {animated:true}) : view.setZoomScale(1, {animated:true});

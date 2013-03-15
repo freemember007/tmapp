@@ -1,4 +1,6 @@
-Alloy.Globals.tableMonth = $.table
+// 添加actInd 
+var actInd = Alloy.createController('actInd').getView();
+$.monthList.add(actInd);
 
 var offset = 0;
 function hideNavBar(e){
@@ -38,9 +40,11 @@ function fetchMonth(){
 		}else{
 			alert('unknown error');
 		}
+		$.monthList.remove(actInd);
 	});
+	
 }
 
 // 下拉刷新
-var pullView = Alloy.createController('pullView', {table:Alloy.Globals.tableMonth,fetch:fetchMonth}).getView();
+var pullView = Alloy.createController('pullView', {table:$.table,fetch:fetchMonth}).getView();
 $.table.headerPullView = pullView
