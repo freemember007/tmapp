@@ -1,8 +1,8 @@
 "Window":{
-	backgroundColor: "black",	
+	backgroundColor: Alloy.Globals.GUI_bkC,	
 }
 
 "#table":{
-	backgroundColor: "black",
+	backgroundColor: Alloy.Globals.GUI_bkC,
 	separatorColor:"transparent",
 }

@@ -36,14 +36,25 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.yearList = Ti.UI.createWindow({
-        backgroundColor: "black",
+        backgroundColor: Alloy.Globals.GUI_bkC,
         title: "今年",
         id: "yearList"
     });
     $.addTopLevelView($.__views.yearList);
     fetchYear ? $.__views.yearList.addEventListener("open", fetchYear) : __defers["$.__views.yearList!open!fetchYear"] = !0;
+    $.__views.__alloyId37 = Ti.UI.createLabel({
+        font: {
+            fontSize: 24,
+            fontWeight: "bold",
+            fontFamily: "迷你简南宫"
+        },
+        color: "#666",
+        text: "今年",
+        id: "__alloyId37"
+    });
+    $.__views.yearList.titleControl = $.__views.__alloyId37;
     $.__views.table = Ti.UI.createTableView({
-        backgroundColor: "black",
+        backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
         id: "table"
     });

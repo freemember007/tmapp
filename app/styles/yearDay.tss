@@ -1,5 +1,5 @@
 "Window":{
-	backgroundColor: "black",
+	backgroundColor: Alloy.Globals.GUI_bkC,
 }
 
 "#label":{

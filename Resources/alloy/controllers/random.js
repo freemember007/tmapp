@@ -36,9 +36,9 @@ function Controller() {
     });
     $.addTopLevelView($.__views.random);
     fetchRandom ? $.__views.random.addEventListener("focus", fetchRandom) : __defers["$.__views.random!focus!fetchRandom"] = !0;
-    var __alloyId30 = [];
+    var __alloyId34 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId30,
+        views: __alloyId34,
         id: "scrollableView"
     });
     $.__views.random.add($.__views.scrollableView);

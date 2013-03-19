@@ -6,7 +6,7 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.row = Ti.UI.createTableViewRow({
-        backgroundColor: "black",
+        backgroundColor: Alloy.Globals.GUI_bkC,
         selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
         layout: "vertical",
         height: 100,
@@ -18,7 +18,7 @@ function Controller() {
         top: 5,
         bottom: 5,
         height: 15,
-        color: "white",
+        color: Alloy.Globals.GUI_FC,
         font: {
             fontSize: 12
         },

@@ -1,32 +1,22 @@
 <Alloy>
-	<Tab id="tab3" onFocus="donotOpen" title="记录" >
-		<Window id="window" title='记录这一刻'>
+	<Window title='记录这一刻'>
 
-			<LeftNavButton>
-				<Button id="cancelButton" title="取消" />
-			</LeftNavButton>
+		<LeftNavButton>
+			<Button id="cancelButton" title="取消" />
+		</LeftNavButton>
 
-			<View id="imageContainer"/>
-			<ImageView id="image" onClick="openZoomImage"/>
+		<View id="imageContainer"/>
+		<ImageView id="image" onClick="openZoomImage"/>
 
-			<ScrollView>
-				<Toolbar id="toolbar" platform="ios">
-		            <Items>
-		            	<TextField id="commentInput"/>
-		                <FlexSpace />
-		                <Button id="pubButton" title="发布"/>
-		            </Items>
-		        </Toolbar>
-			</ScrollView>
-
-			<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
-				<Options>
-	                <Option >照相</Option>
-	                <Option >从相册选取</Option>
-	                <Option>取消</Option>
-	            </Options>
-			</OptionDialog>
-
-		</Window>
-	</Tab>
+		<ScrollView>
+			<Toolbar id="toolbar" platform="ios">
+	            <Items>
+	            	<TextField id="commentInput"/>
+	                <FlexSpace />
+	                <Button id="pubButton" title="发布"/>
+	            </Items>
+	        </Toolbar>
+		</ScrollView>
+	
+	</Window>
 </Alloy>

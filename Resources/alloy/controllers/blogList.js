@@ -17,6 +17,8 @@ function Controller() {
                     tabledata.push(section);
                 }
                 Alloy.Globals.tableBlog.setData(tabledata);
+                fetchOffset = 10;
+                lastRow = 10;
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
             $.blogList.remove(actInd);
         });
@@ -77,7 +79,7 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.blogList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        title: "最近时光",
+        barImage: "navBar.png",
         id: "blogList"
     });
     $.addTopLevelView($.__views.blogList);
@@ -95,14 +97,14 @@ function Controller() {
     Alloy.Globals.fetchBlog = fetchBlog;
     var actInd = Alloy.createController("actInd").getView();
     actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
-    actInd.color = "black";
+    actInd.color = Alloy.Globals.GUI_FC;
     $.blogList.add(actInd);
-    var offset = 0, pullView = Alloy.createController("pullView", {
+    var fetchOffset = 10, lastRow = 10, offset = 0, pullView = Alloy.createController("pullView", {
         table: $.table,
         fetch: fetchBlog
     }).getView();
     $.table.headerPullView = pullView;
-    var lastRow = 10, fetchOffset = 10, updating = !1, loadingInd = Titanium.UI.createActivityIndicator({
+    var updating = !1, loadingInd = Titanium.UI.createActivityIndicator({
         bottom: 5,
         width: 30,
         height: 30,

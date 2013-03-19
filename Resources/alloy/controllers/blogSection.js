@@ -7,11 +7,11 @@ function Controller() {
     });
     $.addTopLevelView($.__views.blogSection);
     $.__views.headerLabel = Ti.UI.createLabel({
-        backgroundColor: Alloy.Globals.GUI_bkC,
+        backgroundColor: "transparent",
         height: 30,
         color: "white",
         font: {
-            fontFamily: "HelveticaNeue-CondensedBlack",
+            fontFamily: "迷你简瘦金书",
             fontSize: 24,
             fontWeight: "bold"
         },

@@ -16,7 +16,9 @@
 	bottom: 5,
 	height: 60,
 	width: 300,
-	font:{fontSize:14, fontStyle:"italic" },
-	shadowColor: "#ddd",
+	font:{fontSize:14, fontWeight:"bold", fontFamily:"迷你简瘦金书" },
+	color: "black",
+	shadowColor: "#000",
+	shadowOffset: {x:0,y:0},
 	backgroundColor: "white",
 }

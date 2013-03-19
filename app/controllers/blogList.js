@@ -5,10 +5,12 @@ Alloy.Globals.fetchBlog = fetchBlog;
 // 添加actInd 
 var actInd = Alloy.createController('actInd').getView();
 actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
-actInd.color = "black";
+actInd.color = Alloy.Globals.GUI_FC;
 $.blogList.add(actInd);
 
 // fetchBlog
+var fetchOffset = 10;
+var lastRow = 10;
 function fetchBlog(){
 	util.send('api/login', {email: "freemem@163.com", password: "666666", offset: 0}, function(res){
 		var data = JSON.parse(res);
@@ -24,6 +26,8 @@ function fetchBlog(){
 				tabledata.push(section);
 			};
 			Alloy.Globals.tableBlog.setData(tabledata);
+			fetchOffset = 10;
+			lastRow = 10;
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{
@@ -59,8 +63,6 @@ $.table.headerPullView = pullView
 
 
 // 底部刷新
-var lastRow = 10;
-var fetchOffset = 10;
 var updating = false;
 var loadingInd = Titanium.UI.createActivityIndicator({bottom: 5,width:30,height:30,
 	style:  Titanium.UI.iPhone.ActivityIndicatorStyle.DARK

@@ -3,7 +3,7 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.monthDay = Ti.UI.createWindow({
-        backgroundColor: "black",
+        backgroundColor: Alloy.Globals.GUI_bkC,
         id: "monthDay"
     });
     $.addTopLevelView($.__views.monthDay);

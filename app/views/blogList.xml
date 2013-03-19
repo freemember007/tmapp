@@ -1,5 +1,10 @@
 <Alloy>
-	<Window onOpen="fetchBlog" title='最近时光'>
+	<Window onOpen="fetchBlog">
+		<!--
+		<TitleControl>
+			<Label class="titleControl" text="时光笔记">
+		</TitleControl>
+		-->
 		<TableView onScroll="hideNavBar" id="table" ><!--数据绑定暂不支持绑定至section-->
 			<!--
 			<TableViewSection id="section" >

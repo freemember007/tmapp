@@ -2,6 +2,7 @@
 var actInd = Alloy.createController('actInd').getView();
 $.monthList.add(actInd);
 
+// show/hide navBar
 var offset = 0;
 function hideNavBar(e){
 	if(e.contentOffset.y - offset > 10){
@@ -20,6 +21,7 @@ function hideNavBar(e){
 	}
 }
 
+// fetch
 function fetchMonth(){
 	util.send('api/fetchMonth', {email: "freemem@163.com", password: "666666"}, function(res){
 		var data = JSON.parse(res);

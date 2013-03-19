@@ -28,9 +28,15 @@ function Controller() {
         width: 300,
         font: {
             fontSize: 14,
-            fontStyle: "italic"
+            fontWeight: "bold",
+            fontFamily: "迷你简瘦金书"
         },
-        shadowColor: "#ddd",
+        color: "black",
+        shadowColor: "#000",
+        shadowOffset: {
+            x: 0,
+            y: 0
+        },
         backgroundColor: "white",
         id: "label"
     });

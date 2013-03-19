@@ -1,5 +1,5 @@
 "#row":{
-	backgroundColor: "black",
+	backgroundColor: Alloy.Globals.GUI_bkC,
 	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
 	layout:"horizontal",
 }

@@ -36,14 +36,25 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.monthList = Ti.UI.createWindow({
-        backgroundColor: "black",
+        backgroundColor: Alloy.Globals.GUI_bkC,
         title: "本月",
         id: "monthList"
     });
     $.addTopLevelView($.__views.monthList);
     fetchMonth ? $.__views.monthList.addEventListener("open", fetchMonth) : __defers["$.__views.monthList!open!fetchMonth"] = !0;
+    $.__views.__alloyId28 = Ti.UI.createLabel({
+        font: {
+            fontSize: 24,
+            fontWeight: "bold",
+            fontFamily: "迷你简南宫"
+        },
+        color: "#666",
+        text: "本月",
+        id: "__alloyId28"
+    });
+    $.__views.monthList.titleControl = $.__views.__alloyId28;
     $.__views.table = Ti.UI.createTableView({
-        backgroundColor: "black",
+        backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
         id: "table"
     });

@@ -1,9 +1,6 @@
-"#tab3":{
-	//icon:Titanium.UI.iPhone.SystemIcon.FAVORITES,
-}
-
 "Window":{
 	backgroundColor: Alloy.Globals.GUI_bkC,
+	barColor: "white",
 }
 
 "#imageContainer":{

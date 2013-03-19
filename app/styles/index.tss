@@ -1,5 +1,35 @@
-'TabGroup':{
-	backgroundColor: '#black', //发布pop时闪得好一些
-	barColor:'gray',
-	tabsBackgroundColor:"darkgray",
+"Window":{
+	navBarHidden : true
+}
+
+"View":{
+	bottom: 0,
+	height: 50, width: 60,
+	zIndex: 1
+}
+
+'#tabGroup':{
+	barColor:"#fff",
+	//backgroundColor: Alloy.Globals.GUI_bkC,
+	tabsBackgroundColor:"#000",
+	//customBackgroundImage: 'tabsBackgroundImage.png',
+}
+
+"#tab1":{
+	
+}
+
+"#tab2":{
+	
+}
+
+"#tab4":{
+	images: {
+        selected: '',
+        unselected: ''
+   }
+}
+
+"#tab5":{
+	
 }

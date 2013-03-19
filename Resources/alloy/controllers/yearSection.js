@@ -8,9 +8,9 @@ function Controller() {
     $.addTopLevelView($.__views.yearSection);
     $.__views.headerLabel = Ti.UI.createLabel({
         height: 50,
-        backgroundColor: "black",
+        backgroundColor: Alloy.Globals.GUI_bkC,
         opacity: 0.8,
-        color: "white",
+        color: Alloy.Globals.GUI_FC,
         font: {
             fontSize: 20,
             fontWeight: "bold"
