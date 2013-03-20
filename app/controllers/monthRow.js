@@ -19,11 +19,12 @@ for(i=0; i<items.length; i++){
 			width:75,height:75,
 			backgroundColor:"black",
 			opacity:0.6,
-			font:{fontSize:12,fontWeight:'bold', },
+			font:{fontSize:12,fontWeight:'bold',fontFamily:'迷你简南宫' },
 			color:"white",
 			textAlign:"center",
+			text: "共" + items.length + "张 »"
 		})
-		label.text = "共" + items.length + "张 »"
+		//label.text = 
 		image.image = image.toBlob().imageAsThumbnail(75);
 		view.add(image);
 		view.add(label)

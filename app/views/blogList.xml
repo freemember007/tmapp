@@ -1,10 +1,10 @@
 <Alloy>
 	<Window onOpen="fetchBlog">
-		<!--
+		
 		<TitleControl>
 			<Label class="titleControl" text="时光笔记">
 		</TitleControl>
-		-->
+		
 		<TableView onScroll="hideNavBar" id="table" ><!--数据绑定暂不支持绑定至section-->
 			<!--
 			<TableViewSection id="section" >
@@ -16,7 +16,9 @@
 						<Label class="content" text="{content}"/>
 				</TableViewRow>
 			</TableViewSection>
+			<Require src="bottom"/>
 			-->
 		</TableView>
+
 	</Window>
 </Alloy>

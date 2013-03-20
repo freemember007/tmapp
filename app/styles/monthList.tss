@@ -1,5 +1,6 @@
 "Window":{
 	backgroundColor: Alloy.Globals.GUI_bkC,	
+	barImage: "navBar.png",
 }
 
 "#table":{

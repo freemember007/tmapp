@@ -1,7 +1,7 @@
 <Alloy>
 	<Window onOpen="fetchYear" title='今年'>
 		<TitleControl>
-			<Label class="titleControl" text="今年">
+			<Label class="titleControl" text=".: 今年 :.">
 		</TitleControl>
 		<TableView onScroll="hideNavBar" id="table" >
 		</TableView>

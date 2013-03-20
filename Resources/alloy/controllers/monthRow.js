@@ -17,10 +17,12 @@ function Controller() {
     $.__views.label = Ti.UI.createLabel({
         top: 5,
         bottom: 5,
-        height: 15,
+        height: 20,
         color: Alloy.Globals.GUI_FC,
         font: {
-            fontSize: 12
+            fontSize: 20,
+            fontWeight: "bold",
+            fontFamily: "迷你简瘦金书"
         },
         left: 10,
         id: "label"
@@ -55,12 +57,13 @@ function Controller() {
                 opacity: 0.6,
                 font: {
                     fontSize: 12,
-                    fontWeight: "bold"
+                    fontWeight: "bold",
+                    fontFamily: "迷你简南宫"
                 },
                 color: "white",
-                textAlign: "center"
+                textAlign: "center",
+                text: "共" + items.length + "张 »"
             });
-            label.text = "共" + items.length + "张 »";
             image.image = image.toBlob().imageAsThumbnail(75);
             view.add(image);
             view.add(label);

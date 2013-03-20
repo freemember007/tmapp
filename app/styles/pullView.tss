@@ -5,13 +5,13 @@
 }
 
 "#border1":{
-	backgroundColor:"#ccc",
+	backgroundColor:"#333",
 	height:1,
 	bottom:1
 }
 
 "#border2":{
-	backgroundColor:"#fff",
+	backgroundColor:"#999",
 	height:1,
 	bottom:0
 }

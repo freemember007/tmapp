@@ -1,4 +1,5 @@
 "Window": {
 	backgroundColor: "black",
-	barColor: "transparent",
+	barImage: "navBar.png",
+	//barColor: "transparent",
 }

@@ -79,13 +79,28 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.blogList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        barImage: "navBar.png",
+        barImage: "navBar1.png",
         id: "blogList"
     });
     $.addTopLevelView($.__views.blogList);
     fetchBlog ? $.__views.blogList.addEventListener("open", fetchBlog) : __defers["$.__views.blogList!open!fetchBlog"] = !0;
+    $.__views.__alloyId1 = Ti.UI.createLabel({
+        font: {
+            fontSize: 24,
+            fontWeight: "bold",
+            fontFamily: "迷你简南宫"
+        },
+        color: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: -1
+        },
+        text: "时光笔记",
+        id: "__alloyId1"
+    });
+    $.__views.blogList.titleControl = $.__views.__alloyId1;
     $.__views.table = Ti.UI.createTableView({
-        backgroundColor: Alloy.Globals.GUI_bkC,
+        backgroundColor: "#ccc",
         separatorColor: "transparent",
         id: "table"
     });
@@ -97,7 +112,7 @@ function Controller() {
     Alloy.Globals.fetchBlog = fetchBlog;
     var actInd = Alloy.createController("actInd").getView();
     actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
-    actInd.color = Alloy.Globals.GUI_FC;
+    actInd.color = Alloy.Globals.GUI_bkC;
     $.blogList.add(actInd);
     var fetchOffset = 10, lastRow = 10, offset = 0, pullView = Alloy.createController("pullView", {
         table: $.table,

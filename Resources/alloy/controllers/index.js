@@ -29,7 +29,6 @@ function Controller() {
     function takePhoto() {
         Ti.Media.showCamera({
             success: function(e) {
-                Ti.Media.hideCamera();
                 var pub = Alloy.createController("pub").getView();
                 pub.open({
                     modal: !0
@@ -40,7 +39,7 @@ function Controller() {
             error: function() {
                 alert("error");
             },
-            autohide: !1
+            saveToPhotoGallery: !0
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -51,15 +50,6 @@ function Controller() {
         id: "index"
     });
     $.addTopLevelView($.__views.index);
-    $.__views.__alloyId2 = Ti.UI.createView({
-        bottom: 0,
-        height: 50,
-        width: 60,
-        zIndex: 1,
-        id: "__alloyId2"
-    });
-    $.__views.index.add($.__views.__alloyId2);
-    showDialog ? $.__views.__alloyId2.addEventListener("singletap", showDialog) : __defers["$.__views.__alloyId2!singletap!showDialog"] = !0;
     $.__views.tabWin = Ti.UI.createWindow({
         navBarHidden: !0,
         id: "tabWin"
@@ -76,7 +66,7 @@ function Controller() {
     });
     choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
     $.__views.tabGroup = Ti.UI.createTabGroup({
-        barColor: "#fff",
+        barColor: "#333",
         tabsBackgroundColor: "#000",
         id: "tabGroup"
     });
@@ -85,16 +75,25 @@ function Controller() {
         id: "__alloyId9"
     });
     $.__views.tab1 = Ti.UI.createTab({
+        images: {
+            selected: "recent.png",
+            unselected: "recent.png"
+        },
         window: $.__views.__alloyId9.getViewEx({
             recurse: !0
         }),
-        id: "tab1"
+        id: "tab1",
+        title: "最近"
     });
     $.__views.tabGroup.addTab($.__views.tab1);
     $.__views.__alloyId11 = Alloy.createController("monthList", {
         id: "__alloyId11"
     });
     $.__views.tab2 = Ti.UI.createTab({
+        images: {
+            selected: "month.png",
+            unselected: "month.png"
+        },
         window: $.__views.__alloyId11.getViewEx({
             recurse: !0
         }),
@@ -108,8 +107,7 @@ function Controller() {
     });
     $.__views.tab3 = Ti.UI.createTab({
         window: $.__views.__alloyId13,
-        id: "tab3",
-        title: "记录"
+        id: "tab3"
     });
     $.__views.tabGroup.addTab($.__views.tab3);
     $.__views.__alloyId14 = Alloy.createController("yearList", {
@@ -117,8 +115,8 @@ function Controller() {
     });
     $.__views.tab4 = Ti.UI.createTab({
         images: {
-            selected: "",
-            unselected: ""
+            selected: "year.png",
+            unselected: "year.png"
         },
         window: $.__views.__alloyId14.getViewEx({
             recurse: !0
@@ -131,6 +129,10 @@ function Controller() {
         id: "__alloyId16"
     });
     $.__views.tab5 = Ti.UI.createTab({
+        images: {
+            selected: "random.png",
+            unselected: "random.png"
+        },
         window: $.__views.__alloyId16.getViewEx({
             recurse: !0
         }),
@@ -138,23 +140,26 @@ function Controller() {
         title: "随机"
     });
     $.__views.tabGroup.addTab($.__views.tab5);
-    $.__views.__alloyId3 = Ti.UI.iPhone.createNavigationGroup({
-        window: $.__views.tabWin,
-        id: "__alloyId3"
+    $.__views.snapView = Ti.UI.createView({
+        bottom: 0,
+        width: 47,
+        height: 47,
+        backgroundImage: "camera.png",
+        id: "snapView"
     });
-    $.__views.index.add($.__views.__alloyId3);
+    $.__views.tabWin.add($.__views.snapView);
+    showDialog ? $.__views.snapView.addEventListener("singletap", showDialog) : __defers["$.__views.snapView!singletap!showDialog"] = !0;
+    $.__views.navGroup = Ti.UI.iPhone.createNavigationGroup({
+        window: $.__views.tabWin,
+        id: "navGroup"
+    });
+    $.__views.index.add($.__views.navGroup);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var ticustomtab = require("de.marcelpociot.ticustomtab");
-    ticustomtab.customText({
-        textColor: "#666",
-        shadowColor: "#fff",
-        font: {
-            fontSize: 10,
-            fontWeight: "bold",
-            fontFamily: ""
-        }
-    });
+    Alloy.Globals.tabGroup = $.tabGroup;
+    Alloy.Globals.tab1 = $.tab1;
+    Alloy.Globals.tab2 = $.tab2;
+    Alloy.Globals.tab4 = $.tab4;
     var startWin = Ti.UI.createWindow({
         backgroundImage: "Default.png"
     }), actInd = Titanium.UI.createActivityIndicator({
@@ -172,7 +177,6 @@ function Controller() {
             transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT
         });
         $.tabGroup.open();
-        startWin.close();
     } else {
         var login = Alloy.createController("login").getView();
         login.open({
@@ -180,12 +184,17 @@ function Controller() {
         });
         startWin.close();
     }
-    Alloy.Globals.tabGroup = $.tabGroup;
-    Alloy.Globals.tab1 = $.tab1;
-    Alloy.Globals.tab2 = $.tab2;
-    Alloy.Globals.tab4 = $.tab4;
-    __defers["$.__views.__alloyId2!singletap!showDialog"] && $.__views.__alloyId2.addEventListener("singletap", showDialog);
+    var ticustomtab = require("de.marcelpociot.ticustomtab");
+    ticustomtab.customText({
+        textColor: "#666",
+        font: {
+            fontSize: 12,
+            fontWeight: "bold",
+            fontFamily: "迷你简南宫"
+        }
+    });
     __defers["$.__views.dialog!click!choose"] && $.__views.dialog.addEventListener("click", choose);
+    __defers["$.__views.snapView!singletap!showDialog"] && $.__views.snapView.addEventListener("singletap", showDialog);
     _.extend($, exports);
 }
 

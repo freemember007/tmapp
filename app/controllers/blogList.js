@@ -5,7 +5,7 @@ Alloy.Globals.fetchBlog = fetchBlog;
 // 添加actInd 
 var actInd = Alloy.createController('actInd').getView();
 actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
-actInd.color = Alloy.Globals.GUI_FC;
+actInd.color = Alloy.Globals.GUI_bkC;
 $.blogList.add(actInd);
 
 // fetchBlog

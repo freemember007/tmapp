@@ -37,22 +37,27 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.yearList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
+        barImage: "navBar.png",
         title: "今年",
         id: "yearList"
     });
     $.addTopLevelView($.__views.yearList);
     fetchYear ? $.__views.yearList.addEventListener("open", fetchYear) : __defers["$.__views.yearList!open!fetchYear"] = !0;
-    $.__views.__alloyId37 = Ti.UI.createLabel({
+    $.__views.__alloyId39 = Ti.UI.createLabel({
         font: {
             fontSize: 24,
             fontWeight: "bold",
             fontFamily: "迷你简南宫"
         },
-        color: "#666",
-        text: "今年",
-        id: "__alloyId37"
+        color: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: -1
+        },
+        text: ".: 今年 :.",
+        id: "__alloyId39"
     });
-    $.__views.yearList.titleControl = $.__views.__alloyId37;
+    $.__views.yearList.titleControl = $.__views.__alloyId39;
     $.__views.table = Ti.UI.createTableView({
         backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",

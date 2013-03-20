@@ -31,14 +31,14 @@ function Controller() {
     });
     $.addTopLevelView($.__views.pullView);
     $.__views.border1 = Ti.UI.createView({
-        backgroundColor: "#ccc",
+        backgroundColor: "#333",
         height: 1,
         bottom: 1,
         id: "border1"
     });
     $.__views.pullView.add($.__views.border1);
     $.__views.border2 = Ti.UI.createView({
-        backgroundColor: "#fff",
+        backgroundColor: "#999",
         height: 1,
         bottom: 0,
         id: "border2"

@@ -12,8 +12,8 @@
 
 "#label":{
 	top:5,bottom: 5,
-	height: 15,
+	height: 20,
 	color:Alloy.Globals.GUI_FC,
-	font:{fontSize:12,},
+	font:{fontSize:20, fontWeight:"bold", fontFamily:"迷你简瘦金书" },
 	left:10,
 }

@@ -3,7 +3,6 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.actInd = Ti.UI.createActivityIndicator({
-        style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
         message: "加载中...",
         color: Alloy.Globals.GUI_FC,
         font: {

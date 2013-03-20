@@ -13,7 +13,8 @@ function Controller() {
         color: Alloy.Globals.GUI_FC,
         font: {
             fontSize: 20,
-            fontWeight: "bold"
+            fontWeight: "bold",
+            fontFamily: "迷你简南宫"
         },
         textAlign: "center",
         id: "headerLabel"

@@ -1,12 +1,12 @@
 ".invisible":{
 	visible: false,
 }
-
+// 全局titleControl
 ".titleControl":{
 	font:{fontSize:24, fontWeight:"bold", fontFamily:"迷你简南宫" },
-	color: "#666",
-	//shadowColor: "#666",
-	//shadowOffset: {x:1,y:-1},
+	color: "#fff",
+	//shadowColor: "#fff",
+	shadowOffset: {x:1,y:-1},
 }
 
 "ImageView":{

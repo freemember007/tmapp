@@ -1,10 +1,8 @@
 <Alloy>
 	<Window>
-
-		<View onSingletap="showDialog" />
 		
-		<NavigationGroup>
-			<Window id="tabWin">
+		<NavigationGroup id="navGroup">
+			<Window id="tabWin" >
 				<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
 					<Options>
 		                <Option >照相</Option>
@@ -13,13 +11,13 @@
 		            </Options>
 				</OptionDialog>
 				<TabGroup id="tabGroup">
-					<Tab id="tab1"  >
+					<Tab id="tab1" title="最近" >
 						<Require src="blogList"/>
 					</Tab>
 					<Tab id="tab2" title="本月" >
 						<Require src="monthList"/>
 					</Tab>
-					<Tab id="tab3" title="记录" >
+					<Tab id="tab3" >
 						<Window />
 					</Tab>
 					<Tab id="tab4" title="今年">
@@ -29,6 +27,7 @@
 						<Require src="random"/>
 					</Tab>
 				</TabGroup>
+				<View id="snapView" onSingletap="showDialog" />
 			</Window>
 		</NavigationGroup>
 		

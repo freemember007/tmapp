@@ -37,6 +37,7 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.monthList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
+        barImage: "navBar.png",
         title: "本月",
         id: "monthList"
     });
@@ -48,8 +49,12 @@ function Controller() {
             fontWeight: "bold",
             fontFamily: "迷你简南宫"
         },
-        color: "#666",
-        text: "本月",
+        color: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: -1
+        },
+        text: ".: 本月 :.",
         id: "__alloyId28"
     });
     $.__views.monthList.titleControl = $.__views.__alloyId28;

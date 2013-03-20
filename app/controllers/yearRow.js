@@ -13,13 +13,13 @@ for(key in args){
 	image.image = image.toBlob().imageAsThumbnail(105);
 	var label1 = Ti.UI.createLabel({
 		bottom: 5, left: 10,
-		font: {fontSize:14,fontWeight:'bold', },
+		font: {fontSize:14,fontWeight:'bold',fontFamily:'迷你简南宫' },
 		color: "#eee",
 		text: key + "日",
 	});
 	var label2 = Ti.UI.createLabel({
 		bottom: 5, right: 10,
-		font:{fontSize:12,fontWeight:'bold', },
+		font:{fontSize:12,fontWeight:'bold',fontFamily:'迷你简南宫' },
 		color:"#eee",
 		text:args[key].length,
 	});

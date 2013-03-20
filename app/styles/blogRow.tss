@@ -1,5 +1,5 @@
 "#blogRow":{
-	backgroundColor: Alloy.Globals.GUI_bkC,
+	backgroundColor: "#ccc",
 	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
 	layout:"vertical",
 }
@@ -16,7 +16,7 @@
 	bottom: 5,
 	height: 60,
 	width: 300,
-	font:{fontSize:14, fontWeight:"bold", fontFamily:"迷你简瘦金书" },
+	font:{fontSize:14, fontWeight:"bold", fontFamily:"迷你简南宫" },
 	color: "black",
 	shadowColor: "#000",
 	shadowOffset: {x:0,y:0},

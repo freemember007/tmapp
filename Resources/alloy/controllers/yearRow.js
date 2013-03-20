@@ -28,7 +28,8 @@ function Controller() {
             left: 10,
             font: {
                 fontSize: 14,
-                fontWeight: "bold"
+                fontWeight: "bold",
+                fontFamily: "迷你简南宫"
             },
             color: "#eee",
             text: key + "日"
@@ -37,7 +38,8 @@ function Controller() {
             right: 10,
             font: {
                 fontSize: 12,
-                fontWeight: "bold"
+                fontWeight: "bold",
+                fontFamily: "迷你简南宫"
             },
             color: "#eee",
             text: args[key].length

@@ -1,35 +1,49 @@
 "Window":{
-	navBarHidden : true
+	navBarHidden : true,
 }
 
-"View":{
+"#snapView":{
 	bottom: 0,
-	height: 50, width: 60,
-	zIndex: 1
+	width: 47, height: 47, 
+	backgroundImage:"camera.png",
 }
 
+//全局tabGroup
 '#tabGroup':{
-	barColor:"#fff",
+	barColor:"#333",
 	//backgroundColor: Alloy.Globals.GUI_bkC,
 	tabsBackgroundColor:"#000",
-	//customBackgroundImage: 'tabsBackgroundImage.png',
+	//customBackgroundImage: 'navBar.png',
 }
 
 "#tab1":{
-	
+	images: {
+        selected: 'recent.png',
+        unselected: 'recent.png'
+   }
 }
 
 "#tab2":{
+	images: {
+        selected: 'month.png',
+        unselected: 'month.png',
+   }
+}
+
+"#tab3":{
 	
 }
 
 "#tab4":{
 	images: {
-        selected: '',
-        unselected: ''
+        selected: 'year.png',
+        unselected: 'year.png'
    }
 }
 
 "#tab5":{
-	
+	images: {
+        selected: 'random.png',
+        unselected: 'random.png'
+   }
 }

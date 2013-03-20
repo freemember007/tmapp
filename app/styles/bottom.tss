@@ -1,0 +1,7 @@
+".container": {
+	backgroundColor: "red",
+	height: 55,
+	width: "100%",
+	bottom: 0,
+	zIndex: 1,
+}

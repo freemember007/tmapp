@@ -1,5 +1,8 @@
 <Alloy>
 	<Window onFocus="fetchRandom">
+		<TitleControl>
+			<Label class="titleControl" text="随机">
+		</TitleControl>
 		<ScrollableView id="scrollableView">
         </ScrollableView>
 	</Window>

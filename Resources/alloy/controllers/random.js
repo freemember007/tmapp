@@ -31,14 +31,29 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.random = Ti.UI.createWindow({
         backgroundColor: "black",
-        barColor: "transparent",
+        barImage: "navBar.png",
         id: "random"
     });
     $.addTopLevelView($.__views.random);
     fetchRandom ? $.__views.random.addEventListener("focus", fetchRandom) : __defers["$.__views.random!focus!fetchRandom"] = !0;
-    var __alloyId34 = [];
+    $.__views.__alloyId35 = Ti.UI.createLabel({
+        font: {
+            fontSize: 24,
+            fontWeight: "bold",
+            fontFamily: "迷你简南宫"
+        },
+        color: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: -1
+        },
+        text: "随机",
+        id: "__alloyId35"
+    });
+    $.__views.random.titleControl = $.__views.__alloyId35;
+    var __alloyId36 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId34,
+        views: __alloyId36,
         id: "scrollableView"
     });
     $.__views.random.add($.__views.scrollableView);
