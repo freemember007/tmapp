@@ -6,11 +6,13 @@ $.monthList.add(actInd);
 var offset = 0;
 function hideNavBar(e){
 	if(e.contentOffset.y - offset > 10){
-		$.monthList.hideNavBar();
+		$.top.hide();
+		$.table.top=0;
 		offset = e.contentOffset.y
 	}
 	if(e.contentOffset.y - offset < -10){
-		$.monthList.showNavBar() ;
+		$.top.show() ;
+		$.table.top=40,
 		offset = e.contentOffset.y
 	}
 	if(e.contentOffset.y <= 0){

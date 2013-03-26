@@ -1,17 +1,17 @@
 "#pullView":{
-	backgroundColor:"#FFFFCC",
+	backgroundColor:"#f4f4f4",
     width:320,
     height:60,
 }
 
 "#border1":{
-	backgroundColor:"#333",
+	backgroundColor:"#eee",
 	height:1,
 	bottom:1
 }
 
 "#border2":{
-	backgroundColor:"#999",
+	backgroundColor:"#eee",
 	height:1,
 	bottom:0
 }

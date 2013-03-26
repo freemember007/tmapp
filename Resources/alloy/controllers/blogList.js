@@ -25,12 +25,13 @@ function Controller() {
     }
     function hideNavBar(e) {
         if (e.contentOffset.y - offset > 10) {
-            $.blogList.hideNavBar();
+            $.top.hide();
+            $.table.top = 0;
             offset = e.contentOffset.y;
         }
         if (e.contentOffset.y - offset < -10) {
-            $.blogList.showNavBar();
-            offset = e.contentOffset.y;
+            $.top.show();
+            $.table.top = 40, offset = e.contentOffset.y;
         }
         e.contentOffset.y <= 0 && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
@@ -79,40 +80,42 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.blogList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        barImage: "navBar1.png",
+        tabBarHidden: !0,
+        navBarHidden: !0,
         id: "blogList"
     });
     $.addTopLevelView($.__views.blogList);
     fetchBlog ? $.__views.blogList.addEventListener("open", fetchBlog) : __defers["$.__views.blogList!open!fetchBlog"] = !0;
-    $.__views.__alloyId1 = Ti.UI.createLabel({
-        font: {
-            fontSize: 24,
-            fontWeight: "bold",
-            fontFamily: "迷你简南宫"
-        },
-        color: "#fff",
-        shadowOffset: {
-            x: 1,
-            y: -1
-        },
-        text: "时光笔记",
-        id: "__alloyId1"
+    $.__views.top = Ti.UI.createView({
+        width: "100%",
+        height: 44,
+        top: 0,
+        backgroundImage: "top1.png",
+        zIndex: 1,
+        id: "top"
     });
-    $.__views.blogList.titleControl = $.__views.__alloyId1;
+    $.__views.blogList.add($.__views.top);
     $.__views.table = Ti.UI.createTableView({
-        backgroundColor: "#ccc",
+        top: 40,
+        backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
+        bottom: 45,
         id: "table"
     });
     $.__views.blogList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
+    $.__views.__alloyId0 = Alloy.createController("bottom", {
+        id: "__alloyId0"
+    });
+    $.__views.__alloyId0.setParent($.__views.blogList);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    Alloy.Globals.blogList = $.blogList;
     Alloy.Globals.tableBlog = $.table;
     Alloy.Globals.fetchBlog = fetchBlog;
     var actInd = Alloy.createController("actInd").getView();
     actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
-    actInd.color = Alloy.Globals.GUI_bkC;
+    actInd.color = "black";
     $.blogList.add(actInd);
     var fetchOffset = 10, lastRow = 10, offset = 0, pullView = Alloy.createController("pullView", {
         table: $.table,

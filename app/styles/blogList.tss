@@ -1,11 +1,19 @@
 "Window":{
-	backgroundColor: Alloy.Globals.GUI_bkC,	
-	barImage: "navBar1.png",
-	//tabBarHidden:true,
+	backgroundColor: Alloy.Globals.GUI_bkC,		
+	tabBarHidden:true,
+	navBarHidden: true,
+}
+
+"#top":{
+	width:"100%", height: 44,
+	top:0,
+	backgroundImage: "top1.png",
+	zIndex: 1,
 }
 
 "#table":{
-	backgroundColor: "#ccc",
+	top:40, // 注意要与顶部的4个像素的阴影重叠
+	backgroundColor: Alloy.Globals.GUI_bkC,
 	separatorColor:"transparent",
-	//bottom: 55,
+	bottom: 45, // 注意要与底部的5个像素的阴影重叠
 }

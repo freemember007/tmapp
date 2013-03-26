@@ -1,9 +1,19 @@
 "Window":{
 	backgroundColor: Alloy.Globals.GUI_bkC,	
-	barImage: "navBar.png",
+	tabBarHidden:true,
+	navBarHidden: true,
+}
+
+"#top":{
+	width:"100%", height: 44,
+	top:0,
+	backgroundImage: "top4.png",
+	zIndex: 1,
 }
 
 "#table":{
+	top:40,
 	backgroundColor: Alloy.Globals.GUI_bkC,
 	separatorColor:"transparent",
+	bottom: 45,
 }

@@ -28,19 +28,19 @@ function Controller() {
     $.__views.login = Ti.UI.createTabGroup({
         id: "login"
     });
-    $.__views.__alloyId19 = Ti.UI.createWindow({
+    $.__views.__alloyId17 = Ti.UI.createWindow({
         backgroundColor: "#f4f4f4",
         barColor: "darkgray",
         tabBarHidden: !0,
         title: "时光笔记",
-        id: "__alloyId19"
+        id: "__alloyId17"
     });
     $.__views.submitButton = Ti.UI.createButton({
         id: "submitButton",
         title: "登录"
     });
     login ? $.__views.submitButton.addEventListener("click", login) : __defers["$.__views.submitButton!click!login"] = !0;
-    $.__views.__alloyId19.rightNavButton = $.__views.submitButton;
+    $.__views.__alloyId17.rightNavButton = $.__views.submitButton;
     $.__views.container = Ti.UI.createView({
         top: 20,
         bottom: 10,
@@ -49,13 +49,38 @@ function Controller() {
         layout: "vertical",
         id: "container"
     });
-    $.__views.__alloyId19.add($.__views.container);
+    $.__views.__alloyId17.add($.__views.container);
     $.__views.loginTitle = Ti.UI.createLabel({
         left: 0,
         id: "loginTitle",
         text: "请登录您的时光帐户："
     });
     $.__views.container.add($.__views.loginTitle);
+    $.__views.__alloyId19 = Ti.UI.createView({
+        top: 10,
+        height: 40,
+        backgroundColor: "white",
+        borderColor: "#ccc",
+        borderRadius: 2,
+        layout: "horizontal",
+        id: "__alloyId19"
+    });
+    $.__views.container.add($.__views.__alloyId19);
+    $.__views.__alloyId20 = Ti.UI.createLabel({
+        left: 10,
+        height: 40,
+        text: "邮箱",
+        id: "__alloyId20"
+    });
+    $.__views.__alloyId19.add($.__views.__alloyId20);
+    $.__views.usernameInput = Ti.UI.createTextField({
+        left: 10,
+        right: 10,
+        height: 40,
+        color: "#666",
+        id: "usernameInput"
+    });
+    $.__views.__alloyId19.add($.__views.usernameInput);
     $.__views.__alloyId21 = Ti.UI.createView({
         top: 10,
         height: 40,
@@ -69,35 +94,10 @@ function Controller() {
     $.__views.__alloyId22 = Ti.UI.createLabel({
         left: 10,
         height: 40,
-        text: "邮箱",
+        text: "密码",
         id: "__alloyId22"
     });
     $.__views.__alloyId21.add($.__views.__alloyId22);
-    $.__views.usernameInput = Ti.UI.createTextField({
-        left: 10,
-        right: 10,
-        height: 40,
-        color: "#666",
-        id: "usernameInput"
-    });
-    $.__views.__alloyId21.add($.__views.usernameInput);
-    $.__views.__alloyId23 = Ti.UI.createView({
-        top: 10,
-        height: 40,
-        backgroundColor: "white",
-        borderColor: "#ccc",
-        borderRadius: 2,
-        layout: "horizontal",
-        id: "__alloyId23"
-    });
-    $.__views.container.add($.__views.__alloyId23);
-    $.__views.__alloyId24 = Ti.UI.createLabel({
-        left: 10,
-        height: 40,
-        text: "密码",
-        id: "__alloyId24"
-    });
-    $.__views.__alloyId23.add($.__views.__alloyId24);
     $.__views.passwordInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -106,7 +106,7 @@ function Controller() {
         passwordMask: !0,
         id: "passwordInput"
     });
-    $.__views.__alloyId23.add($.__views.passwordInput);
+    $.__views.__alloyId21.add($.__views.passwordInput);
     $.__views.registerTips = Ti.UI.createView({
         top: 10,
         layout: "horizontal",
@@ -148,13 +148,13 @@ function Controller() {
         id: "registerInputOne"
     });
     $.__views.container.add($.__views.registerInputOne);
-    $.__views.__alloyId25 = Ti.UI.createLabel({
+    $.__views.__alloyId23 = Ti.UI.createLabel({
         left: 10,
         height: 40,
         text: "昵称",
-        id: "__alloyId25"
+        id: "__alloyId23"
     });
-    $.__views.registerInputOne.add($.__views.__alloyId25);
+    $.__views.registerInputOne.add($.__views.__alloyId23);
     $.__views.nicknameInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -174,13 +174,13 @@ function Controller() {
         id: "registerInputTwo"
     });
     $.__views.container.add($.__views.registerInputTwo);
-    $.__views.__alloyId26 = Ti.UI.createLabel({
+    $.__views.__alloyId24 = Ti.UI.createLabel({
         left: 10,
         height: 40,
         text: "头像",
-        id: "__alloyId26"
+        id: "__alloyId24"
     });
-    $.__views.registerInputTwo.add($.__views.__alloyId26);
+    $.__views.registerInputTwo.add($.__views.__alloyId24);
     $.__views.avatarInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -189,11 +189,11 @@ function Controller() {
         id: "avatarInput"
     });
     $.__views.registerInputTwo.add($.__views.avatarInput);
-    $.__views.__alloyId18 = Ti.UI.createTab({
-        window: $.__views.__alloyId19,
-        id: "__alloyId18"
+    $.__views.__alloyId16 = Ti.UI.createTab({
+        window: $.__views.__alloyId17,
+        id: "__alloyId16"
     });
-    $.__views.login.addTab($.__views.__alloyId18);
+    $.__views.login.addTab($.__views.__alloyId16);
     $.addTopLevelView($.__views.login);
     exports.destroy = function() {};
     _.extend($, $.__views);

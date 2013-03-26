@@ -1,6 +1,13 @@
 <Alloy>
 	<TableViewRow id="blogRow">
-		<ImageView onClick="openZoomImage" id="image" />
-		<Label id="label" />
+			<Label id="container" onClick="openZoomImage" >
+				<ImageView id="image" />
+				<Label id="label" />
+			</Label>
+			<Label id="actionContainer">
+				<Label id="timeLabel" text="清晨 06:38" />
+				<ImageView id="shareImg" /> 
+				<ImageView id="deleteImg" />
+			</Label>
 	</TableViewRow>
 </Alloy>

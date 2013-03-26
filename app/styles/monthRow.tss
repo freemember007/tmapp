@@ -1,5 +1,5 @@
 "#row":{
-	backgroundColor: Alloy.Globals.GUI_bkC,
+	backgroundColor: "#fff",
 	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
 	layout:"vertical",
 	height: 100,
@@ -13,7 +13,7 @@
 "#label":{
 	top:5,bottom: 5,
 	height: 20,
-	color:Alloy.Globals.GUI_FC,
-	font:{fontSize:20, fontWeight:"bold", fontFamily:"迷你简瘦金书" },
+	color:"#666",
+	font:{fontSize:16, fontFamily:"HelveticaNeue-CondensedBlack" },//STHeitiK-Medium, Verdana-Bold, Georgia-BoldItalic, Trebuchet-BoldItalic
 	left:10,
 }

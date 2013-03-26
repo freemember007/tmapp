@@ -1,12 +1,13 @@
 function Controller() {
     function hideNavBar(e) {
         if (e.contentOffset.y - offset > 10) {
-            $.yearList.hideNavBar();
+            $.top.hide();
+            $.table.top = 0;
             offset = e.contentOffset.y;
         }
         if (e.contentOffset.y - offset < -10) {
-            $.yearList.showNavBar();
-            offset = e.contentOffset.y;
+            $.top.show();
+            $.table.top = 40, offset = e.contentOffset.y;
         }
         e.contentOffset.y <= 0 && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
@@ -37,34 +38,35 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.yearList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        barImage: "navBar.png",
+        tabBarHidden: !0,
+        navBarHidden: !0,
         title: "今年",
         id: "yearList"
     });
     $.addTopLevelView($.__views.yearList);
     fetchYear ? $.__views.yearList.addEventListener("open", fetchYear) : __defers["$.__views.yearList!open!fetchYear"] = !0;
-    $.__views.__alloyId39 = Ti.UI.createLabel({
-        font: {
-            fontSize: 24,
-            fontWeight: "bold",
-            fontFamily: "迷你简南宫"
-        },
-        color: "#fff",
-        shadowOffset: {
-            x: 1,
-            y: -1
-        },
-        text: ".: 今年 :.",
-        id: "__alloyId39"
+    $.__views.top = Ti.UI.createView({
+        width: "100%",
+        height: 44,
+        top: 0,
+        backgroundImage: "top4.png",
+        zIndex: 1,
+        id: "top"
     });
-    $.__views.yearList.titleControl = $.__views.__alloyId39;
+    $.__views.yearList.add($.__views.top);
     $.__views.table = Ti.UI.createTableView({
+        top: 40,
         backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
+        bottom: 45,
         id: "table"
     });
     $.__views.yearList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
+    $.__views.__alloyId34 = Alloy.createController("bottom", {
+        id: "__alloyId34"
+    });
+    $.__views.__alloyId34.setParent($.__views.yearList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();

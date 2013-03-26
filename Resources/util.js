@@ -1,7 +1,7 @@
 var sitePath = "http://184.82.117.60/";
 
 exports.computeImageSize = function(originImg) {
-    var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 500, middleImg = imagefactory.imageAsResized(originImg, {
+    var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 320, middleImg = imagefactory.imageAsResized(originImg, {
         width: width,
         height: h * (width / w)
     });

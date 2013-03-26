@@ -1,7 +1,33 @@
 ".container": {
-	backgroundColor: "red",
-	height: 55,
+	backgroundImage: "bottom.png",
+	height: 50,
 	width: "100%",
 	bottom: 0,
 	zIndex: 1,
+	layout: "horizontal",
+}
+
+"#recentImg":{
+	image: "recentImg.png",
+	top: 5,
+}
+
+"#monthImg":{
+	image: "monthImg.png",
+	top: 5,
+}
+
+"#cameraImg":{
+	image: "cameraImg.png",
+	top: 5,
+}
+
+"#yearImg":{
+	image: "yearImg.png",
+	top: 5,
+}
+
+"#randomImg":{
+	image: "randomImg.png",
+	top: 5,
 }

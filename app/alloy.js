@@ -12,7 +12,7 @@
 var util = require("util");
 
 //定义GUI规格
-Alloy.Globals.GUI_bkC = "#000";
-Alloy.Globals.GUI_FC = "#fff";
+Alloy.Globals.GUI_bkC = "#fff";
+Alloy.Globals.GUI_FC = "#000";
 
 Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;

@@ -1,6 +1,6 @@
 "Window":{
 	backgroundColor: Alloy.Globals.GUI_bkC,
-	barColor: "white",
+	barColor: "#333",
 }
 
 "#imageContainer":{
@@ -17,7 +17,7 @@
 
 "#toolbar":{
 	bottom:0,
-    barColor:"#999", 
+    barColor:"#333", 
 }
 
 "#commentInput":{

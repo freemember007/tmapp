@@ -1,24 +1,56 @@
 "#blogRow":{
-	backgroundColor: "#ccc",
+	backgroundColor: "#fff",
+	borderColor: "#ccc",
 	selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
 	layout:"vertical",
 }
 
+"#container":{
+	width: 308,
+	backgroundImage: "image_back.png",
+	//borderColor: "#999",
+	layout: "vertical",
+}
+
 "#image":{
-	top:5,
-	width: 300,
-	borderWidth: 5,
-	borderColor: "white",
+	top:9,
+	width: 286,
+	//borderWidth: 5,
+	//borderColor: "white",
 	preventDefaultImage:true,
+
 }
 
 "#label":{
-	bottom: 5,
-	height: 60,
-	width: 300,
+	height: 40,
+	width: 286,
 	font:{fontSize:14, fontWeight:"bold", fontFamily:"迷你简南宫" },
 	color: "black",
 	shadowColor: "#000",
 	shadowOffset: {x:0,y:0},
-	backgroundColor: "white",
+	backgroundColor: "transparent",
+}
+
+"#actionContainer":{
+	bottom:5,
+	height: 30,
+	width: 286,
+}
+
+"#timeLabel":{
+	left: 0,
+	color: "#999",
+	font:{fontSize:12, fontWeight:"bold", fontFamily:"迷你简南宫" },
+}
+
+"#shareImg":{
+	right: 30,
+	height: 16,width: 16,
+	image:"share.png",
+}
+
+"#deleteImg":{
+	right: 0,
+	height: 16,width: 16,
+	image:"delete.png",
 }

@@ -1,4 +1,17 @@
 <Alloy>
 	<View class="container">
+		<ImageView onClick="openRecent" id="recentImg" />
+		<ImageView onClick="openMonth" id="monthImg" />
+		<ImageView onClick="showDialog" id="cameraImg" />
+		<ImageView onClick="openYear" id="yearImg" />
+		<ImageView onClick="openRandom" id="randomImg" />
+		<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
+			<Options>
+	            <Option >照相</Option>
+	            <Option >从相册选取</Option>
+	            <Option>取消</Option>
+	        </Options>
+		</OptionDialog>
 	</View>
+
 </Alloy>

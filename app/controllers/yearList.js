@@ -5,11 +5,13 @@ $.yearList.add(actInd);
 var offset = 0;
 function hideNavBar(e){
 	if(e.contentOffset.y - offset > 10){
-		$.yearList.hideNavBar();
+		$.top.hide();
+		$.table.top=0;
 		offset = e.contentOffset.y
 	}
 	if(e.contentOffset.y - offset < -10){
-		$.yearList.showNavBar() ;
+		$.top.show() ;
+		$.table.top=40,
 		offset = e.contentOffset.y
 	}
 	if(e.contentOffset.y <= 0){

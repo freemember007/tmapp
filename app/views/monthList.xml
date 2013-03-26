@@ -1,9 +1,9 @@
 <Alloy>
 	<Window onOpen="fetchMonth" title='本月'>
-		<TitleControl>
-			<Label class="titleControl" text=".: 本月 :.">
-		</TitleControl>
+		<View id="top">
+		</View>
 		<TableView onScroll="hideNavBar" id="table" >
 		</TableView>
+		<Require src="bottom"/>
 	</Window>
 </Alloy>

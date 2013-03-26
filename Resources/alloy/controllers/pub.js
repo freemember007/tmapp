@@ -37,7 +37,7 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.pub = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        barColor: "white",
+        barColor: "#333",
         title: "记录这一刻",
         id: "pub"
     });
@@ -63,11 +63,11 @@ function Controller() {
     });
     $.__views.pub.add($.__views.image);
     openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = !0;
-    $.__views.__alloyId30 = Ti.UI.createScrollView({
-        id: "__alloyId30"
+    $.__views.__alloyId27 = Ti.UI.createScrollView({
+        id: "__alloyId27"
     });
-    $.__views.pub.add($.__views.__alloyId30);
-    var __alloyId32 = [];
+    $.__views.pub.add($.__views.__alloyId27);
+    var __alloyId29 = [];
     $.__views.commentInput = Ti.UI.createTextField({
         width: 240,
         height: 32,
@@ -78,24 +78,24 @@ function Controller() {
         zIndex: 1,
         id: "commentInput"
     });
-    __alloyId32.push($.__views.commentInput);
-    $.__views.__alloyId33 = Ti.UI.createButton({
+    __alloyId29.push($.__views.commentInput);
+    $.__views.__alloyId30 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId32.push($.__views.__alloyId33);
+    __alloyId29.push($.__views.__alloyId30);
     $.__views.pubButton = Ti.UI.createButton({
         style: Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
         id: "pubButton",
         title: "发布"
     });
-    __alloyId32.push($.__views.pubButton);
+    __alloyId29.push($.__views.pubButton);
     $.__views.toolbar = Ti.UI.iOS.createToolbar({
         bottom: 0,
-        barColor: "#999",
-        items: __alloyId32,
+        barColor: "#333",
+        items: __alloyId29,
         id: "toolbar"
     });
-    $.__views.__alloyId30.add($.__views.toolbar);
+    $.__views.__alloyId27.add($.__views.toolbar);
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.showPhoto = showPhoto;

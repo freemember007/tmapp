@@ -1,10 +1,27 @@
-"#headerLabel":{
-	backgroundColor: "transparent",
-	height: 30,
-	color: "white",
-	//font:{fontFamily:'HelveticaNeue-CondensedBlack', fontSize:24, fontWeight:'bold', },
-	font:{fontFamily:'迷你简瘦金书', fontSize:24, fontWeight:'bold', },
+"#Container":{
+	backgroundColor: "#fff",
+	height: 50,
 	opacity: 0.6,
-	shadowColor: "#000",
-	shadowOffset: {x:1,y:1},
+	layout: "horizontal",
+	verticalAlign: "center",
+}
+"#headerLabel":{
+	left: 3,
+	font:{fontFamily:'HelveticaNeue-CondensedBlack', fontSize:32,fontWeight:'bold', },
+}
+
+"#Container2":{
+	left: 5,
+}
+
+"#weekLabel":{
+	left: 0,top:10,
+	font:{fontFamily:'HelveticaNeue-CondensedBlack', fontSize:12, fontWeight:'bold', },
+	text: "星期六",
+}
+
+"#monthLabel":{
+	left: 0,bottom:10,
+	font:{fontFamily:'HelveticaNeue-CondensedBlack', fontSize:12, fontWeight:'bold', },
+	text: "2013.03",
 }

@@ -1,11 +1,12 @@
 // 给pub成功后用
+Alloy.Globals.blogList = $.blogList;
 Alloy.Globals.tableBlog = $.table;
 Alloy.Globals.fetchBlog = fetchBlog;
 
 // 添加actInd 
 var actInd = Alloy.createController('actInd').getView();
 actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
-actInd.color = Alloy.Globals.GUI_bkC;
+actInd.color = "black";
 $.blogList.add(actInd);
 
 // fetchBlog
@@ -41,11 +42,13 @@ function fetchBlog(){
 var offset = 0;
 function hideNavBar(e){
 	if(e.contentOffset.y - offset > 10){
-		$.blogList.hideNavBar();
+		$.top.hide();
+		$.table.top=0;
 		offset = e.contentOffset.y
 	}
 	if(e.contentOffset.y - offset < -10){
-		$.blogList.showNavBar() ;
+		$.top.show() ;
+		$.table.top=40,
 		offset = e.contentOffset.y
 	}
 	//以下处理超出上下边界的极端情况：

@@ -24,21 +24,21 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.pullView = Ti.UI.createView({
-        backgroundColor: "#FFFFCC",
+        backgroundColor: "#f4f4f4",
         width: 320,
         height: 60,
         id: "pullView"
     });
     $.addTopLevelView($.__views.pullView);
     $.__views.border1 = Ti.UI.createView({
-        backgroundColor: "#333",
+        backgroundColor: "#eee",
         height: 1,
         bottom: 1,
         id: "border1"
     });
     $.__views.pullView.add($.__views.border1);
     $.__views.border2 = Ti.UI.createView({
-        backgroundColor: "#999",
+        backgroundColor: "#eee",
         height: 1,
         bottom: 0,
         id: "border2"
