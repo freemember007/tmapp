@@ -1,5 +1,5 @@
 <Alloy>
-	<Window onOpen="fetchBlog" >
+	<Window onOpen="firstFetchBlog" >
 		<View id="top" >
 			<Label id="menuButton" onClick="toggleMenu" />
 		</View>

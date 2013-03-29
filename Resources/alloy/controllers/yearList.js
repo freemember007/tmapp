@@ -23,6 +23,22 @@ function Controller() {
         e.contentOffset.y <= 0 && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
     }
+    function firstFetchYear() {
+        if (Ti.App.Properties.hasProperty("yearData")) {
+            var data = JSON.parse(Ti.App.Properties.getString("yearData"));
+            items = data.items;
+            var tabledata = [];
+            for (key in items) {
+                var arg = {
+                    month: key,
+                    feeds: items[key]
+                }, section = Alloy.createController("yearSection", arg).getView();
+                tabledata.push(section);
+            }
+            $.table.setData(tabledata);
+            $.yearList.remove(actInd);
+        } else fetchYear();
+    }
     function fetchYear() {
         util.send("api/fetchYear", {
             email: "freemem@163.com",
@@ -40,6 +56,7 @@ function Controller() {
                     tabledata.push(section);
                 }
                 $.table.setData(tabledata);
+                Ti.App.Properties.setString("yearData", res);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
             $.yearList.remove(actInd);
         });
@@ -55,7 +72,7 @@ function Controller() {
         id: "yearList"
     });
     $.addTopLevelView($.__views.yearList);
-    fetchYear ? $.__views.yearList.addEventListener("open", fetchYear) : __defers["$.__views.yearList!open!fetchYear"] = !0;
+    firstFetchYear ? $.__views.yearList.addEventListener("open", firstFetchYear) : __defers["$.__views.yearList!open!firstFetchYear"] = !0;
     $.__views.top = Ti.UI.createView({
         width: "100%",
         height: 47,
@@ -87,7 +104,7 @@ function Controller() {
         fetch: fetchYear
     }).getView();
     $.table.headerPullView = pullView;
-    __defers["$.__views.yearList!open!fetchYear"] && $.__views.yearList.addEventListener("open", fetchYear);
+    __defers["$.__views.yearList!open!firstFetchYear"] && $.__views.yearList.addEventListener("open", firstFetchYear);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

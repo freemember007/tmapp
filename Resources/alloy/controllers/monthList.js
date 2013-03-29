@@ -23,6 +23,22 @@ function Controller() {
         e.contentOffset.y <= 0 && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
     }
+    function firstFetchMonth() {
+        if (Ti.App.Properties.hasProperty("monthData")) {
+            var data = JSON.parse(Ti.App.Properties.getString("monthData"));
+            items = data.items;
+            var tabledata = [];
+            for (key in items) {
+                var arg = {
+                    day: key,
+                    feeds: items[key]
+                }, row = Alloy.createController("monthRow", arg).getView();
+                tabledata.push(row);
+            }
+            $.table.setData(tabledata);
+            $.monthList.remove(actInd);
+        } else fetchMonth();
+    }
     function fetchMonth() {
         util.send("api/fetchMonth", {
             email: "freemem@163.com",
@@ -40,6 +56,7 @@ function Controller() {
                     tabledata.push(row);
                 }
                 $.table.setData(tabledata);
+                Ti.App.Properties.setString("monthData", res);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
             $.monthList.remove(actInd);
         });
@@ -55,7 +72,7 @@ function Controller() {
         id: "monthList"
     });
     $.addTopLevelView($.__views.monthList);
-    fetchMonth ? $.__views.monthList.addEventListener("open", fetchMonth) : __defers["$.__views.monthList!open!fetchMonth"] = !0;
+    firstFetchMonth ? $.__views.monthList.addEventListener("open", firstFetchMonth) : __defers["$.__views.monthList!open!firstFetchMonth"] = !0;
     $.__views.top = Ti.UI.createView({
         width: "100%",
         height: 47,
@@ -87,7 +104,7 @@ function Controller() {
         fetch: fetchMonth
     }).getView();
     $.table.headerPullView = pullView;
-    __defers["$.__views.monthList!open!fetchMonth"] && $.__views.monthList.addEventListener("open", fetchMonth);
+    __defers["$.__views.monthList!open!firstFetchMonth"] && $.__views.monthList.addEventListener("open", firstFetchMonth);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

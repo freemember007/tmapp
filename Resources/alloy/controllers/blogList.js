@@ -1,4 +1,22 @@
 function Controller() {
+    function firstFetchBlog() {
+        if (Ti.App.Properties.hasProperty("blogData")) {
+            var data = JSON.parse(Ti.App.Properties.getString("blogData"));
+            items = data.items;
+            var tabledata = [];
+            for (key in items) {
+                var arg = {
+                    day: key,
+                    feeds: items[key]
+                }, section = Alloy.createController("blogSection", arg).getView();
+                tabledata.push(section);
+            }
+            Alloy.Globals.tableBlog.setData(tabledata);
+            fetchOffset = 10;
+            lastRow = 10;
+            $.blogList.remove(actInd);
+        } else fetchBlog();
+    }
     function fetchBlog() {
         util.send("api/login", {
             email: "freemem@163.com",
@@ -19,6 +37,7 @@ function Controller() {
                 Alloy.Globals.tableBlog.setData(tabledata);
                 fetchOffset = 10;
                 lastRow = 10;
+                Ti.App.Properties.setString("blogData", res);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
             $.blogList.remove(actInd);
         });
@@ -117,7 +136,7 @@ function Controller() {
         id: "blogList"
     });
     $.addTopLevelView($.__views.blogList);
-    fetchBlog ? $.__views.blogList.addEventListener("open", fetchBlog) : __defers["$.__views.blogList!open!fetchBlog"] = !0;
+    firstFetchBlog ? $.__views.blogList.addEventListener("open", firstFetchBlog) : __defers["$.__views.blogList!open!firstFetchBlog"] = !0;
     $.__views.top = Ti.UI.createView({
         width: 320,
         height: 47,
@@ -179,7 +198,7 @@ function Controller() {
     $.table.addEventListener("scroll", function(e) {
         !updating && e.contentOffset.y + e.size.height + 100 > e.contentSize.height && beginUpdate();
     });
-    __defers["$.__views.blogList!open!fetchBlog"] && $.__views.blogList.addEventListener("open", fetchBlog);
+    __defers["$.__views.blogList!open!firstFetchBlog"] && $.__views.blogList.addEventListener("open", firstFetchBlog);
     __defers["$.__views.menuButton!click!toggleMenu"] && $.__views.menuButton.addEventListener("click", toggleMenu);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);

@@ -1,5 +1,5 @@
 <Alloy>
-	<Window onOpen="fetchYear" title='今年'>
+	<Window onOpen="firstFetchYear" title='今年'>
 		<View id="top">
 		</View>
 		<TableView onScroll="hideNavBar" id="table" >

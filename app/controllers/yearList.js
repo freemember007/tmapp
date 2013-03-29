@@ -25,6 +25,25 @@ function hideNavBar(e){
 	}
 }
 
+function firstFetchYear(){
+	if(Ti.App.Properties.hasProperty("yearData")){
+		var data = JSON.parse(Ti.App.Properties.getString("yearData"));
+		items = data.items;
+		var tabledata = [];
+		for(key in items){
+			var arg = {
+		        month: key,
+		        feeds: items[key]
+			};
+			var section = Alloy.createController('yearSection', arg).getView();
+			tabledata.push(section);
+		};
+		$.table.setData(tabledata);
+		$.yearList.remove(actInd);
+	}else{
+		fetchYear()
+	}
+}
 function fetchYear(){
 	util.send('api/fetchYear', {email: "freemem@163.com", password: "666666"}, function(res){
 		var data = JSON.parse(res);
@@ -40,6 +59,7 @@ function fetchYear(){
 				tabledata.push(section);
 			};
 			$.table.setData(tabledata);
+			Ti.App.Properties.setString("yearData",res);
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{
