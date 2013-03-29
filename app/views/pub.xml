@@ -1,21 +1,17 @@
 <Alloy>
-	<Window title='记录这一刻'>
+	<Window onFocus="showKeybroad">
 
-		<LeftNavButton>
-			<Button id="cancelButton" title="取消" />
-		</LeftNavButton>
+		<Label id="top" text="记录这一刻" />
+		<Label id="cancelButton" text="取消" />
 
-		<View id="imageContainer"/>
-		<ImageView id="image" onClick="openZoomImage"/>
+		<View id="imageContainer" />
+		<ImageView id="image" onClick="openZoomImage" />
 
 		<ScrollView>
-			<Toolbar id="toolbar" platform="ios">
-	            <Items>
-	            	<TextField id="commentInput"/>
-	                <FlexSpace />
-	                <Button id="pubButton" title="发布"/>
-	            </Items>
-	        </Toolbar>
+			<View id="toolbar">
+            	<TextField id="commentInput"/>
+                <Label id="pubButton" text="发布"/>
+	        </View>
 		</ScrollView>
 	
 	</Window>

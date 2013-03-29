@@ -24,6 +24,7 @@ if(Ti.App.Properties.hasProperty("id")){
 	$.tabGroup.open({
 		transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT,
 	});
+	Alloy.Globals.menu.open();
 	startWin.close(); //后续设个延时
 }else{
 	var login = Alloy.createController('login').getView();

@@ -2,12 +2,26 @@ function Controller() {
     function openZoomImage() {
         Alloy.createController("zoomImage", $.image.image).getView();
     }
+    function showDialog() {
+        var dialog = Ti.UI.createOptionDialog({
+            cancel: 1,
+            options: [ "删除", "取消" ],
+            destructive: 0,
+            title: "确认删除？"
+        });
+        dialog.show();
+        dialog.addEventListener("click", function(e) {
+            e.index == 0 && util.get("api/delete?id=" + args.id, function(res) {
+                var data = JSON.parse(res);
+                data.success && Alloy.Globals.fetchBlog();
+            });
+        });
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.blogRow = Ti.UI.createTableViewRow({
-        backgroundColor: "#fff",
-        borderColor: "#ccc",
+        backgroundColor: "#f3f3f3",
         selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
         layout: "vertical",
         id: "blogRow"
@@ -34,34 +48,37 @@ function Controller() {
         width: 286,
         font: {
             fontSize: 14,
-            fontWeight: "bold",
-            fontFamily: "迷你简南宫"
+            fontWeight: "bold"
         },
-        color: "black",
-        shadowColor: "#000",
+        color: "#555",
+        shadowColor: "#eee",
         shadowOffset: {
-            x: 0,
-            y: 0
+            x: 1,
+            y: 1
         },
         backgroundColor: "transparent",
         id: "label"
     });
     $.__views.container.add($.__views.label);
-    $.__views.actionContainer = Ti.UI.createLabel({
+    $.__views.actionContainer = Ti.UI.createView({
         bottom: 5,
         height: 30,
         width: 286,
-        text: "",
         id: "actionContainer"
     });
     $.__views.blogRow.add($.__views.actionContainer);
     $.__views.timeLabel = Ti.UI.createLabel({
         left: 0,
-        color: "#999",
+        color: "#888",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
         font: {
             fontSize: 12,
-            fontWeight: "bold",
-            fontFamily: "迷你简南宫"
+            fontStyle: "italic",
+            fontWeight: "bold"
         },
         id: "timeLabel",
         text: "清晨 06:38"
@@ -85,12 +102,14 @@ function Controller() {
         id: "deleteImg"
     });
     $.__views.actionContainer.add($.__views.deleteImg);
+    showDialog ? $.__views.deleteImg.addEventListener("click", showDialog) : __defers["$.__views.deleteImg!click!showDialog"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.image.image = args.url;
     args.content == "" ? $.label.height = 11 : $.label.text = args.content;
     __defers["$.__views.container!click!openZoomImage"] && $.__views.container.addEventListener("click", openZoomImage);
+    __defers["$.__views.deleteImg!click!showDialog"] && $.__views.deleteImg.addEventListener("click", showDialog);
     _.extend($, exports);
 }
 

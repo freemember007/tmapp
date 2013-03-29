@@ -24,17 +24,49 @@ function Controller() {
         });
     }
     function hideNavBar(e) {
-        if (e.contentOffset.y - offset > 10) {
-            $.top.hide();
-            $.table.top = 0;
+        if (e.contentOffset.y - offset > 10 && isHide == 0) {
+            $.top.animate({
+                top: -47
+            });
+            $.table.animate({
+                top: 0
+            });
             offset = e.contentOffset.y;
+            isHide = !0;
         }
-        if (e.contentOffset.y - offset < -10) {
-            $.top.show();
-            $.table.top = 40, offset = e.contentOffset.y;
+        if (e.contentOffset.y - offset < -10 && isHide == 1) {
+            $.top.animate({
+                top: 0
+            });
+            $.table.animate({
+                top: 44
+            });
+            offset = e.contentOffset.y;
+            isHide = !1;
         }
         e.contentOffset.y <= 0 && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
+    }
+    function toggleMenu() {
+        if (Alloy.Globals.slide) {
+            $.blogList.animate({
+                left: 0
+            });
+            Alloy.Globals.menu.animate({
+                left: -200
+            });
+            Alloy.Globals.slide = !1;
+            $.table.scrollable = !0;
+        } else {
+            $.table.scrollable = !1;
+            $.blogList.animate({
+                left: 200
+            });
+            Alloy.Globals.menu.animate({
+                left: 0
+            });
+            Alloy.Globals.slide = !0;
+        }
     }
     function beginUpdate() {
         updating = !0;
@@ -87,19 +119,33 @@ function Controller() {
     $.addTopLevelView($.__views.blogList);
     fetchBlog ? $.__views.blogList.addEventListener("open", fetchBlog) : __defers["$.__views.blogList!open!fetchBlog"] = !0;
     $.__views.top = Ti.UI.createView({
-        width: "100%",
-        height: 44,
+        width: 320,
+        height: 47,
         top: 0,
+        left: 0,
         backgroundImage: "top1.png",
         zIndex: 1,
         id: "top"
     });
     $.__views.blogList.add($.__views.top);
+    $.__views.menuButton = Ti.UI.createLabel({
+        left: 10,
+        top: 9,
+        width: 32,
+        height: 27,
+        backgroundImage: "menuIcon.png",
+        zIndex: 1,
+        id: "menuButton"
+    });
+    $.__views.top.add($.__views.menuButton);
+    toggleMenu ? $.__views.menuButton.addEventListener("click", toggleMenu) : __defers["$.__views.menuButton!click!toggleMenu"] = !0;
     $.__views.table = Ti.UI.createTableView({
-        top: 40,
+        left: 0,
+        top: 44,
+        width: 320,
         backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
-        bottom: 45,
+        bottom: 49,
         id: "table"
     });
     $.__views.blogList.add($.__views.table);
@@ -117,7 +163,7 @@ function Controller() {
     actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
     actInd.color = "black";
     $.blogList.add(actInd);
-    var fetchOffset = 10, lastRow = 10, offset = 0, pullView = Alloy.createController("pullView", {
+    var fetchOffset = 10, lastRow = 10, offset = 0, isHide = !1, pullView = Alloy.createController("pullView", {
         table: $.table,
         fetch: fetchBlog
     }).getView();
@@ -134,6 +180,7 @@ function Controller() {
         !updating && e.contentOffset.y + e.size.height + 100 > e.contentSize.height && beginUpdate();
     });
     __defers["$.__views.blogList!open!fetchBlog"] && $.__views.blogList.addEventListener("open", fetchBlog);
+    __defers["$.__views.menuButton!click!toggleMenu"] && $.__views.menuButton.addEventListener("click", toggleMenu);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

@@ -1,6 +1,7 @@
 <Alloy>
-	<Window onOpen="fetchBlog">
-		<View id="top">
+	<Window onOpen="fetchBlog" >
+		<View id="top" >
+			<Label id="menuButton" onClick="toggleMenu" />
 		</View>
 		<TableView onScroll="hideNavBar" id="table" ><!--数据绑定暂不支持绑定至section-->
 			<!--

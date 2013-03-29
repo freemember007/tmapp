@@ -1,16 +1,22 @@
 "Window": {
-	backgroundColor: "#f4f4f4",
-	barColor:'darkgray',
+	backgroundColor: "#f3f3f3",
 	tabBarHidden:true,
 }
 
-"#backButton":{
-	visible: false,
-	height: 0,
+"#top":{
+	width:"100%", height: 47,
+	top:0,
+	backgroundImage: "top0.png",
+}
+
+"#loginButton":{
+	right:10, top:7,
+	width: 51, height: 31,
+	backgroundImage:"loginButton.png"
 }
 
 "#container":{
-	top:20,bottom:10,left:10,right:10,
+	top:64,bottom:10,left:10,right:10,
 	layout:"vertical",
 }
 

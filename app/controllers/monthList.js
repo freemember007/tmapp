@@ -4,16 +4,19 @@ $.monthList.add(actInd);
 
 // show/hide navBar
 var offset = 0;
+var isHide = false; //避免事件重复触发而影响性能，尚不是很完美，仍有warn.
 function hideNavBar(e){
-	if(e.contentOffset.y - offset > 10){
-		$.top.hide();
-		$.table.top=0;
+	if(e.contentOffset.y - offset > 10 && isHide == false){
+		$.top.animate({top:-47});
+		$.table.animate({top:0});
 		offset = e.contentOffset.y
+		isHide = true;
 	}
-	if(e.contentOffset.y - offset < -10){
-		$.top.show() ;
-		$.table.top=40,
+	if(e.contentOffset.y - offset < -10 && isHide == true){
+		$.top.animate({top:0});
+		$.table.animate({top:44});
 		offset = e.contentOffset.y
+		isHide = false;
 	}
 	if(e.contentOffset.y <= 0){
 		offset = 0;

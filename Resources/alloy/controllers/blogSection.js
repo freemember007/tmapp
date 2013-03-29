@@ -7,8 +7,8 @@ function Controller() {
     });
     $.addTopLevelView($.__views.blogSection);
     $.__views.Container = Ti.UI.createView({
-        backgroundColor: "#fff",
-        height: 50,
+        backgroundColor: "#f3f3f3",
+        height: 44,
         opacity: 0.6,
         layout: "horizontal",
         verticalAlign: "center",
@@ -21,35 +21,50 @@ function Controller() {
             fontSize: 32,
             fontWeight: "bold"
         },
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
         id: "headerLabel"
     });
     $.__views.Container.add($.__views.headerLabel);
     $.__views.Container2 = Ti.UI.createView({
-        left: 5,
+        left: 0,
         id: "Container2"
     });
     $.__views.Container.add($.__views.Container2);
     $.__views.weekLabel = Ti.UI.createLabel({
         left: 0,
-        top: 10,
+        top: 8,
         font: {
             fontFamily: "HelveticaNeue-CondensedBlack",
             fontSize: 12,
             fontWeight: "bold"
         },
         text: "星期六",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
         id: "weekLabel"
     });
     $.__views.Container2.add($.__views.weekLabel);
     $.__views.monthLabel = Ti.UI.createLabel({
         left: 0,
-        bottom: 10,
+        bottom: 8,
         font: {
             fontFamily: "HelveticaNeue-CondensedBlack",
             fontSize: 12,
             fontWeight: "bold"
         },
         text: "2013.03",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
         id: "monthLabel"
     });
     $.__views.Container2.add($.__views.monthLabel);

@@ -1,6 +1,5 @@
 //全局tabGroup
 '#tabGroup':{
-	barColor:"#fff",
-	//tabsBackgroundColor:"#fff",
-	backgroundColor: "white",
+	backgroundColor: Alloy.Globals.GUI_bkC,	
+	navBarHidden: true,
 }

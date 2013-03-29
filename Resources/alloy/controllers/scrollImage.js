@@ -1,17 +1,67 @@
 function Controller() {
+    function back() {
+        $.scrollImage.close({
+            animated: !0
+        });
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.scrollImage = Ti.UI.createWindow({
-        backgroundColor: "black",
-        barColor: "transparent",
-        tabBarHidden: !0,
+        backgroundColor: "#000",
         id: "scrollImage"
     });
     $.addTopLevelView($.__views.scrollImage);
-    var __alloyId33 = [];
+    $.__views.top = Ti.UI.createLabel({
+        width: "100%",
+        height: 47,
+        top: 0,
+        backgroundImage: "topBlank.png",
+        text: "某时",
+        color: "#555",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
+        opacity: 0.9,
+        zIndex: 1,
+        id: "top"
+    });
+    $.__views.scrollImage.add($.__views.top);
+    $.__views.backButton = Ti.UI.createLabel({
+        left: 10,
+        top: 7,
+        width: 56,
+        height: 31,
+        backgroundImage: "backBlank.png",
+        text: "某天",
+        color: "#555",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 14,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
+        opacity: 0.9,
+        zIndex: 2,
+        id: "backButton"
+    });
+    $.__views.scrollImage.add($.__views.backButton);
+    back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = !0;
+    var __alloyId26 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId33,
+        width: 330,
+        views: __alloyId26,
         id: "scrollableView",
         showPagingControl: "true"
     });
@@ -24,7 +74,7 @@ function Controller() {
         var view = Ti.UI.createScrollView({
             maxZoomScale: 1.5
         }), image = Ti.UI.createImageView({
-            width: 318,
+            width: 320,
             image: items[i].url
         });
         view.add(image);
@@ -41,6 +91,7 @@ function Controller() {
         });
     });
     $.scrollImage.title = "某时";
+    __defers["$.__views.backButton!click!back"] && $.__views.backButton.addEventListener("click", back);
     _.extend($, exports);
 }
 

@@ -1,6 +1,7 @@
 <Alloy>
 	<Window>
-		<Label id="label" />
+		<Label id="top" />
+		<Label id="backButton" onClick="back" />
 		<View id="imageContainer" />
 	</Window>
 </Alloy>

@@ -13,7 +13,7 @@ function Controller() {
     $.addTopLevelView($.__views.zoomImage);
     $.__views.image = Ti.UI.createImageView({
         preventDefaultImage: !0,
-        width: "100%",
+        width: 320,
         id: "image"
     });
     $.__views.zoomImage.add($.__views.image);

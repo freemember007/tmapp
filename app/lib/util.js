@@ -4,7 +4,7 @@ exports.computeImageSize = function(originImg){
 	var imagefactory = require('ti.imagefactory');
 	var w = originImg.width;
 	var h = originImg.height;
-	var width = 320;
+	var width = 600;
 	var middleImg = imagefactory.imageAsResized(originImg, {width:width, height:h*(width/w)});
 	middleImg = imagefactory.compress(middleImg, 0.65); //本来上面的函数有压缩功能，但在iPhone下貌似有bug，必须与上面分开写才行，否则格式为png.
 	var thumb = imagefactory.imageAsResized(originImg, {width:120, height:h*(120/w)});
@@ -39,8 +39,30 @@ exports.send = function(url, data, onload){
 	    }
     };
     xhr.onerror = function(e){
-        alert(e.error);
+        alert(e.error + "测试");
     };
     xhr.open('POST',sitePath + url);
     xhr.send(data);
+}
+
+exports.get = function(url, onload){
+	var networkType = Ti.Network.getNetworkType();
+	if(networkType == Ti.Network.NETWORK_NONE){
+		alert('无可用网络!');
+		return;
+	}
+	var xhr = Titanium.Network.createHTTPClient();
+    xhr.onload = function(e){
+    	if (this.status != 200) {
+	        alert(e);
+	        alert(this.status);
+	    }else{
+    		onload(this.responseText);
+	    }
+    };
+    xhr.onerror = function(e){
+        alert(e.error + "测试");
+    };
+    xhr.open('get',sitePath + url);
+    xhr.send();
 }

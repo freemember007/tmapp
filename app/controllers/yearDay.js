@@ -17,6 +17,9 @@ for(i=0; i<items.length; i++){
 }
 
 $.yearDay.title = "某天"; 
-$.yearDay.showNavBar();
 Alloy.Globals.tab4.open($.yearDay);
+
+function back(){
+	$.yearDay.close({animated:true});
+}
 

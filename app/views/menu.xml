@@ -1,0 +1,6 @@
+<Alloy>
+	<Window onTouchstart="touchStart" onTouchmove="touchMove" >
+		<Label id="accountSet" />
+		<Label id="exit" onClick="exit" />
+	</Window>
+</Alloy>

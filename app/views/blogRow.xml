@@ -4,10 +4,10 @@
 				<ImageView id="image" />
 				<Label id="label" />
 			</Label>
-			<Label id="actionContainer">
+			<View id="actionContainer">
 				<Label id="timeLabel" text="清晨 06:38" />
 				<ImageView id="shareImg" /> 
-				<ImageView id="deleteImg" />
-			</Label>
+				<ImageView id="deleteImg" onClick="showDialog" />
+			</View>
 	</TableViewRow>
 </Alloy>

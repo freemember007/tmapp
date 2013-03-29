@@ -1,5 +1,7 @@
 <Alloy>
 	<Window>
+		<Label id="top" text="某天" />
+		<Label id="backButton" onClick="back" />
 		<View id="imageContainer" />
 	</Window>
 </Alloy>

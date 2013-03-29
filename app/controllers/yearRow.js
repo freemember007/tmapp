@@ -13,14 +13,22 @@ for(key in args){
 	image.image = image.toBlob().imageAsThumbnail(105);
 	var label1 = Ti.UI.createLabel({
 		bottom: 5, left: 10,
-		font: {fontSize:14,fontWeight:'bold',fontFamily:'迷你简南宫' },
-		color: "#eee",
+		font: {fontSize:12},
+		color: "#fff",
+		shadowColor:"black",
+		shadowOffset: {x:1,y:1},
+		textAlign:"left",
+		opacity:0.9,
 		text: key + "日",
 	});
 	var label2 = Ti.UI.createLabel({
 		bottom: 5, right: 10,
-		font:{fontSize:12,fontWeight:'bold',fontFamily:'迷你简南宫' },
-		color:"#eee",
+		font:{fontSize:12},
+		color:"#fff",
+		shadowColor:"black",
+		shadowOffset: {x:1,y:1},
+		textAlign:"right",
+		opacity:0.9,
 		text:args[key].length,
 	});
 	image.addEventListener("click",function(e){

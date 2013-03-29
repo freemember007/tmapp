@@ -40,16 +40,19 @@ function fetchBlog(){
 
 // show/hideNavBar
 var offset = 0;
+var isHide = false; //避免事件重复触发而影响性能，尚不是很完美，仍有warn.
 function hideNavBar(e){
-	if(e.contentOffset.y - offset > 10){
-		$.top.hide();
-		$.table.top=0;
+	if(e.contentOffset.y - offset > 10 && isHide == false){
+		$.top.animate({top:-47});
+		$.table.animate({top:0});
 		offset = e.contentOffset.y
+		isHide = true;
 	}
-	if(e.contentOffset.y - offset < -10){
-		$.top.show() ;
-		$.table.top=40,
+	if(e.contentOffset.y - offset < -10 && isHide == true){
+		$.top.animate({top:0});
+		$.table.animate({top:44});
 		offset = e.contentOffset.y
+		isHide = false;
 	}
 	//以下处理超出上下边界的极端情况：
 	if(e.contentOffset.y <= 0){
@@ -57,6 +60,23 @@ function hideNavBar(e){
 	}
 	if(e.contentOffset.y >= e.contentSize.height - e.size.height){
 		offset = e.contentSize.height - e.size.height;
+	}
+}
+
+
+// toggleMenu
+//var slide = false;
+function toggleMenu(){
+	if(Alloy.Globals.slide){
+		$.blogList.animate({left:0});
+		Alloy.Globals.menu.animate({left:-200});
+		Alloy.Globals.slide = false;
+		$.table.scrollable = true;
+	}else{
+		$.table.scrollable = false;
+		$.blogList.animate({left:200});
+		Alloy.Globals.menu.animate({left:0});
+		Alloy.Globals.slide = true;
 	}
 }
 
@@ -113,22 +133,6 @@ $.table.addEventListener('scroll',function(e){
     }
 });
 
-
-/* touch事情监听实现hideNavBar，有诸多问题，如不包括scroll，事情不能在空的区域触发。
-var start, move;
-function touchStart(e){
-	start = e.globalPoint.y;
-}
-function touchMove(e){
-	move = e.globalPoint.y;
-	if(start>move){
-		$.blogList.hideNavBar();
-	}
-	if(start<move){
-		$.blogList.showNavBar();
-	}
-}
-*/
 
 /* 数据绑定的实现方式 
 var user = Alloy.createModel("user",{email: 'freemem@163.com', password: '666666'});

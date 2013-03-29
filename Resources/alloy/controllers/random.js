@@ -14,7 +14,7 @@ function Controller() {
                     var view = Ti.UI.createScrollView({
                         maxZoomScale: 1.5
                     }), image = Ti.UI.createImageView({
-                        width: 318,
+                        width: 320,
                         image: items[i].url
                     });
                     view.add(image);
@@ -37,25 +37,39 @@ function Controller() {
     });
     $.addTopLevelView($.__views.random);
     fetchRandom ? $.__views.random.addEventListener("focus", fetchRandom) : __defers["$.__views.random!focus!fetchRandom"] = !0;
-    $.__views.top = Ti.UI.createView({
-        width: "100%",
-        height: 44,
+    $.__views.top = Ti.UI.createLabel({
+        width: 320,
+        height: 47,
         top: 0,
         backgroundImage: "top5.png",
+        color: "#555",
+        opacity: 0.9,
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
         zIndex: 1,
-        id: "top"
+        id: "top",
+        text: "随机"
     });
     $.__views.random.add($.__views.top);
-    var __alloyId31 = [];
+    var __alloyId24 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
-        views: __alloyId31,
+        width: 330,
+        views: __alloyId24,
         id: "scrollableView"
     });
     $.__views.random.add($.__views.scrollableView);
-    $.__views.__alloyId32 = Alloy.createController("bottom", {
-        id: "__alloyId32"
+    $.__views.__alloyId25 = Alloy.createController("bottom", {
+        id: "__alloyId25"
     });
-    $.__views.__alloyId32.setParent($.__views.random);
+    $.__views.__alloyId25.setParent($.__views.random);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.scrollableView.addEventListener("doubletap", function(e) {

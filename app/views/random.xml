@@ -1,7 +1,6 @@
 <Alloy>
 	<Window onFocus="fetchRandom">
-		<View id="top">
-		</View>
+		<Label id="top" text="随机" />
 		<ScrollableView id="scrollableView">
         </ScrollableView>
         <Require src="bottom"/>

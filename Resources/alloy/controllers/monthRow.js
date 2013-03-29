@@ -6,7 +6,7 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.row = Ti.UI.createTableViewRow({
-        backgroundColor: "#fff",
+        backgroundColor: "#f3f3f3",
         selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
         layout: "vertical",
         height: 100,
@@ -19,6 +19,11 @@ function Controller() {
         bottom: 5,
         height: 20,
         color: "#666",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
         font: {
             fontSize: 16,
             fontFamily: "HelveticaNeue-CondensedBlack"
@@ -53,19 +58,33 @@ function Controller() {
                 width: 75,
                 height: 75,
                 backgroundColor: "black",
-                opacity: 0.6,
+                opacity: 0.5
+            }), arrow = Ti.UI.createImageView({
+                width: 75,
+                height: 45,
+                top: 0,
+                image: "arrow.png"
+            }), text = Ti.UI.createLabel({
+                width: 75,
+                height: 30,
+                bottom: 10,
                 font: {
-                    fontSize: 12,
-                    fontWeight: "bold",
-                    fontFamily: "迷你简南宫"
+                    fontSize: 12
                 },
-                color: "white",
+                color: "#fff",
+                shadowColor: "#000",
+                shadowOffset: {
+                    x: 1,
+                    y: 1
+                },
                 textAlign: "center",
-                text: "共" + items.length + "张 »"
+                text: "共" + items.length + "张"
             });
             image.image = image.toBlob().imageAsThumbnail(75);
             view.add(image);
             view.add(label);
+            view.add(arrow);
+            view.add(text);
             $.imageContainer.add(view);
         }
     }

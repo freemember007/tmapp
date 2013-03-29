@@ -1,17 +1,17 @@
 "#pullView":{
-	backgroundColor:"#f4f4f4",
+	backgroundColor:"#ddd",
     width:320,
     height:60,
 }
 
 "#border1":{
-	backgroundColor:"#eee",
+	backgroundColor:"#ccc",
 	height:1,
 	bottom:1
 }
 
 "#border2":{
-	backgroundColor:"#eee",
+	backgroundColor:"#fff",
 	height:1,
 	bottom:0
 }
@@ -38,7 +38,7 @@
 	width:200,
 	bottom:30,
 	height:"auto",
-	color:"#333",
+	color:"#666",
 	textAlign:"center",
 	font:{fontSize:13,fontWeight:"bold"},
 	shadowColor:"#999",
@@ -51,7 +51,7 @@
 	width:200,
 	bottom:15,
 	height:"auto",
-	color:"#333",
+	color:"#666",
 	textAlign:"center",
 	font:{fontSize:12},
 	shadowColor:"#999",

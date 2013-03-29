@@ -1,0 +1,15 @@
+"Window": {
+	backgroundImage: "menuBack.png",
+	left: -200,
+	width: 200,
+}
+
+"#accountSet":{
+	top:44,left: 0,
+	width: 200,height: 44,
+}
+
+"#exit":{
+	top:88,left: 0,
+	width: 200,height: 44,
+}

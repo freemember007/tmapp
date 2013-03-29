@@ -1,5 +1,35 @@
 "Window": {
-	backgroundColor: "black",
-	barColor: "transparent",
-	tabBarHidden: true,
+	backgroundColor: "#000",
+}
+
+"#top":{
+	width:"100%", height: 47,
+	top:0,
+	backgroundImage: "topBlank.png",
+	text: "某时",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:20, fontWeight:"bold"},
+	textAlign: "center",
+	opacity: 0.9,
+	zIndex: 1,
+}
+
+"#backButton":{
+	left:10, top:7,
+	width: 56, height: 31,
+	backgroundImage:"backBlank.png",
+	text: "某天",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:14, fontWeight:"bold"},
+	textAlign: "center",
+	opacity: 0.9,
+	zIndex: 2,
+}
+
+"#scrollableView":{
+	width:330,
 }

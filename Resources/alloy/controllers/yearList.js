@@ -1,13 +1,24 @@
 function Controller() {
     function hideNavBar(e) {
-        if (e.contentOffset.y - offset > 10) {
-            $.top.hide();
-            $.table.top = 0;
+        if (e.contentOffset.y - offset > 10 && isHide == 0) {
+            $.top.animate({
+                top: -47
+            });
+            $.table.animate({
+                top: 0
+            });
             offset = e.contentOffset.y;
+            isHide = !0;
         }
-        if (e.contentOffset.y - offset < -10) {
-            $.top.show();
-            $.table.top = 40, offset = e.contentOffset.y;
+        if (e.contentOffset.y - offset < -10 && isHide == 1) {
+            $.top.animate({
+                top: 0
+            });
+            $.table.animate({
+                top: 44
+            });
+            offset = e.contentOffset.y;
+            isHide = !1;
         }
         e.contentOffset.y <= 0 && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
@@ -47,7 +58,7 @@ function Controller() {
     fetchYear ? $.__views.yearList.addEventListener("open", fetchYear) : __defers["$.__views.yearList!open!fetchYear"] = !0;
     $.__views.top = Ti.UI.createView({
         width: "100%",
-        height: 44,
+        height: 47,
         top: 0,
         backgroundImage: "top4.png",
         zIndex: 1,
@@ -55,23 +66,23 @@ function Controller() {
     });
     $.__views.yearList.add($.__views.top);
     $.__views.table = Ti.UI.createTableView({
-        top: 40,
+        top: 44,
         backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
-        bottom: 45,
+        bottom: 49,
         id: "table"
     });
     $.__views.yearList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId34 = Alloy.createController("bottom", {
-        id: "__alloyId34"
+    $.__views.__alloyId27 = Alloy.createController("bottom", {
+        id: "__alloyId27"
     });
-    $.__views.__alloyId34.setParent($.__views.yearList);
+    $.__views.__alloyId27.setParent($.__views.yearList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
     $.yearList.add(actInd);
-    var offset = 0, pullView = Alloy.createController("pullView", {
+    var offset = 0, isHide = !1, pullView = Alloy.createController("pullView", {
         table: $.table,
         fetch: fetchYear
     }).getView();

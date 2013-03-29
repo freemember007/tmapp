@@ -1,32 +1,79 @@
 "Window":{
 	backgroundColor: Alloy.Globals.GUI_bkC,
-	barColor: "#333",
+	navBarHidden: true,
 }
 
+"#top":{
+	width:320, height: 47,
+	top:0,
+	backgroundImage: "topBlank.png",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:20, fontWeight:"bold"},
+	textAlign: "center",
+	zIndex: 1,
+}
+
+"#cancelButton":{
+	left:10, top:7,
+	width: 56, height: 31,
+	backgroundImage:"backBlank.png",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:14, fontWeight:"bold"},
+	textAlign: "center",
+	zIndex: 1,
+}
+
+
 "#imageContainer":{
-	top:20,
+	top:64,
 	width:120,height:120,
 	borderColor: "#999",
 }
 
 "#image":{
-	top:0,
+	top:44,
 	width:120,
 	preventDefaultImage:true,
 }
 
+"ScrollView":{
+	height: 290,
+	bottom: 0,
+}
+
 "#toolbar":{
 	bottom:0,
-    barColor:"#333", 
+	height: 44,
+    backgroundGradient: {
+        type: 'linear',
+        startPoint: { x: '50%', y: '0%' },
+        endPoint: { x: '50%', y: '100%' },
+        colors: [ { color: '#666', offset: 0.0},{ color: '#fff', offset: 0.025},{ color: '#eee', offset: 0.05}, { color: '#ccc', offset: 1.0 }],
+    } 
 }
 
 "#commentInput":{
+	left: 7,top:7,
 	width:240,height: 32,
 	font: {fontSize: 14},
-	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	hintText:"添加照片描述",
+	enableReturnKey:true, //为空的时候就别return了。
+	suppressReturn: false, //不允许键盘被压下来
 	zIndex: 1,
 }
 
 "#pubButton":{
-	style:Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
+	right: 7,top:7,
+	width: 56, height: 31,
+	backgroundImage:"buttonBlank.png",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:14, fontWeight:"bold"},
+	textAlign: "center",
 }

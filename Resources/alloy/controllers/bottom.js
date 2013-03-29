@@ -30,9 +30,7 @@ function Controller() {
         Ti.Media.openPhotoGallery({
             success: function(e) {
                 var pub = Alloy.createController("pub").getView();
-                pub.open({
-                    modal: !0
-                });
+                pub.open();
                 Alloy.Globals.showPhoto(util.computeImageSize(e.media));
             },
             cancel: function() {},
@@ -45,9 +43,7 @@ function Controller() {
         Ti.Media.showCamera({
             success: function(e) {
                 var pub = Alloy.createController("pub").getView();
-                pub.open({
-                    modal: !0
-                });
+                pub.open();
                 Alloy.Globals.showPhoto(util.computeImageSize(e.media));
             },
             cancel: function() {},
@@ -62,9 +58,10 @@ function Controller() {
     var $ = this, exports = {}, __defers = {};
     $.__views.bottom = Ti.UI.createView({
         backgroundImage: "bottom.png",
-        height: 50,
-        width: "100%",
+        height: 54,
+        width: 320,
         bottom: 0,
+        left: 0,
         zIndex: 1,
         layout: "horizontal",
         id: "bottom"
@@ -73,7 +70,7 @@ function Controller() {
     $.__views.recentImg = Ti.UI.createImageView({
         preventDefaultImage: !0,
         image: "recentImg.png",
-        top: 5,
+        top: 8,
         id: "recentImg"
     });
     $.__views.bottom.add($.__views.recentImg);
@@ -81,7 +78,7 @@ function Controller() {
     $.__views.monthImg = Ti.UI.createImageView({
         preventDefaultImage: !0,
         image: "monthImg.png",
-        top: 5,
+        top: 6,
         id: "monthImg"
     });
     $.__views.bottom.add($.__views.monthImg);
@@ -97,7 +94,7 @@ function Controller() {
     $.__views.yearImg = Ti.UI.createImageView({
         preventDefaultImage: !0,
         image: "yearImg.png",
-        top: 5,
+        top: 6,
         id: "yearImg"
     });
     $.__views.bottom.add($.__views.yearImg);
@@ -105,7 +102,7 @@ function Controller() {
     $.__views.randomImg = Ti.UI.createImageView({
         preventDefaultImage: !0,
         image: "randomImg.png",
-        top: 5,
+        top: 6,
         id: "randomImg"
     });
     $.__views.bottom.add($.__views.randomImg);

@@ -18,16 +18,26 @@ for(i=0; i<items.length; i++){
 		var label = Ti.UI.createLabel({
 			width:75,height:75,
 			backgroundColor:"black",
-			opacity:0.6,
-			font:{fontSize:12,fontWeight:'bold',fontFamily:'迷你简南宫' },
-			color:"white",
-			textAlign:"center",
-			text: "共" + items.length + "张 »"
+			opacity:0.5,
 		})
-		//label.text = 
+		var arrow = Ti.UI.createImageView({
+			width:75,height:45,top:0,
+			image:"arrow.png",
+		})
+		var text = Ti.UI.createLabel({
+			width:75,height:30,bottom:10,
+			font:{fontSize:12},
+			color:"#fff",
+			shadowColor:"#000",
+			shadowOffset: {x:1,y:1},
+			textAlign:"center",
+			text: "共" + items.length + "张"
+		})
 		image.image = image.toBlob().imageAsThumbnail(75);
 		view.add(image);
-		view.add(label)
+		view.add(label);
+		view.add(arrow);
+		view.add(text);
 		$.imageContainer.add(view);
 	}
 }

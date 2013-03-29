@@ -4,10 +4,6 @@
 <dict>
 	<key>UIAppFonts</key>
     <array>
-        <string>fonts/新蒂下午茶基本版.ttf</string>
-        <string>fonts/迷你简南宫.ttf</string>
-        <string>fonts/迷你简瘦金书.ttf</string>
-    	<string>fonts/造字工坊俊雅.otf</string>
     </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
@@ -47,7 +43,7 @@
 	<key>UIRequiresPersistentWiFi</key>
 	<false/>
 	<key>UIPrerenderedIcon</key>
-	<false/>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>UIStatusBarStyle</key>

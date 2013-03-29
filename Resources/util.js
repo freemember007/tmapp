@@ -1,7 +1,7 @@
 var sitePath = "http://184.82.117.60/";
 
 exports.computeImageSize = function(originImg) {
-    var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 320, middleImg = imagefactory.imageAsResized(originImg, {
+    var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 600, middleImg = imagefactory.imageAsResized(originImg, {
         width: width,
         height: h * (width / w)
     });
@@ -39,8 +39,28 @@ exports.send = function(url, data, onload) {
         } else onload(this.responseText);
     };
     xhr.onerror = function(e) {
-        alert(e.error);
+        alert(e.error + "测试");
     };
     xhr.open("POST", sitePath + url);
     xhr.send(data);
+};
+
+exports.get = function(url, onload) {
+    var networkType = Ti.Network.getNetworkType();
+    if (networkType == Ti.Network.NETWORK_NONE) {
+        alert("无可用网络!");
+        return;
+    }
+    var xhr = Titanium.Network.createHTTPClient();
+    xhr.onload = function(e) {
+        if (this.status != 200) {
+            alert(e);
+            alert(this.status);
+        } else onload(this.responseText);
+    };
+    xhr.onerror = function(e) {
+        alert(e.error + "测试");
+    };
+    xhr.open("get", sitePath + url);
+    xhr.send();
 };

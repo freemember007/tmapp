@@ -38,14 +38,14 @@ function openPhoto(){
 	Ti.Media.openPhotoGallery({
 		success: function(e){
 			var pub = Alloy.createController('pub').getView();
-			pub.open({modal:true});
+			pub.open();
 			Alloy.Globals.showPhoto(util.computeImageSize(e.media));
 		},
 		cancel: function(){
 		},
 		error: function(){
 			alert("error");
-		}
+		},
 	});
 }
 
@@ -53,7 +53,7 @@ function takePhoto(){
 	Ti.Media.showCamera({
 		success: function(e){
 			var pub = Alloy.createController('pub').getView();
-			pub.open({modal:true});
+			pub.open();
 			Alloy.Globals.showPhoto(util.computeImageSize(e.media));
 		},
 		cancel: function(){

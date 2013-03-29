@@ -12,7 +12,7 @@ function fetchRandom(){
 						maxZoomScale:1.5, //这项必须有,先放1.5吧，否则不清晰。
 					})
 					var image = Ti.UI.createImageView({
-						width:318, //让图片之间留点间隙，暂时的解决办法
+						width:320, 
 						image: items[i].url,
 					})
 					view.add(image);

@@ -7,14 +7,19 @@ function Controller() {
     });
     $.addTopLevelView($.__views.yearSection);
     $.__views.headerLabel = Ti.UI.createLabel({
-        height: 50,
-        backgroundColor: Alloy.Globals.GUI_bkC,
-        opacity: 0.8,
-        color: Alloy.Globals.GUI_FC,
+        height: 40,
+        backgroundImage: "line.png",
+        opacity: 0.7,
+        color: "#333",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
         font: {
             fontSize: 20,
             fontWeight: "bold",
-            fontFamily: "迷你简南宫"
+            fontFamily: "HelveticaNeue-CondensedBlack"
         },
         textAlign: "center",
         id: "headerLabel"

@@ -3,8 +3,8 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.tabGroup = Ti.UI.createTabGroup({
-        barColor: "#fff",
-        backgroundColor: "white",
+        backgroundColor: Alloy.Globals.GUI_bkC,
+        navBarHidden: !0,
         id: "tabGroup"
     });
     $.__views.__alloyId7 = Alloy.createController("blogList", {
@@ -83,6 +83,7 @@ function Controller() {
         $.tabGroup.open({
             transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT
         });
+        Alloy.Globals.menu.open();
         startWin.close();
     } else {
         var login = Alloy.createController("login").getView();

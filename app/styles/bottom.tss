@@ -1,20 +1,20 @@
 ".container": {
 	backgroundImage: "bottom.png",
-	height: 50,
-	width: "100%",
-	bottom: 0,
+	height: 54,
+	width: 320,
+	bottom: 0,left: 0,
 	zIndex: 1,
 	layout: "horizontal",
 }
 
 "#recentImg":{
 	image: "recentImg.png",
-	top: 5,
+	top: 8,
 }
 
 "#monthImg":{
 	image: "monthImg.png",
-	top: 5,
+	top: 6,
 }
 
 "#cameraImg":{
@@ -24,10 +24,10 @@
 
 "#yearImg":{
 	image: "yearImg.png",
-	top: 5,
+	top: 6,
 }
 
 "#randomImg":{
 	image: "randomImg.png",
-	top: 5,
+	top: 6,
 }

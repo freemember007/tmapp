@@ -27,21 +27,31 @@ function Controller() {
             bottom: 5,
             left: 10,
             font: {
-                fontSize: 14,
-                fontWeight: "bold",
-                fontFamily: "迷你简南宫"
+                fontSize: 12
             },
-            color: "#eee",
+            color: "#fff",
+            shadowColor: "black",
+            shadowOffset: {
+                x: 1,
+                y: 1
+            },
+            textAlign: "left",
+            opacity: 0.9,
             text: key + "日"
         }), label2 = Ti.UI.createLabel({
             bottom: 5,
             right: 10,
             font: {
-                fontSize: 12,
-                fontWeight: "bold",
-                fontFamily: "迷你简南宫"
+                fontSize: 12
             },
-            color: "#eee",
+            color: "#fff",
+            shadowColor: "black",
+            shadowOffset: {
+                x: 1,
+                y: 1
+            },
+            textAlign: "right",
+            opacity: 0.9,
             text: args[key].length
         });
         image.addEventListener("click", function(e) {

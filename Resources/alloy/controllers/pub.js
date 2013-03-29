@@ -2,7 +2,6 @@ function Controller() {
     function showPhoto(imgs) {
         $.pub.remove($.imageContainer);
         $.image.image = imgs.middleImg.src;
-        $.commentInput.focus();
         $.cancelButton.addEventListener("click", clearPub);
         $.pubButton.addEventListener("click", pub);
     }
@@ -30,25 +29,67 @@ function Controller() {
         $.pub.close();
     }
     function openZoomImage() {
+        $.commentInput.blur();
         Alloy.createController("zoomImage", $.image.image).getView();
+    }
+    function showKeybroad() {
+        $.commentInput.focus();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.pub = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        barColor: "#333",
-        title: "记录这一刻",
+        navBarHidden: !0,
         id: "pub"
     });
     $.addTopLevelView($.__views.pub);
-    $.__views.cancelButton = Ti.UI.createButton({
-        id: "cancelButton",
-        title: "取消"
+    showKeybroad ? $.__views.pub.addEventListener("focus", showKeybroad) : __defers["$.__views.pub!focus!showKeybroad"] = !0;
+    $.__views.top = Ti.UI.createLabel({
+        width: 320,
+        height: 47,
+        top: 0,
+        backgroundImage: "topBlank.png",
+        color: "#555",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
+        zIndex: 1,
+        id: "top",
+        text: "记录这一刻"
     });
-    $.__views.pub.leftNavButton = $.__views.cancelButton;
+    $.__views.pub.add($.__views.top);
+    $.__views.cancelButton = Ti.UI.createLabel({
+        left: 10,
+        top: 7,
+        width: 56,
+        height: 31,
+        backgroundImage: "backBlank.png",
+        color: "#555",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 14,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
+        zIndex: 1,
+        id: "cancelButton",
+        text: "取消"
+    });
+    $.__views.pub.add($.__views.cancelButton);
     $.__views.imageContainer = Ti.UI.createView({
-        top: 20,
+        top: 64,
         width: 120,
         height: 120,
         borderColor: "#999",
@@ -57,48 +98,89 @@ function Controller() {
     $.__views.pub.add($.__views.imageContainer);
     $.__views.image = Ti.UI.createImageView({
         preventDefaultImage: !0,
-        top: 0,
+        top: 44,
         width: 120,
         id: "image"
     });
     $.__views.pub.add($.__views.image);
     openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = !0;
-    $.__views.__alloyId27 = Ti.UI.createScrollView({
-        id: "__alloyId27"
+    $.__views.__alloyId23 = Ti.UI.createScrollView({
+        height: 290,
+        bottom: 0,
+        id: "__alloyId23"
     });
-    $.__views.pub.add($.__views.__alloyId27);
-    var __alloyId29 = [];
+    $.__views.pub.add($.__views.__alloyId23);
+    $.__views.toolbar = Ti.UI.createView({
+        bottom: 0,
+        height: 44,
+        backgroundGradient: {
+            type: "linear",
+            startPoint: {
+                x: "50%",
+                y: "0%"
+            },
+            endPoint: {
+                x: "50%",
+                y: "100%"
+            },
+            colors: [ {
+                color: "#666",
+                offset: 0
+            }, {
+                color: "#fff",
+                offset: 0.025
+            }, {
+                color: "#eee",
+                offset: 0.05
+            }, {
+                color: "#ccc",
+                offset: 1
+            } ]
+        },
+        id: "toolbar"
+    });
+    $.__views.__alloyId23.add($.__views.toolbar);
     $.__views.commentInput = Ti.UI.createTextField({
+        left: 7,
+        top: 7,
         width: 240,
         height: 32,
         font: {
             fontSize: 14
         },
-        borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        hintText: "添加照片描述",
+        enableReturnKey: !0,
+        suppressReturn: !1,
         zIndex: 1,
         id: "commentInput"
     });
-    __alloyId29.push($.__views.commentInput);
-    $.__views.__alloyId30 = Ti.UI.createButton({
-        systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-    });
-    __alloyId29.push($.__views.__alloyId30);
-    $.__views.pubButton = Ti.UI.createButton({
-        style: Titanium.UI.iPhone.SystemButtonStyle.BORDERED,
+    $.__views.toolbar.add($.__views.commentInput);
+    $.__views.pubButton = Ti.UI.createLabel({
+        right: 7,
+        top: 7,
+        width: 56,
+        height: 31,
+        backgroundImage: "buttonBlank.png",
+        color: "#555",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 14,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
         id: "pubButton",
-        title: "发布"
+        text: "发布"
     });
-    __alloyId29.push($.__views.pubButton);
-    $.__views.toolbar = Ti.UI.iOS.createToolbar({
-        bottom: 0,
-        barColor: "#333",
-        items: __alloyId29,
-        id: "toolbar"
-    });
-    $.__views.__alloyId27.add($.__views.toolbar);
+    $.__views.toolbar.add($.__views.pubButton);
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.showPhoto = showPhoto;
+    __defers["$.__views.pub!focus!showKeybroad"] && $.__views.pub.addEventListener("focus", showKeybroad);
     __defers["$.__views.image!click!openZoomImage"] && $.__views.image.addEventListener("click", openZoomImage);
     _.extend($, exports);
 }

@@ -3,7 +3,6 @@ Alloy.Globals.showPhoto = showPhoto;
 function showPhoto(imgs){
 	$.pub.remove($.imageContainer);
 	$.image.image = imgs.middleImg.src;
-	$.commentInput.focus();
 	$.cancelButton.addEventListener("click",clearPub);
 	$.pubButton.addEventListener("click",pub);
 }
@@ -30,5 +29,10 @@ function clearPub(){
 };
 
 function openZoomImage(){
+	$.commentInput.blur(); 
 	Alloy.createController('zoomImage', $.image.image).getView();
 };
+
+function showKeybroad(){
+	$.commentInput.focus();
+}

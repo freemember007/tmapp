@@ -7,9 +7,9 @@ function login(){
 		if(data.type == "success"){
 			Ti.App.Properties.setString("id", data.id);
 			Ti.App.Properties.setString("email", data.email);
+			Alloy.Globals.tabGroup.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
+			Alloy.Globals.menu.open();
 			$.login.close();
-			var index = Alloy.createController('index').getView();
-			index.open();
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{

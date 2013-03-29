@@ -1,6 +1,6 @@
 "#Container":{
-	backgroundColor: "#fff",
-	height: 50,
+	backgroundColor: "#f3f3f3",
+	height: 44,
 	opacity: 0.6,
 	layout: "horizontal",
 	verticalAlign: "center",
@@ -8,20 +8,26 @@
 "#headerLabel":{
 	left: 3,
 	font:{fontFamily:'HelveticaNeue-CondensedBlack', fontSize:32,fontWeight:'bold', },
+	shadowColor:"#fff",
+	shadowOffset: {x:1,y:1},
 }
 
 "#Container2":{
-	left: 5,
+	left: 0,
 }
 
 "#weekLabel":{
-	left: 0,top:10,
+	left: 0,top:8,
 	font:{fontFamily:'HelveticaNeue-CondensedBlack', fontSize:12, fontWeight:'bold', },
 	text: "星期六",
+	shadowColor:"#fff",
+	shadowOffset: {x:1,y:1},
 }
 
 "#monthLabel":{
-	left: 0,bottom:10,
+	left: 0,bottom:8,
 	font:{fontFamily:'HelveticaNeue-CondensedBlack', fontSize:12, fontWeight:'bold', },
 	text: "2013.03",
+	shadowColor:"#fff",
+	shadowOffset: {x:1,y:1},
 }

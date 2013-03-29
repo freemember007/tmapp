@@ -24,21 +24,21 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.pullView = Ti.UI.createView({
-        backgroundColor: "#f4f4f4",
+        backgroundColor: "#ddd",
         width: 320,
         height: 60,
         id: "pullView"
     });
     $.addTopLevelView($.__views.pullView);
     $.__views.border1 = Ti.UI.createView({
-        backgroundColor: "#eee",
+        backgroundColor: "#ccc",
         height: 1,
         bottom: 1,
         id: "border1"
     });
     $.__views.pullView.add($.__views.border1);
     $.__views.border2 = Ti.UI.createView({
-        backgroundColor: "#eee",
+        backgroundColor: "#fff",
         height: 1,
         bottom: 0,
         id: "border2"
@@ -68,7 +68,7 @@ function Controller() {
         width: 200,
         bottom: 30,
         height: "auto",
-        color: "#333",
+        color: "#666",
         textAlign: "center",
         font: {
             fontSize: 13,
@@ -88,7 +88,7 @@ function Controller() {
         width: 200,
         bottom: 15,
         height: "auto",
-        color: "#333",
+        color: "#666",
         textAlign: "center",
         font: {
             fontSize: 12
