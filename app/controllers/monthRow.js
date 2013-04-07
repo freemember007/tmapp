@@ -43,5 +43,7 @@ for(i=0; i<items.length; i++){
 }
 
 function showDay(){
-	Alloy.createController('monthDay', items).getView();
+	var monthDay = Alloy.createController('monthDay', items).getView();
+	monthDay.children[0].text = args.day + "日" ;
+	Alloy.Globals.tab2.open(monthDay);
 }

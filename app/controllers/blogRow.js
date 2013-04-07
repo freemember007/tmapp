@@ -1,5 +1,7 @@
 var args = arguments[0] || {};
 $.image.image = args.url;
+var hour = args.created_at.match(/[0-9]+:[0-9]+/)[0];
+$.timeLabel.text = util.formatTime(parseInt(hour)) + " " + hour;
 
 if(args.content == ""){
 	$.label.height = 11

@@ -1,3 +1,5 @@
+Alloy.Globals.showDialog = showDialog;
+
 function openRecent(){
 	Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab1);
 }
@@ -16,6 +18,7 @@ function openYear(){
 
 function openRandom(){
 	Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab5);
+	Alloy.Globals.fetchRandom();
 }
 
 // show/hide dialog and open pub

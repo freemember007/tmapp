@@ -3,27 +3,22 @@ function Controller() {
         var actInd = Alloy.createController("actInd").getView();
         $.random.add(actInd);
         util.send("api/fetchRandom", {
-            email: "freemem@163.com",
-            password: "666666"
+            email: Ti.App.Properties.getString("email"),
+            password: Ti.App.Properties.getString("password")
         }, function(res) {
             var data = JSON.parse(res);
             if (data.type == "success") {
-                items = data.items;
-                data = [];
-                for (i = 0; i < items.length; i++) if (items[i].url != null) {
-                    var view = Ti.UI.createScrollView({
-                        maxZoomScale: 1.5
-                    }), image = Ti.UI.createImageView({
-                        width: 320,
-                        image: items[i].url
-                    });
-                    view.add(image);
-                    data.push(view);
-                }
-                $.scrollableView.setViews(data);
+                item = data.item;
+                item.url != null && ($.image.image = item.url);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
             $.random.remove(actInd);
-            $.scrollableView.scrollToView(0);
+        });
+    }
+    function zoom() {
+        $.scrollView.zoomScale <= 1 ? $.scrollView.setZoomScale(2, {
+            animated: !0
+        }) : $.scrollView.setZoomScale(1, {
+            animated: !0
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -36,7 +31,6 @@ function Controller() {
         id: "random"
     });
     $.addTopLevelView($.__views.random);
-    fetchRandom ? $.__views.random.addEventListener("focus", fetchRandom) : __defers["$.__views.random!focus!fetchRandom"] = !0;
     $.__views.top = Ti.UI.createLabel({
         width: 320,
         height: 47,
@@ -59,29 +53,27 @@ function Controller() {
         text: "随机"
     });
     $.__views.random.add($.__views.top);
-    var __alloyId24 = [];
-    $.__views.scrollableView = Ti.UI.createScrollableView({
-        width: 330,
-        views: __alloyId24,
-        id: "scrollableView"
+    $.__views.scrollView = Ti.UI.createScrollView({
+        width: 320,
+        maxZoomScale: 1.5,
+        id: "scrollView"
     });
-    $.__views.random.add($.__views.scrollableView);
-    $.__views.__alloyId25 = Alloy.createController("bottom", {
-        id: "__alloyId25"
+    $.__views.random.add($.__views.scrollView);
+    zoom ? $.__views.scrollView.addEventListener("doubletap", zoom) : __defers["$.__views.scrollView!doubletap!zoom"] = !0;
+    $.__views.image = Ti.UI.createImageView({
+        preventDefaultImage: !0,
+        width: 320,
+        id: "image"
     });
-    $.__views.__alloyId25.setParent($.__views.random);
+    $.__views.scrollView.add($.__views.image);
+    $.__views.__alloyId22 = Alloy.createController("bottom", {
+        id: "__alloyId22"
+    });
+    $.__views.__alloyId22.setParent($.__views.random);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.scrollableView.addEventListener("doubletap", function(e) {
-        var view = $.scrollableView.views[$.scrollableView.currentPage];
-        view.zoomScale <= 1 ? view.setZoomScale(2, {
-            animated: !0
-        }) : view.setZoomScale(1, {
-            animated: !0
-        });
-    });
-    $.random.title = "某时";
-    __defers["$.__views.random!focus!fetchRandom"] && $.__views.random.addEventListener("focus", fetchRandom);
+    Alloy.Globals.fetchRandom = fetchRandom;
+    __defers["$.__views.scrollView!doubletap!zoom"] && $.__views.scrollView.addEventListener("doubletap", zoom);
     _.extend($, exports);
 }
 

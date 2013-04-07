@@ -9,7 +9,19 @@
 	backgroundImage: "top0.png",
 }
 
-"#loginButton":{
+"#backButton":{
+	left:10, top:7,
+	width: 56, height: 31,
+	backgroundImage:"backBlank.png",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:14, fontWeight:"bold"},
+	textAlign: "center",
+	zIndex: 1,
+}
+
+"#registerButton":{
 	right:10, top:7,
 	width: 51, height: 31,
 	backgroundImage:"buttonRound.png",
@@ -22,11 +34,10 @@
 
 "#container":{
 	top:55,bottom:10,left:10,right:10,
-	font:{fontSize:14, fontWeight:"bold"},
 	layout:"vertical",
 }
 
-"#loginTitle":{
+"#registerTitle":{
 	left:0,
 	font:{fontSize:16},
 }
@@ -57,25 +68,6 @@
 	passwordMask:true,
 }
 
-"#registerTips":{
-	top:8, 
-	layout:"horizontal",
-	font:{fontSize:16},
-}
-
-"#registerLabel":{
-	left:0,
-	height: 30,
-	font:{fontSize:16},
-}
-
-"#registerButton":{
-	left:10,
-	height: 30, width:140,
-	font:{size:14},
-	textAlign:"center",
-	backgroundColor:"white",
-	borderColor:"#ccc",
-	borderRadius: 5,
-	shadowColor:"#ccc"
+"#avatar":{
+	image:"avatar.png"
 }

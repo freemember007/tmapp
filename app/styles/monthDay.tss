@@ -17,7 +17,6 @@
 	left:10, top:7,
 	width: 56, height: 31,
 	backgroundImage:"backBlank.png",
-	text: "本月",
 	color: "#555",
 	shadowColor: "#fff",
 	shadowOffset: {x:1,y:1},

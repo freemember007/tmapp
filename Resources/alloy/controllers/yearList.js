@@ -24,10 +24,8 @@ function Controller() {
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
     }
     function firstFetchYear() {
-        if (Ti.App.Properties.hasProperty("yearData")) {
-            var data = JSON.parse(Ti.App.Properties.getString("yearData"));
-            items = data.items;
-            var tabledata = [];
+        if (Ti.App.Properties.hasProperty("yearData") && Ti.App.Properties.getString("yearData") != "{}") {
+            var items = JSON.parse(Ti.App.Properties.getString("yearData")), tabledata = [];
             for (key in items) {
                 var arg = {
                     month: key,
@@ -41,10 +39,11 @@ function Controller() {
     }
     function fetchYear() {
         util.send("api/fetchYear", {
-            email: "freemem@163.com",
-            password: "666666"
+            email: Ti.App.Properties.getString("email"),
+            password: Ti.App.Properties.getString("password")
         }, function(res) {
             var data = JSON.parse(res);
+            $.yearList.remove(actInd);
             if (data.type == "success") {
                 items = data.items;
                 var tabledata = [];
@@ -56,9 +55,8 @@ function Controller() {
                     tabledata.push(section);
                 }
                 $.table.setData(tabledata);
-                Ti.App.Properties.setString("yearData", res);
+                Ti.App.Properties.setString("yearData", JSON.stringify(items));
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
-            $.yearList.remove(actInd);
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -72,7 +70,7 @@ function Controller() {
         id: "yearList"
     });
     $.addTopLevelView($.__views.yearList);
-    firstFetchYear ? $.__views.yearList.addEventListener("open", firstFetchYear) : __defers["$.__views.yearList!open!firstFetchYear"] = !0;
+    firstFetchYear ? $.__views.yearList.addEventListener("focus", firstFetchYear) : __defers["$.__views.yearList!focus!firstFetchYear"] = !0;
     $.__views.top = Ti.UI.createView({
         width: "100%",
         height: 47,
@@ -91,10 +89,10 @@ function Controller() {
     });
     $.__views.yearList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId27 = Alloy.createController("bottom", {
-        id: "__alloyId27"
+    $.__views.__alloyId37 = Alloy.createController("bottom", {
+        id: "__alloyId37"
     });
-    $.__views.__alloyId27.setParent($.__views.yearList);
+    $.__views.__alloyId37.setParent($.__views.yearList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
@@ -104,7 +102,7 @@ function Controller() {
         fetch: fetchYear
     }).getView();
     $.table.headerPullView = pullView;
-    __defers["$.__views.yearList!open!firstFetchYear"] && $.__views.yearList.addEventListener("open", firstFetchYear);
+    __defers["$.__views.yearList!focus!firstFetchYear"] && $.__views.yearList.addEventListener("focus", firstFetchYear);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

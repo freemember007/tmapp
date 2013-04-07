@@ -5,7 +5,7 @@
 				<Label id="label" />
 			</Label>
 			<View id="actionContainer">
-				<Label id="timeLabel" text="清晨 06:38" />
+				<Label id="timeLabel" />
 				<ImageView id="shareImg" /> 
 				<ImageView id="deleteImg" onClick="showDialog" />
 			</View>

@@ -1,14 +1,11 @@
 <Alloy>
 	<TableViewSection>
 		<HeaderView>
-			<View id="Container">
-				<Label id="headerLabel" />
-				<View id="Container2">
-					<Label id="weekLabel" />
-					<Label id="monthLabel" />
-				</View>	
-			</View>
-			
+			<Label id="Container">
+				<Label id="dayLabel" />
+				<Label id="weekLabel" />
+				<Label id="monthLabel" />
+			</Label>
 		</HeaderView>
 	</TableViewSection>
 </Alloy>

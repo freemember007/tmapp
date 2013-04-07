@@ -1,0 +1,25 @@
+".container": {
+	top:47,bottom: 54,left: 0,right: 0,
+	layout: "vertical",
+	backgroundColor: Alloy.Globals.GUI_bkC,
+}
+
+"#text":{
+	top:20, bottom: 20, height: 100, width: 300,left: 10,
+	color: "#666",
+	textAlign: "center",
+	font: {fontSize:16},
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+}
+
+"#button":{
+	image: "welcome.png",
+	width: 163, height: 41,left: 75,
+	bottom: 30
+}
+
+"#slogan":{
+	image:  "slogan.png",
+	width: 292, height: 100,left: 20,
+}

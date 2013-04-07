@@ -6,16 +6,15 @@ function Controller() {
         id: "blogSection"
     });
     $.addTopLevelView($.__views.blogSection);
-    $.__views.Container = Ti.UI.createView({
+    $.__views.Container = Ti.UI.createLabel({
         backgroundColor: "#f3f3f3",
         height: 44,
         opacity: 0.6,
-        layout: "horizontal",
-        verticalAlign: "center",
+        text: "",
         id: "Container"
     });
-    $.__views.headerLabel = Ti.UI.createLabel({
-        left: 3,
+    $.__views.dayLabel = Ti.UI.createLabel({
+        left: 10,
         font: {
             fontFamily: "HelveticaNeue-CondensedBlack",
             fontSize: 32,
@@ -26,23 +25,17 @@ function Controller() {
             x: 1,
             y: 1
         },
-        id: "headerLabel"
+        id: "dayLabel"
     });
-    $.__views.Container.add($.__views.headerLabel);
-    $.__views.Container2 = Ti.UI.createView({
-        left: 0,
-        id: "Container2"
-    });
-    $.__views.Container.add($.__views.Container2);
+    $.__views.Container.add($.__views.dayLabel);
     $.__views.weekLabel = Ti.UI.createLabel({
-        left: 0,
-        top: 8,
+        left: 50,
+        top: 9,
         font: {
             fontFamily: "HelveticaNeue-CondensedBlack",
             fontSize: 12,
             fontWeight: "bold"
         },
-        text: "星期六",
         shadowColor: "#fff",
         shadowOffset: {
             x: 1,
@@ -50,16 +43,15 @@ function Controller() {
         },
         id: "weekLabel"
     });
-    $.__views.Container2.add($.__views.weekLabel);
+    $.__views.Container.add($.__views.weekLabel);
     $.__views.monthLabel = Ti.UI.createLabel({
-        left: 0,
-        bottom: 8,
+        left: 48,
+        bottom: 7,
         font: {
             fontFamily: "HelveticaNeue-CondensedBlack",
             fontSize: 12,
             fontWeight: "bold"
         },
-        text: "2013.03",
         shadowColor: "#fff",
         shadowOffset: {
             x: 1,
@@ -67,12 +59,14 @@ function Controller() {
         },
         id: "monthLabel"
     });
-    $.__views.Container2.add($.__views.monthLabel);
+    $.__views.Container.add($.__views.monthLabel);
     $.__views.blogSection.headerView = $.__views.Container;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.headerLabel.text = " " + args.day.match(/[0-9]+$/)[0];
+    $.dayLabel.text = args.day.match(/[0-9]+$/)[0];
+    $.monthLabel.text = args.day.match(/^[0-9]+-[0-9]+/)[0].replace("-", ".");
+    $.weekLabel.text = util.getWeek(args.day);
     var items = args.feeds;
     for (i = 0; i < items.length; i++) {
         var row = Alloy.createController("blogRow", items[i]).getView();

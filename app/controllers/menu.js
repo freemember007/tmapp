@@ -1,12 +1,15 @@
 function exit(){
 	Ti.App.Properties.removeProperty("id");
-	Alloy.Globals.menu.animate({left:-200});
-	Alloy.Globals.blogList.animate({left:0});
+	Ti.App.Properties.removeProperty("email");
+	Ti.App.Properties.removeProperty("password");
+	Ti.App.Properties.removeProperty("blogData");
+	Ti.App.Properties.removeProperty("monthData");
+	Ti.App.Properties.removeProperty("yearData");
+	hideMenu();
 	var login = Alloy.createController('login').getView();
 	login.open({
 		transition:Ti.UI.iPhone.AnimationStyle.CURL_DOWN
 	});
-	Alloy.Globals.slide = false;
 	Alloy.Globals.tabGroup.close();
 	Alloy.Globals.menu.close();
 }
@@ -19,9 +22,13 @@ function touchStart(e){
 function touchMove(e){
 	move = e.globalPoint.x;
 	if(start>move){
-		Alloy.Globals.blogList.animate({left:0});
-		$.menu.animate({left:-200});
-		Alloy.Globals.slide = false;
-		Alloy.Globals.tableBlog.scrollable = true;
+		hideMenu()
 	}
+}
+
+function hideMenu(){
+	Alloy.Globals.tabGroup.animate({left:0});
+	$.menu.animate({left:-200});
+	Alloy.Globals.slide = false;
+	Alloy.Globals.tableBlog.scrollable = true;
 }

@@ -13,6 +13,7 @@ function Controller() {
     }
     function openRandom() {
         Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab5);
+        Alloy.Globals.fetchRandom();
     }
     function showDialog() {
         $.dialog.show();
@@ -120,6 +121,7 @@ function Controller() {
     choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
+    Alloy.Globals.showDialog = showDialog;
     __defers["$.__views.recentImg!click!openRecent"] && $.__views.recentImg.addEventListener("click", openRecent);
     __defers["$.__views.monthImg!click!openMonth"] && $.__views.monthImg.addEventListener("click", openMonth);
     __defers["$.__views.cameraImg!click!showDialog"] && $.__views.cameraImg.addEventListener("click", showDialog);

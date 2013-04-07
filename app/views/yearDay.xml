@@ -1,7 +1,7 @@
 <Alloy>
 	<Window>
 		<Label id="top" />
-		<Label id="backButton" onClick="back" />
+		<Label id="backButton" text="今年" onClick="back" />
 		<View id="imageContainer" />
 	</Window>
 </Alloy>

@@ -64,3 +64,16 @@ exports.get = function(url, onload) {
     xhr.open("get", sitePath + url);
     xhr.send();
 };
+
+exports.formatTime = function(hour) {
+    var personalTime = "今天";
+    hour < 9 ? personalTime = "清晨" : hour < 12 ? personalTime = "上午" : hour < 12 ? personalTime = "上午" : hour < 14 ? personalTime = "中午" : hour < 18 ? personalTime = "下午" : hour < 21 ? personalTime = "黄昏" : personalTime = "深夜";
+    return personalTime;
+};
+
+exports.getWeek = function(date) {
+    var arr = new Array;
+    arr = date.split("-");
+    var newDate = new Date(arr[0], parseInt(arr[1] - 1), arr[2]), weekArray = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"), week = weekArray[newDate.getDay()];
+    return week;
+};

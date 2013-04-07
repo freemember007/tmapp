@@ -1,17 +1,16 @@
 function Controller() {
     function exit() {
         Ti.App.Properties.removeProperty("id");
-        Alloy.Globals.menu.animate({
-            left: -200
-        });
-        Alloy.Globals.blogList.animate({
-            left: 0
-        });
+        Ti.App.Properties.removeProperty("email");
+        Ti.App.Properties.removeProperty("password");
+        Ti.App.Properties.removeProperty("blogData");
+        Ti.App.Properties.removeProperty("monthData");
+        Ti.App.Properties.removeProperty("yearData");
+        hideMenu();
         var login = Alloy.createController("login").getView();
         login.open({
             transition: Ti.UI.iPhone.AnimationStyle.CURL_DOWN
         });
-        Alloy.Globals.slide = !1;
         Alloy.Globals.tabGroup.close();
         Alloy.Globals.menu.close();
     }
@@ -20,16 +19,17 @@ function Controller() {
     }
     function touchMove(e) {
         move = e.globalPoint.x;
-        if (start > move) {
-            Alloy.Globals.blogList.animate({
-                left: 0
-            });
-            $.menu.animate({
-                left: -200
-            });
-            Alloy.Globals.slide = !1;
-            Alloy.Globals.tableBlog.scrollable = !0;
-        }
+        start > move && hideMenu();
+    }
+    function hideMenu() {
+        Alloy.Globals.tabGroup.animate({
+            left: 0
+        });
+        $.menu.animate({
+            left: -200
+        });
+        Alloy.Globals.slide = !1;
+        Alloy.Globals.tableBlog.scrollable = !0;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;

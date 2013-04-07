@@ -18,6 +18,11 @@
 }
 
 
-"#scrollableView":{
-	width: 330,
+"#scrollView":{
+	width: 320,
+	maxZoomScale:1.5
+}
+
+"#image":{
+	width: 320,
 }

@@ -80,8 +80,7 @@ function Controller() {
             fontStyle: "italic",
             fontWeight: "bold"
         },
-        id: "timeLabel",
-        text: "清晨 06:38"
+        id: "timeLabel"
     });
     $.__views.actionContainer.add($.__views.timeLabel);
     $.__views.shareImg = Ti.UI.createImageView({
@@ -107,6 +106,8 @@ function Controller() {
     _.extend($, $.__views);
     var args = arguments[0] || {};
     $.image.image = args.url;
+    var hour = args.created_at.match(/[0-9]+:[0-9]+/)[0];
+    $.timeLabel.text = util.formatTime(parseInt(hour)) + " " + hour;
     args.content == "" ? $.label.height = 11 : $.label.text = args.content;
     __defers["$.__views.container!click!openZoomImage"] && $.__views.container.addEventListener("click", openZoomImage);
     __defers["$.__views.deleteImg!click!showDialog"] && $.__views.deleteImg.addEventListener("click", showDialog);

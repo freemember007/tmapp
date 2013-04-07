@@ -26,9 +26,8 @@ function hideNavBar(e){
 }
 
 function firstFetchYear(){
-	if(Ti.App.Properties.hasProperty("yearData")){
-		var data = JSON.parse(Ti.App.Properties.getString("yearData"));
-		items = data.items;
+	if(Ti.App.Properties.hasProperty("yearData")&&Ti.App.Properties.getString("yearData")!="{}"){
+		var items = JSON.parse(Ti.App.Properties.getString("yearData"));
 		var tabledata = [];
 		for(key in items){
 			var arg = {
@@ -45,8 +44,9 @@ function firstFetchYear(){
 	}
 }
 function fetchYear(){
-	util.send('api/fetchYear', {email: "freemem@163.com", password: "666666"}, function(res){
+	util.send('api/fetchYear', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password")}, function(res){
 		var data = JSON.parse(res);
+		$.yearList.remove(actInd);
 		if(data.type == "success"){
 			items = data.items;
 			var tabledata = [];
@@ -59,13 +59,12 @@ function fetchYear(){
 				tabledata.push(section);
 			};
 			$.table.setData(tabledata);
-			Ti.App.Properties.setString("yearData",res);
+			Ti.App.Properties.setString("yearData",JSON.stringify(items));
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{
 			alert('unknown error');
 		}
-		$.yearList.remove(actInd);
 	});
 }
 

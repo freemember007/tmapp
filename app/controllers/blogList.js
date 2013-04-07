@@ -14,8 +14,7 @@ var fetchOffset = 10;
 var lastRow = 10;
 function firstFetchBlog(){
 	if(Ti.App.Properties.hasProperty("blogData")){
-		var data = JSON.parse(Ti.App.Properties.getString("blogData"));
-		items = data.items;
+		var items = JSON.parse(Ti.App.Properties.getString("blogData"));
 		var tabledata = [];
 		for(key in items){
 			var arg = {
@@ -33,24 +32,31 @@ function firstFetchBlog(){
 		fetchBlog()
 	}
 }
+
+var welcome = Alloy.createController('welcome').getView();
 function fetchBlog(){
-	util.send('api/login', {email: "freemem@163.com", password: "666666", offset: 0}, function(res){
+	util.send('api/login', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password"), offset: 0}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			items = data.items;
-			var tabledata = [];
-			for(key in items){
-				var arg = {
-			        day: key,
-			        feeds: items[key]
+			if (JSON.stringify(items) == "{}"){
+				Alloy.Globals.tabGroup.add(welcome);
+			}else{
+				Alloy.Globals.tabGroup.remove(welcome);
+				var tabledata = [];
+				for(key in items){
+					var arg = {
+				        day: key,
+				        feeds: items[key]
+					};
+					var section = Alloy.createController('blogSection', arg).getView();
+					tabledata.push(section);
 				};
-				var section = Alloy.createController('blogSection', arg).getView();
-				tabledata.push(section);
-			};
-			Alloy.Globals.tableBlog.setData(tabledata);
-			fetchOffset = 10;
-			lastRow = 10;
-			Ti.App.Properties.setString("blogData",res);
+				Alloy.Globals.tableBlog.setData(tabledata);
+				fetchOffset = 10;
+				lastRow = 10;
+				Ti.App.Properties.setString("blogData",JSON.stringify(items));
+			}
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{
@@ -90,13 +96,13 @@ function hideNavBar(e){
 //var slide = false;
 function toggleMenu(){
 	if(Alloy.Globals.slide){
-		$.blogList.animate({left:0});
+		Alloy.Globals.tabGroup.animate({left:0});
 		Alloy.Globals.menu.animate({left:-200});
 		Alloy.Globals.slide = false;
 		$.table.scrollable = true;
 	}else{
 		$.table.scrollable = false;
-		$.blogList.animate({left:200});
+		Alloy.Globals.tabGroup.animate({left:200});
 		Alloy.Globals.menu.animate({left:0});
 		Alloy.Globals.slide = true;
 	}
@@ -109,10 +115,10 @@ $.table.headerPullView = pullView
 
 // 底部刷新
 var updating = false;
-var loadingInd = Titanium.UI.createActivityIndicator({bottom: 5,width:30,height:30,
+var loadingInd = Titanium.UI.createActivityIndicator({width:30,height:30,
 	style:  Titanium.UI.iPhone.ActivityIndicatorStyle.DARK
 });
-var loadingRow = Ti.UI.createTableViewRow();
+var loadingRow = Ti.UI.createTableViewRow({height:40});
 var loadingSection = Ti.UI.createTableViewSection();
 loadingSection.add(loadingRow);
 loadingRow.add(loadingInd);
@@ -125,7 +131,7 @@ function beginUpdate(){
 function endUpdate(){
 	updating = false;
 	lastRow += 10;
-	util.send('api/login', {email: "freemem@163.com", password: "666666", offset:fetchOffset}, function(res){
+	util.send('api/login', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password"), offset:fetchOffset}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			$.table.deleteSection($.table.data.length-1,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});

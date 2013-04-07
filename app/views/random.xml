@@ -1,8 +1,9 @@
 <Alloy>
-	<Window onFocus="fetchRandom">
+	<Window>
 		<Label id="top" text="随机" />
-		<ScrollableView id="scrollableView">
-        </ScrollableView>
+		<ScrollView id="scrollView" onDoubletap="zoom">
+			<ImageView id="image" />
+        </ScrollView>
         <Require src="bottom"/>
 	</Window>
 </Alloy>

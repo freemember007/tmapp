@@ -17,7 +17,6 @@ function Controller() {
         height: 47,
         top: 0,
         backgroundImage: "topBlank.png",
-        text: "某天",
         color: "#555",
         shadowColor: "#fff",
         shadowOffset: {
@@ -38,7 +37,6 @@ function Controller() {
         width: 56,
         height: 31,
         backgroundImage: "backBlank.png",
-        text: "今年",
         color: "#555",
         shadowColor: "#fff",
         shadowOffset: {
@@ -50,7 +48,8 @@ function Controller() {
             fontWeight: "bold"
         },
         textAlign: "center",
-        id: "backButton"
+        id: "backButton",
+        text: "今年"
     });
     $.__views.yearDay.add($.__views.backButton);
     back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = !0;
@@ -63,26 +62,27 @@ function Controller() {
     $.__views.yearDay.add($.__views.imageContainer);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var args = arguments[0] || {}, items = args;
+    var items = arguments[0] || {};
     for (i = 0; i < items.length; i++) {
         var url = items[i].url, image = Ti.UI.createImageView({
             left: 0,
             top: 0,
             image: url,
-            index: i
+            index: i,
+            created_at: items[i].created_at
         });
-        image.image = image.toBlob().imageAsThumbnail(100);
+        image.image = image.toBlob().imageAsThumbnail(101);
         image.addEventListener("click", function(e) {
             var scrollImage = Alloy.createController("scrollImage", {
                 index: e.source.index,
                 items: items
-            }).getView();
+            }).getView(), hour = e.source.created_at.match(/[0-9]+:[0-9]+/)[0];
+            scrollImage.children[0].text = util.formatTime(parseInt(hour)) + " " + hour;
+            scrollImage.children[1].text = $.top.text;
             Alloy.Globals.tab4.open(scrollImage);
         });
         $.imageContainer.add(image);
     }
-    $.yearDay.title = "某天";
-    Alloy.Globals.tab4.open($.yearDay);
     __defers["$.__views.backButton!click!back"] && $.__views.backButton.addEventListener("click", back);
     _.extend($, exports);
 }

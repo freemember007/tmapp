@@ -1,9 +1,7 @@
 function Controller() {
     function firstFetchBlog() {
         if (Ti.App.Properties.hasProperty("blogData")) {
-            var data = JSON.parse(Ti.App.Properties.getString("blogData"));
-            items = data.items;
-            var tabledata = [];
+            var items = JSON.parse(Ti.App.Properties.getString("blogData")), tabledata = [];
             for (key in items) {
                 var arg = {
                     day: key,
@@ -19,25 +17,28 @@ function Controller() {
     }
     function fetchBlog() {
         util.send("api/login", {
-            email: "freemem@163.com",
-            password: "666666",
+            email: Ti.App.Properties.getString("email"),
+            password: Ti.App.Properties.getString("password"),
             offset: 0
         }, function(res) {
             var data = JSON.parse(res);
             if (data.type == "success") {
                 items = data.items;
-                var tabledata = [];
-                for (key in items) {
-                    var arg = {
-                        day: key,
-                        feeds: items[key]
-                    }, section = Alloy.createController("blogSection", arg).getView();
-                    tabledata.push(section);
+                if (JSON.stringify(items) == "{}") Alloy.Globals.tabGroup.add(welcome); else {
+                    Alloy.Globals.tabGroup.remove(welcome);
+                    var tabledata = [];
+                    for (key in items) {
+                        var arg = {
+                            day: key,
+                            feeds: items[key]
+                        }, section = Alloy.createController("blogSection", arg).getView();
+                        tabledata.push(section);
+                    }
+                    Alloy.Globals.tableBlog.setData(tabledata);
+                    fetchOffset = 10;
+                    lastRow = 10;
+                    Ti.App.Properties.setString("blogData", JSON.stringify(items));
                 }
-                Alloy.Globals.tableBlog.setData(tabledata);
-                fetchOffset = 10;
-                lastRow = 10;
-                Ti.App.Properties.setString("blogData", res);
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
             $.blogList.remove(actInd);
         });
@@ -68,7 +69,7 @@ function Controller() {
     }
     function toggleMenu() {
         if (Alloy.Globals.slide) {
-            $.blogList.animate({
+            Alloy.Globals.tabGroup.animate({
                 left: 0
             });
             Alloy.Globals.menu.animate({
@@ -78,7 +79,7 @@ function Controller() {
             $.table.scrollable = !0;
         } else {
             $.table.scrollable = !1;
-            $.blogList.animate({
+            Alloy.Globals.tabGroup.animate({
                 left: 200
             });
             Alloy.Globals.menu.animate({
@@ -97,8 +98,8 @@ function Controller() {
         updating = !1;
         lastRow += 10;
         util.send("api/login", {
-            email: "freemem@163.com",
-            password: "666666",
+            email: Ti.App.Properties.getString("email"),
+            password: Ti.App.Properties.getString("password"),
             offset: fetchOffset
         }, function(res) {
             var data = JSON.parse(res);
@@ -136,7 +137,7 @@ function Controller() {
         id: "blogList"
     });
     $.addTopLevelView($.__views.blogList);
-    firstFetchBlog ? $.__views.blogList.addEventListener("open", firstFetchBlog) : __defers["$.__views.blogList!open!firstFetchBlog"] = !0;
+    firstFetchBlog ? $.__views.blogList.addEventListener("focus", firstFetchBlog) : __defers["$.__views.blogList!focus!firstFetchBlog"] = !0;
     $.__views.top = Ti.UI.createView({
         width: 320,
         height: 47,
@@ -182,23 +183,24 @@ function Controller() {
     actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
     actInd.color = "black";
     $.blogList.add(actInd);
-    var fetchOffset = 10, lastRow = 10, offset = 0, isHide = !1, pullView = Alloy.createController("pullView", {
+    var fetchOffset = 10, lastRow = 10, welcome = Alloy.createController("welcome").getView(), offset = 0, isHide = !1, pullView = Alloy.createController("pullView", {
         table: $.table,
         fetch: fetchBlog
     }).getView();
     $.table.headerPullView = pullView;
     var updating = !1, loadingInd = Titanium.UI.createActivityIndicator({
-        bottom: 5,
         width: 30,
         height: 30,
         style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK
-    }), loadingRow = Ti.UI.createTableViewRow(), loadingSection = Ti.UI.createTableViewSection();
+    }), loadingRow = Ti.UI.createTableViewRow({
+        height: 40
+    }), loadingSection = Ti.UI.createTableViewSection();
     loadingSection.add(loadingRow);
     loadingRow.add(loadingInd);
     $.table.addEventListener("scroll", function(e) {
         !updating && e.contentOffset.y + e.size.height + 100 > e.contentSize.height && beginUpdate();
     });
-    __defers["$.__views.blogList!open!firstFetchBlog"] && $.__views.blogList.addEventListener("open", firstFetchBlog);
+    __defers["$.__views.blogList!focus!firstFetchBlog"] && $.__views.blogList.addEventListener("focus", firstFetchBlog);
     __defers["$.__views.menuButton!click!toggleMenu"] && $.__views.menuButton.addEventListener("click", toggleMenu);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);

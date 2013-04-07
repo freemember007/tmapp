@@ -20,6 +20,7 @@ function Controller() {
             bottom: 1
         }), image = Ti.UI.createImageView({
             image: args[key][0].url,
+            date: key + "日",
             data: args[key]
         });
         image.image = image.toBlob().imageAsThumbnail(105);
@@ -55,7 +56,9 @@ function Controller() {
             text: args[key].length
         });
         image.addEventListener("click", function(e) {
-            Alloy.createController("yearDay", e.source.data).getView();
+            var yearDay = Alloy.createController("yearDay", e.source.data).getView();
+            yearDay.children[0].text = e.source.date;
+            Alloy.Globals.tab4.open(yearDay);
         });
         view.add(image);
         view.add(label1);

@@ -66,3 +66,39 @@ exports.get = function(url, onload){
     xhr.open('get',sitePath + url);
     xhr.send();
 }
+
+exports.formatTime = function(hour){
+	var personalTime = "今天";
+
+	if (hour < 9){
+		personalTime = "清晨"
+	}
+	else if (hour < 12){
+		personalTime = "上午"
+	}
+	else if (hour < 12){
+		personalTime = "上午"
+	}
+	else if (hour < 14){
+		personalTime = "中午"
+	}
+	else if (hour < 18){
+		personalTime = "下午"
+	}
+	else if (hour < 21){
+		personalTime = "黄昏"
+	}
+	else {
+		personalTime = "深夜"
+	}
+	return personalTime;
+}
+
+exports.getWeek = function(date){
+	var arr = new Array();
+    arr = date.split('-'); //日期为输入日期，格式为 2013-3-10
+    var newDate = new Date(arr[0],parseInt(arr[1]-1),arr[2]); 
+    var weekArray = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
+	var week = weekArray[newDate.getDay()];  
+   	return week;
+}

@@ -2,14 +2,14 @@
 	<Window >
 		
 		<View id="top">
-			<View id="loginButton" onClick="login"/>
+			<Label id="loginButton" text="登录" onClick="login"/>
 		</View>
 
 		<View id="container">
-			<Label id="loginTitle" text="请登录您的时光帐户："/>
+			<Label id="loginTitle" text="登录您的时光帐户："/>
 			<View class="inputContainer">
 				<Label class="inputLabel" text="邮箱"/>
-				<TextField id="usernameInput" class="input"/>
+				<TextField id="emailInput" class="input"/>
 			</View>
 			<View class="inputContainer">
 				<Label class="inputLabel" text="密码"/>
@@ -18,15 +18,6 @@
 			<View id="registerTips">
 				<Label id="registerLabel" text="还没有注册？"/>
 				<Label id="registerButton" text="创建一个时光帐户" onClick="showRegister" />
-			</View>				
-            <!--给注册控制器的表单-->
-			<View id="registerInputOne" class="inputContainer invisible">
-				<Label class="inputLabel" text="昵称"/>
-				<TextField id="nicknameInput" class="input"/>
-			</View>
-			<View id="registerInputTwo" class="inputContainer invisible">
-				<Label class="inputLabel" text="头像"/>
-				<TextField id="avatarInput" class="input"/>
 			</View>
 		</View>
 

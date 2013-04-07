@@ -7,7 +7,8 @@ var items = args.items;
 data = [];
 for(i=0; i<items.length; i++){
 	var view = Ti.UI.createScrollView({
-		maxZoomScale:1.5, //这项必须有,先放1.5吧，否则不清晰。
+		maxZoomScale: 1.5, //这项必须有,先放1.5吧，否则不清晰。
+		created_at: items[i].created_at, //自定义属性
 	})
 	var image = Ti.UI.createImageView({
 		width:320, 
@@ -25,8 +26,11 @@ $.scrollableView.addEventListener('doubletap', function(e){
     (view.zoomScale <= 1.0) ? view.setZoomScale(2, {animated:true}) : view.setZoomScale(1, {animated:true});
 });
 
-//设置窗口title
-$.scrollImage.title = "某时"; 
+//适时改变窗口title
+$.scrollableView.addEventListener("scrollEnd",function(e){
+	var hour = e.view.created_at.match(/[0-9]+:[0-9]+/)[0];
+	$.top.text = util.formatTime(parseInt(hour)) + " " + hour;
+});
 
 function back(){
 	$.scrollImage.close({animated:true});

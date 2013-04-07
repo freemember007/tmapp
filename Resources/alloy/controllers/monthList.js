@@ -24,10 +24,8 @@ function Controller() {
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
     }
     function firstFetchMonth() {
-        if (Ti.App.Properties.hasProperty("monthData")) {
-            var data = JSON.parse(Ti.App.Properties.getString("monthData"));
-            items = data.items;
-            var tabledata = [];
+        if (Ti.App.Properties.hasProperty("monthData") && Ti.App.Properties.getString("monthData") != "{}") {
+            var items = JSON.parse(Ti.App.Properties.getString("monthData")), tabledata = [];
             for (key in items) {
                 var arg = {
                     day: key,
@@ -41,10 +39,11 @@ function Controller() {
     }
     function fetchMonth() {
         util.send("api/fetchMonth", {
-            email: "freemem@163.com",
-            password: "666666"
+            email: Ti.App.Properties.getString("email"),
+            password: Ti.App.Properties.getString("password")
         }, function(res) {
             var data = JSON.parse(res);
+            $.monthList.remove(actInd);
             if (data.type == "success") {
                 items = data.items;
                 var tabledata = [];
@@ -56,9 +55,8 @@ function Controller() {
                     tabledata.push(row);
                 }
                 $.table.setData(tabledata);
-                Ti.App.Properties.setString("monthData", res);
+                Ti.App.Properties.setString("monthData", JSON.stringify(items));
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
-            $.monthList.remove(actInd);
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -72,7 +70,7 @@ function Controller() {
         id: "monthList"
     });
     $.addTopLevelView($.__views.monthList);
-    firstFetchMonth ? $.__views.monthList.addEventListener("open", firstFetchMonth) : __defers["$.__views.monthList!open!firstFetchMonth"] = !0;
+    firstFetchMonth ? $.__views.monthList.addEventListener("focus", firstFetchMonth) : __defers["$.__views.monthList!focus!firstFetchMonth"] = !0;
     $.__views.top = Ti.UI.createView({
         width: "100%",
         height: 47,
@@ -91,10 +89,10 @@ function Controller() {
     });
     $.__views.monthList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId22 = Alloy.createController("bottom", {
-        id: "__alloyId22"
+    $.__views.__alloyId20 = Alloy.createController("bottom", {
+        id: "__alloyId20"
     });
-    $.__views.__alloyId22.setParent($.__views.monthList);
+    $.__views.__alloyId20.setParent($.__views.monthList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
@@ -104,7 +102,7 @@ function Controller() {
         fetch: fetchMonth
     }).getView();
     $.table.headerPullView = pullView;
-    __defers["$.__views.monthList!open!firstFetchMonth"] && $.__views.monthList.addEventListener("open", firstFetchMonth);
+    __defers["$.__views.monthList!focus!firstFetchMonth"] && $.__views.monthList.addEventListener("focus", firstFetchMonth);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

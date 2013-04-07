@@ -28,9 +28,8 @@ function hideNavBar(e){
 
 // fetch
 function firstFetchMonth(){
-	if(Ti.App.Properties.hasProperty("monthData")){
-		var data = JSON.parse(Ti.App.Properties.getString("monthData"));
-		items = data.items;
+	if(Ti.App.Properties.hasProperty("monthData")&&Ti.App.Properties.getString("monthData")!="{}"){
+		var items = JSON.parse(Ti.App.Properties.getString("monthData"));
 		var tabledata = [];
 		for(key in items){
 			var arg = {
@@ -47,8 +46,9 @@ function firstFetchMonth(){
 	}
 }
 function fetchMonth(){
-	util.send('api/fetchMonth', {email: "freemem@163.com", password: "666666"}, function(res){
+	util.send('api/fetchMonth', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password")}, function(res){
 		var data = JSON.parse(res);
+		$.monthList.remove(actInd);
 		if(data.type == "success"){
 			items = data.items;
 			var tabledata = [];
@@ -61,15 +61,13 @@ function fetchMonth(){
 				tabledata.push(row);
 			};
 			$.table.setData(tabledata);
-			Ti.App.Properties.setString("monthData",res);
+			Ti.App.Properties.setString("monthData",JSON.stringify(items));
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{
 			alert('unknown error');
 		}
-		$.monthList.remove(actInd);
 	});
-	
 }
 
 // 下拉刷新

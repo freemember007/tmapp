@@ -17,7 +17,6 @@ function Controller() {
         height: 47,
         top: 0,
         backgroundImage: "topBlank.png",
-        text: "某时",
         color: "#555",
         shadowColor: "#fff",
         shadowOffset: {
@@ -40,7 +39,6 @@ function Controller() {
         width: 56,
         height: 31,
         backgroundImage: "backBlank.png",
-        text: "某天",
         color: "#555",
         shadowColor: "#fff",
         shadowOffset: {
@@ -58,10 +56,10 @@ function Controller() {
     });
     $.__views.scrollImage.add($.__views.backButton);
     back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = !0;
-    var __alloyId26 = [];
+    var __alloyId36 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
         width: 330,
-        views: __alloyId26,
+        views: __alloyId36,
         id: "scrollableView",
         showPagingControl: "true"
     });
@@ -72,7 +70,8 @@ function Controller() {
     data = [];
     for (i = 0; i < items.length; i++) {
         var view = Ti.UI.createScrollView({
-            maxZoomScale: 1.5
+            maxZoomScale: 1.5,
+            created_at: items[i].created_at
         }), image = Ti.UI.createImageView({
             width: 320,
             image: items[i].url
@@ -90,7 +89,10 @@ function Controller() {
             animated: !0
         });
     });
-    $.scrollImage.title = "某时";
+    $.scrollableView.addEventListener("scrollEnd", function(e) {
+        var hour = e.view.created_at.match(/[0-9]+:[0-9]+/)[0];
+        $.top.text = util.formatTime(parseInt(hour)) + " " + hour;
+    });
     __defers["$.__views.backButton!click!back"] && $.__views.backButton.addEventListener("click", back);
     _.extend($, exports);
 }

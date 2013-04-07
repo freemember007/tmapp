@@ -1,0 +1,11 @@
+<Alloy>
+	<View class="container">
+		<Label id="text" text="欢迎来到时光笔记！
+	
+		时光笔记是一部由手机书写个人生活志。
+	
+		要使用它，从上传您的第一张照片开始。" />
+		<ImageView id="button" onClick="Alloy.Globals.showDialog"/>
+		<ImageView id="slogan" />
+	</View>
+</Alloy>
