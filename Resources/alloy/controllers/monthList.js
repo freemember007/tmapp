@@ -1,6 +1,6 @@
 function Controller() {
     function hideNavBar(e) {
-        if (e.contentOffset.y - offset > 10 && isHide == 0) {
+        if (e.contentOffset.y - offset > 10 && e.contentSize.height > 480 && isHide == 0) {
             $.top.animate({
                 top: -47
             });
@@ -59,6 +59,9 @@ function Controller() {
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
         });
     }
+    function preFetchMonth() {
+        (!Ti.App.Properties.hasProperty("monthData") || Ti.App.Properties.getString("monthData") == "{}") && fetchMonth();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
@@ -70,7 +73,8 @@ function Controller() {
         id: "monthList"
     });
     $.addTopLevelView($.__views.monthList);
-    firstFetchMonth ? $.__views.monthList.addEventListener("focus", firstFetchMonth) : __defers["$.__views.monthList!focus!firstFetchMonth"] = !0;
+    firstFetchMonth ? $.__views.monthList.addEventListener("open", firstFetchMonth) : __defers["$.__views.monthList!open!firstFetchMonth"] = !0;
+    preFetchMonth ? $.__views.monthList.addEventListener("focus", preFetchMonth) : __defers["$.__views.monthList!focus!preFetchMonth"] = !0;
     $.__views.top = Ti.UI.createView({
         width: "100%",
         height: 47,
@@ -89,10 +93,10 @@ function Controller() {
     });
     $.__views.monthList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId20 = Alloy.createController("bottom", {
-        id: "__alloyId20"
+    $.__views.__alloyId25 = Alloy.createController("bottom", {
+        id: "__alloyId25"
     });
-    $.__views.__alloyId20.setParent($.__views.monthList);
+    $.__views.__alloyId25.setParent($.__views.monthList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
@@ -102,7 +106,8 @@ function Controller() {
         fetch: fetchMonth
     }).getView();
     $.table.headerPullView = pullView;
-    __defers["$.__views.monthList!focus!firstFetchMonth"] && $.__views.monthList.addEventListener("focus", firstFetchMonth);
+    __defers["$.__views.monthList!open!firstFetchMonth"] && $.__views.monthList.addEventListener("open", firstFetchMonth);
+    __defers["$.__views.monthList!focus!preFetchMonth"] && $.__views.monthList.addEventListener("focus", preFetchMonth);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

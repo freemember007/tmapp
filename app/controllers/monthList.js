@@ -6,7 +6,7 @@ $.monthList.add(actInd);
 var offset = 0;
 var isHide = false; //避免事件重复触发而影响性能，尚不是很完美，仍有warn.
 function hideNavBar(e){
-	if(e.contentOffset.y - offset > 10 && isHide == false){
+	if(e.contentOffset.y - offset > 10 && e.contentSize.height>480 && isHide == false){
 		$.top.animate({top:-47});
 		$.table.animate({top:0});
 		offset = e.contentOffset.y
@@ -68,6 +68,12 @@ function fetchMonth(){
 			alert('unknown error');
 		}
 	});
+}
+
+function preFetchMonth(){
+	if(!Ti.App.Properties.hasProperty("monthData")||Ti.App.Properties.getString("monthData")=="{}"){
+		fetchMonth()
+	}
 }
 
 // 下拉刷新

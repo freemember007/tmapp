@@ -56,10 +56,10 @@ function Controller() {
     });
     $.__views.scrollImage.add($.__views.backButton);
     back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = !0;
-    var __alloyId36 = [];
+    var __alloyId41 = [];
     $.__views.scrollableView = Ti.UI.createScrollableView({
         width: 330,
-        views: __alloyId36,
+        views: __alloyId41,
         id: "scrollableView",
         showPagingControl: "true"
     });

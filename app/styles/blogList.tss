@@ -18,6 +18,12 @@
 	zIndex: 1,
 }
 
+"#avatar":{
+	right:10, top:8,
+	width: 30, height: 30,
+	zIndex: 1,
+}
+
 "#table":{
 	left:0, top:44, // 注意要与顶部的4个像素的阴影重叠
 	width: 320,

@@ -10,8 +10,10 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 var util = require("util");
+var APNS = require('APNS');
 
 //定义GUI规格
+Alloy.Globals.sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
 Alloy.Globals.GUI_bkC = "#f3f3f3";
 Alloy.Globals.GUI_FC = "#000";
 Alloy.Globals.menu = Alloy.createController('menu').getView();

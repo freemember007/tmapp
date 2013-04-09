@@ -52,16 +52,19 @@ function showPhoto(imgs){
 
 //remember_created_at貌似不需要，有空去掉。
 function register(){
-	util.send('api/register', {email:$.emailInput.value, password:$.passwordInput.value, domain_name:$.nicknameInput.value, 
-		remember_created_at:"2012-12-13 12:00", avatar:$.avatar.image}, function(res){
+	util.send('api/register', {email:$.emailInput.value, password:$.passwordInput.value, 
+		domain_name:$.nicknameInput.value, avatar:$.avatar.image}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			Ti.App.Properties.setString("id", data.id);
 			Ti.App.Properties.setString("email", $.emailInput.value);
-			Ti.App.Properties.setString("password", $.passwordInput.value);
+			Ti.App.Properties.setString("password", $.passwordInput.value);			
+			Ti.App.Properties.setString("avatar", data.avatar); // 如果属性为空，将不会记录
+			Alloy.Globals.avatar.image = $.avatar.image;
 			Alloy.Globals.tabGroup.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
 			Alloy.Globals.menu.open();
 			$.register.close();
+			APNS.apns();
 		}else if(data.type == "fail"){
 			alert('注册失败');
 		}else{

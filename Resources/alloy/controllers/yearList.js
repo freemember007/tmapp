@@ -1,6 +1,6 @@
 function Controller() {
     function hideNavBar(e) {
-        if (e.contentOffset.y - offset > 10 && isHide == 0) {
+        if (e.contentOffset.y - offset > 10 && e.contentSize.height > 480 && isHide == 0) {
             $.top.animate({
                 top: -47
             });
@@ -59,6 +59,9 @@ function Controller() {
             } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
         });
     }
+    function preFetchYear() {
+        (!Ti.App.Properties.hasProperty("yearData") || Ti.App.Properties.getString("yearData") == "{}") && fetchYear();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
@@ -70,7 +73,8 @@ function Controller() {
         id: "yearList"
     });
     $.addTopLevelView($.__views.yearList);
-    firstFetchYear ? $.__views.yearList.addEventListener("focus", firstFetchYear) : __defers["$.__views.yearList!focus!firstFetchYear"] = !0;
+    firstFetchYear ? $.__views.yearList.addEventListener("open", firstFetchYear) : __defers["$.__views.yearList!open!firstFetchYear"] = !0;
+    preFetchYear ? $.__views.yearList.addEventListener("focus", preFetchYear) : __defers["$.__views.yearList!focus!preFetchYear"] = !0;
     $.__views.top = Ti.UI.createView({
         width: "100%",
         height: 47,
@@ -89,10 +93,10 @@ function Controller() {
     });
     $.__views.yearList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId37 = Alloy.createController("bottom", {
-        id: "__alloyId37"
+    $.__views.__alloyId42 = Alloy.createController("bottom", {
+        id: "__alloyId42"
     });
-    $.__views.__alloyId37.setParent($.__views.yearList);
+    $.__views.__alloyId42.setParent($.__views.yearList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
@@ -102,7 +106,8 @@ function Controller() {
         fetch: fetchYear
     }).getView();
     $.table.headerPullView = pullView;
-    __defers["$.__views.yearList!focus!firstFetchYear"] && $.__views.yearList.addEventListener("focus", firstFetchYear);
+    __defers["$.__views.yearList!open!firstFetchYear"] && $.__views.yearList.addEventListener("open", firstFetchYear);
+    __defers["$.__views.yearList!focus!preFetchYear"] && $.__views.yearList.addEventListener("focus", preFetchYear);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
     _.extend($, exports);
 }

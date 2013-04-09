@@ -5,8 +5,9 @@ for(i=0; i<items.length; i++){
 	if(i<3){
 		var image = Ti.UI.createImageView({
 			image:items[i].url,
+			width:75,height:75,
 		})
-		image.image = image.toBlob().imageAsThumbnail(75);
+		image.image = image.toBlob().imageAsThumbnail(120);
 		$.imageContainer.add(image);
 	}
 	if(i==4){
@@ -14,6 +15,7 @@ for(i=0; i<items.length; i++){
 		})
 		var image = Ti.UI.createImageView({
 			image:items[i].url,
+			width:75,height:75,
 		})
 		var label = Ti.UI.createLabel({
 			width:75,height:75,
@@ -33,7 +35,7 @@ for(i=0; i<items.length; i++){
 			textAlign:"center",
 			text: "共" + items.length + "张"
 		})
-		image.image = image.toBlob().imageAsThumbnail(75);
+		image.image = image.toBlob().imageAsThumbnail(120);
 		view.add(image);
 		view.add(label);
 		view.add(arrow);

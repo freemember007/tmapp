@@ -11,3 +11,6 @@ provisioning_profiles/development/B4EA9CAA-17C6-4978-82AD-D7B49E7B75FE/uuid=B4EA
 provisioning_profiles/development/E39C4C7D-3457-4916-B18F-331D11BAACFD/appid=*
 provisioning_profiles/development/E39C4C7D-3457-4916-B18F-331D11BAACFD/name=timenote_dev
 provisioning_profiles/development/E39C4C7D-3457-4916-B18F-331D11BAACFD/uuid=E39C4C7D-3457-4916-B18F-331D11BAACFD
+provisioning_profiles/development/EE20F27B-E6B9-4670-A756-7F38C4EB0026/appid=com.xjp.timenote
+provisioning_profiles/development/EE20F27B-E6B9-4670-A756-7F38C4EB0026/name=TimeNote
+provisioning_profiles/development/EE20F27B-E6B9-4670-A756-7F38C4EB0026/uuid=EE20F27B-E6B9-4670-A756-7F38C4EB0026

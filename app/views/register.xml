@@ -26,9 +26,9 @@
 			</View>
 		</View>
 
-		<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
+		<OptionDialog id="dialog" cancel="2" onClick="choose" title="上传头像">
 			<Options>
-	            <Option >照相</Option>
+	            <Option >拍照</Option>
 	            <Option >从相册选取</Option>
 	            <Option>取消</Option>
 	        </Options>

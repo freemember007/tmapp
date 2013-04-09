@@ -3,6 +3,7 @@ function Controller() {
         Ti.App.Properties.removeProperty("id");
         Ti.App.Properties.removeProperty("email");
         Ti.App.Properties.removeProperty("password");
+        Ti.App.Properties.removeProperty("avatar");
         Ti.App.Properties.removeProperty("blogData");
         Ti.App.Properties.removeProperty("monthData");
         Ti.App.Properties.removeProperty("yearData");

@@ -108,12 +108,12 @@ function Controller() {
     });
     $.__views.bottom.add($.__views.randomImg);
     openRandom ? $.__views.randomImg.addEventListener("click", openRandom) : __defers["$.__views.randomImg!click!openRandom"] = !0;
-    var __alloyId3 = [];
-    __alloyId3.push("照相");
-    __alloyId3.push("从相册选取");
-    __alloyId3.push("取消");
+    var __alloyId8 = [];
+    __alloyId8.push("照相");
+    __alloyId8.push("从相册选取");
+    __alloyId8.push("取消");
     $.__views.dialog = Ti.UI.createOptionDialog({
-        options: __alloyId3,
+        options: __alloyId8,
         id: "dialog",
         cancel: "2",
         title: "添加照片"

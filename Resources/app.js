@@ -1,4 +1,6 @@
-var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone, util = require("util");
+var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone, util = require("util"), APNS = require("APNS");
+
+Alloy.Globals.sitePath = "http://184.82.117.60/";
 
 Alloy.Globals.GUI_bkC = "#f3f3f3";
 

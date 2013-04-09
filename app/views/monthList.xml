@@ -1,5 +1,5 @@
 <Alloy>
-	<Window onFocus="firstFetchMonth" title='本月'>
+	<Window onOpen="firstFetchMonth" onFocus="preFetchMonth" title='本月'>
 		<View id="top">
 		</View>
 		<TableView onScroll="hideNavBar" id="table" >

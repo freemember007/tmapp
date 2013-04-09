@@ -1,6 +1,54 @@
 function Controller() {
+    function showDialog() {
+        $.dialog.show();
+    }
+    function choose(e) {
+        switch (e.index) {
+          case 0:
+            takePhoto();
+            break;
+          case 1:
+            openPhoto();
+        }
+    }
+    function openPhoto() {
+        Ti.Media.openPhotoGallery({
+            success: function(e) {
+                showPhoto(util.computeImageSize(e.media));
+            },
+            cancel: function() {},
+            error: function() {
+                alert("error");
+            },
+            allowEditing: !0
+        });
+    }
+    function takePhoto() {
+        Ti.Media.showCamera({
+            success: function(e) {
+                showPhoto(util.computeImageSize(e.media));
+            },
+            cancel: function() {},
+            error: function() {
+                alert("error");
+            },
+            saveToPhotoGallery: !0,
+            allowEditing: !0
+        });
+    }
+    function showPhoto(imgs) {
+        $.avatar.image = imgs.thumb.src;
+        util.send("api/altAvatar", {
+            email: Ti.App.Properties.getString("email"),
+            password: Ti.App.Properties.getString("password"),
+            avatar: $.avatar.image
+        }, function(res) {
+            var data = JSON.parse(res);
+            data.type == "success" ? Ti.App.Properties.setString("avatar", data.avatar) : data.type == "fail" ? alert("上传头像失败") : alert("unknown error");
+        });
+    }
     function firstFetchBlog() {
-        if (Ti.App.Properties.hasProperty("blogData")) {
+        if (Ti.App.Properties.hasProperty("blogData") && Ti.App.Properties.getString("blogData") != "{}") {
             var items = JSON.parse(Ti.App.Properties.getString("blogData")), tabledata = [];
             for (key in items) {
                 var arg = {
@@ -43,8 +91,11 @@ function Controller() {
             $.blogList.remove(actInd);
         });
     }
+    function preFetchBlog() {
+        (!Ti.App.Properties.hasProperty("blogData") || Ti.App.Properties.getString("blogData") == "{}") && fetchBlog();
+    }
     function hideNavBar(e) {
-        if (e.contentOffset.y - offset > 10 && isHide == 0) {
+        if (e.contentOffset.y - offset > 10 && e.contentSize.height > 480 && isHide == 0) {
             $.top.animate({
                 top: -47
             });
@@ -137,7 +188,8 @@ function Controller() {
         id: "blogList"
     });
     $.addTopLevelView($.__views.blogList);
-    firstFetchBlog ? $.__views.blogList.addEventListener("focus", firstFetchBlog) : __defers["$.__views.blogList!focus!firstFetchBlog"] = !0;
+    firstFetchBlog ? $.__views.blogList.addEventListener("open", firstFetchBlog) : __defers["$.__views.blogList!open!firstFetchBlog"] = !0;
+    preFetchBlog ? $.__views.blogList.addEventListener("focus", preFetchBlog) : __defers["$.__views.blogList!focus!preFetchBlog"] = !0;
     $.__views.top = Ti.UI.createView({
         width: 320,
         height: 47,
@@ -159,6 +211,17 @@ function Controller() {
     });
     $.__views.top.add($.__views.menuButton);
     toggleMenu ? $.__views.menuButton.addEventListener("click", toggleMenu) : __defers["$.__views.menuButton!click!toggleMenu"] = !0;
+    $.__views.avatar = Ti.UI.createImageView({
+        preventDefaultImage: !0,
+        right: 10,
+        top: 8,
+        width: 30,
+        height: 30,
+        zIndex: 1,
+        id: "avatar"
+    });
+    $.__views.top.add($.__views.avatar);
+    showDialog ? $.__views.avatar.addEventListener("click", showDialog) : __defers["$.__views.avatar!click!showDialog"] = !0;
     $.__views.table = Ti.UI.createTableView({
         left: 0,
         top: 44,
@@ -174,11 +237,24 @@ function Controller() {
         id: "__alloyId0"
     });
     $.__views.__alloyId0.setParent($.__views.blogList);
+    var __alloyId2 = [];
+    __alloyId2.push("拍照");
+    __alloyId2.push("从相册选取");
+    __alloyId2.push("取消");
+    $.__views.dialog = Ti.UI.createOptionDialog({
+        options: __alloyId2,
+        id: "dialog",
+        cancel: "2",
+        title: "修改头像"
+    });
+    choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.blogList = $.blogList;
     Alloy.Globals.tableBlog = $.table;
     Alloy.Globals.fetchBlog = fetchBlog;
+    Alloy.Globals.avatar = $.avatar;
+    Ti.App.Properties.hasProperty("avatar") ? $.avatar.image = Alloy.Globals.sitePath + Ti.App.Properties.getString("avatar") : $.avatar.image = "avatar.png";
     var actInd = Alloy.createController("actInd").getView();
     actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
     actInd.color = "black";
@@ -198,11 +274,14 @@ function Controller() {
     loadingSection.add(loadingRow);
     loadingRow.add(loadingInd);
     $.table.addEventListener("scroll", function(e) {
-        !updating && e.contentOffset.y + e.size.height + 100 > e.contentSize.height && beginUpdate();
+        !updating && e.contentSize.height > 3360 && e.contentOffset.y + e.size.height + 100 > e.contentSize.height && beginUpdate();
     });
-    __defers["$.__views.blogList!focus!firstFetchBlog"] && $.__views.blogList.addEventListener("focus", firstFetchBlog);
+    __defers["$.__views.blogList!open!firstFetchBlog"] && $.__views.blogList.addEventListener("open", firstFetchBlog);
+    __defers["$.__views.blogList!focus!preFetchBlog"] && $.__views.blogList.addEventListener("focus", preFetchBlog);
     __defers["$.__views.menuButton!click!toggleMenu"] && $.__views.menuButton.addEventListener("click", toggleMenu);
+    __defers["$.__views.avatar!click!showDialog"] && $.__views.avatar.addEventListener("click", showDialog);
     __defers["$.__views.table!scroll!hideNavBar"] && $.__views.table.addEventListener("scroll", hideNavBar);
+    __defers["$.__views.dialog!click!choose"] && $.__views.dialog.addEventListener("click", choose);
     _.extend($, exports);
 }
 

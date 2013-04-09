@@ -104,12 +104,12 @@ function Controller() {
     });
     $.__views.pub.add($.__views.image);
     openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = !0;
-    $.__views.__alloyId21 = Ti.UI.createScrollView({
+    $.__views.__alloyId26 = Ti.UI.createScrollView({
         height: 290,
         bottom: 0,
-        id: "__alloyId21"
+        id: "__alloyId26"
     });
-    $.__views.pub.add($.__views.__alloyId21);
+    $.__views.pub.add($.__views.__alloyId26);
     $.__views.toolbar = Ti.UI.createView({
         bottom: 0,
         height: 44,
@@ -139,7 +139,7 @@ function Controller() {
         },
         id: "toolbar"
     });
-    $.__views.__alloyId21.add($.__views.toolbar);
+    $.__views.__alloyId26.add($.__views.toolbar);
     $.__views.commentInput = Ti.UI.createTextField({
         left: 7,
         top: 7,

@@ -7,52 +7,52 @@ function Controller() {
         navBarHidden: !0,
         id: "tabGroup"
     });
-    $.__views.__alloyId7 = Alloy.createController("blogList", {
-        id: "__alloyId7"
+    $.__views.__alloyId12 = Alloy.createController("blogList", {
+        id: "__alloyId12"
     });
     $.__views.tab1 = Ti.UI.createTab({
-        window: $.__views.__alloyId7.getViewEx({
+        window: $.__views.__alloyId12.getViewEx({
             recurse: !0
         }),
         id: "tab1",
         title: "最近"
     });
     $.__views.tabGroup.addTab($.__views.tab1);
-    $.__views.__alloyId9 = Alloy.createController("monthList", {
-        id: "__alloyId9"
+    $.__views.__alloyId14 = Alloy.createController("monthList", {
+        id: "__alloyId14"
     });
     $.__views.tab2 = Ti.UI.createTab({
-        window: $.__views.__alloyId9.getViewEx({
+        window: $.__views.__alloyId14.getViewEx({
             recurse: !0
         }),
         id: "tab2",
         title: "本月"
     });
     $.__views.tabGroup.addTab($.__views.tab2);
-    $.__views.__alloyId11 = Ti.UI.createWindow({
-        id: "__alloyId11"
+    $.__views.__alloyId16 = Ti.UI.createWindow({
+        id: "__alloyId16"
     });
     $.__views.tab3 = Ti.UI.createTab({
-        window: $.__views.__alloyId11,
+        window: $.__views.__alloyId16,
         id: "tab3"
     });
     $.__views.tabGroup.addTab($.__views.tab3);
-    $.__views.__alloyId12 = Alloy.createController("yearList", {
-        id: "__alloyId12"
+    $.__views.__alloyId17 = Alloy.createController("yearList", {
+        id: "__alloyId17"
     });
     $.__views.tab4 = Ti.UI.createTab({
-        window: $.__views.__alloyId12.getViewEx({
+        window: $.__views.__alloyId17.getViewEx({
             recurse: !0
         }),
         id: "tab4",
         title: "今年"
     });
     $.__views.tabGroup.addTab($.__views.tab4);
-    $.__views.__alloyId14 = Alloy.createController("random", {
-        id: "__alloyId14"
+    $.__views.__alloyId19 = Alloy.createController("random", {
+        id: "__alloyId19"
     });
     $.__views.tab5 = Ti.UI.createTab({
-        window: $.__views.__alloyId14.getViewEx({
+        window: $.__views.__alloyId19.getViewEx({
             recurse: !0
         }),
         id: "tab5",
