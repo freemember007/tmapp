@@ -10,7 +10,8 @@ function Controller() {
         util.send("api/uploadPhoto", {
             photo: $.image.image,
             content: $.commentInput.value,
-            id: Ti.App.Properties.getString("id")
+            id: Ti.App.Properties.getString("id"),
+            friendsID: "1,"
         }, function(res) {
             var data = JSON.parse(res);
             item = data.item;
@@ -104,12 +105,12 @@ function Controller() {
     });
     $.__views.pub.add($.__views.image);
     openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = !0;
-    $.__views.__alloyId26 = Ti.UI.createScrollView({
+    $.__views.__alloyId27 = Ti.UI.createScrollView({
         height: 290,
         bottom: 0,
-        id: "__alloyId26"
+        id: "__alloyId27"
     });
-    $.__views.pub.add($.__views.__alloyId26);
+    $.__views.pub.add($.__views.__alloyId27);
     $.__views.toolbar = Ti.UI.createView({
         bottom: 0,
         height: 44,
@@ -139,7 +140,7 @@ function Controller() {
         },
         id: "toolbar"
     });
-    $.__views.__alloyId26.add($.__views.toolbar);
+    $.__views.__alloyId27.add($.__views.toolbar);
     $.__views.commentInput = Ti.UI.createTextField({
         left: 7,
         top: 7,

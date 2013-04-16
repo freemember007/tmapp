@@ -64,7 +64,7 @@ function Controller() {
         } else fetchBlog();
     }
     function fetchBlog() {
-        util.send("api/login", {
+        util.send("api/fetchBlog", {
             email: Ti.App.Properties.getString("email"),
             password: Ti.App.Properties.getString("password"),
             offset: 0
@@ -126,16 +126,16 @@ function Controller() {
             Alloy.Globals.menu.animate({
                 left: -200
             });
-            Alloy.Globals.slide = !1;
             $.table.scrollable = !0;
+            Alloy.Globals.slide = !1;
         } else {
-            $.table.scrollable = !1;
             Alloy.Globals.tabGroup.animate({
                 left: 200
             });
             Alloy.Globals.menu.animate({
                 left: 0
             });
+            $.table.scrollable = !1;
             Alloy.Globals.slide = !0;
         }
     }
@@ -148,7 +148,7 @@ function Controller() {
     function endUpdate() {
         updating = !1;
         lastRow += 10;
-        util.send("api/login", {
+        util.send("api/fetchBlog", {
             email: Ti.App.Properties.getString("email"),
             password: Ti.App.Properties.getString("password"),
             offset: fetchOffset

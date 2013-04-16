@@ -93,10 +93,10 @@ function Controller() {
     });
     $.__views.monthList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId25 = Alloy.createController("bottom", {
-        id: "__alloyId25"
+    $.__views.__alloyId26 = Alloy.createController("bottom", {
+        id: "__alloyId26"
     });
-    $.__views.__alloyId25.setParent($.__views.monthList);
+    $.__views.__alloyId26.setParent($.__views.monthList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();

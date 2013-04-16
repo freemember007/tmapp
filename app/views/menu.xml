@@ -1,6 +1,8 @@
 <Alloy>
 	<Window onTouchstart="touchStart" onTouchmove="touchMove" >
-		<Label id="accountSet" />
+		<Label id="mytime" onClick= "openMytime" />
+		<Label id="friends" onClick="openFriends" />
+		<Label id="sharetome" onClick="openSharetome" />
 		<Label id="exit" onClick="exit" />
 	</Window>
 </Alloy>

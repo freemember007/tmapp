@@ -1,0 +1,7 @@
+<Alloy>
+	<Window onOpen="fetchSharetome">
+		<Label id="top" text="分享给我的" />
+		<Label id="menuButton" onClick="toggleMenu" />
+		<TableView id="table" />
+	</Window>
+</Alloy>

@@ -2,7 +2,7 @@ var user = Alloy.createModel("user");
 
 function login(){
 	user.set({email: $.emailInput.value, password: $.passwordInput.value});//作数据校验之用
-	util.send('api/login', {email: user.get("email"), password: user.get("password")}, function(res){
+	util.send('api/login', {email: user.get("email"), password: user.get("password"), device_token: Ti.App.Properties.getString("device_token")}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			Ti.App.Properties.setString("id", data.id);
@@ -13,7 +13,6 @@ function login(){
 			Alloy.Globals.tabGroup.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
 			Alloy.Globals.menu.open();
 			$.login.close();
-			APNS.apns();
 		}else if(data.type == "fail"){
 			alert('用户名或密码错误！');
 		}else{

@@ -50,10 +50,9 @@ function showPhoto(imgs){
 	$.avatar.image = imgs.thumb.src;
 }
 
-//remember_created_at貌似不需要，有空去掉。
 function register(){
 	util.send('api/register', {email:$.emailInput.value, password:$.passwordInput.value, 
-		domain_name:$.nicknameInput.value, avatar:$.avatar.image}, function(res){
+		domain_name:$.nicknameInput.value, avatar:$.avatar.image, device_token:Ti.App.Properties.getString("device_token")}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			Ti.App.Properties.setString("id", data.id);
@@ -64,7 +63,6 @@ function register(){
 			Alloy.Globals.tabGroup.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
 			Alloy.Globals.menu.open();
 			$.register.close();
-			APNS.apns();
 		}else if(data.type == "fail"){
 			alert('注册失败');
 		}else{

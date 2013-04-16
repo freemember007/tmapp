@@ -1,0 +1,32 @@
+"Window": {
+	backgroundColor: Alloy.Globals.GUI_bkC,
+	tabBarHidden:true,
+	navBarHidden: true,
+}
+
+"#top":{
+	width:320, height: 47, left: 0,
+	top:0,
+	backgroundImage: "top5.png",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:20, fontWeight:"bold"},
+	textAlign: "center",
+	zIndex: 1
+}
+
+"#menuButton":{
+	left:10, top:9,
+	width: 32, height: 27,
+	backgroundImage:"menuIcon.png",
+	zIndex: 1,
+}
+
+"#table":{
+	left:0, top:44, // 注意要与顶部的4个像素的阴影重叠
+	width: 320,
+	backgroundColor: Alloy.Globals.GUI_bkC,
+	separatorColor:"transparent",
+	bottom: 0, // 注意要与底部的5个像素的阴影重叠
+}

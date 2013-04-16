@@ -104,7 +104,7 @@ function firstFetchBlog(){
 	// 窗口打开时主动刷新
 var welcome = Alloy.createController('welcome').getView();
 function fetchBlog(){
-	util.send('api/login', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password"), offset: 0}, function(res){
+	util.send('api/fetchBlog', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password"), offset: 0}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			items = data.items;
@@ -168,17 +168,17 @@ function hideNavBar(e){
 
 
 // toggleMenu
-//var slide = false;
 function toggleMenu(){
 	if(Alloy.Globals.slide){
 		Alloy.Globals.tabGroup.animate({left:0});
 		Alloy.Globals.menu.animate({left:-200});
-		Alloy.Globals.slide = false;
 		$.table.scrollable = true;
+		Alloy.Globals.slide = false;
 	}else{
-		$.table.scrollable = false;
+		
 		Alloy.Globals.tabGroup.animate({left:200});
 		Alloy.Globals.menu.animate({left:0});
+		$.table.scrollable = false;
 		Alloy.Globals.slide = true;
 	}
 }
@@ -206,7 +206,7 @@ function beginUpdate(){
 function endUpdate(){
 	updating = false;
 	lastRow += 10;
-	util.send('api/login', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password"), offset:fetchOffset}, function(res){
+	util.send('api/fetchBlog', {email: Ti.App.Properties.getString("email"), password: Ti.App.Properties.getString("password"), offset:fetchOffset}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			$.table.deleteSection($.table.data.length-1,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});
@@ -243,7 +243,7 @@ var feeds = Alloy.Collections.feed;
 
 fetch feed via RestAPI.
 function fetchBlog(){
-	util.send('api/login', {email: user.get("email"), password: user.get("password")}, function(res){
+	util.send('api/fetchBlog', {email: user.get("email"), password: user.get("password")}, function(res){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			items = data.items;

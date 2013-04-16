@@ -4,12 +4,23 @@
 	width: 200,
 }
 
-"#accountSet":{
+"#mytime":{
+	top:0,left: 0,
+	width: 200, height: 44,
+	
+}
+
+"#friends":{
 	top:44,left: 0,
 	width: 200,height: 44,
 }
 
-"#exit":{
+"#sharetome":{
 	top:88,left: 0,
+	width: 200,height: 44,
+}
+
+"#exit":{
+	top:132,left: 0,
 	width: 200,height: 44,
 }

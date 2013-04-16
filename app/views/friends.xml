@@ -1,0 +1,11 @@
+<Alloy>
+	<Window>
+		<Label id="top" text="自己人" />
+		<Label id="menuButton" onClick="toggleMenu" />
+		<TableView id="table" >
+			<TableViewRow id="row">
+					<ImageView id="image" / >
+			</TableViewRow>
+		</TableView>
+	</Window>
+</Alloy>

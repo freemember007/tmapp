@@ -9,7 +9,8 @@ function showPhoto(imgs){
 
 function pub(){
 	$.commentInput.blur(); 
-	util.send('api/uploadPhoto', {photo:$.image.image, content:$.commentInput.value, id:Ti.App.Properties.getString("id")}, function(res){
+	util.send('api/uploadPhoto', {photo:$.image.image, content:$.commentInput.value, 
+		id:Ti.App.Properties.getString("id"),friendsID:"1,"}, function(res){
 		var data = JSON.parse(res);
 		item = data.item;
 		clearPub();

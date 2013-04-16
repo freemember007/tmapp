@@ -66,10 +66,10 @@ function Controller() {
         id: "image"
     });
     $.__views.scrollView.add($.__views.image);
-    $.__views.__alloyId27 = Alloy.createController("bottom", {
-        id: "__alloyId27"
+    $.__views.__alloyId28 = Alloy.createController("bottom", {
+        id: "__alloyId28"
     });
-    $.__views.__alloyId27.setParent($.__views.random);
+    $.__views.__alloyId28.setParent($.__views.random);
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.fetchRandom = fetchRandom;
