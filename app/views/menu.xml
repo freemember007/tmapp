@@ -1,8 +1,10 @@
 <Alloy>
-	<Window onTouchstart="touchStart" onTouchmove="touchMove" >
+	<Model src="badge" />
+	<Window onTouchstart="touchStart" onTouchmove="touchMove"  >
 		<Label id="mytime" onClick= "openMytime" />
 		<Label id="friends" onClick="openFriends" />
 		<Label id="sharetome" onClick="openSharetome" />
+		<Label id="shareBadge" text="{badge.number}" visible="{badge.visible}" width="{badge.width}"/>
 		<Label id="exit" onClick="exit" />
 	</Window>
 </Alloy>

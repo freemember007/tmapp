@@ -14,6 +14,7 @@ function Controller() {
                 Ti.App.Properties.setString("id", data.id);
                 Ti.App.Properties.setString("email", $.emailInput.value);
                 Ti.App.Properties.setString("password", $.passwordInput.value);
+                Ti.App.Properties.setString("domain_name", data.domain_name);
                 Ti.App.Properties.setString("avatar", data.avatar);
                 Alloy.Globals.avatar.image = Alloy.Globals.sitePath + data.avatar;
                 Alloy.Globals.tabGroup.open({
@@ -89,26 +90,26 @@ function Controller() {
         text: "登录您的时光帐户："
     });
     $.__views.container.add($.__views.loginTitle);
-    $.__views.__alloyId22 = Ti.UI.createView({
+    $.__views.__alloyId34 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId22"
+        id: "__alloyId34"
     });
-    $.__views.container.add($.__views.__alloyId22);
-    $.__views.__alloyId23 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId34);
+    $.__views.__alloyId35 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "邮箱",
-        id: "__alloyId23"
+        id: "__alloyId35"
     });
-    $.__views.__alloyId22.add($.__views.__alloyId23);
+    $.__views.__alloyId34.add($.__views.__alloyId35);
     $.__views.emailInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -119,27 +120,27 @@ function Controller() {
         },
         id: "emailInput"
     });
-    $.__views.__alloyId22.add($.__views.emailInput);
-    $.__views.__alloyId24 = Ti.UI.createView({
+    $.__views.__alloyId34.add($.__views.emailInput);
+    $.__views.__alloyId36 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId24"
+        id: "__alloyId36"
     });
-    $.__views.container.add($.__views.__alloyId24);
-    $.__views.__alloyId25 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId36);
+    $.__views.__alloyId37 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "密码",
-        id: "__alloyId25"
+        id: "__alloyId37"
     });
-    $.__views.__alloyId24.add($.__views.__alloyId25);
+    $.__views.__alloyId36.add($.__views.__alloyId37);
     $.__views.passwordInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -151,7 +152,7 @@ function Controller() {
         passwordMask: !0,
         id: "passwordInput"
     });
-    $.__views.__alloyId24.add($.__views.passwordInput);
+    $.__views.__alloyId36.add($.__views.passwordInput);
     $.__views.registerTips = Ti.UI.createView({
         top: 8,
         layout: "horizontal",

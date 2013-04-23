@@ -102,3 +102,11 @@ exports.getWeek = function(date){
 	var week = weekArray[newDate.getDay()];  
    	return week;
 }
+
+exports.alert = function(message){
+	Ti.UI.createAlertDialog({
+		title: "提示",
+		message: message,
+		ok: "确定"
+	}).show();
+}

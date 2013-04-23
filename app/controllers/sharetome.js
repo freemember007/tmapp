@@ -1,21 +1,26 @@
+// tableScroolable
+function tableScroolable(){
+	$.table.scrollable = Alloy.Globals.slide?false:true;
+}
+
 // toggleMenu
 function toggleMenu(){
 	if(Alloy.Globals.slide){
 		$.sharetome.animate({left:0});
 		Alloy.Globals.menu.animate({left:-200});
-		$.table.scrollable = true;
 		Alloy.Globals.slide = false;
 	}else{
 		$.sharetome.animate({left:200});
 		Alloy.Globals.menu.animate({left:0});
-		$.table.scrollable = false;
 		Alloy.Globals.slide = true;
 	}
 }
 
+// add actInd
 var actInd = Alloy.createController('actInd').getView();
 $.sharetome.add(actInd);
 
+// fetch
 function fetchSharetome(){
 	util.send('api/fetchSharetome', {id: Ti.App.Properties.getString("id")}, function(res){
 		var data = JSON.parse(res);
@@ -24,15 +29,17 @@ function fetchSharetome(){
 			users = data.users
 			items = data.items;
 			var tabledata = [];
-			for(var i=0; i<users.length-1; i++){
+			for(var i=0; i<users.length; i++){
 				var hour = items[i].created_at.match(/[0-9]+:[0-9]+/)[0];
 				var row = Ti.UI.createTableViewRow({
 					selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
 				});
 				var avatar = Ti.UI.createImageView({
 					top:10, left:10, width:32, height:32,
-					image:Alloy.Globals.sitePath + users[i].avatar_url,
+					preventDefaultImage: true,
+					image: users[i].avatar_url!=null ? Alloy.Globals.sitePath + users[i].avatar_url : "avatar.png",
 				})
+				
 				var username = Ti.UI.createLabel({
 					top:10, left:48, height:32,
 					text: users[i].domain_name,
@@ -58,10 +65,12 @@ function fetchSharetome(){
 				var image = Ti.UI.createImageView({
 					top:10, width:286,
 					preventDefaultImage:true,
-					image:items[i].url,					
+					image:items[i].url,	
 				})
 				imageContainer.addEventListener("click",function(e){
-					Alloy.createController('zoomImage', image.image).getView();
+					if(e.source.image!==undefined){
+						Alloy.createController('zoomImage', e.source.image).getView();
+					}
 				})
 				var describe = Ti.UI.createLabel({
 					width:286,
@@ -85,6 +94,10 @@ function fetchSharetome(){
 				tabledata.push(row);
 			};
 			$.table.setData(tabledata);
+			Ti.UI.iPhone.setAppBadge(0);
+			var badge = Alloy.Models.instance("badge");
+			badge.set({"visible":false,"width":0,"number":0});
+			badge.save();
 			Ti.App.Properties.setString("sharetomeData",JSON.stringify(data));
 		}
 	});

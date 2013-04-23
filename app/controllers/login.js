@@ -8,6 +8,7 @@ function login(){
 			Ti.App.Properties.setString("id", data.id);
 			Ti.App.Properties.setString("email", $.emailInput.value);
 			Ti.App.Properties.setString("password", $.passwordInput.value);
+			Ti.App.Properties.setString("domain_name", data.domain_name);
 			Ti.App.Properties.setString("avatar", data.avatar);
 			Alloy.Globals.avatar.image = Alloy.Globals.sitePath + data.avatar; //必须设置，否则在同一个session下（即虽然登录，但bloglist并未关闭并再次打开）原始值不会改变
 			Alloy.Globals.tabGroup.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});

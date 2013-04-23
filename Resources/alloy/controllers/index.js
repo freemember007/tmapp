@@ -7,52 +7,52 @@ function Controller() {
         navBarHidden: !0,
         id: "tabGroup"
     });
-    $.__views.__alloyId13 = Alloy.createController("blogList", {
-        id: "__alloyId13"
+    $.__views.__alloyId24 = Alloy.createController("blogList", {
+        id: "__alloyId24"
     });
     $.__views.tab1 = Ti.UI.createTab({
-        window: $.__views.__alloyId13.getViewEx({
+        window: $.__views.__alloyId24.getViewEx({
             recurse: !0
         }),
         id: "tab1",
         title: "最近"
     });
     $.__views.tabGroup.addTab($.__views.tab1);
-    $.__views.__alloyId15 = Alloy.createController("monthList", {
-        id: "__alloyId15"
+    $.__views.__alloyId27 = Alloy.createController("monthList", {
+        id: "__alloyId27"
     });
     $.__views.tab2 = Ti.UI.createTab({
-        window: $.__views.__alloyId15.getViewEx({
+        window: $.__views.__alloyId27.getViewEx({
             recurse: !0
         }),
         id: "tab2",
         title: "本月"
     });
     $.__views.tabGroup.addTab($.__views.tab2);
-    $.__views.__alloyId17 = Ti.UI.createWindow({
-        id: "__alloyId17"
+    $.__views.__alloyId29 = Ti.UI.createWindow({
+        id: "__alloyId29"
     });
     $.__views.tab3 = Ti.UI.createTab({
-        window: $.__views.__alloyId17,
+        window: $.__views.__alloyId29,
         id: "tab3"
     });
     $.__views.tabGroup.addTab($.__views.tab3);
-    $.__views.__alloyId18 = Alloy.createController("yearList", {
-        id: "__alloyId18"
+    $.__views.__alloyId30 = Alloy.createController("yearList", {
+        id: "__alloyId30"
     });
     $.__views.tab4 = Ti.UI.createTab({
-        window: $.__views.__alloyId18.getViewEx({
+        window: $.__views.__alloyId30.getViewEx({
             recurse: !0
         }),
         id: "tab4",
         title: "今年"
     });
     $.__views.tabGroup.addTab($.__views.tab4);
-    $.__views.__alloyId20 = Alloy.createController("random", {
-        id: "__alloyId20"
+    $.__views.__alloyId32 = Alloy.createController("random", {
+        id: "__alloyId32"
     });
     $.__views.tab5 = Ti.UI.createTab({
-        window: $.__views.__alloyId20.getViewEx({
+        window: $.__views.__alloyId32.getViewEx({
             recurse: !0
         }),
         id: "tab5",
@@ -79,6 +79,56 @@ function Controller() {
     startWin.add(actInd);
     actInd.show();
     startWin.open();
+    var badge = Alloy.Models.instance("badge");
+    badge.set({
+        number: Ti.UI.iPhone.getAppBadge()
+    });
+    badge.get("number") == 0 ? badge.set({
+        visible: !1,
+        width: 0
+    }) : badge.get("number") < 10 ? badge.set({
+        visible: !0,
+        width: 22
+    }) : badge.set({
+        visible: !0,
+        width: 32
+    });
+    badge.save();
+    Titanium.Network.registerForPushNotifications({
+        types: [ Titanium.Network.NOTIFICATION_TYPE_BADGE, Titanium.Network.NOTIFICATION_TYPE_ALERT, Titanium.Network.NOTIFICATION_TYPE_SOUND ],
+        success: function(e) {
+            var device_token = e.deviceToken;
+            Ti.App.Properties.setString("device_token", device_token);
+        },
+        error: function(e) {
+            Ti.API.info("Error during registration: " + e.error);
+        },
+        callback: function(e) {
+            if (Ti.App.Properties.getString("isInForeground") == "true") {
+                var badgeCount = Ti.UI.iPhone.getAppBadge();
+                badgeCount += 1;
+                Ti.UI.iPhone.setAppBadge(badgeCount);
+                badge.set({
+                    number: badgeCount
+                });
+                badge.get("number") == 0 ? badge.set({
+                    visible: !1,
+                    width: 0
+                }) : badge.get("number") < 10 ? badge.set({
+                    visible: !0,
+                    width: 22
+                }) : badge.set({
+                    visible: !0,
+                    width: 32
+                });
+                badge.save();
+            } else if (Alloy.Globals.currentWindow != Alloy.Globals.sharetome) {
+                Alloy.Globals.currentWindow != undefined && Alloy.Globals.currentWindow.close();
+                Alloy.Globals.sharetome.open();
+                Alloy.Globals.currentWindow = Alloy.Globals.sharetome;
+            }
+        }
+    });
     if (Ti.App.Properties.hasProperty("id")) {
         $.tabGroup.open({
             transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT

@@ -175,7 +175,6 @@ function toggleMenu(){
 		$.table.scrollable = true;
 		Alloy.Globals.slide = false;
 	}else{
-		
 		Alloy.Globals.tabGroup.animate({left:200});
 		Alloy.Globals.menu.animate({left:0});
 		$.table.scrollable = false;

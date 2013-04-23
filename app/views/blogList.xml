@@ -1,22 +1,12 @@
 <Alloy>
+	<Model src="badge" />
 	<Window onOpen="firstFetchBlog" onFocus="preFetchBlog">
 		<View id="top" >
 			<Label id="menuButton" onClick="toggleMenu" />
+			<Label id="shareBadge" text="{badge.number}" visible="{badge.visible}" width="{badge.width}"/>
 			<ImageView id="avatar" onClick="showDialog" />
 		</View>
-		<TableView onScroll="hideNavBar" id="table" ><!--数据绑定暂不支持绑定至section-->
-			<!--
-			<TableViewSection id="section" >
-				<HeaderView>
-					<Label id="{the}" class="date" text="{date}" />
-				</HeaderView>
-				<TableViewRow id="row">
-						<ImageView class="image" image="{image}"/ >
-						<Label class="content" text="{content}"/>
-				</TableViewRow>
-			</TableViewSection>
-			<Require src="bottom"/>
-			-->
+		<TableView onScroll="hideNavBar" id="table" >
 		</TableView>
 		<Require src="bottom"/>
 		<OptionDialog id="dialog" cancel="2" onClick="choose" title="修改头像">

@@ -1,4 +1,7 @@
 function Controller() {
+    function tableScroolable() {
+        $.table.scrollable = Alloy.Globals.slide ? !1 : !0;
+    }
     function toggleMenu() {
         if (Alloy.Globals.slide) {
             $.sharetome.animate({
@@ -7,7 +10,6 @@ function Controller() {
             Alloy.Globals.menu.animate({
                 left: -200
             });
-            $.table.scrollable = !0;
             Alloy.Globals.slide = !1;
         } else {
             $.sharetome.animate({
@@ -16,7 +18,6 @@ function Controller() {
             Alloy.Globals.menu.animate({
                 left: 0
             });
-            $.table.scrollable = !1;
             Alloy.Globals.slide = !0;
         }
     }
@@ -30,7 +31,7 @@ function Controller() {
                 users = data.users;
                 items = data.items;
                 var tabledata = [];
-                for (var i = 0; i < users.length - 1; i++) {
+                for (var i = 0; i < users.length; i++) {
                     var hour = items[i].created_at.match(/[0-9]+:[0-9]+/)[0], row = Ti.UI.createTableViewRow({
                         selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE
                     }), avatar = Ti.UI.createImageView({
@@ -38,7 +39,8 @@ function Controller() {
                         left: 10,
                         width: 32,
                         height: 32,
-                        image: Alloy.Globals.sitePath + users[i].avatar_url
+                        preventDefaultImage: !0,
+                        image: users[i].avatar_url != null ? Alloy.Globals.sitePath + users[i].avatar_url : "avatar.png"
                     }), username = Ti.UI.createLabel({
                         top: 10,
                         left: 48,
@@ -82,7 +84,7 @@ function Controller() {
                         image: items[i].url
                     });
                     imageContainer.addEventListener("click", function(e) {
-                        Alloy.createController("zoomImage", image.image).getView();
+                        e.source.image !== undefined && Alloy.createController("zoomImage", e.source.image).getView();
                     });
                     var describe = Ti.UI.createLabel({
                         width: 286,
@@ -110,6 +112,14 @@ function Controller() {
                     tabledata.push(row);
                 }
                 $.table.setData(tabledata);
+                Ti.UI.iPhone.setAppBadge(0);
+                var badge = Alloy.Models.instance("badge");
+                badge.set({
+                    visible: !1,
+                    width: 0,
+                    number: 0
+                });
+                badge.save();
                 Ti.App.Properties.setString("sharetomeData", JSON.stringify(data));
             }
         });
@@ -124,6 +134,7 @@ function Controller() {
         id: "sharetome"
     });
     $.addTopLevelView($.__views.sharetome);
+    tableScroolable ? $.__views.sharetome.addEventListener("postlayout", tableScroolable) : __defers["$.__views.sharetome!postlayout!tableScroolable"] = !0;
     fetchSharetome ? $.__views.sharetome.addEventListener("open", fetchSharetome) : __defers["$.__views.sharetome!open!fetchSharetome"] = !0;
     $.__views.top = Ti.UI.createLabel({
         width: 320,
@@ -172,6 +183,7 @@ function Controller() {
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
     $.sharetome.add(actInd);
+    __defers["$.__views.sharetome!postlayout!tableScroolable"] && $.__views.sharetome.addEventListener("postlayout", tableScroolable);
     __defers["$.__views.sharetome!open!fetchSharetome"] && $.__views.sharetome.addEventListener("open", fetchSharetome);
     __defers["$.__views.menuButton!click!toggleMenu"] && $.__views.menuButton.addEventListener("click", toggleMenu);
     _.extend($, exports);

@@ -1,11 +1,17 @@
 <Alloy>
+	<Collection src="friend" />
 	<Window>
 		<Label id="top" text="自己人" />
 		<Label id="menuButton" onClick="toggleMenu" />
-		<TableView id="table" >
-			<TableViewRow id="row">
-					<ImageView id="image" / >
-			</TableViewRow>
-		</TableView>
+		<View id="toolbar">
+        	<TextField id="input"/>
+            <Label id="submit" text="添加" onClick="addFriend"/>
+        </View>
+		<View dataCollection="friend" dataTransform="transformFunction" dataFilter="filterFunction" id="userList" >
+			<ImageView image="{avatar}" class="userAvatar">
+				<Label text="{domain_name}" class="userLabel" />
+			</ImageView>
+		</View>
+
 	</Window>
 </Alloy>

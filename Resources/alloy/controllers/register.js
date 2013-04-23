@@ -55,6 +55,7 @@ function Controller() {
                 Ti.App.Properties.setString("id", data.id);
                 Ti.App.Properties.setString("email", $.emailInput.value);
                 Ti.App.Properties.setString("password", $.passwordInput.value);
+                Ti.App.Properties.setString("domain_name", data.domain_name);
                 Ti.App.Properties.setString("avatar", data.avatar);
                 Alloy.Globals.avatar.image = $.avatar.image;
                 Alloy.Globals.tabGroup.open({
@@ -145,26 +146,26 @@ function Controller() {
         text: "注册一个新帐户："
     });
     $.__views.container.add($.__views.registerTitle);
-    $.__views.__alloyId29 = Ti.UI.createView({
+    $.__views.__alloyId50 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId29"
+        id: "__alloyId50"
     });
-    $.__views.container.add($.__views.__alloyId29);
-    $.__views.__alloyId30 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId50);
+    $.__views.__alloyId51 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "邮箱",
-        id: "__alloyId30"
+        id: "__alloyId51"
     });
-    $.__views.__alloyId29.add($.__views.__alloyId30);
+    $.__views.__alloyId50.add($.__views.__alloyId51);
     $.__views.emailInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -175,27 +176,27 @@ function Controller() {
         },
         id: "emailInput"
     });
-    $.__views.__alloyId29.add($.__views.emailInput);
-    $.__views.__alloyId31 = Ti.UI.createView({
+    $.__views.__alloyId50.add($.__views.emailInput);
+    $.__views.__alloyId52 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId31"
+        id: "__alloyId52"
     });
-    $.__views.container.add($.__views.__alloyId31);
-    $.__views.__alloyId32 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId52);
+    $.__views.__alloyId53 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "密码",
-        id: "__alloyId32"
+        id: "__alloyId53"
     });
-    $.__views.__alloyId31.add($.__views.__alloyId32);
+    $.__views.__alloyId52.add($.__views.__alloyId53);
     $.__views.passwordInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -207,27 +208,27 @@ function Controller() {
         passwordMask: !0,
         id: "passwordInput"
     });
-    $.__views.__alloyId31.add($.__views.passwordInput);
-    $.__views.__alloyId33 = Ti.UI.createView({
+    $.__views.__alloyId52.add($.__views.passwordInput);
+    $.__views.__alloyId54 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId33"
+        id: "__alloyId54"
     });
-    $.__views.container.add($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId54);
+    $.__views.__alloyId55 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "昵称",
-        id: "__alloyId34"
+        id: "__alloyId55"
     });
-    $.__views.__alloyId33.add($.__views.__alloyId34);
+    $.__views.__alloyId54.add($.__views.__alloyId55);
     $.__views.nicknameInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -238,27 +239,27 @@ function Controller() {
         },
         id: "nicknameInput"
     });
-    $.__views.__alloyId33.add($.__views.nicknameInput);
-    $.__views.__alloyId35 = Ti.UI.createView({
+    $.__views.__alloyId54.add($.__views.nicknameInput);
+    $.__views.__alloyId56 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId35"
+        id: "__alloyId56"
     });
-    $.__views.container.add($.__views.__alloyId35);
-    $.__views.__alloyId36 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId56);
+    $.__views.__alloyId57 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "头像",
-        id: "__alloyId36"
+        id: "__alloyId57"
     });
-    $.__views.__alloyId35.add($.__views.__alloyId36);
+    $.__views.__alloyId56.add($.__views.__alloyId57);
     $.__views.avatar = Ti.UI.createImageView({
         preventDefaultImage: !0,
         left: 10,
@@ -271,14 +272,14 @@ function Controller() {
         image: "avatar.png",
         id: "avatar"
     });
-    $.__views.__alloyId35.add($.__views.avatar);
+    $.__views.__alloyId56.add($.__views.avatar);
     showDialog ? $.__views.avatar.addEventListener("click", showDialog) : __defers["$.__views.avatar!click!showDialog"] = !0;
-    var __alloyId38 = [];
-    __alloyId38.push("拍照");
-    __alloyId38.push("从相册选取");
-    __alloyId38.push("取消");
+    var __alloyId59 = [];
+    __alloyId59.push("拍照");
+    __alloyId59.push("从相册选取");
+    __alloyId59.push("取消");
     $.__views.dialog = Ti.UI.createOptionDialog({
-        options: __alloyId38,
+        options: __alloyId59,
         id: "dialog",
         cancel: "2",
         title: "上传头像"

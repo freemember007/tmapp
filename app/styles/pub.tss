@@ -27,22 +27,48 @@
 	zIndex: 1,
 }
 
-
 "#imageContainer":{
 	top:64,
-	width:120,height:120,
+	width:90,height:90,
 	borderColor: "#999",
 }
 
 "#image":{
 	top:44,
-	width:120,
+	width:90,
 	preventDefaultImage:true,
 }
 
 "ScrollView":{
-	height: 290,
+	height: 320,
 	bottom: 0,
+}
+
+"#shareLabel":{
+	left:0,bottom:44,
+	width:320,height: 32,
+	//backgroundColor: "#fff",
+    opacity: 0.8,
+	font: {fontSize: 14},
+	verticalAlign: "center",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:12, fontWeight:"bold"},
+	zIndex: 1,
+}
+
+"#userAvatarList":{
+	left: 50,bottom:44,height: 32,
+	layout: "horizontal",
+	zIndex: 1
+}
+
+"#userAvatar":{
+	top:4,left: 8,
+	width: 24, height: 24,
+	borderRadius:3, 
+	opacity: 0.3,
 }
 
 "#toolbar":{
@@ -63,7 +89,7 @@
 	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	hintText:"添加照片描述",
 	enableReturnKey:true, //为空的时候就别return了。
-	suppressReturn: false, //不允许键盘被压下来
+	//suppressReturn: false, //不允许键盘被压下来
 	zIndex: 1,
 }
 

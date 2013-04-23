@@ -1,4 +1,5 @@
 <Alloy>
+	<Collection src="friend" />
 	<Window onFocus="showKeybroad">
 
 		<Label id="top" text="记录这一刻" />
@@ -8,10 +9,15 @@
 		<ImageView id="image" onClick="openZoomImage" />
 
 		<ScrollView>
+        	<Label id="shareLabel" text="  分享给："/>
+        	<View dataCollection="friend" dataTransform="transformFunction" dataFilter="filterFunction" id="userAvatarList" onClick="addShare">
+            	<ImageView id="userAvatar" image="{avatar}" uid="{uid}" modelId="{alloy_id}"  />
+            </View>
 			<View id="toolbar">
             	<TextField id="commentInput"/>
                 <Label id="pubButton" text="发布"/>
 	        </View>
+	        
 		</ScrollView>
 	
 	</Window>

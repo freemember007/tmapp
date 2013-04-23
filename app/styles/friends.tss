@@ -24,10 +24,55 @@
 	zIndex: 2,
 }
 
-"#table":{
-	left:0, top:44, // 注意要与顶部的4个像素的阴影重叠
-	width: 320,
-	backgroundColor: Alloy.Globals.GUI_bkC,
-	separatorColor:"transparent",
-	bottom: 49, // 注意要与底部的5个像素的阴影重叠
+"#toolbar":{
+	left:0, top:44,// 注意要与顶部的4个像素的阴影重叠
+	height: 44,
+    backgroundGradient: {
+        type: 'linear',
+        startPoint: { x: '50%', y: '0%' },
+        endPoint: { x: '50%', y: '100%' },
+        colors: [ { color: '#666', offset: 0.0},{ color: '#fff', offset: 0.025},{ color: '#eee', offset: 0.05}, { color: '#ccc', offset: 1.0 }],
+    },
+    zIndex: 1,
+}
+
+"#input":{
+	left: 7,top:7,
+	width:240,height: 32,
+	font: {fontSize: 14},
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	hintText:"添加自己人",
+	zIndex: 1,
+}
+
+"#submit":{
+	right: 7,top:7,
+	width: 56, height: 31,
+	backgroundImage:"buttonBlank.png",
+	color: "#555",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:14, fontWeight:"bold"},
+	textAlign: "center",
+}
+
+"#userList":{
+	left:0, top:100, width: 320,
+	layout: "horizontal",
+}
+
+".userAvatar":{
+	left:10,right:10,top:10,bottom:10,
+	width: 85,height: 85,
+	borderRadius:5, 
+}
+
+".userLabel":{
+	bottom: 3, 
+	font: {fontSize:12},
+	color: "#fff",
+	shadowColor:"black",
+	shadowOffset: {x:1,y:1},
+	textAlign:"left",
+	opacity:0.9,
 }

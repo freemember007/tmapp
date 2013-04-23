@@ -4,70 +4,77 @@ function Controller() {
             email: Ti.App.Properties.getString("email"),
             password: Ti.App.Properties.getString("password"),
             device_token: ""
+        }, function(res) {
+            var data = JSON.parse(res);
+            if (data.type == "success") {
+                Ti.App.Properties.removeProperty("id");
+                Ti.App.Properties.removeProperty("email");
+                Ti.App.Properties.removeProperty("password");
+                Ti.App.Properties.removeProperty("domain_name");
+                Ti.App.Properties.removeProperty("avatar");
+                Ti.App.Properties.removeProperty("blogData");
+                Ti.App.Properties.removeProperty("monthData");
+                Ti.App.Properties.removeProperty("yearData");
+                hideMenu();
+                var login = Alloy.createController("login").getView();
+                login.open({
+                    transition: Ti.UI.iPhone.AnimationStyle.CURL_DOWN
+                });
+                Alloy.Globals.tabGroup.close();
+                Alloy.Globals.menu.close();
+                Alloy.Globals.currentWindow != undefined && Alloy.Globals.currentWindow.close();
+            } else data.type == "fail" ? alert("退出失败，请重新退出！") : alert("unknown error");
         });
-        Ti.App.Properties.removeProperty("id");
-        Ti.App.Properties.removeProperty("email");
-        Ti.App.Properties.removeProperty("password");
-        Ti.App.Properties.removeProperty("avatar");
-        Ti.App.Properties.removeProperty("blogData");
-        Ti.App.Properties.removeProperty("monthData");
-        Ti.App.Properties.removeProperty("yearData");
-        hideMenu();
-        var login = Alloy.createController("login").getView();
-        login.open({
-            transition: Ti.UI.iPhone.AnimationStyle.CURL_DOWN
-        });
-        Alloy.Globals.tabGroup.close();
-        Alloy.Globals.menu.close();
-        currentWindow != undefined && currentWindow.close();
     }
     function openMytime() {
         hideMenu();
-        currentWindow != undefined && currentWindow.close();
-        currentWindow = undefined;
+        Alloy.Globals.currentWindow != undefined && Alloy.Globals.currentWindow.close();
+        Alloy.Globals.currentWindow = undefined;
     }
     function openFriends() {
         hideMenu();
-        currentWindow != undefined && currentWindow != friends && currentWindow.close();
+        var friends = Alloy.createController("friends").getView();
         friends.open();
         friends.animate({
             left: 0
         });
-        currentWindow = friends;
+        Alloy.Globals.currentWindow != undefined && Alloy.Globals.currentWindow != friends && Alloy.Globals.currentWindow.close();
+        Alloy.Globals.currentWindow = friends;
     }
     function openSharetome() {
         hideMenu();
-        currentWindow != undefined && currentWindow != sharetome && currentWindow.close();
-        sharetome.open();
-        sharetome.animate({
+        Alloy.Globals.sharetome.open();
+        Alloy.Globals.sharetome.animate({
             left: 0
         });
-        currentWindow = sharetome;
+        Alloy.Globals.currentWindow != undefined && Alloy.Globals.currentWindow != Alloy.Globals.sharetome && Alloy.Globals.currentWindow.close();
+        Alloy.Globals.currentWindow = Alloy.Globals.sharetome;
     }
     function touchStart(e) {
-        start = e.globalPoint.x;
+        start = e.x;
     }
     function touchMove(e) {
-        move = e.globalPoint.x;
+        move = e.x;
         start > move && hideMenu();
     }
     function hideMenu() {
         $.menu.animate({
             left: -200
         });
-        Alloy.Globals.slide = !1;
-        if (currentWindow == undefined) {
+        if (Alloy.Globals.currentWindow == undefined) {
             Alloy.Globals.tabGroup.animate({
                 left: 0
             });
             Alloy.Globals.tableBlog.scrollable = !0;
-        } else currentWindow.animate({
+        } else Alloy.Globals.currentWindow.animate({
             left: 0
         });
+        Alloy.Globals.slide = !1;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
+    Alloy.Models.instance("badge");
     $.__views.menu = Ti.UI.createWindow({
         backgroundImage: "menuBack.png",
         left: -200,
@@ -104,6 +111,25 @@ function Controller() {
     });
     $.__views.menu.add($.__views.sharetome);
     openSharetome ? $.__views.sharetome.addEventListener("click", openSharetome) : __defers["$.__views.sharetome!click!openSharetome"] = !0;
+    $.__views.shareBadge = Ti.UI.createLabel({
+        top: 85,
+        left: 140,
+        height: 22,
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor: "#fff",
+        backgroundColor: "red",
+        color: "#fff",
+        font: {
+            fontSize: 14,
+            fontWeight: "bolder",
+            fontFamily: "HelveticaNeue-CondensedBlack"
+        },
+        zIndex: 1,
+        textAlign: "center",
+        id: "shareBadge"
+    });
+    $.__views.menu.add($.__views.shareBadge);
     $.__views.exit = Ti.UI.createLabel({
         top: 132,
         left: 0,
@@ -113,9 +139,17 @@ function Controller() {
     });
     $.__views.menu.add($.__views.exit);
     exit ? $.__views.exit.addEventListener("click", exit) : __defers["$.__views.exit!click!exit"] = !0;
-    exports.destroy = function() {};
+    var __alloyId40 = function() {
+        $.shareBadge.text = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().number : Alloy.Models.badge.get("number");
+        $.shareBadge.visible = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().visible : Alloy.Models.badge.get("visible");
+        $.shareBadge.width = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().width : Alloy.Models.badge.get("width");
+    };
+    Alloy.Models.badge.on("fetch change destroy", __alloyId40);
+    exports.destroy = function() {
+        Alloy.Models.badge.off("fetch change destroy", __alloyId40);
+    };
     _.extend($, $.__views);
-    var currentWindow, friends = Alloy.createController("friends").getView(), sharetome = Alloy.createController("sharetome").getView(), start, move;
+    var start, move;
     __defers["$.__views.menu!touchstart!touchStart"] && $.__views.menu.addEventListener("touchstart", touchStart);
     __defers["$.__views.menu!touchmove!touchMove"] && $.__views.menu.addEventListener("touchmove", touchMove);
     __defers["$.__views.mytime!click!openMytime"] && $.__views.mytime.addEventListener("click", openMytime);

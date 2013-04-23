@@ -18,6 +18,16 @@
 	zIndex: 1,
 }
 
+"#shareBadge":{
+	top:5,left: 45,height: 22,
+	borderWidth: 2,borderRadius: 10,borderColor: "#fff",
+	backgroundColor: "red",
+	color: "#fff",
+	font: {fontSize:14,fontWeight:"bolder",fontFamily:'HelveticaNeue-CondensedBlack'},
+	zIndex: 1,
+	textAlign: "center",
+}
+
 "#avatar":{
 	right:10, top:8,
 	width: 30, height: 30,

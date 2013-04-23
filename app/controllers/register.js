@@ -57,7 +57,8 @@ function register(){
 		if(data.type == "success"){
 			Ti.App.Properties.setString("id", data.id);
 			Ti.App.Properties.setString("email", $.emailInput.value);
-			Ti.App.Properties.setString("password", $.passwordInput.value);			
+			Ti.App.Properties.setString("password", $.passwordInput.value);	
+			Ti.App.Properties.setString("domain_name", data.domain_name);		
 			Ti.App.Properties.setString("avatar", data.avatar); // 如果属性为空，将不会记录
 			Alloy.Globals.avatar.image = $.avatar.image;
 			Alloy.Globals.tabGroup.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});

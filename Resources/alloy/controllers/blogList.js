@@ -181,6 +181,7 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
+    Alloy.Models.instance("badge");
     $.__views.blogList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
         tabBarHidden: !0,
@@ -211,6 +212,25 @@ function Controller() {
     });
     $.__views.top.add($.__views.menuButton);
     toggleMenu ? $.__views.menuButton.addEventListener("click", toggleMenu) : __defers["$.__views.menuButton!click!toggleMenu"] = !0;
+    $.__views.shareBadge = Ti.UI.createLabel({
+        top: 5,
+        left: 45,
+        height: 22,
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor: "#fff",
+        backgroundColor: "red",
+        color: "#fff",
+        font: {
+            fontSize: 14,
+            fontWeight: "bolder",
+            fontFamily: "HelveticaNeue-CondensedBlack"
+        },
+        zIndex: 1,
+        textAlign: "center",
+        id: "shareBadge"
+    });
+    $.__views.top.add($.__views.shareBadge);
     $.__views.avatar = Ti.UI.createImageView({
         preventDefaultImage: !0,
         right: 10,
@@ -233,22 +253,30 @@ function Controller() {
     });
     $.__views.blogList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId0 = Alloy.createController("bottom", {
-        id: "__alloyId0"
+    $.__views.__alloyId2 = Alloy.createController("bottom", {
+        id: "__alloyId2"
     });
-    $.__views.__alloyId0.setParent($.__views.blogList);
-    var __alloyId2 = [];
-    __alloyId2.push("拍照");
-    __alloyId2.push("从相册选取");
-    __alloyId2.push("取消");
+    $.__views.__alloyId2.setParent($.__views.blogList);
+    var __alloyId4 = [];
+    __alloyId4.push("拍照");
+    __alloyId4.push("从相册选取");
+    __alloyId4.push("取消");
     $.__views.dialog = Ti.UI.createOptionDialog({
-        options: __alloyId2,
+        options: __alloyId4,
         id: "dialog",
         cancel: "2",
         title: "修改头像"
     });
     choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
-    exports.destroy = function() {};
+    var __alloyId8 = function() {
+        $.shareBadge.text = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().number : Alloy.Models.badge.get("number");
+        $.shareBadge.visible = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().visible : Alloy.Models.badge.get("visible");
+        $.shareBadge.width = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().width : Alloy.Models.badge.get("width");
+    };
+    Alloy.Models.badge.on("fetch change destroy", __alloyId8);
+    exports.destroy = function() {
+        Alloy.Models.badge.off("fetch change destroy", __alloyId8);
+    };
     _.extend($, $.__views);
     Alloy.Globals.blogList = $.blogList;
     Alloy.Globals.tableBlog = $.table;

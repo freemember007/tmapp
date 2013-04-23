@@ -1,4 +1,4 @@
-var sitePath = "http://184.82.117.60/";
+var sitePath = "http://localhost:3000/";
 
 exports.computeImageSize = function(originImg) {
     var imagefactory = require("ti.imagefactory"), w = originImg.width, h = originImg.height, width = 600, middleImg = imagefactory.imageAsResized(originImg, {
@@ -76,4 +76,12 @@ exports.getWeek = function(date) {
     arr = date.split("-");
     var newDate = new Date(arr[0], parseInt(arr[1] - 1), arr[2]), weekArray = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"), week = weekArray[newDate.getDay()];
     return week;
+};
+
+exports.alert = function(message) {
+    Ti.UI.createAlertDialog({
+        title: "提示",
+        message: message,
+        ok: "确定"
+    }).show();
 };

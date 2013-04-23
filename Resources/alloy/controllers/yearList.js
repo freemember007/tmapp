@@ -93,10 +93,10 @@ function Controller() {
     });
     $.__views.yearList.add($.__views.table);
     hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId43 = Alloy.createController("bottom", {
-        id: "__alloyId43"
+    $.__views.__alloyId64 = Alloy.createController("bottom", {
+        id: "__alloyId64"
     });
-    $.__views.__alloyId43.setParent($.__views.yearList);
+    $.__views.__alloyId64.setParent($.__views.yearList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
