@@ -7,6 +7,7 @@ function Controller() {
           case 0:
             takePhoto();
             break;
+
           case 1:
             openPhoto();
         }
@@ -20,7 +21,7 @@ function Controller() {
             error: function() {
                 alert("error");
             },
-            allowEditing: !0
+            allowEditing: true
         });
     }
     function takePhoto() {
@@ -32,8 +33,8 @@ function Controller() {
             error: function() {
                 alert("error");
             },
-            saveToPhotoGallery: !0,
-            allowEditing: !0
+            saveToPhotoGallery: true,
+            allowEditing: true
         });
     }
     function showPhoto(imgs) {
@@ -44,17 +45,19 @@ function Controller() {
             avatar: $.avatar.image
         }, function(res) {
             var data = JSON.parse(res);
-            data.type == "success" ? Ti.App.Properties.setString("avatar", data.avatar) : data.type == "fail" ? alert("上传头像失败") : alert("unknown error");
+            "success" == data.type ? Ti.App.Properties.setString("avatar", data.avatar) : "fail" == data.type ? alert("上传头像失败") : alert("unknown error");
         });
     }
     function firstFetchBlog() {
-        if (Ti.App.Properties.hasProperty("blogData") && Ti.App.Properties.getString("blogData") != "{}") {
-            var items = JSON.parse(Ti.App.Properties.getString("blogData")), tabledata = [];
+        if (Ti.App.Properties.hasProperty("blogData") && "{}" != Ti.App.Properties.getString("blogData")) {
+            var items = JSON.parse(Ti.App.Properties.getString("blogData"));
+            var tabledata = [];
             for (key in items) {
                 var arg = {
                     day: key,
                     feeds: items[key]
-                }, section = Alloy.createController("blogSection", arg).getView();
+                };
+                var section = Alloy.createController("blogSection", arg).getView();
                 tabledata.push(section);
             }
             Alloy.Globals.tableBlog.setData(tabledata);
@@ -70,16 +73,17 @@ function Controller() {
             offset: 0
         }, function(res) {
             var data = JSON.parse(res);
-            if (data.type == "success") {
+            if ("success" == data.type) {
                 items = data.items;
-                if (JSON.stringify(items) == "{}") Alloy.Globals.tabGroup.add(welcome); else {
+                if ("{}" == JSON.stringify(items)) Alloy.Globals.tabGroup.add(welcome); else {
                     Alloy.Globals.tabGroup.remove(welcome);
                     var tabledata = [];
                     for (key in items) {
                         var arg = {
                             day: key,
                             feeds: items[key]
-                        }, section = Alloy.createController("blogSection", arg).getView();
+                        };
+                        var section = Alloy.createController("blogSection", arg).getView();
                         tabledata.push(section);
                     }
                     Alloy.Globals.tableBlog.setData(tabledata);
@@ -87,15 +91,15 @@ function Controller() {
                     lastRow = 10;
                     Ti.App.Properties.setString("blogData", JSON.stringify(items));
                 }
-            } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
+            } else "fail" == data.type ? alert("用户名或密码错误！") : alert("unknown error");
             $.blogList.remove(actInd);
         });
     }
     function preFetchBlog() {
-        (!Ti.App.Properties.hasProperty("blogData") || Ti.App.Properties.getString("blogData") == "{}") && fetchBlog();
+        Ti.App.Properties.hasProperty("blogData") && "{}" != Ti.App.Properties.getString("blogData") || fetchBlog();
     }
     function hideNavBar(e) {
-        if (e.contentOffset.y - offset > 10 && e.contentSize.height > 480 && isHide == 0) {
+        if (e.contentOffset.y - offset > 10 && e.contentSize.height > Ti.Platform.displayCaps.platformHeight && false == isHide) {
             $.top.animate({
                 top: -47
             });
@@ -103,9 +107,9 @@ function Controller() {
                 top: 0
             });
             offset = e.contentOffset.y;
-            isHide = !0;
+            isHide = true;
         }
-        if (e.contentOffset.y - offset < -10 && isHide == 1) {
+        if (-10 > e.contentOffset.y - offset && true == isHide) {
             $.top.animate({
                 top: 0
             });
@@ -113,9 +117,9 @@ function Controller() {
                 top: 44
             });
             offset = e.contentOffset.y;
-            isHide = !1;
+            isHide = false;
         }
-        e.contentOffset.y <= 0 && (offset = 0);
+        0 >= e.contentOffset.y && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
     }
     function toggleMenu() {
@@ -126,8 +130,8 @@ function Controller() {
             Alloy.Globals.menu.animate({
                 left: -200
             });
-            $.table.scrollable = !0;
-            Alloy.Globals.slide = !1;
+            $.table.scrollable = true;
+            Alloy.Globals.slide = false;
         } else {
             Alloy.Globals.tabGroup.animate({
                 left: 200
@@ -135,18 +139,18 @@ function Controller() {
             Alloy.Globals.menu.animate({
                 left: 0
             });
-            $.table.scrollable = !1;
-            Alloy.Globals.slide = !0;
+            $.table.scrollable = false;
+            Alloy.Globals.slide = true;
         }
     }
     function beginUpdate() {
-        updating = !0;
+        updating = true;
         $.table.appendSection(loadingSection);
         loadingInd.show();
-        setTimeout(endUpdate, 2000);
+        setTimeout(endUpdate, 2e3);
     }
     function endUpdate() {
-        updating = !1;
+        updating = false;
         lastRow += 10;
         util.send("api/fetchBlog", {
             email: Ti.App.Properties.getString("email"),
@@ -154,45 +158,47 @@ function Controller() {
             offset: fetchOffset
         }, function(res) {
             var data = JSON.parse(res);
-            if (data.type == "success") {
-                $.table.deleteSection($.table.data.length - 1, {
-                    animationStyle: Titanium.UI.iPhone.RowAnimationStyle.NONE
-                });
-                loadingInd.hide();
+            if ("success" == data.type) {
                 items = data.items;
-                var tabledata = [];
                 for (key in items) {
                     var arg = {
                         day: key,
                         feeds: items[key]
-                    }, section = Alloy.createController("blogSection", arg).getView();
+                    };
+                    var section = Alloy.createController("blogSection", arg).getView();
                     $.table.appendSection(section, {
-                        animationStyle: Titanium.UI.iPhone.RowAnimationStyle.NONE
+                        animated: false
                     });
                 }
+                $.table.deleteSection($.table.data.length - Object.keys(items).length - 1, {
+                    animated: false
+                });
                 $.table.scrollToIndex(lastRow - 10, {
-                    animated: !0,
                     position: Ti.UI.iPhone.TableViewScrollPosition.BOTTOM
                 });
                 fetchOffset += 10;
-            } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
+            } else "fail" == data.type ? alert("用户名或密码错误！") : alert("unknown error");
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
     Alloy.Models.instance("badge");
     $.__views.blogList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        tabBarHidden: !0,
-        navBarHidden: !0,
+        navBarHidden: true,
+        borderRadius: 3,
+        tabBarHidden: true,
         id: "blogList"
     });
-    $.addTopLevelView($.__views.blogList);
-    firstFetchBlog ? $.__views.blogList.addEventListener("open", firstFetchBlog) : __defers["$.__views.blogList!open!firstFetchBlog"] = !0;
-    preFetchBlog ? $.__views.blogList.addEventListener("focus", preFetchBlog) : __defers["$.__views.blogList!focus!preFetchBlog"] = !0;
+    $.__views.blogList && $.addTopLevelView($.__views.blogList);
+    firstFetchBlog ? $.__views.blogList.addEventListener("open", firstFetchBlog) : __defers["$.__views.blogList!open!firstFetchBlog"] = true;
+    preFetchBlog ? $.__views.blogList.addEventListener("focus", preFetchBlog) : __defers["$.__views.blogList!focus!preFetchBlog"] = true;
     $.__views.top = Ti.UI.createView({
-        width: 320,
+        width: Ti.Platform.displayCaps.platformWidth,
         height: 47,
         top: 0,
         left: 0,
@@ -205,13 +211,12 @@ function Controller() {
         left: 10,
         top: 9,
         width: 32,
-        height: 27,
-        backgroundImage: "menuIcon.png",
+        height: 32,
         zIndex: 1,
         id: "menuButton"
     });
     $.__views.top.add($.__views.menuButton);
-    toggleMenu ? $.__views.menuButton.addEventListener("click", toggleMenu) : __defers["$.__views.menuButton!click!toggleMenu"] = !0;
+    toggleMenu ? $.__views.menuButton.addEventListener("click", toggleMenu) : __defers["$.__views.menuButton!click!toggleMenu"] = true;
     $.__views.shareBadge = Ti.UI.createLabel({
         top: 5,
         left: 45,
@@ -232,29 +237,31 @@ function Controller() {
     });
     $.__views.top.add($.__views.shareBadge);
     $.__views.avatar = Ti.UI.createImageView({
-        preventDefaultImage: !0,
+        preventDefaultImage: true,
         right: 10,
         top: 8,
         width: 30,
         height: 30,
+        borderRadius: 3,
         zIndex: 1,
         id: "avatar"
     });
     $.__views.top.add($.__views.avatar);
-    showDialog ? $.__views.avatar.addEventListener("click", showDialog) : __defers["$.__views.avatar!click!showDialog"] = !0;
+    showDialog ? $.__views.avatar.addEventListener("click", showDialog) : __defers["$.__views.avatar!click!showDialog"] = true;
     $.__views.table = Ti.UI.createTableView({
         left: 0,
         top: 44,
-        width: 320,
+        width: Ti.Platform.displayCaps.platformWidth,
         backgroundColor: Alloy.Globals.GUI_bkC,
         separatorColor: "transparent",
         bottom: 49,
         id: "table"
     });
     $.__views.blogList.add($.__views.table);
-    hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
+    hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = true;
     $.__views.__alloyId2 = Alloy.createController("bottom", {
-        id: "__alloyId2"
+        id: "__alloyId2",
+        __parentSymbol: $.__views.blogList
     });
     $.__views.__alloyId2.setParent($.__views.blogList);
     var __alloyId4 = [];
@@ -267,11 +274,11 @@ function Controller() {
         cancel: "2",
         title: "修改头像"
     });
-    choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
+    choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = true;
     var __alloyId8 = function() {
-        $.shareBadge.text = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().number : Alloy.Models.badge.get("number");
-        $.shareBadge.visible = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().visible : Alloy.Models.badge.get("visible");
-        $.shareBadge.width = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform().width : Alloy.Models.badge.get("width");
+        $.shareBadge.text = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["number"] : Alloy.Models.badge.get("number");
+        $.shareBadge.visible = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["visible"] : Alloy.Models.badge.get("visible");
+        $.shareBadge.width = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["width"] : Alloy.Models.badge.get("width");
     };
     Alloy.Models.badge.on("fetch change destroy", __alloyId8);
     exports.destroy = function() {
@@ -282,27 +289,35 @@ function Controller() {
     Alloy.Globals.tableBlog = $.table;
     Alloy.Globals.fetchBlog = fetchBlog;
     Alloy.Globals.avatar = $.avatar;
-    Ti.App.Properties.hasProperty("avatar") ? $.avatar.image = Alloy.Globals.sitePath + Ti.App.Properties.getString("avatar") : $.avatar.image = "avatar.png";
+    $.avatar.image = null == Ti.App.Properties.getString("avatar") ? "avatar.png" : Alloy.Globals.sitePath + Ti.App.Properties.getString("avatar");
     var actInd = Alloy.createController("actInd").getView();
-    actInd.style = Titanium.UI.iPhone.ActivityIndicatorStyle.DARK;
+    actInd.style = Ti.UI.iPhone.ActivityIndicatorStyle.DARK;
     actInd.color = "black";
     $.blogList.add(actInd);
-    var fetchOffset = 10, lastRow = 10, welcome = Alloy.createController("welcome").getView(), offset = 0, isHide = !1, pullView = Alloy.createController("pullView", {
+    var fetchOffset = 10;
+    var lastRow = 10;
+    var welcome = Alloy.createController("welcome").getView();
+    var offset = 0;
+    var isHide = false;
+    var pullView = Alloy.createController("pullView", {
         table: $.table,
         fetch: fetchBlog
     }).getView();
     $.table.headerPullView = pullView;
-    var updating = !1, loadingInd = Titanium.UI.createActivityIndicator({
+    var updating = false;
+    var loadingInd = Ti.UI.createActivityIndicator({
         width: 30,
         height: 30,
-        style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK
-    }), loadingRow = Ti.UI.createTableViewRow({
+        style: Ti.UI.iPhone.ActivityIndicatorStyle.DARK
+    });
+    var loadingRow = Ti.UI.createTableViewRow({
         height: 40
-    }), loadingSection = Ti.UI.createTableViewSection();
+    });
+    var loadingSection = Ti.UI.createTableViewSection();
     loadingSection.add(loadingRow);
     loadingRow.add(loadingInd);
     $.table.addEventListener("scroll", function(e) {
-        !updating && e.contentSize.height > 3360 && e.contentOffset.y + e.size.height + 100 > e.contentSize.height && beginUpdate();
+        !updating && e.contentSize.height > 5 * Ti.Platform.displayCaps.platformHeight && e.contentOffset.y + e.size.height + 100 > e.contentSize.height && beginUpdate();
     });
     __defers["$.__views.blogList!open!firstFetchBlog"] && $.__views.blogList.addEventListener("open", firstFetchBlog);
     __defers["$.__views.blogList!focus!preFetchBlog"] && $.__views.blogList.addEventListener("focus", preFetchBlog);
@@ -313,6 +328,6 @@ function Controller() {
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

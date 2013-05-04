@@ -1,0 +1,66 @@
+".window":{
+	layout: "vertical",
+	//top:100,bottom:100,
+}
+
+"#shareLabel":{
+	left:25, top:90,
+	height: 36,
+	font:{fontSize:14, fontWeight:"bold"},
+	color: "#666",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+}
+
+"#shareLabel[platform=ios formFactor=tablet]":{
+	top: 240,
+}
+
+"#userAvatarList":{
+	left:15, right:15, top:20, 
+	height: 150,
+	layout: "horizontal",
+}
+
+"#userAvatar":{
+	left:10, right:10, bottom:20,
+	width: 50,height: 50,
+	opacity: 0.3,
+	borderRadius:5, 
+}
+
+"#buttons":{
+	top:20, height: 36,
+}
+
+"#cancelButton":{
+	top:0, left: 80,
+	width: 70, height: 36,
+	font:{size:14},
+	color: "#999",
+	textAlign:"center",
+	backgroundColor:"#ddd",
+	borderColor:"#ccc",
+	borderRadius: 5,
+	shadowColor:"#fff",
+}
+
+"#cancelButton[platform=ios formFactor=tablet]":{
+	left: 260,
+}
+
+"#shareButton":{
+	top:0, right: 80,
+	width: 70, height: 36,
+	font:{size:14},
+	color: "#fff",
+	textAlign:"center",
+	backgroundColor:"#51A351",
+	borderColor:"#387038",
+	borderRadius: 5,
+	shadowColor:"#ccc",
+}
+
+"#shareButton[platform=ios formFactor=tablet]":{
+	right: 260,
+}

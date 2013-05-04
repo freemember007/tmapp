@@ -6,17 +6,19 @@ friends.fetch();
 function filterFunction(collection) {
     return collection.where({owner:ownerID});
 }
-//var myFriends = filterFunction(friends) // 用myFriends=friends.where({owner:ownerID})不行，貌似这样还是不行，不知是何原因？
 
 function transformFunction(model) {
     var transform = model.toJSON();
-    if(transform.avatar!=null){
-    	transform.avatar = Alloy.Globals.sitePath + transform.avatar;
-    }else{
+    if(transform.avatar==null){
     	transform.avatar = "avatar.png";
+    }else{
+    	transform.avatar = Alloy.Globals.sitePath + transform.avatar;
     }
     return transform;
 }
+
+var myFriends = filterFunction(friends) // 用var myFriends=friends.where({owner:ownerID})不行，貌似这样还是不行，不知是何原因？
+$.hint.setVisible(myFriends.length==0?true:false);
 
 function addFriend(){
 	if($.input.value.match(/^\s*$/)){
@@ -29,11 +31,12 @@ function addFriend(){
 	}else if(friends.length!=0 && friends.where({owner:ownerID,domain_name:$.input.value}).length!=0){// 注：backbone0.9.2没有findWhere方法，故用此方法。
 		util.alert("用户已经在您的自己人列表中！")
 	}else{
-		util.get("api/userInfo?domain_name=" + $.input.value, function(res){
+		util.send("api/userInfo",{domain_name:$.input.value}, function(res){
 			var data = JSON.parse(res);
-			if(data.success){
+			if(data.type=="success"){
 				var friend = Alloy.createModel("friend",{uid:data.uid, owner:ownerID, avatar: data.avatar, domain_name:data.domain_name});
 				friend.save()
+				$.hint.setVisible(false);
 				friends.add(friend);
 			}else{
 				util.alert("用户名不存在，请确认添加的用户名是否正确！");

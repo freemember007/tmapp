@@ -5,11 +5,11 @@
 }
 
 "#top":{
-	width:320, height: 47,
+	width:Ti.Platform.displayCaps.platformWidth, height: 47,
 	top:0,
-	backgroundImage: "top5.png",
+	backgroundImage: "topBlank.png",
 	color: "#555",
-	opacity: 0.9,
+	opacity: 1.0,
 	shadowColor: "#fff",
 	shadowOffset: {x:1,y:1},
 	font:{fontSize:20, fontWeight:"bold"},
@@ -19,10 +19,10 @@
 
 
 "#scrollView":{
-	width: 320,
-	maxZoomScale:1.5
+	width: Ti.Platform.displayCaps.platformWidth,
+	maxZoomScale:2
 }
 
 "#image":{
-	width: 320,
+	width: Ti.Platform.displayCaps.platformWidth,
 }

@@ -1,14 +1,13 @@
 ".invisible":{
 	visible: false,
 }
-// 全局titleControl
-".titleControl":{
-	font:{fontSize:22, fontWeight:"bold", fontFamily:"" },
-	color: "#333",
-	//shadowColor: "#fff",
-	shadowOffset: {x:1,y:-1},
-}
 
 "ImageView":{
 	preventDefaultImage: true,
+}
+
+"Window":{
+	backgroundColor: Alloy.Globals.GUI_bkC,
+	navBarHidden: true,
+	borderRadius: 3
 }

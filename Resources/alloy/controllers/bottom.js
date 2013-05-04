@@ -5,9 +5,6 @@ function Controller() {
     function openMonth() {
         Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab2);
     }
-    function openCamera() {
-        Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab3);
-    }
     function openYear() {
         Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab4);
     }
@@ -23,6 +20,7 @@ function Controller() {
           case 0:
             takePhoto();
             break;
+
           case 1:
             openPhoto();
         }
@@ -51,74 +49,128 @@ function Controller() {
             error: function() {
                 alert("error");
             },
-            saveToPhotoGallery: !0
+            saveToPhotoGallery: true
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
     $.__views.bottom = Ti.UI.createView({
-        backgroundImage: "bottom.png",
+        backgroundImage: "bottomRound.png",
         height: 54,
-        width: 320,
+        width: Ti.Platform.displayCaps.platformWidth,
         bottom: 0,
         left: 0,
         zIndex: 1,
         layout: "horizontal",
         id: "bottom"
     });
-    $.addTopLevelView($.__views.bottom);
-    $.__views.recentImg = Ti.UI.createImageView({
-        preventDefaultImage: !0,
-        image: "recentImg.png",
-        top: 8,
-        id: "recentImg"
-    });
+    $.__views.bottom && $.addTopLevelView($.__views.bottom);
+    $.__views.recentImg = Ti.UI.createLabel(function() {
+        var o = {};
+        _.extend(o, {
+            bottom: 0,
+            width: 64,
+            height: 49,
+            zIndex: 1
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 153
+        });
+        _.extend(o, {
+            id: "recentImg"
+        });
+        return o;
+    }());
     $.__views.bottom.add($.__views.recentImg);
-    openRecent ? $.__views.recentImg.addEventListener("click", openRecent) : __defers["$.__views.recentImg!click!openRecent"] = !0;
-    $.__views.monthImg = Ti.UI.createImageView({
-        preventDefaultImage: !0,
-        image: "monthImg.png",
-        top: 6,
-        id: "monthImg"
-    });
+    openRecent ? $.__views.recentImg.addEventListener("click", openRecent) : __defers["$.__views.recentImg!click!openRecent"] = true;
+    $.__views.monthImg = Ti.UI.createLabel(function() {
+        var o = {};
+        _.extend(o, {
+            bottom: 0,
+            width: 64,
+            height: 49,
+            zIndex: 1
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 153
+        });
+        _.extend(o, {
+            id: "monthImg"
+        });
+        return o;
+    }());
     $.__views.bottom.add($.__views.monthImg);
-    openMonth ? $.__views.monthImg.addEventListener("click", openMonth) : __defers["$.__views.monthImg!click!openMonth"] = !0;
-    $.__views.cameraImg = Ti.UI.createImageView({
-        preventDefaultImage: !0,
-        image: "cameraImg.png",
-        top: 5,
-        id: "cameraImg"
-    });
+    openMonth ? $.__views.monthImg.addEventListener("click", openMonth) : __defers["$.__views.monthImg!click!openMonth"] = true;
+    $.__views.cameraImg = Ti.UI.createLabel(function() {
+        var o = {};
+        _.extend(o, {
+            bottom: 0,
+            width: 64,
+            height: 49,
+            zIndex: 1
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 153
+        });
+        _.extend(o, {
+            id: "cameraImg"
+        });
+        return o;
+    }());
     $.__views.bottom.add($.__views.cameraImg);
-    showDialog ? $.__views.cameraImg.addEventListener("click", showDialog) : __defers["$.__views.cameraImg!click!showDialog"] = !0;
-    $.__views.yearImg = Ti.UI.createImageView({
-        preventDefaultImage: !0,
-        image: "yearImg.png",
-        top: 6,
-        id: "yearImg"
-    });
+    showDialog ? $.__views.cameraImg.addEventListener("click", showDialog) : __defers["$.__views.cameraImg!click!showDialog"] = true;
+    $.__views.yearImg = Ti.UI.createLabel(function() {
+        var o = {};
+        _.extend(o, {
+            bottom: 0,
+            width: 64,
+            height: 49,
+            zIndex: 1
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 153
+        });
+        _.extend(o, {
+            id: "yearImg"
+        });
+        return o;
+    }());
     $.__views.bottom.add($.__views.yearImg);
-    openYear ? $.__views.yearImg.addEventListener("click", openYear) : __defers["$.__views.yearImg!click!openYear"] = !0;
-    $.__views.randomImg = Ti.UI.createImageView({
-        preventDefaultImage: !0,
-        image: "randomImg.png",
-        top: 6,
-        id: "randomImg"
-    });
+    openYear ? $.__views.yearImg.addEventListener("click", openYear) : __defers["$.__views.yearImg!click!openYear"] = true;
+    $.__views.randomImg = Ti.UI.createLabel(function() {
+        var o = {};
+        _.extend(o, {
+            bottom: 0,
+            width: 64,
+            height: 49,
+            zIndex: 1
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 153
+        });
+        _.extend(o, {
+            id: "randomImg"
+        });
+        return o;
+    }());
     $.__views.bottom.add($.__views.randomImg);
-    openRandom ? $.__views.randomImg.addEventListener("click", openRandom) : __defers["$.__views.randomImg!click!openRandom"] = !0;
+    openRandom ? $.__views.randomImg.addEventListener("click", openRandom) : __defers["$.__views.randomImg!click!openRandom"] = true;
     var __alloyId11 = [];
     __alloyId11.push("照相");
     __alloyId11.push("从相册选取");
     __alloyId11.push("取消");
     $.__views.dialog = Ti.UI.createOptionDialog({
+        bubbleParent: false,
         options: __alloyId11,
         id: "dialog",
         cancel: "2",
         title: "添加照片"
     });
-    choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
+    choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.showDialog = showDialog;
@@ -131,6 +183,6 @@ function Controller() {
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

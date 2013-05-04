@@ -1,24 +1,25 @@
 function Controller() {
-    function __alloyId48(e) {
-        var models = filterFunction(__alloyId47), len = models.length, children = $.__views.userAvatarList.children;
+    function __alloyId43() {
+        var models = filterFunction(__alloyId42);
+        var len = models.length;
+        var children = $.__views.userAvatarList.children;
         for (var d = children.length - 1; d >= 0; d--) $.__views.userAvatarList.remove(children[d]);
-        for (var i = 0; i < len; i++) {
-            var __alloyId45 = models[i];
-            __alloyId45.__transform = transformFunction(__alloyId45);
-            var __alloyId46 = Ti.UI.createImageView({
-                preventDefaultImage: !0,
-                top: 4,
+        for (var i = 0; len > i; i++) {
+            var __alloyId40 = models[i];
+            __alloyId40.__transform = transformFunction(__alloyId40);
+            var __alloyId41 = Ti.UI.createImageView({
+                preventDefaultImage: true,
                 left: 8,
+                top: 4,
                 width: 24,
                 height: 24,
                 borderRadius: 3,
-                opacity: 0.3,
-                id: "userAvatar",
-                image: typeof __alloyId45.__transform.avatar != "undefined" ? __alloyId45.__transform.avatar : __alloyId45.get("avatar"),
-                uid: typeof __alloyId45.__transform.uid != "undefined" ? __alloyId45.__transform.uid : __alloyId45.get("uid"),
-                modelId: typeof __alloyId45.__transform.alloy_id != "undefined" ? __alloyId45.__transform.alloy_id : __alloyId45.get("alloy_id")
+                opacity: .3,
+                image: "undefined" != typeof __alloyId40.__transform["avatar"] ? __alloyId40.__transform["avatar"] : __alloyId40.get("avatar"),
+                uid: "undefined" != typeof __alloyId40.__transform["uid"] ? __alloyId40.__transform["uid"] : __alloyId40.get("uid"),
+                modelId: "undefined" != typeof __alloyId40.__transform["alloy_id"] ? __alloyId40.__transform["alloy_id"] : __alloyId40.get("alloy_id")
             });
-            $.__views.userAvatarList.add(__alloyId46);
+            $.__views.userAvatarList.add(__alloyId41);
         }
     }
     function filterFunction(collection) {
@@ -28,25 +29,28 @@ function Controller() {
     }
     function transformFunction(model) {
         var transform = model.toJSON();
-        transform.avatar != null ? transform.avatar = Alloy.Globals.sitePath + transform.avatar : transform.avatar = "avatar.png";
+        transform.avatar = null != transform.avatar ? Alloy.Globals.sitePath + transform.avatar : "avatar.png";
         return transform;
     }
     function addShare(e) {
-        if (e.source.opacity == 0.3) {
-            e.source.opacity = 0.99;
+        if (.3 == e.source.opacity) {
+            e.source.opacity = .99;
             friendsID.push(e.source.uid);
             return;
         }
-        if (e.source.opacity == 0.99) {
-            e.source.opacity = 0.3;
-            for (var i = 0; i < friendsID.length; i++) friendsID[i] == e.source.uid && friendsID.splice(i, 1);
+        if (.99 == e.source.opacity) {
+            e.source.opacity = .3;
+            for (var i = 0; friendsID.length > i; i++) friendsID[i] == e.source.uid && friendsID.splice(i, 1);
         }
     }
     function showPhoto(imgs) {
-        $.pub.remove($.imageContainer);
         $.image.image = imgs.middleImg.src;
         $.cancelButton.addEventListener("click", clearPub);
         $.pubButton.addEventListener("click", pub);
+    }
+    function hideActInd() {
+        $.imageContainer.hide();
+        $.actInd.hide();
     }
     function pub() {
         $.commentInput.blur();
@@ -60,17 +64,17 @@ function Controller() {
             if (data.type = "success") {
                 clearPub();
                 Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab1);
-                Alloy.Globals.fetchBlog();
                 Alloy.Globals.tableBlog.scrollToTop();
+                Alloy.Globals.fetchBlog();
             } else util.alert("上传失败，请重新发布！");
         });
     }
     function clearPub() {
-        $.pub.add($.imageContainer);
-        $.image.image = "null";
-        $.commentInput.value = "";
         $.cancelButton.removeEventListener("click", clearPub);
         $.pubButton.removeEventListener("click", pub);
+        hideActInd();
+        $.image.image = "null";
+        $.commentInput.value = "";
         $.pub.close();
     }
     function openZoomImage() {
@@ -81,18 +85,22 @@ function Controller() {
         $.commentInput.focus();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
     Alloy.Collections.instance("friend");
     $.__views.pub = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        navBarHidden: !0,
+        navBarHidden: true,
+        borderRadius: 3,
         id: "pub"
     });
-    $.addTopLevelView($.__views.pub);
-    showKeybroad ? $.__views.pub.addEventListener("focus", showKeybroad) : __defers["$.__views.pub!focus!showKeybroad"] = !0;
+    $.__views.pub && $.addTopLevelView($.__views.pub);
+    showKeybroad ? $.__views.pub.addEventListener("focus", showKeybroad) : __defers["$.__views.pub!focus!showKeybroad"] = true;
     $.__views.top = Ti.UI.createLabel({
-        width: 320,
+        width: Ti.Platform.displayCaps.platformWidth,
         height: 47,
         top: 0,
         backgroundImage: "topBlank.png",
@@ -109,12 +117,12 @@ function Controller() {
         textAlign: "center",
         zIndex: 1,
         id: "top",
-        text: "记录这一刻"
+        text: "记录你的时光"
     });
     $.__views.pub.add($.__views.top);
     $.__views.cancelButton = Ti.UI.createLabel({
         left: 10,
-        top: 7,
+        top: 8,
         width: 56,
         height: 31,
         backgroundImage: "backBlank.png",
@@ -134,34 +142,72 @@ function Controller() {
         text: "取消"
     });
     $.__views.pub.add($.__views.cancelButton);
-    $.__views.imageContainer = Ti.UI.createView({
-        top: 64,
-        width: 90,
-        height: 90,
-        borderColor: "#999",
-        id: "imageContainer"
-    });
+    $.__views.imageContainer = Ti.UI.createView(function() {
+        var o = {};
+        _.extend(o, {
+            top: 64,
+            width: 90,
+            height: 90,
+            borderColor: "#999"
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 216,
+            height: 216
+        });
+        _.extend(o, {
+            id: "imageContainer"
+        });
+        return o;
+    }());
     $.__views.pub.add($.__views.imageContainer);
-    $.__views.image = Ti.UI.createImageView({
-        preventDefaultImage: !0,
-        top: 44,
-        width: 90,
-        id: "image"
+    $.__views.actInd = Ti.UI.createActivityIndicator({
+        style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+        id: "actInd"
     });
+    $.__views.imageContainer.add($.__views.actInd);
+    $.__views.image = Ti.UI.createImageView(function() {
+        var o = {};
+        _.extend(o, {
+            preventDefaultImage: true,
+            top: 44,
+            height: 120
+        });
+        Alloy.isTablet && _.extend(o, {
+            height: 288
+        });
+        _.extend(o, {
+            id: "image"
+        });
+        return o;
+    }());
     $.__views.pub.add($.__views.image);
-    openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = !0;
-    $.__views.__alloyId44 = Ti.UI.createScrollView({
-        height: 320,
-        bottom: 0,
-        id: "__alloyId44"
-    });
-    $.__views.pub.add($.__views.__alloyId44);
+    openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = true;
+    hideActInd ? $.__views.image.addEventListener("load", hideActInd) : __defers["$.__views.image!load!hideActInd"] = true;
+    $.__views.__alloyId39 = Ti.UI.createScrollView(function() {
+        var o = {};
+        _.extend(o, {
+            left: 0,
+            bottom: 0,
+            width: Ti.Platform.displayCaps.platformWidth,
+            height: 330,
+            disableBounce: true
+        });
+        Alloy.isTablet && _.extend(o, {
+            height: 600
+        });
+        _.extend(o, {
+            id: "__alloyId39"
+        });
+        return o;
+    }());
+    $.__views.pub.add($.__views.__alloyId39);
     $.__views.shareLabel = Ti.UI.createLabel({
         left: 0,
         bottom: 44,
-        width: 320,
+        width: Ti.Platform.displayCaps.platformWidth,
         height: 32,
-        opacity: 0.8,
+        backgroundColor: Alloy.Globals.GUI_bkC,
+        opacity: .8,
         font: {
             fontSize: 12,
             fontWeight: "bold"
@@ -173,27 +219,29 @@ function Controller() {
             x: 1,
             y: 1
         },
-        zIndex: 1,
         id: "shareLabel",
         text: "  分享给："
     });
-    $.__views.__alloyId44.add($.__views.shareLabel);
+    $.__views.__alloyId39.add($.__views.shareLabel);
     $.__views.userAvatarList = Ti.UI.createView({
         left: 50,
         bottom: 44,
         height: 32,
+        width: "auto",
         layout: "horizontal",
         zIndex: 1,
         dataTransform: "transformFunction",
         id: "userAvatarList"
     });
-    $.__views.__alloyId44.add($.__views.userAvatarList);
-    var __alloyId47 = Alloy.Collections.friend || friend;
-    __alloyId47.on("fetch destroy change add remove reset", __alloyId48);
-    addShare ? $.__views.userAvatarList.addEventListener("click", addShare) : __defers["$.__views.userAvatarList!click!addShare"] = !0;
+    $.__views.__alloyId39.add($.__views.userAvatarList);
+    var __alloyId42 = Alloy.Collections["friend"] || friend;
+    __alloyId42.on("fetch destroy change add remove reset", __alloyId43);
+    addShare ? $.__views.userAvatarList.addEventListener("click", addShare) : __defers["$.__views.userAvatarList!click!addShare"] = true;
     $.__views.toolbar = Ti.UI.createView({
+        left: 0,
         bottom: 0,
         height: 44,
+        width: Ti.Platform.displayCaps.platformWidth,
         backgroundGradient: {
             type: "linear",
             startPoint: {
@@ -209,10 +257,10 @@ function Controller() {
                 offset: 0
             }, {
                 color: "#fff",
-                offset: 0.025
+                offset: .025
             }, {
                 color: "#eee",
-                offset: 0.05
+                offset: .05
             }, {
                 color: "#ccc",
                 offset: 1
@@ -220,28 +268,38 @@ function Controller() {
         },
         id: "toolbar"
     });
-    $.__views.__alloyId44.add($.__views.toolbar);
-    $.__views.commentInput = Ti.UI.createTextField({
-        left: 7,
-        top: 7,
-        width: 240,
-        height: 32,
-        font: {
-            fontSize: 14
-        },
-        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        hintText: "添加照片描述",
-        enableReturnKey: !0,
-        zIndex: 1,
-        id: "commentInput"
-    });
+    $.__views.__alloyId39.add($.__views.toolbar);
+    $.__views.commentInput = Ti.UI.createTextField(function() {
+        var o = {};
+        _.extend(o, {
+            left: 7,
+            top: 7,
+            width: 240,
+            height: 32,
+            font: {
+                fontSize: 14
+            },
+            borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+            hintText: "描述这则时光",
+            enableReturnKey: true,
+            autocapitalization: false,
+            autocorrect: false
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 690
+        });
+        _.extend(o, {
+            id: "commentInput"
+        });
+        return o;
+    }());
     $.__views.toolbar.add($.__views.commentInput);
     $.__views.pubButton = Ti.UI.createLabel({
         right: 7,
         top: 7,
         width: 56,
         height: 31,
-        backgroundImage: "buttonBlank.png",
+        backgroundImage: "buttonRound.png",
         color: "#555",
         shadowColor: "#fff",
         shadowOffset: {
@@ -258,23 +316,27 @@ function Controller() {
     });
     $.__views.toolbar.add($.__views.pubButton);
     exports.destroy = function() {
-        __alloyId47.off("fetch destroy change add remove reset", __alloyId48);
+        __alloyId42.off("fetch destroy change add remove reset", __alloyId43);
     };
     _.extend($, $.__views);
+    $.actInd.show();
     Alloy.Globals.showPhoto = showPhoto;
-    var friendsID = [], ownerID = parseInt(Ti.App.Properties.getString("id")), friends = Alloy.Collections.friend;
+    var friendsID = [];
+    var ownerID = parseInt(Ti.App.Properties.getString("id"));
+    var friends = Alloy.Collections.friend;
     friends.fetch();
     var myFriends = filterFunction(friends);
-    myFriends.length == 0 && $.shareLabel.setVisible(!1);
+    0 == myFriends.length && $.shareLabel.setVisible(false);
     $.pub.addEventListener("close", function() {
         $.destroy();
     });
     __defers["$.__views.pub!focus!showKeybroad"] && $.__views.pub.addEventListener("focus", showKeybroad);
     __defers["$.__views.image!click!openZoomImage"] && $.__views.image.addEventListener("click", openZoomImage);
+    __defers["$.__views.image!load!hideActInd"] && $.__views.image.addEventListener("load", hideActInd);
     __defers["$.__views.userAvatarList!click!addShare"] && $.__views.userAvatarList.addEventListener("click", addShare);
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

@@ -1,10 +1,10 @@
 <Alloy>
 	<View class="container">
-		<ImageView onClick="openRecent" id="recentImg" />
-		<ImageView onClick="openMonth" id="monthImg" />
-		<ImageView onClick="showDialog" id="cameraImg" />
-		<ImageView onClick="openYear" id="yearImg" />
-		<ImageView onClick="openRandom" id="randomImg" />
+		<Label onClick="openRecent" id="recentImg" class="bottomIcon" />
+		<Label onClick="openMonth" id="monthImg"  class="bottomIcon" />
+		<Label onClick="showDialog" id="cameraImg"  class="bottomIcon" />
+		<Label onClick="openYear" id="yearImg"  class="bottomIcon" />
+		<Label onClick="openRandom" id="randomImg"  class="bottomIcon" />
 		<OptionDialog id="dialog" cancel="2" onClick="choose" title="添加照片">
 			<Options>
 	            <Option >照相</Option>

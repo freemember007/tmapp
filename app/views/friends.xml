@@ -4,14 +4,14 @@
 		<Label id="top" text="自己人" />
 		<Label id="menuButton" onClick="toggleMenu" />
 		<View id="toolbar">
-        	<TextField id="input"/>
+        	<TextField id="input" onReturn="addFriend"/>
             <Label id="submit" text="添加" onClick="addFriend"/>
         </View>
+        <Label id="hint" text="暂无自己人。\n请添加自己人，以便能分享时光给他们。"/>
 		<View dataCollection="friend" dataTransform="transformFunction" dataFilter="filterFunction" id="userList" >
-			<ImageView image="{avatar}" class="userAvatar">
-				<Label text="{domain_name}" class="userLabel" />
+			<ImageView image="{avatar}" id="userAvatar" >
+				<Label text="{domain_name}" id="userLabel" />
 			</ImageView>
 		</View>
-
 	</Window>
 </Alloy>

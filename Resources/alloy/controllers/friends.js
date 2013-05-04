@@ -1,24 +1,36 @@
 function Controller() {
-    function __alloyId23(e) {
-        var models = filterFunction(__alloyId22), len = models.length, children = $.__views.userList.children;
+    function __alloyId27() {
+        var models = filterFunction(__alloyId26);
+        var len = models.length;
+        var children = $.__views.userList.children;
         for (var d = children.length - 1; d >= 0; d--) $.__views.userList.remove(children[d]);
-        for (var i = 0; i < len; i++) {
-            var __alloyId17 = models[i];
-            __alloyId17.__transform = transformFunction(__alloyId17);
-            var __alloyId19 = Ti.UI.createImageView({
-                preventDefaultImage: !0,
-                left: 10,
-                right: 10,
-                top: 10,
-                bottom: 10,
-                width: 85,
-                height: 85,
-                borderRadius: 5,
-                image: typeof __alloyId17.__transform.avatar != "undefined" ? __alloyId17.__transform.avatar : __alloyId17.get("avatar"),
-                id: "__alloyId18"
-            });
-            $.__views.userList.add(__alloyId19);
-            var __alloyId21 = Ti.UI.createLabel({
+        for (var i = 0; len > i; i++) {
+            var __alloyId23 = models[i];
+            __alloyId23.__transform = transformFunction(__alloyId23);
+            var __alloyId24 = Ti.UI.createImageView(function() {
+                var o = {};
+                _.extend(o, {
+                    preventDefaultImage: true,
+                    left: 15,
+                    top: 15,
+                    width: 85,
+                    height: 85,
+                    borderRadius: 5
+                });
+                Alloy.isTablet && _.extend(o, {
+                    left: 36,
+                    top: 36,
+                    width: 204,
+                    height: 204,
+                    borderRadius: 5
+                });
+                _.extend(o, {
+                    image: "undefined" != typeof __alloyId23.__transform["avatar"] ? __alloyId23.__transform["avatar"] : __alloyId23.get("avatar")
+                });
+                return o;
+            }());
+            $.__views.userList.add(__alloyId24);
+            var __alloyId25 = Ti.UI.createLabel({
                 bottom: 3,
                 font: {
                     fontSize: 12
@@ -30,11 +42,10 @@ function Controller() {
                     y: 1
                 },
                 textAlign: "left",
-                opacity: 0.9,
-                text: typeof __alloyId17.__transform.domain_name != "undefined" ? __alloyId17.__transform.domain_name : __alloyId17.get("domain_name"),
-                id: "__alloyId20"
+                opacity: .9,
+                text: "undefined" != typeof __alloyId23.__transform["domain_name"] ? __alloyId23.__transform["domain_name"] : __alloyId23.get("domain_name")
             });
-            __alloyId19.add(__alloyId21);
+            __alloyId24.add(__alloyId25);
         }
     }
     function filterFunction(collection) {
@@ -44,7 +55,7 @@ function Controller() {
     }
     function transformFunction(model) {
         var transform = model.toJSON();
-        transform.avatar != null ? transform.avatar = Alloy.Globals.sitePath + transform.avatar : transform.avatar = "avatar.png";
+        transform.avatar = null == transform.avatar ? "avatar.png" : Alloy.Globals.sitePath + transform.avatar;
         return transform;
     }
     function addFriend() {
@@ -52,14 +63,16 @@ function Controller() {
             $.input.value = "";
             return;
         }
-        $.input.value == Ti.App.Properties.getString("domain_name") ? util.alert("不可添加自己为自己人") : friends.where({
+        $.input.value == Ti.App.Properties.getString("domain_name") ? util.alert("不可添加自己为自己人") : 9 == friends.where({
             owner: ownerID
-        }).length == 9 ? util.alert("自己人最多可设9人，现在达上限，请删除不必要的自己人。") : friends.length != 0 && friends.where({
+        }).length ? util.alert("自己人最多可设9人，现在达上限，请删除不必要的自己人。") : 0 != friends.length && 0 != friends.where({
             owner: ownerID,
             domain_name: $.input.value
-        }).length != 0 ? util.alert("用户已经在您的自己人列表中！") : util.get("api/userInfo?domain_name=" + $.input.value, function(res) {
+        }).length ? util.alert("用户已经在您的自己人列表中！") : util.send("api/userInfo", {
+            domain_name: $.input.value
+        }, function(res) {
             var data = JSON.parse(res);
-            if (data.success) {
+            if ("success" == data.type) {
                 var friend = Alloy.createModel("friend", {
                     uid: data.uid,
                     owner: ownerID,
@@ -67,6 +80,7 @@ function Controller() {
                     domain_name: data.domain_name
                 });
                 friend.save();
+                $.hint.setVisible(false);
                 friends.add(friend);
             } else util.alert("用户名不存在，请确认添加的用户名是否正确！");
         });
@@ -81,7 +95,7 @@ function Controller() {
             Alloy.Globals.menu.animate({
                 left: -200
             });
-            Alloy.Globals.slide = !1;
+            Alloy.Globals.slide = false;
         } else {
             $.friends.animate({
                 left: 200
@@ -91,28 +105,31 @@ function Controller() {
             });
             $.input.blur();
             $.input.value = "";
-            Alloy.Globals.slide = !0;
+            Alloy.Globals.slide = true;
         }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
     Alloy.Collections.instance("friend");
     $.__views.friends = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        tabBarHidden: !0,
-        navBarHidden: !0,
+        navBarHidden: true,
+        borderRadius: 3,
+        left: 200,
         id: "friends"
     });
-    $.addTopLevelView($.__views.friends);
+    $.__views.friends && $.addTopLevelView($.__views.friends);
     $.__views.top = Ti.UI.createLabel({
-        width: 320,
+        width: Ti.Platform.displayCaps.platformWidth,
         height: 47,
         left: 0,
         top: 0,
-        backgroundImage: "top5.png",
+        backgroundImage: "topBlank.png",
         color: "#555",
-        opacity: 0.9,
         shadowColor: "#fff",
         shadowOffset: {
             x: 1,
@@ -138,11 +155,12 @@ function Controller() {
         id: "menuButton"
     });
     $.__views.friends.add($.__views.menuButton);
-    toggleMenu ? $.__views.menuButton.addEventListener("click", toggleMenu) : __defers["$.__views.menuButton!click!toggleMenu"] = !0;
+    toggleMenu ? $.__views.menuButton.addEventListener("click", toggleMenu) : __defers["$.__views.menuButton!click!toggleMenu"] = true;
     $.__views.toolbar = Ti.UI.createView({
         left: 0,
         top: 44,
         height: 44,
+        width: Ti.Platform.displayCaps.platformWidth,
         backgroundGradient: {
             type: "linear",
             startPoint: {
@@ -158,10 +176,10 @@ function Controller() {
                 offset: 0
             }, {
                 color: "#fff",
-                offset: 0.025
+                offset: .025
             }, {
                 color: "#eee",
-                offset: 0.05
+                offset: .05
             }, {
                 color: "#ccc",
                 offset: 1
@@ -171,26 +189,40 @@ function Controller() {
         id: "toolbar"
     });
     $.__views.friends.add($.__views.toolbar);
-    $.__views.input = Ti.UI.createTextField({
-        left: 7,
-        top: 7,
-        width: 240,
-        height: 32,
-        font: {
-            fontSize: 14
-        },
-        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        hintText: "添加自己人",
-        zIndex: 1,
-        id: "input"
-    });
+    $.__views.input = Ti.UI.createTextField(function() {
+        var o = {};
+        _.extend(o, {
+            left: 7,
+            top: 7,
+            width: 240,
+            height: 32,
+            font: {
+                fontSize: 14
+            },
+            borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+            hintText: "添加自己人",
+            autocapitalization: false,
+            autocorrect: false,
+            enableReturnKey: true,
+            returnKeyType: Ti.UI.RETURNKEY_GO,
+            zIndex: 1
+        });
+        Alloy.isTablet && _.extend(o, {
+            width: 690
+        });
+        _.extend(o, {
+            id: "input"
+        });
+        return o;
+    }());
     $.__views.toolbar.add($.__views.input);
+    addFriend ? $.__views.input.addEventListener("return", addFriend) : __defers["$.__views.input!return!addFriend"] = true;
     $.__views.submit = Ti.UI.createLabel({
         right: 7,
         top: 7,
         width: 56,
         height: 31,
-        backgroundImage: "buttonBlank.png",
+        backgroundImage: "buttonRound.png",
         color: "#555",
         shadowColor: "#fff",
         shadowOffset: {
@@ -206,32 +238,57 @@ function Controller() {
         text: "添加"
     });
     $.__views.toolbar.add($.__views.submit);
-    addFriend ? $.__views.submit.addEventListener("click", addFriend) : __defers["$.__views.submit!click!addFriend"] = !0;
+    addFriend ? $.__views.submit.addEventListener("click", addFriend) : __defers["$.__views.submit!click!addFriend"] = true;
+    $.__views.hint = Ti.UI.createLabel({
+        top: 100,
+        width: 280,
+        height: 280,
+        color: "#666",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 14,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
+        visible: false,
+        id: "hint",
+        text: "暂无自己人。\n请添加自己人，以便能分享时光给他们。"
+    });
+    $.__views.friends.add($.__views.hint);
     $.__views.userList = Ti.UI.createView({
         left: 0,
         top: 100,
-        width: 320,
+        width: Ti.Platform.displayCaps.platformWidth,
+        height: Ti.Platform.displayCaps.platformWidth,
         layout: "horizontal",
         dataTransform: "transformFunction",
         id: "userList"
     });
     $.__views.friends.add($.__views.userList);
-    var __alloyId22 = Alloy.Collections.friend || friend;
-    __alloyId22.on("fetch destroy change add remove reset", __alloyId23);
+    var __alloyId26 = Alloy.Collections["friend"] || friend;
+    __alloyId26.on("fetch destroy change add remove reset", __alloyId27);
     exports.destroy = function() {
-        __alloyId22.off("fetch destroy change add remove reset", __alloyId23);
+        __alloyId26.off("fetch destroy change add remove reset", __alloyId27);
     };
     _.extend($, $.__views);
-    var ownerID = parseInt(Ti.App.Properties.getString("id")), friends = Alloy.Collections.friend;
+    var ownerID = parseInt(Ti.App.Properties.getString("id"));
+    var friends = Alloy.Collections.friend;
     friends.fetch();
+    var myFriends = filterFunction(friends);
+    $.hint.setVisible(0 == myFriends.length ? true : false);
     $.friends.addEventListener("close", function() {
         $.destroy();
     });
     __defers["$.__views.menuButton!click!toggleMenu"] && $.__views.menuButton.addEventListener("click", toggleMenu);
+    __defers["$.__views.input!return!addFriend"] && $.__views.input.addEventListener("return", addFriend);
     __defers["$.__views.submit!click!addFriend"] && $.__views.submit.addEventListener("click", addFriend);
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

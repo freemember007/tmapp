@@ -1,14 +1,14 @@
-var sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
+var sitePath = ENV_DEV? "http://localhost:3000/" : "http://184.82.117.60/";
 
 exports.computeImageSize = function(originImg){
 	var imagefactory = require('ti.imagefactory');
 	var w = originImg.width;
 	var h = originImg.height;
-	var width = 600;
+	var width = 1024;
 	var middleImg = imagefactory.imageAsResized(originImg, {width:width, height:h*(width/w)});
-	middleImg = imagefactory.compress(middleImg, 0.65); //本来上面的函数有压缩功能，但在iPhone下貌似有bug，必须与上面分开写才行，否则格式为png.
-	var thumb = imagefactory.imageAsResized(originImg, {width:120, height:h*(120/w)});
-	thumb = imagefactory.compress(thumb, 0.65);
+	middleImg = imagefactory.compress(middleImg, 0.75); //本来上面的函数有压缩功能，但在iPhone下貌似有bug，必须与上面分开写才行，否则格式为png.
+	var thumb = imagefactory.imageAsResized(originImg, {width:480, height:h*(480/w)});
+	thumb = imagefactory.compress(thumb, 0.75);
 	return {
 		middleImg: {
 			src: middleImg,
@@ -26,10 +26,11 @@ exports.computeImageSize = function(originImg){
 exports.send = function(url, data, onload){
 	var networkType = Ti.Network.getNetworkType();
 	if(networkType == Ti.Network.NETWORK_NONE){
-		alert('无可用网络!');
+		Ti.UI.createAlertDialog({title:"提示", message:"网络连接异常，请检查。", ok:"确定"}).show();
 		return;
 	}
 	var xhr = Titanium.Network.createHTTPClient();
+	xhr.timeout = 60000;
     xhr.onload = function(e){
     	if (this.status != 200) {
 	        alert(e);
@@ -39,7 +40,7 @@ exports.send = function(url, data, onload){
 	    }
     };
     xhr.onerror = function(e){
-        alert(e.error + "测试");
+        alert(e.error);
     };
     xhr.open('POST',sitePath + url);
     xhr.send(data);
@@ -48,7 +49,7 @@ exports.send = function(url, data, onload){
 exports.get = function(url, onload){
 	var networkType = Ti.Network.getNetworkType();
 	if(networkType == Ti.Network.NETWORK_NONE){
-		alert('无可用网络!');
+		Ti.UI.createAlertDialog({title:"提示", message:"网络连接异常，请检查。", ok:"确定"}).show();
 		return;
 	}
 	var xhr = Titanium.Network.createHTTPClient();
@@ -61,7 +62,7 @@ exports.get = function(url, onload){
 	    }
     };
     xhr.onerror = function(e){
-        alert(e.error + "测试");
+        alert(e.error);
     };
     xhr.open('get',sitePath + url);
     xhr.send();

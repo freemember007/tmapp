@@ -1,7 +1,8 @@
 <Alloy>
-	<Window onPostlayout="tableScroolable" onOpen="fetchSharetome">
+	<Window onPostlayout="tableScroolable" onOpen="firstfetchSharetome">
 		<Label id="top" text="分享给我的" />
 		<Label id="menuButton" onClick="toggleMenu" />
+		<Label id="hint" text="暂无人分享时光给你。\n请告诉朋友添加你为自己人，以便他们可以分享时光给他们。"/>
 		<TableView id="table" />
 	</Window>
 </Alloy>

@@ -15,8 +15,8 @@ exports.definition = {
             validate: function(attrs) {
                 for (var key in attrs) {
                     var value = attrs[key];
-                    if (key === "email" && value.length <= 0) return "Error: No email!";
-                    if (key === "password" && value.length <= 0) return "Error: No password!";
+                    if ("email" === key && 0 >= value.length) return "Error: No email!";
+                    if ("password" === key && 0 >= value.length) return "Error: No password!";
                 }
             }
         });

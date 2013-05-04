@@ -1,8 +1,12 @@
-"Window": {
+".window": {
 	backgroundColor: "black",
 	fullscreen: true,
 }
 
-"ImageView":{
-	width: 320,
+"#scrollView":{
+	maxZoomScale: 2,
+}
+
+"#image":{
+	width: Ti.Platform.displayCaps.platformWidth,
 }

@@ -1,33 +1,38 @@
-"Window": {
+".window": {
 	backgroundColor: "#000",
 }
 
 "#top":{
-	width:"100%", height: 47,
+	width:Ti.Platform.displayCaps.platformWidth, height: 47,
 	top:0,
-	backgroundImage: "topBlank.png",
-	color: "#555",
-	shadowColor: "#fff",
-	shadowOffset: {x:1,y:1},
+	backgroundImage: "topBlankBlack.png",
+	color: "#fff",
+	//shadowColor: "#ccc",
+	//shadowOffset: {x:1,y:1},
 	font:{fontSize:20, fontWeight:"bold"},
 	textAlign: "center",
-	opacity: 0.9,
+	opacity: 0.7,
 	zIndex: 1,
 }
 
 "#backButton":{
 	left:10, top:7,
 	width: 56, height: 31,
-	backgroundImage:"backBlank.png",
-	color: "#555",
-	shadowColor: "#fff",
-	shadowOffset: {x:1,y:1},
+	backgroundImage:"backBlankBlack.png",
+	color: "#fff",
+	//shadowColor: "#ccc",
+	//shadowOffset: {x:1,y:1},
 	font:{fontSize:14, fontWeight:"bold"},
 	textAlign: "center",
-	opacity: 0.9,
+	opacity: 1.0,
 	zIndex: 2,
 }
 
 "#scrollableView":{
 	width:330,
+	showPagingControl:true,
+}
+
+"#scrollableView[platform=ios formFactor=tablet]":{
+	width:Ti.Platform.displayCaps.platformWidth,
 }

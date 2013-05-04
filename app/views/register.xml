@@ -10,22 +10,21 @@
 			<Label id="registerTitle" text="注册一个新帐户："/>
 			<View class="inputContainer">
 				<Label class="inputLabel" text="邮箱"/>
-				<TextField id="emailInput" class="input"/>
+				<TextField id="emailInput" class="input" onReturn="focusPassword"/>
 			</View>
 			<View class="inputContainer">
 				<Label class="inputLabel" text="密码"/>
-				<TextField id="passwordInput" class="input"/>
+				<TextField id="passwordInput" class="input" onReturn="focusNickname"/>
 			</View>	
 			<View class="inputContainer">
 				<Label class="inputLabel" text="昵称"/>
-				<TextField id="nicknameInput" class="input"/>
+				<TextField id="nicknameInput" class="input" onReturn="showDialog"/>
 			</View>
 			<View class="inputContainer">
 				<Label class="inputLabel" text="头像"/>
 				<ImageView id="avatar" onClick="showDialog" class="input"/>
 			</View>
 		</View>
-
 		<OptionDialog id="dialog" cancel="2" onClick="choose" title="上传头像">
 			<Options>
 	            <Option >拍照</Option>

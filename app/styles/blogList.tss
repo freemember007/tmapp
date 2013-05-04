@@ -1,11 +1,9 @@
-"Window":{
-	backgroundColor: Alloy.Globals.GUI_bkC,		
+"Window":{		
 	tabBarHidden:true,
-	navBarHidden: true,
 }
 
 "#top":{
-	width:320, height: 47,
+	width:Ti.Platform.displayCaps.platformWidth, height: 47,
 	top:0,left: 0,
 	backgroundImage: "top1.png",
 	zIndex: 1,
@@ -13,8 +11,7 @@
 
 "#menuButton":{
 	left:10, top:9,
-	width: 32, height: 27,
-	backgroundImage:"menuIcon.png",
+	width: 32, height: 32,
 	zIndex: 1,
 }
 
@@ -31,12 +28,13 @@
 "#avatar":{
 	right:10, top:8,
 	width: 30, height: 30,
+	borderRadius: 3,
 	zIndex: 1,
 }
 
 "#table":{
 	left:0, top:44, // 注意要与顶部的4个像素的阴影重叠
-	width: 320,
+	width:Ti.Platform.displayCaps.platformWidth,
 	backgroundColor: Alloy.Globals.GUI_bkC,
 	separatorColor:"transparent",
 	bottom: 49, // 注意要与底部的5个像素的阴影重叠

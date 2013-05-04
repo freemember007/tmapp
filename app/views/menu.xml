@@ -1,6 +1,6 @@
 <Alloy>
 	<Model src="badge" />
-	<Window onTouchstart="touchStart" onTouchmove="touchMove"  >
+	<Window class="window" onTouchstart="touchStart" onTouchmove="touchMove"  >
 		<Label id="mytime" onClick= "openMytime" />
 		<Label id="friends" onClick="openFriends" />
 		<Label id="sharetome" onClick="openSharetome" />

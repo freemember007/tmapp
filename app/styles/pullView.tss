@@ -1,19 +1,24 @@
 "#pullView":{
 	backgroundColor:"#ddd",
-    width:320,
+    width:Ti.Platform.displayCaps.platformWidth,
     height:60,
 }
+
+"#container":{
+	width: 240,
+}
+
 
 "#border1":{
 	backgroundColor:"#ccc",
 	height:1,
-	bottom:1
+	bottom:1,
 }
 
 "#border2":{
 	backgroundColor:"#fff",
 	height:1,
-	bottom:0
+	bottom:0,
 }
 
 "#arrow":{
@@ -21,11 +26,11 @@
 	width:23,
 	height:60,
 	bottom:10,
-	left:20
+	left:0
 }
 
 "#actInd":{
-	left:20,
+	left:0,
 	bottom:13,
 	width:30,
 	height:30,
@@ -34,7 +39,7 @@
 
 "#statusLabel":{
 	text:"下拉刷新",
-	left:55,
+	left:25,
 	width:200,
 	bottom:30,
 	height:"auto",
@@ -47,7 +52,7 @@
 
 "#lastUpdatedLabel":{
 	text:"上次更新: 尚未更新过",
-	left:55,
+	left:25,
 	width:200,
 	bottom:15,
 	height:"auto",

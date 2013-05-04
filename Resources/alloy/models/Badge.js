@@ -8,7 +8,7 @@ exports.definition = {
         defaults: {
             number: 0,
             width: 0,
-            visible: !1
+            visible: false
         },
         adapter: {
             type: "properties",

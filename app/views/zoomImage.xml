@@ -1,5 +1,7 @@
 <Alloy>
-	<Window>
-		<ImageView onClick="closeWin" id="image" />
+	<Window class="window">
+		<ScrollView id="scrollView" onClick="closeWin">
+			<ImageView id="image" />
+		</ScrollView>
 	</Window>
 </Alloy>

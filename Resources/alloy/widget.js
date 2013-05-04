@@ -1,8 +1,11 @@
 function ucfirst(text) {
-    return text ? text[0].toUpperCase() + text.substr(1) : text;
+    if (!text) return text;
+    return text[0].toUpperCase() + text.substr(1);
 }
 
-var Alloy = require("alloy"), widgets = {};
+var Alloy = require("alloy");
+
+var widgets = {};
 
 module.exports = function(widgetId) {
     var self = this;

@@ -1,5 +1,10 @@
-//全局tabGroup
-'#tabGroup':{
-	backgroundColor: Alloy.Globals.GUI_bkC,	
-	navBarHidden: true,
+"Window":{
+	backgroundImage: 'Default.png',
+}
+
+"#actInd":{
+	//left: 135, 
+	bottom: 90,
+    height: 50, width: 50,
+    style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK
 }

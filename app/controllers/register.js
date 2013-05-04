@@ -2,6 +2,9 @@ function back(){
 	$.register.close();
 }
 
+function focusPassword(){$.passwordInput.focus()};
+function focusNickname(){$.nicknameInput.focus()};
+
 function showDialog(){
 	$.dialog.show();
 }
@@ -56,7 +59,7 @@ function register(){
 		var data = JSON.parse(res);
 		if(data.type == "success"){
 			Ti.App.Properties.setString("id", data.id);
-			Ti.App.Properties.setString("email", $.emailInput.value);
+			Ti.App.Properties.setString("email", data.email);
 			Ti.App.Properties.setString("password", $.passwordInput.value);	
 			Ti.App.Properties.setString("domain_name", data.domain_name);		
 			Ti.App.Properties.setString("avatar", data.avatar); // 如果属性为空，将不会记录

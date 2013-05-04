@@ -1,15 +1,12 @@
 "Window": {
-	backgroundColor: Alloy.Globals.GUI_bkC,
-	tabBarHidden:true,
-	navBarHidden: true,
+	left: 200,	
 }
 
 "#top":{
-	width:320, height: 47, left: 0,
+	width:Ti.Platform.displayCaps.platformWidth, height: 47, left: 0,
 	top:0,
-	backgroundImage: "top5.png",
+	backgroundImage: "topBlank.png",
 	color: "#555",
-	opacity: 0.9,
 	shadowColor: "#fff",
 	shadowOffset: {x:1,y:1},
 	font:{fontSize:20, fontWeight:"bold"},
@@ -26,7 +23,7 @@
 
 "#toolbar":{
 	left:0, top:44,// 注意要与顶部的4个像素的阴影重叠
-	height: 44,
+	height: 44, width:Ti.Platform.displayCaps.platformWidth,
     backgroundGradient: {
         type: 'linear',
         startPoint: { x: '50%', y: '0%' },
@@ -42,13 +39,21 @@
 	font: {fontSize: 14},
 	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	hintText:"添加自己人",
+	autocapitalization:false,
+	autocorrect: false,
+	enableReturnKey:true,
+	returnKeyType:Ti.UI.RETURNKEY_GO,
 	zIndex: 1,
+}
+
+"#input[platform=ios formFactor=tablet]":{
+	width:690,
 }
 
 "#submit":{
 	right: 7,top:7,
 	width: 56, height: 31,
-	backgroundImage:"buttonBlank.png",
+	backgroundImage:"buttonRound.png",
 	color: "#555",
 	shadowColor: "#fff",
 	shadowOffset: {x:1,y:1},
@@ -56,18 +61,35 @@
 	textAlign: "center",
 }
 
+"#hint":{
+	top:100,
+	width: 280,height:280,
+	color: "#666",
+	shadowColor: "#fff",
+	shadowOffset: {x:1,y:1},
+	font:{fontSize:14, fontWeight:"bold"},
+	textAlign: "center",
+	visible: false,
+}
+
 "#userList":{
-	left:0, top:100, width: 320,
+	left:0, top:100, width: Ti.Platform.displayCaps.platformWidth,height: Ti.Platform.displayCaps.platformWidth,
 	layout: "horizontal",
 }
 
-".userAvatar":{
-	left:10,right:10,top:10,bottom:10,
+"#userAvatar":{
+	left:15,top:15,
 	width: 85,height: 85,
 	borderRadius:5, 
 }
 
-".userLabel":{
+"#userAvatar[platform=ios formFactor=tablet]":{
+	left:36,top:36,
+	width: 204,height: 204,
+	borderRadius:5, 
+}
+
+"#userLabel":{
 	bottom: 3, 
 	font: {fontSize:12},
 	color: "#fff",

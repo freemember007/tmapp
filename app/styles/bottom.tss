@@ -1,33 +1,22 @@
 ".container": {
-	backgroundImage: "bottom.png",
+	backgroundImage: "bottomRound.png",
 	height: 54,
-	width: 320,
+	width: Ti.Platform.displayCaps.platformWidth,
 	bottom: 0,left: 0,
 	zIndex: 1,
 	layout: "horizontal",
 }
 
-"#recentImg":{
-	image: "recentImg.png",
-	top: 8,
+".bottomIcon":{
+	bottom: 0, 
+	width: 64, height: 49,
+	zIndex: 1,
 }
 
-"#monthImg":{
-	image: "monthImg.png",
-	top: 6,
+".bottomIcon[platform=ios formFactor=tablet]":{
+	width: 153, // 注意不能太大，以免被挤下去。
 }
 
-"#cameraImg":{
-	image: "cameraImg.png",
-	top: 5,
-}
-
-"#yearImg":{
-	image: "yearImg.png",
-	top: 6,
-}
-
-"#randomImg":{
-	image: "randomImg.png",
-	top: 6,
+"#dialog":{
+	bubbleParent:false,
 }

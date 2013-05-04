@@ -6,7 +6,7 @@
 			</Label>
 			<View id="actionContainer">
 				<Label id="timeLabel" />
-				<ImageView id="shareImg" /> 
+				<ImageView id="shareImg" onClick="showShare"/> 
 				<ImageView id="deleteImg" onClick="showDialog" />
 			</View>
 	</TableViewRow>

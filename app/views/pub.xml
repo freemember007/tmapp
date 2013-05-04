@@ -2,11 +2,13 @@
 	<Collection src="friend" />
 	<Window onFocus="showKeybroad">
 
-		<Label id="top" text="记录这一刻" />
+		<Label id="top" text="记录你的时光" />
 		<Label id="cancelButton" text="取消" />
 
-		<View id="imageContainer" />
-		<ImageView id="image" onClick="openZoomImage" />
+		<View id="imageContainer" >
+			<ActivityIndicator id="actInd" />
+		</View>
+		<ImageView id="image" onClick="openZoomImage" onLoad = "hideActInd"/>
 
 		<ScrollView>
         	<Label id="shareLabel" text="  分享给："/>
@@ -19,6 +21,5 @@
 	        </View>
 	        
 		</ScrollView>
-	
 	</Window>
 </Alloy>

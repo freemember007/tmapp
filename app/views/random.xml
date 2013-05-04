@@ -1,7 +1,7 @@
 <Alloy>
 	<Window>
 		<Label id="top" text="随机" />
-		<ScrollView id="scrollView" onDoubletap="zoom">
+		<ScrollView id="scrollView" onSingletap="fetchRandom" onDoubletap="zoom">
 			<ImageView id="image" />
         </ScrollView>
         <Require src="bottom"/>

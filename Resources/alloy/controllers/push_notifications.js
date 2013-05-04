@@ -1,7 +1,9 @@
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
     exports.destroy = function() {};
     _.extend($, $.__views);
     var apns = function() {
@@ -22,10 +24,11 @@ function Controller() {
             },
             callback: function(e) {
                 Titanium.Media.vibrate();
-                var data = JSON.parse(e.data), badge = data.badge;
+                var data = JSON.parse(e.data);
+                var badge = data.badge;
                 badge > 0 && (Titanium.UI.iPhone.appBadge = badge);
                 var message = data.message;
-                if (message != "") {
+                if ("" != message) {
                     var my_alert = Ti.UI.createAlertDialog({
                         title: "",
                         message: message
@@ -41,6 +44,6 @@ function Controller() {
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

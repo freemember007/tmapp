@@ -1,0 +1,13 @@
+<Alloy>
+	<Collection src="friend" />
+	<Window class="window" onBlur="close">
+    	<Label id="shareLabel" text="分享这则时光给："/>
+    	<View dataCollection="friend" dataTransform="transformFunction" dataFilter="filterFunction" id="userAvatarList" onClick="addShare">
+        	<ImageView id="userAvatar" image="{avatar}" uid="{uid}" modelId="{alloy_id}"  />
+        </View>
+        <View id="buttons">
+	        <Label id="cancelButton" text="取 消" onClick="close" />
+	        <Label id="shareButton" text="确 定" onClick="share" />
+	    </View>
+	</Window>
+</Alloy>

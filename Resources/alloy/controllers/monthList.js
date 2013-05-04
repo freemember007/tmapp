@@ -1,6 +1,6 @@
 function Controller() {
     function hideNavBar(e) {
-        if (e.contentOffset.y - offset > 10 && e.contentSize.height > 480 && isHide == 0) {
+        if (e.contentOffset.y - offset > 10 && e.contentSize.height > Ti.Platform.displayCaps.platformHeight && false == isHide) {
             $.top.animate({
                 top: -47
             });
@@ -8,9 +8,9 @@ function Controller() {
                 top: 0
             });
             offset = e.contentOffset.y;
-            isHide = !0;
+            isHide = true;
         }
-        if (e.contentOffset.y - offset < -10 && isHide == 1) {
+        if (-10 > e.contentOffset.y - offset && true == isHide) {
             $.top.animate({
                 top: 0
             });
@@ -18,19 +18,21 @@ function Controller() {
                 top: 44
             });
             offset = e.contentOffset.y;
-            isHide = !1;
+            isHide = false;
         }
-        e.contentOffset.y <= 0 && (offset = 0);
+        0 >= e.contentOffset.y && (offset = 0);
         e.contentOffset.y >= e.contentSize.height - e.size.height && (offset = e.contentSize.height - e.size.height);
     }
     function firstFetchMonth() {
-        if (Ti.App.Properties.hasProperty("monthData") && Ti.App.Properties.getString("monthData") != "{}") {
-            var items = JSON.parse(Ti.App.Properties.getString("monthData")), tabledata = [];
+        if (Ti.App.Properties.hasProperty("monthData") && "{}" != Ti.App.Properties.getString("monthData")) {
+            var items = JSON.parse(Ti.App.Properties.getString("monthData"));
+            var tabledata = [];
             for (key in items) {
                 var arg = {
                     day: key,
                     feeds: items[key]
-                }, row = Alloy.createController("monthRow", arg).getView();
+                };
+                var row = Alloy.createController("monthRow", arg).getView();
                 tabledata.push(row);
             }
             $.table.setData(tabledata);
@@ -44,44 +46,62 @@ function Controller() {
         }, function(res) {
             var data = JSON.parse(res);
             $.monthList.remove(actInd);
-            if (data.type == "success") {
+            if ("success" == data.type) {
                 items = data.items;
                 var tabledata = [];
                 for (key in items) {
                     var arg = {
                         day: key,
                         feeds: items[key]
-                    }, row = Alloy.createController("monthRow", arg).getView();
+                    };
+                    var row = Alloy.createController("monthRow", arg).getView();
                     tabledata.push(row);
                 }
                 $.table.setData(tabledata);
                 Ti.App.Properties.setString("monthData", JSON.stringify(items));
-            } else data.type == "fail" ? alert("用户名或密码错误！") : alert("unknown error");
+            } else "fail" == data.type ? alert("用户名或密码错误！") : alert("unknown error");
         });
     }
     function preFetchMonth() {
-        (!Ti.App.Properties.hasProperty("monthData") || Ti.App.Properties.getString("monthData") == "{}") && fetchMonth();
+        Ti.App.Properties.hasProperty("monthData") && "{}" != Ti.App.Properties.getString("monthData") || fetchMonth();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
     $.__views.monthList = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
-        tabBarHidden: !0,
-        navBarHidden: !0,
+        navBarHidden: true,
+        borderRadius: 3,
+        tabBarHidden: true,
         title: "本月",
         id: "monthList"
     });
-    $.addTopLevelView($.__views.monthList);
-    firstFetchMonth ? $.__views.monthList.addEventListener("open", firstFetchMonth) : __defers["$.__views.monthList!open!firstFetchMonth"] = !0;
-    preFetchMonth ? $.__views.monthList.addEventListener("focus", preFetchMonth) : __defers["$.__views.monthList!focus!preFetchMonth"] = !0;
-    $.__views.top = Ti.UI.createView({
-        width: "100%",
+    $.__views.monthList && $.addTopLevelView($.__views.monthList);
+    firstFetchMonth ? $.__views.monthList.addEventListener("open", firstFetchMonth) : __defers["$.__views.monthList!open!firstFetchMonth"] = true;
+    preFetchMonth ? $.__views.monthList.addEventListener("focus", preFetchMonth) : __defers["$.__views.monthList!focus!preFetchMonth"] = true;
+    $.__views.top = Ti.UI.createLabel({
+        width: Ti.Platform.displayCaps.platformWidth,
         height: 47,
         top: 0,
         backgroundImage: "top2.png",
+        color: "#555",
+        opacity: .9,
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        font: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        textAlign: "center",
         zIndex: 1,
-        id: "top"
+        id: "top",
+        text: "本月"
     });
     $.__views.monthList.add($.__views.top);
     $.__views.table = Ti.UI.createTableView({
@@ -92,16 +112,19 @@ function Controller() {
         id: "table"
     });
     $.__views.monthList.add($.__views.table);
-    hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = !0;
-    $.__views.__alloyId41 = Alloy.createController("bottom", {
-        id: "__alloyId41"
+    hideNavBar ? $.__views.table.addEventListener("scroll", hideNavBar) : __defers["$.__views.table!scroll!hideNavBar"] = true;
+    $.__views.__alloyId36 = Alloy.createController("bottom", {
+        id: "__alloyId36",
+        __parentSymbol: $.__views.monthList
     });
-    $.__views.__alloyId41.setParent($.__views.monthList);
+    $.__views.__alloyId36.setParent($.__views.monthList);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var actInd = Alloy.createController("actInd").getView();
     $.monthList.add(actInd);
-    var offset = 0, isHide = !1, pullView = Alloy.createController("pullView", {
+    var offset = 0;
+    var isHide = false;
+    var pullView = Alloy.createController("pullView", {
         table: $.table,
         fetch: fetchMonth
     }).getView();
@@ -112,6 +135,6 @@ function Controller() {
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

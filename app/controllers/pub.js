@@ -1,3 +1,5 @@
+$.actInd.show();
+
 Alloy.Globals.showPhoto = showPhoto;
 var friendsID = [];
 var ownerID = parseInt(Ti.App.Properties.getString("id"));
@@ -37,10 +39,14 @@ function addShare(e){  // 貌似监听事件不能放在绑定的重复元素上
 }
 
 function showPhoto(imgs){
-	$.pub.remove($.imageContainer);
 	$.image.image = imgs.middleImg.src;
 	$.cancelButton.addEventListener("click",clearPub);
 	$.pubButton.addEventListener("click",pub);
+}
+
+function hideActInd(){
+	$.imageContainer.hide();
+	$.actInd.hide();
 }
 
 function pub(){
@@ -51,8 +57,8 @@ function pub(){
 		if(data.type="success"){
 			clearPub();
 			Alloy.Globals.tabGroup.setActiveTab(Alloy.Globals.tab1);
-			Alloy.Globals.fetchBlog();
 			Alloy.Globals.tableBlog.scrollToTop();
+			Alloy.Globals.fetchBlog();
 		}else{
 			util.alert("上传失败，请重新发布！")
 		}
@@ -60,11 +66,11 @@ function pub(){
 }
 
 function clearPub(){
-	$.pub.add($.imageContainer);
-	$.image.image = "null";
-	$.commentInput.value = "";
 	$.cancelButton.removeEventListener("click",clearPub);//重要！取消show函数定义的监听事件,否则后续事件会触发多次！
 	$.pubButton.removeEventListener("click",pub); 
+	hideActInd();
+	$.image.image = "null";
+	$.commentInput.value = "";
 	$.pub.close();
 };
 

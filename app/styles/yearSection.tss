@@ -5,6 +5,6 @@
 	color: "#333",
 	shadowColor:"#fff",
 	shadowOffset: {x:1,y:1},
-	font:{fontSize:20, fontWeight:'bold',fontFamily:"HelveticaNeue-CondensedBlack" },
+	font:{fontSize:20, fontWeight:'bold'},
 	textAlign: "center",
 }

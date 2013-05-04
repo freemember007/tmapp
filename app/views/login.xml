@@ -9,17 +9,16 @@
 			<Label id="loginTitle" text="登录您的时光帐户："/>
 			<View class="inputContainer">
 				<Label class="inputLabel" text="邮箱"/>
-				<TextField id="emailInput" class="input"/>
+				<TextField id="emailInput" class="input" onReturn="editNext"/>
 			</View>
 			<View class="inputContainer">
 				<Label class="inputLabel" text="密码"/>
-				<TextField id="passwordInput" class="input"/>
+				<TextField id="passwordInput" class="input" onReturn="login"/>
 			</View>	
 			<View id="registerTips">
 				<Label id="registerLabel" text="还没有注册？"/>
 				<Label id="registerButton" text="创建一个时光帐户" onClick="showRegister" />
 			</View>
 		</View>
-
 	</Window>
 </Alloy>

@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 
 for(key in args){
 	var view = Ti.UI.createView({
-		width:105,height:105,
+		width:105*Alloy.CFG.GUI_widthScale,height:105*Alloy.CFG.GUI_widthScale,
 		left:1, bottom:1,
 		
 	})
@@ -11,7 +11,7 @@ for(key in args){
 		date:key + "日", //自定义属性，注意这个是date，下面是data，别搞错了。
 		data:args[key], //自定义属性，为传递数据用
 	})
-	image.image = image.toBlob().imageAsThumbnail(105);
+	image.image = image.toBlob().imageAsThumbnail(210*Alloy.CFG.GUI_widthScale);
 	var label1 = Ti.UI.createLabel({
 		bottom: 5, left: 10,
 		font: {fontSize:12},

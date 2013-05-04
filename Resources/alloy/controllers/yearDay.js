@@ -1,19 +1,24 @@
 function Controller() {
     function back() {
         $.yearDay.close({
-            animated: !0
+            animated: true
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
     $.__views.yearDay = Ti.UI.createWindow({
         backgroundColor: Alloy.Globals.GUI_bkC,
+        navBarHidden: true,
+        borderRadius: 3,
         id: "yearDay"
     });
-    $.addTopLevelView($.__views.yearDay);
+    $.__views.yearDay && $.addTopLevelView($.__views.yearDay);
     $.__views.top = Ti.UI.createLabel({
-        width: "100%",
+        width: Ti.Platform.displayCaps.platformWidth,
         height: 47,
         top: 0,
         backgroundImage: "topBlank.png",
@@ -33,7 +38,7 @@ function Controller() {
     $.__views.yearDay.add($.__views.top);
     $.__views.backButton = Ti.UI.createLabel({
         left: 10,
-        top: 7,
+        top: 8,
         width: 56,
         height: 31,
         backgroundImage: "backBlank.png",
@@ -52,7 +57,7 @@ function Controller() {
         text: "今年"
     });
     $.__views.yearDay.add($.__views.backButton);
-    back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = !0;
+    back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = true;
     $.__views.imageContainer = Ti.UI.createView({
         layout: "horizontal",
         left: 5,
@@ -63,20 +68,24 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var items = arguments[0] || {};
-    for (i = 0; i < items.length; i++) {
-        var url = items[i].url, image = Ti.UI.createImageView({
+    for (var i = 0; items.length > i; i++) {
+        var url = items[i].url;
+        var image = Ti.UI.createImageView({
             left: 0,
             top: 0,
+            width: 101 * Alloy.CFG.GUI_widthScale,
+            height: 101 * Alloy.CFG.GUI_widthScale,
             image: url,
             index: i,
             created_at: items[i].created_at
         });
-        image.image = image.toBlob().imageAsThumbnail(101);
+        image.image = image.toBlob().imageAsThumbnail(202 * Alloy.CFG.GUI_widthScale);
         image.addEventListener("click", function(e) {
             var scrollImage = Alloy.createController("scrollImage", {
                 index: e.source.index,
                 items: items
-            }).getView(), hour = e.source.created_at.match(/[0-9]+:[0-9]+/)[0];
+            }).getView();
+            var hour = e.source.created_at.match(/[0-9]+:[0-9]+/)[0];
             scrollImage.children[0].text = util.formatTime(parseInt(hour)) + " " + hour;
             scrollImage.children[1].text = $.top.text;
             Alloy.Globals.tab4.open(scrollImage);
@@ -87,6 +96,6 @@ function Controller() {
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

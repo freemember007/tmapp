@@ -4,7 +4,7 @@
 }
 
 "#top":{
-	width:320, height: 47,
+	width:Ti.Platform.displayCaps.platformWidth, height: 47,
 	top:0,
 	backgroundImage: "topBlank.png",
 	color: "#555",
@@ -16,7 +16,7 @@
 }
 
 "#cancelButton":{
-	left:10, top:7,
+	left:10, top:8,
 	width: 56, height: 31,
 	backgroundImage:"backBlank.png",
 	color: "#555",
@@ -33,21 +33,38 @@
 	borderColor: "#999",
 }
 
+"#imageContainer[platform=ios formFactor=tablet]":{
+	width:216,height:216,
+}
+
+"#actInd":{
+	style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
+}
+
 "#image":{
 	top:44,
-	width:90,
+	height:120,
 	preventDefaultImage:true,
 }
 
+"#image[platform=ios formFactor=tablet]":{
+	height:288,
+}
+
 "ScrollView":{
-	height: 320,
-	bottom: 0,
+	left:0, bottom: 0,
+	width:Ti.Platform.displayCaps.platformWidth, height:330, //注意，其高度比其内元素+键盘的高度（包括中文下的选择条）大10个像素以上！！！否则中文状态下内容随键盘scroll会出错。
+   	disableBounce:true,
+}
+
+"ScrollView[platform=ios formFactor=tablet]":{
+	height:600,
 }
 
 "#shareLabel":{
 	left:0,bottom:44,
-	width:320,height: 32,
-	//backgroundColor: "#fff",
+	width:Ti.Platform.displayCaps.platformWidth,height: 32,
+	backgroundColor: Alloy.Globals.GUI_bkC,
     opacity: 0.8,
 	font: {fontSize: 14},
 	verticalAlign: "center",
@@ -55,48 +72,53 @@
 	shadowColor: "#fff",
 	shadowOffset: {x:1,y:1},
 	font:{fontSize:12, fontWeight:"bold"},
-	zIndex: 1,
 }
 
 "#userAvatarList":{
-	left: 50,bottom:44,height: 32,
+	left: 50,bottom:44,
+	height: 32,width:"auto",
 	layout: "horizontal",
-	zIndex: 1
+	zIndex: 1,
 }
 
 "#userAvatar":{
-	top:4,left: 8,
-	width: 24, height: 24,
+	left:8, top:4,
+	width:24, height:24,
 	borderRadius:3, 
 	opacity: 0.3,
 }
 
 "#toolbar":{
-	bottom:0,
-	height: 44,
+	left:0, bottom:0,
+	height:44, width: Ti.Platform.displayCaps.platformWidth,
     backgroundGradient: {
         type: 'linear',
         startPoint: { x: '50%', y: '0%' },
         endPoint: { x: '50%', y: '100%' },
         colors: [ { color: '#666', offset: 0.0},{ color: '#fff', offset: 0.025},{ color: '#eee', offset: 0.05}, { color: '#ccc', offset: 1.0 }],
-    } 
+    },
 }
 
 "#commentInput":{
-	left: 7,top:7,
-	width:240,height: 32,
+	left:7, top:7,
+	width:240, height:32,
 	font: {fontSize: 14},
 	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-	hintText:"添加照片描述",
+	hintText:"描述这则时光",
 	enableReturnKey:true, //为空的时候就别return了。
 	//suppressReturn: false, //不允许键盘被压下来
-	zIndex: 1,
+	autocapitalization:false,
+	autocorrect: false,
+}
+
+"#commentInput[platform=ios formFactor=tablet]":{
+	width:690,
 }
 
 "#pubButton":{
-	right: 7,top:7,
-	width: 56, height: 31,
-	backgroundImage:"buttonBlank.png",
+	right:7, top:7,
+	width:56, height:31,
+	backgroundImage:"buttonRound.png",
 	color: "#555",
 	shadowColor: "#fff",
 	shadowOffset: {x:1,y:1},

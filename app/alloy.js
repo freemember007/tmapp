@@ -4,6 +4,8 @@ var util = require("util");
 Alloy.Globals.sitePath = ENV_DEV?"http://localhost:3000/":"http://184.82.117.60/";
 Alloy.Globals.GUI_bkC = "#f3f3f3";
 Alloy.Globals.GUI_FC = "#000";
+Alloy.CFG.GUI_widthScale = Ti.Platform.osname == "iphone"? 1 : 2.4;
+
 if (OS_IOS){
 	Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
 }

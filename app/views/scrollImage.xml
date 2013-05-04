@@ -1,8 +1,7 @@
 <Alloy>
-	<Window>
+	<Window class="window">
 		<Label id="top" />
 		<Label id="backButton" onClick="back" />
-		<ScrollableView id="scrollableView" showPagingControl="true">
-        </ScrollableView>
+		<ScrollableView id="scrollableView" />
 	</Window>
 </Alloy>

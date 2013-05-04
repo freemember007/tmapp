@@ -2,6 +2,12 @@ function Controller() {
     function back() {
         $.register.close();
     }
+    function focusPassword() {
+        $.passwordInput.focus();
+    }
+    function focusNickname() {
+        $.nicknameInput.focus();
+    }
     function showDialog() {
         $.dialog.show();
     }
@@ -10,6 +16,7 @@ function Controller() {
           case 0:
             takePhoto();
             break;
+
           case 1:
             openPhoto();
         }
@@ -23,7 +30,7 @@ function Controller() {
             error: function() {
                 alert("error");
             },
-            allowEditing: !0
+            allowEditing: true
         });
     }
     function takePhoto() {
@@ -35,8 +42,8 @@ function Controller() {
             error: function() {
                 alert("error");
             },
-            saveToPhotoGallery: !0,
-            allowEditing: !0
+            saveToPhotoGallery: true,
+            allowEditing: true
         });
     }
     function showPhoto(imgs) {
@@ -51,9 +58,9 @@ function Controller() {
             device_token: Ti.App.Properties.getString("device_token")
         }, function(res) {
             var data = JSON.parse(res);
-            if (data.type == "success") {
+            if ("success" == data.type) {
                 Ti.App.Properties.setString("id", data.id);
-                Ti.App.Properties.setString("email", $.emailInput.value);
+                Ti.App.Properties.setString("email", data.email);
                 Ti.App.Properties.setString("password", $.passwordInput.value);
                 Ti.App.Properties.setString("domain_name", data.domain_name);
                 Ti.App.Properties.setString("avatar", data.avatar);
@@ -63,20 +70,25 @@ function Controller() {
                 });
                 Alloy.Globals.menu.open();
                 $.register.close();
-            } else data.type == "fail" ? alert("注册失败") : alert("unknown error");
+            } else "fail" == data.type ? alert("注册失败") : alert("unknown error");
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    $model = arguments[0] ? arguments[0].$model : null;
-    var $ = this, exports = {}, __defers = {};
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    var $ = this;
+    var exports = {};
+    var __defers = {};
     $.__views.register = Ti.UI.createWindow({
         backgroundColor: "#f3f3f3",
-        tabBarHidden: !0,
+        navBarHidden: true,
+        borderRadius: 3,
+        tabBarHidden: true,
         id: "register"
     });
-    $.addTopLevelView($.__views.register);
+    $.__views.register && $.addTopLevelView($.__views.register);
     $.__views.top = Ti.UI.createView({
-        width: "100%",
+        width: Ti.Platform.displayCaps.platformWidth,
         height: 47,
         top: 0,
         backgroundImage: "top0.png",
@@ -104,10 +116,10 @@ function Controller() {
         text: "注册"
     });
     $.__views.top.add($.__views.registerButton);
-    register ? $.__views.registerButton.addEventListener("click", register) : __defers["$.__views.registerButton!click!register"] = !0;
+    register ? $.__views.registerButton.addEventListener("click", register) : __defers["$.__views.registerButton!click!register"] = true;
     $.__views.backButton = Ti.UI.createLabel({
         left: 10,
-        top: 7,
+        top: 8,
         width: 56,
         height: 31,
         backgroundImage: "backBlank.png",
@@ -127,7 +139,7 @@ function Controller() {
         text: "返回"
     });
     $.__views.top.add($.__views.backButton);
-    back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = !0;
+    back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = true;
     $.__views.container = Ti.UI.createView({
         top: 55,
         bottom: 10,
@@ -146,26 +158,26 @@ function Controller() {
         text: "注册一个新帐户："
     });
     $.__views.container.add($.__views.registerTitle);
-    $.__views.__alloyId50 = Ti.UI.createView({
+    $.__views.__alloyId45 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId50"
+        id: "__alloyId45"
     });
-    $.__views.container.add($.__views.__alloyId50);
-    $.__views.__alloyId51 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId45);
+    $.__views.__alloyId46 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "邮箱",
-        id: "__alloyId51"
+        id: "__alloyId46"
     });
-    $.__views.__alloyId50.add($.__views.__alloyId51);
+    $.__views.__alloyId45.add($.__views.__alloyId46);
     $.__views.emailInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -174,29 +186,33 @@ function Controller() {
         font: {
             fontSize: 16
         },
+        autocapitalization: false,
+        autocorrect: false,
+        returnKeyType: Ti.UI.RETURNKEY_NEXT,
         id: "emailInput"
     });
-    $.__views.__alloyId50.add($.__views.emailInput);
-    $.__views.__alloyId52 = Ti.UI.createView({
+    $.__views.__alloyId45.add($.__views.emailInput);
+    focusPassword ? $.__views.emailInput.addEventListener("return", focusPassword) : __defers["$.__views.emailInput!return!focusPassword"] = true;
+    $.__views.__alloyId47 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId52"
+        id: "__alloyId47"
     });
-    $.__views.container.add($.__views.__alloyId52);
-    $.__views.__alloyId53 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId47);
+    $.__views.__alloyId48 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "密码",
-        id: "__alloyId53"
+        id: "__alloyId48"
     });
-    $.__views.__alloyId52.add($.__views.__alloyId53);
+    $.__views.__alloyId47.add($.__views.__alloyId48);
     $.__views.passwordInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -205,30 +221,35 @@ function Controller() {
         font: {
             fontSize: 16
         },
-        passwordMask: !0,
+        autocapitalization: false,
+        autocorrect: false,
+        returnKeyType: Ti.UI.RETURNKEY_NEXT,
+        passwordMask: true,
+        keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
         id: "passwordInput"
     });
-    $.__views.__alloyId52.add($.__views.passwordInput);
-    $.__views.__alloyId54 = Ti.UI.createView({
+    $.__views.__alloyId47.add($.__views.passwordInput);
+    focusNickname ? $.__views.passwordInput.addEventListener("return", focusNickname) : __defers["$.__views.passwordInput!return!focusNickname"] = true;
+    $.__views.__alloyId49 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId54"
+        id: "__alloyId49"
     });
-    $.__views.container.add($.__views.__alloyId54);
-    $.__views.__alloyId55 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId49);
+    $.__views.__alloyId50 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "昵称",
-        id: "__alloyId55"
+        id: "__alloyId50"
     });
-    $.__views.__alloyId54.add($.__views.__alloyId55);
+    $.__views.__alloyId49.add($.__views.__alloyId50);
     $.__views.nicknameInput = Ti.UI.createTextField({
         left: 10,
         right: 10,
@@ -237,31 +258,35 @@ function Controller() {
         font: {
             fontSize: 16
         },
+        autocapitalization: false,
+        autocorrect: false,
+        returnKeyType: Ti.UI.RETURNKEY_NEXT,
         id: "nicknameInput"
     });
-    $.__views.__alloyId54.add($.__views.nicknameInput);
-    $.__views.__alloyId56 = Ti.UI.createView({
+    $.__views.__alloyId49.add($.__views.nicknameInput);
+    showDialog ? $.__views.nicknameInput.addEventListener("return", showDialog) : __defers["$.__views.nicknameInput!return!showDialog"] = true;
+    $.__views.__alloyId51 = Ti.UI.createView({
         top: 8,
         height: 34,
         backgroundColor: "white",
         borderColor: "#ccc",
         borderRadius: 2,
         layout: "horizontal",
-        id: "__alloyId56"
+        id: "__alloyId51"
     });
-    $.__views.container.add($.__views.__alloyId56);
-    $.__views.__alloyId57 = Ti.UI.createLabel({
+    $.__views.container.add($.__views.__alloyId51);
+    $.__views.__alloyId52 = Ti.UI.createLabel({
         left: 10,
         height: 34,
         font: {
             fontSize: 16
         },
         text: "头像",
-        id: "__alloyId57"
+        id: "__alloyId52"
     });
-    $.__views.__alloyId56.add($.__views.__alloyId57);
+    $.__views.__alloyId51.add($.__views.__alloyId52);
     $.__views.avatar = Ti.UI.createImageView({
-        preventDefaultImage: !0,
+        preventDefaultImage: true,
         left: 10,
         right: 10,
         height: 34,
@@ -269,31 +294,37 @@ function Controller() {
         font: {
             fontSize: 16
         },
+        autocapitalization: false,
+        autocorrect: false,
+        returnKeyType: Ti.UI.RETURNKEY_NEXT,
         image: "avatar.png",
         id: "avatar"
     });
-    $.__views.__alloyId56.add($.__views.avatar);
-    showDialog ? $.__views.avatar.addEventListener("click", showDialog) : __defers["$.__views.avatar!click!showDialog"] = !0;
-    var __alloyId59 = [];
-    __alloyId59.push("拍照");
-    __alloyId59.push("从相册选取");
-    __alloyId59.push("取消");
+    $.__views.__alloyId51.add($.__views.avatar);
+    showDialog ? $.__views.avatar.addEventListener("click", showDialog) : __defers["$.__views.avatar!click!showDialog"] = true;
+    var __alloyId54 = [];
+    __alloyId54.push("拍照");
+    __alloyId54.push("从相册选取");
+    __alloyId54.push("取消");
     $.__views.dialog = Ti.UI.createOptionDialog({
-        options: __alloyId59,
+        options: __alloyId54,
         id: "dialog",
         cancel: "2",
         title: "上传头像"
     });
-    choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = !0;
+    choose ? $.__views.dialog.addEventListener("click", choose) : __defers["$.__views.dialog!click!choose"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     __defers["$.__views.registerButton!click!register"] && $.__views.registerButton.addEventListener("click", register);
     __defers["$.__views.backButton!click!back"] && $.__views.backButton.addEventListener("click", back);
+    __defers["$.__views.emailInput!return!focusPassword"] && $.__views.emailInput.addEventListener("return", focusPassword);
+    __defers["$.__views.passwordInput!return!focusNickname"] && $.__views.passwordInput.addEventListener("return", focusNickname);
+    __defers["$.__views.nicknameInput!return!showDialog"] && $.__views.nicknameInput.addEventListener("return", showDialog);
     __defers["$.__views.avatar!click!showDialog"] && $.__views.avatar.addEventListener("click", showDialog);
     __defers["$.__views.dialog!click!choose"] && $.__views.dialog.addEventListener("click", choose);
     _.extend($, exports);
 }
 
-var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._, $model;
+var Alloy = require("alloy"), Backbone = Alloy.Backbone, _ = Alloy._;
 
 module.exports = Controller;

@@ -3,7 +3,7 @@
 }
 
 "#top":{
-	width:"100%", height: 47,
+	width:Ti.Platform.displayCaps.platformWidth, height: 47,
 	top:0,
 	backgroundImage: "topBlank.png",
 	color: "#555",
@@ -14,7 +14,7 @@
 }
 
 "#backButton":{
-	left:10, top:7,
+	left:10, top:8,
 	width: 56, height: 31,
 	backgroundImage:"backBlank.png",
 	color: "#555",

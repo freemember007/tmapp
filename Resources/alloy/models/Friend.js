@@ -16,8 +16,8 @@ exports.definition = {
             validate: function(attrs) {
                 for (var key in attrs) {
                     var value = attrs[key];
-                    if (key === "uid" && value.length <= 0) return "Error: No uid!";
-                    if (key === "domain_name" && value.length <= 0) return "Error: No domain_name!";
+                    if ("uid" === key && 0 >= value.length) return "Error: No uid!";
+                    if ("domain_name" === key && 0 >= value.length) return "Error: No domain_name!";
                 }
             }
         });
