@@ -69,7 +69,7 @@ function Controller() {
     _.extend($, $.__views);
     var items = arguments[0] || {};
     for (var i = 0; items.length > i; i++) {
-        var url = items[i].url;
+        var url = Alloy.Globals.sitePath + items[i].url;
         var image = Ti.UI.createImageView({
             left: 0,
             top: 0,

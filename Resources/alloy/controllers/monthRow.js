@@ -59,7 +59,7 @@ function Controller() {
     for (var i = 0; items.length > i; i++) {
         if (3 > i) {
             var image = Ti.UI.createImageView({
-                image: items[i].url,
+                image: Alloy.Globals.sitePath + items[i].url,
                 width: 75 * Alloy.CFG.GUI_widthScale,
                 height: 75 * Alloy.CFG.GUI_widthScale
             });
@@ -69,7 +69,7 @@ function Controller() {
         if (4 == i) {
             var view = Ti.UI.createView({});
             var image = Ti.UI.createImageView({
-                image: items[i].url,
+                image: Alloy.Globals.sitePath + items[i].url,
                 width: 75 * Alloy.CFG.GUI_widthScale,
                 height: 75 * Alloy.CFG.GUI_widthScale
             });

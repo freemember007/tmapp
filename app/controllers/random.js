@@ -12,7 +12,7 @@ function fetchRandom(){
 		if(data.type == "success"){
 			item = data.item;
 			if (item.url != null){
-				$.image.image = item.url;
+				$.image.image = Alloy.Globals.sitePath + item.url;
 				$.scrollView.zoomScale = 1.0; //复位一下。
 			};
 		}else if(data.type == "fail"){

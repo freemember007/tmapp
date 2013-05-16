@@ -14,7 +14,7 @@ function Controller() {
             if ("success" == data.type) {
                 item = data.item;
                 if (null != item.url) {
-                    $.image.image = item.url;
+                    $.image.image = Alloy.Globals.sitePath + item.url;
                     $.scrollView.zoomScale = 1;
                 }
             } else "fail" == data.type ? alert("用户名或密码错误！") : alert("unknown error");

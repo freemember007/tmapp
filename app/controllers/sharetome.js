@@ -97,7 +97,7 @@ function setData(data,isAppend){
 			var image = Ti.UI.createImageView({
 				top:10*Alloy.CFG.GUI_widthScale, width:286*Alloy.CFG.GUI_widthScale,
 				preventDefaultImage:true,
-				image:items[i].url,	
+				image:Alloy.Globals.sitePath + items[i].url,	
 			})
 			imageContainer.addEventListener("click",function(e){
 				if(e.source.image!==undefined){

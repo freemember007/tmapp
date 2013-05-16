@@ -1,10 +1,10 @@
-var sitePath = ENV_DEV? "http://localhost:3000/" : "http://184.82.117.60/";
+var sitePath = ENV_DEV? "http://localhost:3000/" : "http://tmweb.ap01.aws.af.cm/";
 
 exports.computeImageSize = function(originImg){
 	var imagefactory = require('ti.imagefactory');
 	var w = originImg.width;
 	var h = originImg.height;
-	var width = 1024;
+	var width = 960;
 	var middleImg = imagefactory.imageAsResized(originImg, {width:width, height:h*(width/w)});
 	middleImg = imagefactory.compress(middleImg, 0.75); //本来上面的函数有压缩功能，但在iPhone下貌似有bug，必须与上面分开写才行，否则格式为png.
 	var thumb = imagefactory.imageAsResized(originImg, {width:480, height:h*(480/w)});

@@ -1,5 +1,5 @@
 var args = arguments[0] || {};
-$.image.image = args.url;
+$.image.image = Alloy.Globals.sitePath + args.url;
 $.shareImg.itemID = args.id; // 自定义属性，为分享做准备。
 if(Ti.Platform.osname == "iphone"){
 	if($.image.toBlob().height <  $.image.toBlob().width){ // 注意：性能可能会受影响

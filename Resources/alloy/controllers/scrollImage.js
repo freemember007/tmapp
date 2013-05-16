@@ -81,7 +81,7 @@ function Controller() {
         });
         var image = Ti.UI.createImageView({
             width: Ti.Platform.displayCaps.platformWidth,
-            image: items[i].url,
+            image: Alloy.Globals.sitePath + items[i].url,
             preventDefaultImage: true
         });
         view.add(image);

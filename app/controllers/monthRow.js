@@ -4,7 +4,7 @@ var items = args.feeds;
 for(var i=0; i<items.length; i++){
 	if(i<3){
 		var image = Ti.UI.createImageView({
-			image:items[i].url,
+			image:Alloy.Globals.sitePath + items[i].url,
 			width:75*Alloy.CFG.GUI_widthScale,height:75*Alloy.CFG.GUI_widthScale,
 		})
 		image.image = image.toBlob().imageAsThumbnail(150*Alloy.CFG.GUI_widthScale); //为兼容iphone4，分辨是位置的2倍
@@ -14,7 +14,7 @@ for(var i=0; i<items.length; i++){
 		var view = Ti.UI.createView({
 		})
 		var image = Ti.UI.createImageView({
-			image:items[i].url,
+			image:Alloy.Globals.sitePath + items[i].url,
 			width:75*Alloy.CFG.GUI_widthScale,height:75*Alloy.CFG.GUI_widthScale,
 		})
 		var label = Ti.UI.createLabel({

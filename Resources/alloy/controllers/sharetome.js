@@ -112,7 +112,7 @@ function Controller() {
                     top: 10 * Alloy.CFG.GUI_widthScale,
                     width: 286 * Alloy.CFG.GUI_widthScale,
                     preventDefaultImage: true,
-                    image: items[i].url
+                    image: Alloy.Globals.sitePath + items[i].url
                 });
                 imageContainer.addEventListener("click", function(e) {
                     void 0 !== e.source.image && Alloy.createController("zoomImage", e.source.image).getView();

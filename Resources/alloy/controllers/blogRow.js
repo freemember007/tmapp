@@ -167,7 +167,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    $.image.image = args.url;
+    $.image.image = Alloy.Globals.sitePath + args.url;
     $.shareImg.itemID = args.id;
     $.container.backgroundImage = "iphone" == Ti.Platform.osname ? $.image.toBlob().height < $.image.toBlob().width ? "image_back_wide.png" : "image_back_high.png" : "image_back.png";
     var hour = args.created_at.match(/[0-9]+:[0-9]+/)[0];

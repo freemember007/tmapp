@@ -7,7 +7,7 @@ for(key in args){
 		
 	})
 	var image = Ti.UI.createImageView({
-		image:args[key][0].url,
+		image:Alloy.Globals.sitePath + args[key][0].url,
 		date:key + "日", //自定义属性，注意这个是date，下面是data，别搞错了。
 		data:args[key], //自定义属性，为传递数据用
 	})

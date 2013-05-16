@@ -1,7 +1,7 @@
 var items = arguments[0] || {};
 
 for(var i=0; i<items.length; i++){
-	var url = items[i].url;
+	var url = Alloy.Globals.sitePath + items[i].url;
 	var image = Ti.UI.createImageView({
 		left:2,bottom:2, //重要，否则返回时位置会变
 		width:101*Alloy.CFG.GUI_widthScale, height:101*Alloy.CFG.GUI_widthScale,

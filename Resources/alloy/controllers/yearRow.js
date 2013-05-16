@@ -22,7 +22,7 @@ function Controller() {
             bottom: 1
         });
         var image = Ti.UI.createImageView({
-            image: args[key][0].url,
+            image: Alloy.Globals.sitePath + args[key][0].url,
             date: key + "日",
             data: args[key]
         });
