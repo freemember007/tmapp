@@ -73,5 +73,8 @@
 }
 
 "#avatar":{
-	image:"avatar.png"
+	image:"avatar.png",
+	width: 32,
+	height: 32,
+	left: 100,
 }

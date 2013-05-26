@@ -287,9 +287,9 @@ function Controller() {
     $.__views.__alloyId51.add($.__views.__alloyId52);
     $.__views.avatar = Ti.UI.createImageView({
         preventDefaultImage: true,
-        left: 10,
+        left: 100,
         right: 10,
-        height: 34,
+        height: 32,
         color: "#666",
         font: {
             fontSize: 16
@@ -298,6 +298,7 @@ function Controller() {
         autocorrect: false,
         returnKeyType: Ti.UI.RETURNKEY_NEXT,
         image: "avatar.png",
+        width: 32,
         id: "avatar"
     });
     $.__views.__alloyId51.add($.__views.avatar);

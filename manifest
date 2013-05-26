@@ -1,9 +1,9 @@
-#appname:tmapp
-#appid:com.xjp.tmapp
-#type:ipad
+#appname:TimeNote
+#appid:com.xjp.timenote
+#type:mobile
 #guid:703b49fc-9a03-44fe-ab10-054a2cff2f46
 #version:1.0
 #publisher:xjp
-#url:timenote.me
+#url:http://timenote.me
 #image:appicon.png
 #desc:not specified

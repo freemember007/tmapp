@@ -2,7 +2,7 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 var util = require("util");
 
-Alloy.Globals.sitePath = "http://tmweb.ap01.aws.af.cm/";
+Alloy.Globals.sitePath = "http://localhost:3000/";
 
 Alloy.Globals.GUI_bkC = "#f3f3f3";
 
