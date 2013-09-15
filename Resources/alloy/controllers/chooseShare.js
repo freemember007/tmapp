@@ -1,5 +1,6 @@
 function Controller() {
     function __alloyId20() {
+        __alloyId20.opts || {};
         var models = filterFunction(__alloyId19);
         var len = models.length;
         var children = $.__views.userAvatarList.children;
@@ -63,8 +64,10 @@ function Controller() {
         $.chooseShare.close();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "chooseShare";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -78,32 +81,23 @@ function Controller() {
     });
     $.__views.chooseShare && $.addTopLevelView($.__views.chooseShare);
     close ? $.__views.chooseShare.addEventListener("blur", close) : __defers["$.__views.chooseShare!blur!close"] = true;
-    $.__views.shareLabel = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            left: 25,
-            top: 90,
-            height: 36,
-            font: {
-                fontSize: 14,
-                fontWeight: "bold"
-            },
-            color: "#666",
-            shadowColor: "#fff",
-            shadowOffset: {
-                x: 1,
-                y: 1
-            }
-        });
-        Alloy.isTablet && _.extend(o, {
-            top: 240
-        });
-        _.extend(o, {
-            id: "shareLabel",
-            text: "分享这则时光给："
-        });
-        return o;
-    }());
+    $.__views.shareLabel = Ti.UI.createLabel({
+        left: 25,
+        top: 90,
+        height: 36,
+        font: {
+            fontSize: 14,
+            fontWeight: "bold"
+        },
+        color: "#666",
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        id: "shareLabel",
+        text: "分享这则时光给："
+    });
     $.__views.chooseShare.add($.__views.shareLabel);
     $.__views.userAvatarList = Ti.UI.createView({
         left: 15,
@@ -124,60 +118,42 @@ function Controller() {
         id: "buttons"
     });
     $.__views.chooseShare.add($.__views.buttons);
-    $.__views.cancelButton = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            top: 0,
-            left: 80,
-            width: 70,
-            height: 36,
-            font: {
-                size: 14
-            },
-            color: "#999",
-            textAlign: "center",
-            backgroundColor: "#ddd",
-            borderColor: "#ccc",
-            borderRadius: 5,
-            shadowColor: "#fff"
-        });
-        Alloy.isTablet && _.extend(o, {
-            left: 260
-        });
-        _.extend(o, {
-            id: "cancelButton",
-            text: "取 消"
-        });
-        return o;
-    }());
+    $.__views.cancelButton = Ti.UI.createLabel({
+        top: 0,
+        left: 80,
+        width: 70,
+        height: 36,
+        font: {
+            size: 14
+        },
+        color: "#999",
+        textAlign: "center",
+        backgroundColor: "#ddd",
+        borderColor: "#ccc",
+        borderRadius: 5,
+        shadowColor: "#fff",
+        id: "cancelButton",
+        text: "取 消"
+    });
     $.__views.buttons.add($.__views.cancelButton);
     close ? $.__views.cancelButton.addEventListener("click", close) : __defers["$.__views.cancelButton!click!close"] = true;
-    $.__views.shareButton = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            top: 0,
-            right: 80,
-            width: 70,
-            height: 36,
-            font: {
-                size: 14
-            },
-            color: "#fff",
-            textAlign: "center",
-            backgroundColor: "#51A351",
-            borderColor: "#387038",
-            borderRadius: 5,
-            shadowColor: "#ccc"
-        });
-        Alloy.isTablet && _.extend(o, {
-            right: 260
-        });
-        _.extend(o, {
-            id: "shareButton",
-            text: "确 定"
-        });
-        return o;
-    }());
+    $.__views.shareButton = Ti.UI.createLabel({
+        top: 0,
+        right: 80,
+        width: 70,
+        height: 36,
+        font: {
+            size: 14
+        },
+        color: "#fff",
+        textAlign: "center",
+        backgroundColor: "#51A351",
+        borderColor: "#387038",
+        borderRadius: 5,
+        shadowColor: "#ccc",
+        id: "shareButton",
+        text: "确 定"
+    });
     $.__views.buttons.add($.__views.shareButton);
     share ? $.__views.shareButton.addEventListener("click", share) : __defers["$.__views.shareButton!click!share"] = true;
     exports.destroy = function() {

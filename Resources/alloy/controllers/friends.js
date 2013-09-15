@@ -1,5 +1,6 @@
 function Controller() {
     function __alloyId27() {
+        __alloyId27.opts || {};
         var models = filterFunction(__alloyId26);
         var len = models.length;
         var children = $.__views.userList.children;
@@ -7,28 +8,15 @@ function Controller() {
         for (var i = 0; len > i; i++) {
             var __alloyId23 = models[i];
             __alloyId23.__transform = transformFunction(__alloyId23);
-            var __alloyId24 = Ti.UI.createImageView(function() {
-                var o = {};
-                _.extend(o, {
-                    preventDefaultImage: true,
-                    left: 15,
-                    top: 15,
-                    width: 85,
-                    height: 85,
-                    borderRadius: 5
-                });
-                Alloy.isTablet && _.extend(o, {
-                    left: 36,
-                    top: 36,
-                    width: 204,
-                    height: 204,
-                    borderRadius: 5
-                });
-                _.extend(o, {
-                    image: "undefined" != typeof __alloyId23.__transform["avatar"] ? __alloyId23.__transform["avatar"] : __alloyId23.get("avatar")
-                });
-                return o;
-            }());
+            var __alloyId24 = Ti.UI.createImageView({
+                preventDefaultImage: true,
+                left: 15,
+                top: 15,
+                width: 85,
+                height: 85,
+                borderRadius: 5,
+                image: "undefined" != typeof __alloyId23.__transform["avatar"] ? __alloyId23.__transform["avatar"] : __alloyId23.get("avatar")
+            });
             $.__views.userList.add(__alloyId24);
             var __alloyId25 = Ti.UI.createLabel({
                 bottom: 3,
@@ -109,8 +97,10 @@ function Controller() {
         }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "friends";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -189,32 +179,23 @@ function Controller() {
         id: "toolbar"
     });
     $.__views.friends.add($.__views.toolbar);
-    $.__views.input = Ti.UI.createTextField(function() {
-        var o = {};
-        _.extend(o, {
-            left: 7,
-            top: 7,
-            width: 240,
-            height: 32,
-            font: {
-                fontSize: 14
-            },
-            borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-            hintText: "添加自己人",
-            autocapitalization: false,
-            autocorrect: false,
-            enableReturnKey: true,
-            returnKeyType: Ti.UI.RETURNKEY_GO,
-            zIndex: 1
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 690
-        });
-        _.extend(o, {
-            id: "input"
-        });
-        return o;
-    }());
+    $.__views.input = Ti.UI.createTextField({
+        left: 7,
+        top: 7,
+        width: 240,
+        height: 32,
+        font: {
+            fontSize: 14
+        },
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        hintText: "添加自己人",
+        autocapitalization: false,
+        autocorrect: false,
+        enableReturnKey: true,
+        returnKeyType: Ti.UI.RETURNKEY_GO,
+        zIndex: 1,
+        id: "input"
+    });
     $.__views.toolbar.add($.__views.input);
     addFriend ? $.__views.input.addEventListener("return", addFriend) : __defers["$.__views.input!return!addFriend"] = true;
     $.__views.submit = Ti.UI.createLabel({
@@ -256,7 +237,7 @@ function Controller() {
         textAlign: "center",
         visible: false,
         id: "hint",
-        text: "暂无自己人。\n请添加自己人，以便能分享时光给他们。"
+        text: "暂无自己人。\\n请添加自己人，以便能分享时光给他们。"
     });
     $.__views.friends.add($.__views.hint);
     $.__views.userList = Ti.UI.createView({

@@ -1,7 +1,9 @@
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "blogSection";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     $.__views.blogSection = Ti.UI.createTableViewSection({
@@ -16,80 +18,53 @@ function Controller() {
         text: "",
         id: "Container"
     });
-    $.__views.dayLabel = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            left: 10,
-            height: 44,
-            font: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 32,
-                fontWeight: "bold"
-            },
-            shadowColor: "#fff",
-            shadowOffset: {
-                x: 1,
-                y: 1
-            }
-        });
-        Alloy.isTablet && _.extend(o, {
-            left: 24
-        });
-        _.extend(o, {
-            id: "dayLabel"
-        });
-        return o;
-    }());
+    $.__views.dayLabel = Ti.UI.createLabel({
+        left: 10,
+        height: 44,
+        font: {
+            fontFamily: "HelveticaNeue-CondensedBlack",
+            fontSize: 32,
+            fontWeight: "bold"
+        },
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        id: "dayLabel"
+    });
     $.__views.Container.add($.__views.dayLabel);
-    $.__views.weekLabel = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            left: 50,
-            top: 9,
-            font: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 12,
-                fontWeight: "bold"
-            },
-            shadowColor: "#fff",
-            shadowOffset: {
-                x: 1,
-                y: 1
-            }
-        });
-        Alloy.isTablet && _.extend(o, {
-            left: 64
-        });
-        _.extend(o, {
-            id: "weekLabel"
-        });
-        return o;
-    }());
+    $.__views.weekLabel = Ti.UI.createLabel({
+        left: 50,
+        top: 9,
+        font: {
+            fontFamily: "HelveticaNeue-CondensedBlack",
+            fontSize: 12,
+            fontWeight: "bold"
+        },
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        id: "weekLabel"
+    });
     $.__views.Container.add($.__views.weekLabel);
-    $.__views.monthLabel = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            left: 48,
-            bottom: 7,
-            font: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 12,
-                fontWeight: "bold"
-            },
-            shadowColor: "#fff",
-            shadowOffset: {
-                x: 1,
-                y: 1
-            }
-        });
-        Alloy.isTablet && _.extend(o, {
-            left: 62
-        });
-        _.extend(o, {
-            id: "monthLabel"
-        });
-        return o;
-    }());
+    $.__views.monthLabel = Ti.UI.createLabel({
+        left: 48,
+        bottom: 7,
+        font: {
+            fontFamily: "HelveticaNeue-CondensedBlack",
+            fontSize: 12,
+            fontWeight: "bold"
+        },
+        shadowColor: "#fff",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        id: "monthLabel"
+    });
     $.__views.Container.add($.__views.monthLabel);
     $.__views.blogSection.headerView = $.__views.Container;
     exports.destroy = function() {};

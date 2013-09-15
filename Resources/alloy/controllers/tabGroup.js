@@ -1,7 +1,9 @@
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "tabGroup";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     $.__views.tabGroup = Ti.UI.createTabGroup({
@@ -85,7 +87,7 @@ function Controller() {
     }
     var badge = Alloy.Models.instance("badge");
     badge.set({
-        number: Ti.UI.iPhone.getAppBadge()
+        number: 0
     });
     0 == badge.get("number") ? badge.set({
         visible: false,
@@ -98,43 +100,6 @@ function Controller() {
         width: 32
     });
     badge.save();
-    Titanium.Network.registerForPushNotifications({
-        types: [ Titanium.Network.NOTIFICATION_TYPE_BADGE, Titanium.Network.NOTIFICATION_TYPE_ALERT, Titanium.Network.NOTIFICATION_TYPE_SOUND ],
-        success: function(e) {
-            var device_token = e.deviceToken;
-            Ti.App.Properties.setString("device_token", device_token);
-        },
-        error: function(e) {
-            Ti.API.info("Error during registration: " + e.error);
-        },
-        callback: function() {
-            if ("true" == Ti.App.Properties.getString("isInForeground")) {
-                var badgeCount = Ti.UI.iPhone.getAppBadge();
-                badgeCount += 1;
-                Ti.UI.iPhone.setAppBadge(badgeCount);
-                badge.set({
-                    number: badgeCount
-                });
-                0 == badge.get("number") ? badge.set({
-                    visible: false,
-                    width: 0
-                }) : 10 > badge.get("number") ? badge.set({
-                    visible: true,
-                    width: 22
-                }) : badge.set({
-                    visible: true,
-                    width: 32
-                });
-                badge.save();
-            } else if (Alloy.Globals.currentWindow != Alloy.Globals.sharetome) {
-                void 0 != Alloy.Globals.currentWindow && Alloy.Globals.currentWindow.close();
-                Alloy.Globals.sharetome.open({
-                    left: 0
-                });
-                Alloy.Globals.currentWindow = Alloy.Globals.sharetome;
-            }
-        }
-    });
     Alloy.Globals.tabGroup = $.tabGroup;
     Alloy.Globals.tab1 = $.tab1;
     Alloy.Globals.tab2 = $.tab2;

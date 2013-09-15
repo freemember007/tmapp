@@ -36,8 +36,10 @@ function Controller() {
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "blogRow";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -48,84 +50,45 @@ function Controller() {
         id: "blogRow"
     });
     $.__views.blogRow && $.addTopLevelView($.__views.blogRow);
-    $.__views.container = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            top: 0,
-            width: 308,
-            backgroundImage: "image_back.png",
-            layout: "vertical"
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 739
-        });
-        _.extend(o, {
-            text: "",
-            id: "container"
-        });
-        return o;
-    }());
+    $.__views.container = Ti.UI.createLabel({
+        top: 0,
+        width: 308,
+        backgroundImage: "image_back.png",
+        layout: "vertical",
+        text: "",
+        id: "container"
+    });
     $.__views.blogRow.add($.__views.container);
     openZoomImage ? $.__views.container.addEventListener("click", openZoomImage) : __defers["$.__views.container!click!openZoomImage"] = true;
-    $.__views.image = Ti.UI.createImageView(function() {
-        var o = {};
-        _.extend(o, {
-            preventDefaultImage: true,
-            top: 9,
-            width: 286
-        });
-        Alloy.isTablet && _.extend(o, {
-            top: 22,
-            width: 686
-        });
-        _.extend(o, {
-            id: "image"
-        });
-        return o;
-    }());
+    $.__views.image = Ti.UI.createImageView({
+        preventDefaultImage: true,
+        top: 9,
+        width: 286,
+        id: "image"
+    });
     $.__views.container.add($.__views.image);
-    $.__views.label = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            width: 286,
-            font: {
-                fontSize: 14,
-                fontWeight: "bold"
-            },
-            color: "#555",
-            shadowColor: "#eee",
-            shadowOffset: {
-                x: 1,
-                y: 1
-            },
-            backgroundColor: "transparent"
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 686
-        });
-        _.extend(o, {
-            id: "label"
-        });
-        return o;
-    }());
+    $.__views.label = Ti.UI.createLabel({
+        width: 286,
+        font: {
+            fontSize: 14,
+            fontWeight: "bold"
+        },
+        color: "#555",
+        shadowColor: "#eee",
+        shadowOffset: {
+            x: 1,
+            y: 1
+        },
+        backgroundColor: "transparent",
+        id: "label"
+    });
     $.__views.container.add($.__views.label);
-    $.__views.actionContainer = Ti.UI.createView(function() {
-        var o = {};
-        _.extend(o, {
-            bottom: 5,
-            height: 30,
-            width: 286
-        });
-        Alloy.isTablet && _.extend(o, {
-            bottom: 12,
-            height: 72,
-            width: 686
-        });
-        _.extend(o, {
-            id: "actionContainer"
-        });
-        return o;
-    }());
+    $.__views.actionContainer = Ti.UI.createView({
+        bottom: 5,
+        height: 30,
+        width: 286,
+        id: "actionContainer"
+    });
     $.__views.blogRow.add($.__views.actionContainer);
     $.__views.timeLabel = Ti.UI.createLabel({
         left: 0,
@@ -169,7 +132,7 @@ function Controller() {
     var args = arguments[0] || {};
     $.image.image = Alloy.Globals.sitePath + args.url;
     $.shareImg.itemID = args.id;
-    $.container.backgroundImage = "iphone" == Ti.Platform.osname ? $.image.toBlob().height < $.image.toBlob().width ? "image_back_wide.png" : "image_back_high.png" : "image_back.png";
+    $.container.backgroundImage = "image_back.png";
     var hour = args.created_at.match(/[0-9]+:[0-9]+/)[0];
     $.timeLabel.text = util.formatTime(parseInt(hour)) + " " + hour;
     if ("" == args.content) $.label.height = 11 * Alloy.CFG.GUI_widthScale; else {

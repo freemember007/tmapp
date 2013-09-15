@@ -176,8 +176,10 @@ function Controller() {
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "sharetome";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -242,7 +244,7 @@ function Controller() {
         visible: false,
         zIndex: 1,
         id: "hint",
-        text: "暂无人分享时光给你。\n请告诉朋友添加你为自己人，以便他们可以分享时光给他们。"
+        text: "暂无人分享时光给你。\\n请告诉朋友添加你为自己人，以便他们可以分享时光给他们。"
     });
     $.__views.sharetome.add($.__views.hint);
     $.__views.table = Ti.UI.createTableView({

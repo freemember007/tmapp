@@ -1,4 +1,4 @@
-var sitePath = "http://localhost:3000/";
+var sitePath = "http://tmweb.ap01.aws.af.cm/";
 
 exports.computeImageSize = function(originImg) {
     var imagefactory = require("ti.imagefactory");

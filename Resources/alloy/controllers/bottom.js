@@ -53,8 +53,10 @@ function Controller() {
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "bottom";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -69,94 +71,49 @@ function Controller() {
         id: "bottom"
     });
     $.__views.bottom && $.addTopLevelView($.__views.bottom);
-    $.__views.recentImg = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            bottom: 0,
-            width: 64,
-            height: 49,
-            zIndex: 1
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 153
-        });
-        _.extend(o, {
-            id: "recentImg"
-        });
-        return o;
-    }());
+    $.__views.recentImg = Ti.UI.createLabel({
+        bottom: 0,
+        width: 64,
+        height: 49,
+        zIndex: 1,
+        id: "recentImg"
+    });
     $.__views.bottom.add($.__views.recentImg);
     openRecent ? $.__views.recentImg.addEventListener("click", openRecent) : __defers["$.__views.recentImg!click!openRecent"] = true;
-    $.__views.monthImg = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            bottom: 0,
-            width: 64,
-            height: 49,
-            zIndex: 1
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 153
-        });
-        _.extend(o, {
-            id: "monthImg"
-        });
-        return o;
-    }());
+    $.__views.monthImg = Ti.UI.createLabel({
+        bottom: 0,
+        width: 64,
+        height: 49,
+        zIndex: 1,
+        id: "monthImg"
+    });
     $.__views.bottom.add($.__views.monthImg);
     openMonth ? $.__views.monthImg.addEventListener("click", openMonth) : __defers["$.__views.monthImg!click!openMonth"] = true;
-    $.__views.cameraImg = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            bottom: 0,
-            width: 64,
-            height: 49,
-            zIndex: 1
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 153
-        });
-        _.extend(o, {
-            id: "cameraImg"
-        });
-        return o;
-    }());
+    $.__views.cameraImg = Ti.UI.createLabel({
+        bottom: 0,
+        width: 64,
+        height: 49,
+        zIndex: 1,
+        id: "cameraImg"
+    });
     $.__views.bottom.add($.__views.cameraImg);
     showDialog ? $.__views.cameraImg.addEventListener("click", showDialog) : __defers["$.__views.cameraImg!click!showDialog"] = true;
-    $.__views.yearImg = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            bottom: 0,
-            width: 64,
-            height: 49,
-            zIndex: 1
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 153
-        });
-        _.extend(o, {
-            id: "yearImg"
-        });
-        return o;
-    }());
+    $.__views.yearImg = Ti.UI.createLabel({
+        bottom: 0,
+        width: 64,
+        height: 49,
+        zIndex: 1,
+        id: "yearImg"
+    });
     $.__views.bottom.add($.__views.yearImg);
     openYear ? $.__views.yearImg.addEventListener("click", openYear) : __defers["$.__views.yearImg!click!openYear"] = true;
-    $.__views.randomImg = Ti.UI.createLabel(function() {
-        var o = {};
-        _.extend(o, {
-            bottom: 0,
-            width: 64,
-            height: 49,
-            zIndex: 1
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 153
-        });
-        _.extend(o, {
-            id: "randomImg"
-        });
-        return o;
-    }());
+    $.__views.randomImg = Ti.UI.createLabel({
+        bottom: 0,
+        width: 64,
+        height: 49,
+        zIndex: 1,
+        id: "randomImg"
+    });
     $.__views.bottom.add($.__views.randomImg);
     openRandom ? $.__views.randomImg.addEventListener("click", openRandom) : __defers["$.__views.randomImg!click!openRandom"] = true;
     var __alloyId11 = [];

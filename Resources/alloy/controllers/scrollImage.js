@@ -5,8 +5,10 @@ function Controller() {
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "scrollImage";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -52,21 +54,12 @@ function Controller() {
     $.__views.scrollImage.add($.__views.backButton);
     back ? $.__views.backButton.addEventListener("click", back) : __defers["$.__views.backButton!click!back"] = true;
     var __alloyId58 = [];
-    $.__views.scrollableView = Ti.UI.createScrollableView(function() {
-        var o = {};
-        _.extend(o, {
-            width: 330,
-            showPagingControl: true
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: Ti.Platform.displayCaps.platformWidth
-        });
-        _.extend(o, {
-            views: __alloyId58,
-            id: "scrollableView"
-        });
-        return o;
-    }());
+    $.__views.scrollableView = Ti.UI.createScrollableView({
+        width: 330,
+        showPagingControl: true,
+        views: __alloyId58,
+        id: "scrollableView"
+    });
     $.__views.scrollImage.add($.__views.scrollableView);
     exports.destroy = function() {};
     _.extend($, $.__views);

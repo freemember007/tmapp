@@ -1,7 +1,9 @@
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "welcome";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -31,7 +33,7 @@ function Controller() {
             y: 1
         },
         id: "text",
-        text: "欢迎来到时光笔记！\n\n时光笔记是一部由手机书写个人生活志。\n\n要使用它，从上传您的第一张照片开始。"
+        text: "欢迎来到时光笔记！\\n\\n时光笔记是一部由手机书写个人生活志。\\n\\n要使用它，从上传您的第一张照片开始。"
     });
     $.__views.welcome.add($.__views.text);
     $.__views.button = Ti.UI.createImageView({
@@ -43,7 +45,11 @@ function Controller() {
         id: "button"
     });
     $.__views.welcome.add($.__views.button);
-    Alloy.Globals.showDialog ? $.__views.button.addEventListener("click", Alloy.Globals.showDialog) : __defers["$.__views.button!click!Alloy.Globals.showDialog"] = true;
+    try {
+        $.__views.button.addEventListener("click", Alloy.Globals.showDialog);
+    } catch (e) {
+        __defers["$.__views.button!click!Alloy.Globals.showDialog"] = true;
+    }
     $.__views.slogan = Ti.UI.createImageView({
         preventDefaultImage: true,
         image: "slogan.png",

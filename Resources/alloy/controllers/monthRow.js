@@ -5,27 +5,20 @@ function Controller() {
         Alloy.Globals.tab2.open(monthDay);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "monthRow";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.row = Ti.UI.createTableViewRow(function() {
-        var o = {};
-        _.extend(o, {
-            backgroundColor: "#f3f3f3",
-            selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
-            layout: "vertical",
-            height: 100
-        });
-        Alloy.isTablet && _.extend(o, {
-            height: 240
-        });
-        _.extend(o, {
-            id: "row"
-        });
-        return o;
-    }());
+    $.__views.row = Ti.UI.createTableViewRow({
+        backgroundColor: "#f3f3f3",
+        selectionStyle: Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE,
+        layout: "vertical",
+        height: 100,
+        id: "row"
+    });
     $.__views.row && $.addTopLevelView($.__views.row);
     showDay ? $.__views.row.addEventListener("click", showDay) : __defers["$.__views.row!click!showDay"] = true;
     $.__views.label = Ti.UI.createLabel({

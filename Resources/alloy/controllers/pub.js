@@ -1,5 +1,6 @@
 function Controller() {
     function __alloyId43() {
+        __alloyId43.opts || {};
         var models = filterFunction(__alloyId42);
         var len = models.length;
         var children = $.__views.userAvatarList.children;
@@ -85,8 +86,10 @@ function Controller() {
         $.commentInput.focus();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "pub";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -142,64 +145,36 @@ function Controller() {
         text: "取消"
     });
     $.__views.pub.add($.__views.cancelButton);
-    $.__views.imageContainer = Ti.UI.createView(function() {
-        var o = {};
-        _.extend(o, {
-            top: 64,
-            width: 90,
-            height: 90,
-            borderColor: "#999"
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 216,
-            height: 216
-        });
-        _.extend(o, {
-            id: "imageContainer"
-        });
-        return o;
-    }());
+    $.__views.imageContainer = Ti.UI.createView({
+        top: 64,
+        width: 90,
+        height: 90,
+        borderColor: "#999",
+        id: "imageContainer"
+    });
     $.__views.pub.add($.__views.imageContainer);
     $.__views.actInd = Ti.UI.createActivityIndicator({
         style: Titanium.UI.iPhone.ActivityIndicatorStyle.DARK,
         id: "actInd"
     });
     $.__views.imageContainer.add($.__views.actInd);
-    $.__views.image = Ti.UI.createImageView(function() {
-        var o = {};
-        _.extend(o, {
-            preventDefaultImage: true,
-            top: 44,
-            height: 120
-        });
-        Alloy.isTablet && _.extend(o, {
-            height: 288
-        });
-        _.extend(o, {
-            id: "image"
-        });
-        return o;
-    }());
+    $.__views.image = Ti.UI.createImageView({
+        preventDefaultImage: true,
+        top: 44,
+        height: 120,
+        id: "image"
+    });
     $.__views.pub.add($.__views.image);
     openZoomImage ? $.__views.image.addEventListener("click", openZoomImage) : __defers["$.__views.image!click!openZoomImage"] = true;
     hideActInd ? $.__views.image.addEventListener("load", hideActInd) : __defers["$.__views.image!load!hideActInd"] = true;
-    $.__views.__alloyId39 = Ti.UI.createScrollView(function() {
-        var o = {};
-        _.extend(o, {
-            left: 0,
-            bottom: 0,
-            width: Ti.Platform.displayCaps.platformWidth,
-            height: 330,
-            disableBounce: true
-        });
-        Alloy.isTablet && _.extend(o, {
-            height: 600
-        });
-        _.extend(o, {
-            id: "__alloyId39"
-        });
-        return o;
-    }());
+    $.__views.__alloyId39 = Ti.UI.createScrollView({
+        left: 0,
+        bottom: 0,
+        width: Ti.Platform.displayCaps.platformWidth,
+        height: 330,
+        disableBounce: true,
+        id: "__alloyId39"
+    });
     $.__views.pub.add($.__views.__alloyId39);
     $.__views.shareLabel = Ti.UI.createLabel({
         left: 0,
@@ -269,30 +244,21 @@ function Controller() {
         id: "toolbar"
     });
     $.__views.__alloyId39.add($.__views.toolbar);
-    $.__views.commentInput = Ti.UI.createTextField(function() {
-        var o = {};
-        _.extend(o, {
-            left: 7,
-            top: 7,
-            width: 240,
-            height: 32,
-            font: {
-                fontSize: 14
-            },
-            borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-            hintText: "描述这则时光",
-            enableReturnKey: true,
-            autocapitalization: false,
-            autocorrect: false
-        });
-        Alloy.isTablet && _.extend(o, {
-            width: 690
-        });
-        _.extend(o, {
-            id: "commentInput"
-        });
-        return o;
-    }());
+    $.__views.commentInput = Ti.UI.createTextField({
+        left: 7,
+        top: 7,
+        width: 240,
+        height: 32,
+        font: {
+            fontSize: 14
+        },
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        hintText: "描述这则时光",
+        enableReturnKey: true,
+        autocapitalization: false,
+        autocorrect: false,
+        id: "commentInput"
+    });
     $.__views.toolbar.add($.__views.commentInput);
     $.__views.pubButton = Ti.UI.createLabel({
         right: 7,

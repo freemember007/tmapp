@@ -2,15 +2,13 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 var util = require("util");
 
-Alloy.Globals.sitePath = "http://localhost:3000/";
+Alloy.Globals.sitePath = "http://tmweb.ap01.aws.af.cm/";
 
 Alloy.Globals.GUI_bkC = "#f3f3f3";
 
 Alloy.Globals.GUI_FC = "#000";
 
-Alloy.CFG.GUI_widthScale = "iphone" == Ti.Platform.osname ? 1 : 2.4;
-
-Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
+Alloy.CFG.GUI_widthScale = 2.4;
 
 Alloy.Globals.menu = Alloy.createController("menu").getView();
 

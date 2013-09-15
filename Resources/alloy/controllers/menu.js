@@ -78,8 +78,10 @@ function Controller() {
         Alloy.Globals.slide = false;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
+    this.__controllerPath = "menu";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -152,6 +154,9 @@ function Controller() {
     $.__views.menu.add($.__views.exit);
     exit ? $.__views.exit.addEventListener("click", exit) : __defers["$.__views.exit!click!exit"] = true;
     var __alloyId35 = function() {
+        $.shareBadge.text = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["number"] : Alloy.Models.badge.get("number");
+        $.shareBadge.visible = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["visible"] : Alloy.Models.badge.get("visible");
+        $.shareBadge.width = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["width"] : Alloy.Models.badge.get("width");
         $.shareBadge.text = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["number"] : Alloy.Models.badge.get("number");
         $.shareBadge.visible = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["visible"] : Alloy.Models.badge.get("visible");
         $.shareBadge.width = _.isFunction(Alloy.Models.badge.transform) ? Alloy.Models.badge.transform()["width"] : Alloy.Models.badge.get("width");
